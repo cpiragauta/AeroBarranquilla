@@ -1,0 +1,957 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46C063B5-B4CE-4677-A7D5-210716FB7EEF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfFront</RootNamespace>
+    <AssemblyName>WpfFront</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <ApplicationIcon>logo16x16.png</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>I:\Pangea\Desktop\wms\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B4A609CCBC5BC709830729CD28CEE71328F6CEAC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WmsWpfUI_ClaveTemporal.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="Assergs.Windows, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a3f5c2f55f72aacd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Assergs.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Barcode, Version=1.0.5.38761, Culture=neutral, PublicKeyToken=6dc438ab78a525b3">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Barcode.dll</HintPath>
+    </Reference>
+    <Reference Include="BarcodeLib, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\BarcodeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=608edcc8b535d274, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\WMComposite\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DataDynamics.Analysis.DataProvider.Microsoft.AnalysisServices, Version=1.0.464.0, Culture=neutral, PublicKeyToken=d557f2f30a260da2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\DataDynamics.Analysis.DataProvider.Microsoft.AnalysisServices.dll</HintPath>
+    </Reference>
+    <Reference Include="DataDynamics.Analysis.Extensions, Version=1.0.464.0, Culture=neutral, PublicKeyToken=d557f2f30a260da2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\DataDynamics.Analysis.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataDynamics.Analysis.Windows.Forms, Version=1.0.464.0, Culture=neutral, PublicKeyToken=d557f2f30a260da2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\DataDynamics.Analysis.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelExport, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\ExcelExport.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.analysisservices.adomdclient, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\microsoft.analysisservices.adomdclient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Odyssey, Version=1.3.18.42840, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Odyssey.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="Webmaster.Composite, Version=1.0.0.0, Culture=neutral, PublicKeyToken=36a08c9dee96b290, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Webmaster.Composite.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\WindowsFormsIntegration.dll</HintPath>
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=c93dde70475aea7e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFVisifire.Charts, Version=2.0.4.0, Culture=neutral, PublicKeyToken=99d724542e4db593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\WPFVisifire.Charts.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Controls, Version=2.0.8211.13450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Xceed.Wpf.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.1.9069.14010, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.1, Version=3.1.9069.14010, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Xceed.Wpf.DataGrid.ThemePack.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.ThemePack.2, Version=3.1.9069.14010, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Xceed.Wpf.DataGrid.ThemePack.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid.Views3D, Version=3.1.9069.14010, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedBinaries\Xceed.Wpf.DataGrid.Views3D.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="CECOA\Vista\AeropuertoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CECOA\Vista\ListaOperacionesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CECOA\Vista\PlaneacionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CECOA\Vista\TarifasView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\WFUserControls\WFDateTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\WFUserControls\WFCheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\WFUserControls\WFLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\WFUserControls\WFNumericText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\WFUserControls\WFStringText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ViewDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Windows\WindowInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\SkinOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\UserControls\UploadFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\UserControls\PopUpShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ViewDocumentBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ConfirmationOK.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ConfirmationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ErrWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\MsgWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\PopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ProcessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Windows\ResultWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\SearchAeronaves.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\SearchAeropuertos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\SearchTerceros.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shell\LogOnScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shell\Shell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shell\Splash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="CECOA\Controlador\AeropuertoPresenter.cs" />
+    <Compile Include="CECOA\Controlador\PlaneacionPresenter.cs" />
+    <Compile Include="CECOA\Controlador\TarifasPresenter.cs" />
+    <Compile Include="CECOA\Modelo\ListaOperacionesModel.cs" />
+    <Compile Include="CECOA\Modelo\AeropuertoModel.cs" />
+    <Compile Include="CECOA\Controlador\ListaOperacionesPresenter.cs" />
+    <Compile Include="CECOA\Modelo\PlaneacionModel.cs" />
+    <Compile Include="CECOA\Modelo\TarifasModel.cs" />
+    <Compile Include="CECOA\Vista\AeropuertoView.xaml.cs">
+      <DependentUpon>AeropuertoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\ListaOperacionesView.xaml.cs">
+      <DependentUpon>ListaOperacionesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\PlaneacionView.xaml.cs">
+      <DependentUpon>PlaneacionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\TarifasView.xaml.cs">
+      <DependentUpon>TarifasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\RawPrinterHelper.cs" />
+    <Compile Include="Common\Windows\ViewDocument.xaml.cs">
+      <DependentUpon>ViewDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Converters.cs" />
+    <Compile Include="Common\Crypto.cs" />
+    <Compile Include="Common\ListValues.cs" />
+    <Compile Include="Common\Printer.cs" />
+    <Compile Include="Common\PrinterControl.cs" />
+    <Compile Include="Common\Query\FormatItem.cs" />
+    <Compile Include="Common\Query\GreaterThanConverter.cs" />
+    <Compile Include="Common\Query\Operators.cs" />
+    <Compile Include="Common\Query\PredefinedSettingsItem.cs" />
+    <Compile Include="Common\Query\SeparatorItem.cs" />
+    <Compile Include="Common\UIMenu.cs" />
+    <Compile Include="Common\UserControls\UploadFile.xaml.cs">
+      <DependentUpon>UploadFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UserControls\PopUpShell.xaml.cs">
+      <DependentUpon>PopUpShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Util.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Util.WF.cs" />
+    <Compile Include="Common\WFUserControls\WFDateTime.xaml.cs">
+      <DependentUpon>WFDateTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WFUserControls\WFCheckBox.xaml.cs">
+      <DependentUpon>WFCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WFUserControls\WFLabel.xaml.cs">
+      <DependentUpon>WFLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WFUserControls\WFNumericText.xaml.cs">
+      <DependentUpon>WFNumericText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WFUserControls\WFStringText.xaml.cs">
+      <DependentUpon>WFStringText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\AuthorizationWindow.xaml.cs">
+      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\ViewDocumentBrowser.xaml.cs">
+      <DependentUpon>ViewDocumentBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UtilWindow.cs" />
+    <Compile Include="Common\Windows\ConfirmationOK.xaml.cs">
+      <DependentUpon>ConfirmationOK.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\ConfirmationWindow.xaml.cs">
+      <DependentUpon>ConfirmationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\ErrWindow.xaml.cs">
+      <DependentUpon>ErrWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\MsgWindow.xaml.cs">
+      <DependentUpon>MsgWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\ProcessWindow.xaml.cs">
+      <DependentUpon>ProcessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\ResultWindow.xaml.cs">
+      <DependentUpon>ResultWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Windows\WindowInfo.xaml.cs">
+      <DependentUpon>WindowInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\SearchAeronaves.xaml.cs">
+      <DependentUpon>SearchAeronaves.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\SearchAeropuertos.xaml.cs">
+      <DependentUpon>SearchAeropuertos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\SearchTerceros.xaml.cs">
+      <DependentUpon>SearchTerceros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Aeronave.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Aeropuerto.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Agrupacion.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Bombero.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Compañia.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Conexion.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Configuracion.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DAO.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DAO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DAO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Estado.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Llegada.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Menu.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MenuRol.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Operacion.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Planeacion.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Rol.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Salida.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TarifaCecoa.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tercero.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tipo.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TRM.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Usuario.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Shell\Bootstrapper.cs" />
+    <Compile Include="Shell\LogOnScreen.xaml.cs">
+      <DependentUpon>LogOnScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ShellPresenter.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Shell\ShellPresenterModel.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Shell\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\SplashModel.cs" />
+    <Compile Include="StartModules.cs" />
+    <Compile Include="Utilidades\Autenticacion.cs" />
+    <Compile Include="Utilidades\Crypto.cs" />
+    <Compile Include="Utilidades\Sql.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Model\DAO.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DAO.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\DAO.edmx.diagram">
+      <DependentUpon>DAO.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="PRINT.BAT" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow.png" />
+    <Resource Include="Images\btn_on_right.gif" />
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\DeleteDisabled.png" />
+    <Resource Include="Images\detail.png" />
+    <Resource Include="Images\fields.png" />
+    <Resource Include="Images\Icons\48x48\Adjustment.png" />
+    <Resource Include="Images\Icons\48x48\Bin.png" />
+    <Resource Include="Images\Icons\48x48\ChangeLocation.png" />
+    <Resource Include="Images\Icons\48x48\Company.png" />
+    <Resource Include="Images\Icons\48x48\Config.png" />
+    <Resource Include="Images\Icons\48x48\Connection.png" />
+    <Resource Include="Images\Icons\48x48\Console.png" />
+    <Resource Include="Images\Icons\48x48\Count.png" />
+    <Resource Include="Images\Icons\48x48\CrossDock.png" />
+    <Resource Include="Images\Icons\48x48\Cube.png" />
+    <Resource Include="Images\Icons\48x48\InvTask.png" />
+    <Resource Include="Images\Icons\48x48\KitAssembly.png" />
+    <Resource Include="Images\Icons\48x48\Label.png" />
+    <Resource Include="Images\Icons\48x48\Location.png" />
+    <Resource Include="Images\Icons\48x48\MenuOption.png" />
+    <Resource Include="Images\Icons\48x48\Node.png" />
+    <Resource Include="Images\Icons\48x48\Permit.png" />
+    <Resource Include="Images\Icons\48x48\PrintLabels.png" />
+    <Resource Include="Images\Icons\48x48\Process.png" />
+    <Resource Include="Images\Icons\48x48\Product.png" />
+    <Resource Include="Images\Icons\48x48\Receiving.png" />
+    <Resource Include="Images\Icons\48x48\Repack.png" />
+    <Resource Include="Images\Icons\48x48\Report.png" />
+    <Resource Include="Images\Icons\48x48\Sequence.png" />
+    <Resource Include="Images\Icons\48x48\Shipping.png" />
+    <Resource Include="Images\Icons\48x48\Trefoil32.png" />
+    <Resource Include="Images\Icons\48x48\Unit.png" />
+    <Resource Include="Images\Icons\48x48\User.png" />
+    <Resource Include="Images\Icons\Confirm.png" />
+    <Resource Include="Images\Icons\Cross.png" />
+    <Resource Include="Images\Icons\Exit16.png" />
+    <Resource Include="Images\Icons\logo16x16.png" />
+    <Resource Include="Images\integration.png" />
+    <Resource Include="Images\invoice.jpg" />
+    <Resource Include="Images\label.jpg" />
+    <Resource Include="Images\look.png" />
+    <Resource Include="Images\Maximized32.png" />
+    <Resource Include="Images\Minimized32.png" />
+    <Resource Include="Images\New.png" />
+    <Resource Include="Images\NewDisabled.png" />
+    <Resource Include="Images\openbox.png" />
+    <Resource Include="Images\print.png" />
+    <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\report.png" />
+    <Resource Include="Images\Save.png" />
+    <Resource Include="Images\SaveDisabled.png" />
+    <Resource Include="Images\Window128.png" />
+    <Resource Include="WmsExpress.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\OrderManager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Category.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Docs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\LastDocs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\printfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Collections.Specialized.StringDictionary.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="Maestro\Controlador\" />
+    <Folder Include="Maestro\Modelo\" />
+    <Folder Include="Maestro\Vista\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\ValidarSeriales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Almacenamiento.png" />
+    <Resource Include="Images\Icons\48x48\Diagnostico.png" />
+    <Resource Include="Images\Icons\48x48\Empaque.png" />
+    <Resource Include="Images\Icons\48x48\Etiquetado.png" />
+    <Resource Include="Images\Icons\48x48\MovMercancia.png" />
+    <Resource Include="Images\Icons\48x48\Recibo.png" />
+    <Resource Include="Images\Icons\48x48\Reparacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Despacho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Liberacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Montacargas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\excel1.png" />
+    <Resource Include="Images\excel2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\check1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\barcode2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\printer1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\printer2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\novedad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\novedad_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\pedidos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Facturas.png" />
+    <Resource Include="Images\Icons\48x48\PQRS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\solicitudes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\BuscarFact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Check16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Editar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buscar.png" />
+    <Resource Include="Images\NuevoRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Avion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\TRM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Aeropuerto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Pasajero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Cecoa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Carnet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\actualizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\TasasDeCobro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Causales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Tarifas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\48x48\Aerodromo.png" />
+    <Resource Include="Images\Icons\48x48\Reloj.png" />
+    <Resource Include="Images\Icons\48x48\Tasa.png" />
+    <Content Include="Model\DAO.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAO.edmx</DependentUpon>
+      <LastGenOutput>DAO.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\DAO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAO.edmx</DependentUpon>
+      <LastGenOutput>DAO.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

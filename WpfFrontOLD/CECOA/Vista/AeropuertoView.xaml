@@ -1,0 +1,114 @@
+﻿<WMCore:UserControlBase x:Uid="Aeropuerto" x:Class="WpfFront.Vista.AeropuertoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Common.UserControls"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Aeropuerto">
+
+    <AdornerDecorator >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" >
+                <Border  Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" >
+                            <Border  Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold"  Text="Nombre:" />
+                                        <TextBox  Name="txt_filtroNombre" Width="90" />
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold"  Text="Pais:" />
+                                        <TextBox  Name="txt_Pais" Width="90"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold"  Text="Ciudad:" />
+                                        <TextBox  Name="txt_Ciudad" Width="90"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock FontWeight="Bold" Text="Tipo Aeropuerto:"/>
+                                        <ComboBox x:Name="cmb_FiltrarTipoAeropuerto" Width="100" ItemsSource="{Binding ListaTipoAeropuerto}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold" Text="Sigla IATA:" />
+                                        <TextBox  Name="txt_Sigla" MaxLength="3" Width="60"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold"  Text="Sigla OACI:" />
+                                        <TextBox  Name="txt_FiltroSiglaOACI" MaxLength="4" Width="60"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                        <awc:ImageButton x:Name="btnBuscarAeropuertos" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Aeropuerto" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAerpuertos_Click_1" />
+                                        <awc:ImageButton x:Name="btnNuevoRegistro" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Nuevo Registro de Aeropuerto" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                        <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Aeropuertos" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <ListView SelectionMode="Single" MouseDoubleClick="ListAeropuertos_MouseDoubleClick_1" ItemsSource="{Binding Path=ListAeropuertos}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListAeropuertos" AllowDrop="True"  >
+                                <ListView.View>
+                                    <GridView x:Name="GridViewDetailsAeropuerto" >
+                                        <GridViewColumn Header="Nombre" Width="150" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                        <GridViewColumn Header="Pais" Width="120" DisplayMemberBinding="{Binding Path=Pais}" />
+                                        <GridViewColumn Header="Ciudad" Width="110" DisplayMemberBinding="{Binding Path=Ciudad}" />
+                                        <GridViewColumn Header="Tipo Aeropuerto" Width="100" DisplayMemberBinding="{Binding Path=Tipo.Nombre}" />
+                                        <GridViewColumn Header="Sigla IATA" Width="80" DisplayMemberBinding="{Binding Path=SiglaIATA}" />
+                                        <GridViewColumn Header="Sigla OACI" Width="80" DisplayMemberBinding="{Binding Path=SiglaOACI}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                <TextBlock Margin="0,0,4,0" FontWeight="Bold" Text="Cantidad: "/>
+                                <TextBlock Margin="0,0,4,0" FontWeight="Bold" Name="TxtCantidadAgrupada" Text="{Binding ListAeropuertos.Count}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="4,0,4,0"  >
+                            <GroupBox Name="gb_NuevoRegistro" Visibility="Collapsed"  >
+                                <StackPanel Orientation="Vertical" Margin="2,4,2,0" >
+                                    <StackPanel  Margin="4,0,0,4">
+                                        <TextBlock  FontWeight="Bold"  Text="Nombre:"  />
+                                        <TextBox  Name="txt_Nombre" Width="160"  Text="{Binding Aeropuerto.Nombre}"/>
+                                    </StackPanel>
+                                    <StackPanel  Margin="4,0,0,4">
+                                        <TextBlock  FontWeight="Bold"  Text="Pais:"  />
+                                        <TextBox  Name="txt_PaisR" HorizontalAlignment="Left"  Width="120"  Text="{Binding Aeropuerto.Pais}"/>
+                                    </StackPanel>
+                                    <StackPanel  Margin="4,0,0,4">
+                                        <TextBlock  FontWeight="Bold"  Text="Ciudad:" />
+                                        <TextBox  Name="txt_CiudadR" HorizontalAlignment="Left"  Width="120"  Text="{Binding Aeropuerto.Ciudad}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,4">
+                                        <TextBlock FontWeight="Bold" Text="Tipo Aeropuerto:"/>
+                                        <ComboBox x:Name="cmb_TipoAeropuerto" HorizontalAlignment="Left" Width="120" ItemsSource="{Binding ListaTipoAeropuerto}" DisplayMemberPath="Nombre" SelectedValue="{Binding Aeropuerto.TipoAeropuerto.MetaMasterID}" SelectedValuePath="MetaMasterID"/>
+                                    </StackPanel>
+                                    <StackPanel  Margin="4,0,0,4">
+                                        <TextBlock  FontWeight="Bold"  Text="Sigla IATA:"  />
+                                        <TextBox  Name="txt_SiglaIATAR"  HorizontalAlignment="Left" Width="120" MaxLength="3" Text="{Binding Aeropuerto.SiglaIATA}"/>
+                                    </StackPanel>
+                                    <StackPanel  Margin="4,0,0,4">
+                                        <TextBlock  FontWeight="Bold"  Text="Sigla OACI:"  />
+                                        <TextBox  Name="txt_SiglaOACI" HorizontalAlignment="Left" Width="120" MaxLength="4" Text="{Binding Aeropuerto.SiglaOACI}"/>
+                                    </StackPanel>
+
+                                    <StackPanel  Margin="4,4,0,4">
+                                        <awc:ImageButton x:Name="btnAgregarAerpuerto" VerticalAlignment="Bottom"  ToolTip="Guardar Registro" IsToolStyle="False" Click="btnAgregarAerpuerto_Click_1" Content="Guardar" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>

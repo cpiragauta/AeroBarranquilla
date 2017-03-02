@@ -1,0 +1,2577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aeronave">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Matricula" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClasificacionID" Type="int" />
+          <Property Name="PropietarioID" Type="int" />
+          <Property Name="CompañiaFacturaID" Type="int" />
+          <Property Name="PBMOKG" Type="int" />
+          <Property Name="FechaVencimientoMatricula" Type="datetime" />
+          <Property Name="TipoAeronave" Type="varchar" MaxLength="50" />
+          <Property Name="CapacidadPasajeros" Type="int" />
+          <Property Name="PermisoExplotacion" Type="bit" />
+          <Property Name="Extranjera" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Aeropuerto">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="SiglaIATA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SiglaOACI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoAeropuertoID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bombero">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperacionID" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="TipoServicioBombID" Type="int" />
+          <Property Name="ValorServicio" Type="float" />
+          <Property Name="EstadoID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Llegada">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NVuelo" Type="varchar" MaxLength="50" />
+          <Property Name="HoraProgramadaLlegada" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraAterrizaje" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraPlataforma" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraPuente" Type="nvarchar" MaxLength="20" />
+          <Property Name="FechaAterrizaje" Type="datetime" />
+          <Property Name="FechaLLegadaPlataforma" Type="datetime" />
+          <Property Name="FechaLlegadaPuente" Type="datetime" />
+          <Property Name="TipoPosicionID" Type="int" />
+          <Property Name="PosicionID" Type="int" />
+          <Property Name="TipoDeclaracionID" Type="int" />
+          <Property Name="TipoVueloID" Type="int" />
+          <Property Name="BandaID" Type="int" />
+          <Property Name="CargaEntrada" Type="float" />
+          <Property Name="CorreoEntrada" Type="float" />
+          <Property Name="CantPax" Type="int" />
+          <Property Name="Sala" Type="int" />
+          <Property Name="ClasificacionID" Type="int" />
+          <Property Name="CIAFacturaID" Type="int" />
+          <Property Name="OrigenID" Type="int" />
+          <Property Name="Observaciones" Type="varchar(max)" />
+          <Property Name="EstadoID" Type="int" Nullable="false" />
+          <Property Name="FechaProgramacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Operacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoFacturacionID" Type="int" />
+          <Property Name="AeronaveID" Type="int" />
+          <Property Name="LlegadaID" Type="int" Nullable="false" />
+          <Property Name="SalidaID" Type="int" />
+          <Property Name="FechaOP" Type="datetime" Nullable="false" />
+          <Property Name="FechaAnulado" Type="datetime" />
+          <Property Name="EstadoID" Type="int" />
+          <Property Name="Facturado" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Planeacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompaniaID" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="NVueloEntrada" Type="varchar" MaxLength="50" />
+          <Property Name="NVueloSalida" Type="varchar" MaxLength="50" />
+          <Property Name="HoraEntrada" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalida" Type="nvarchar" MaxLength="20" />
+          <Property Name="Stand" Type="varchar" MaxLength="50" />
+          <Property Name="Sala" Type="int" />
+          <Property Name="TipoAeronave" Type="varchar" MaxLength="50" />
+          <Property Name="BandaID" Type="int" />
+          <Property Name="OrigenID" Type="int" />
+          <Property Name="DestinoID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NVueloSalida" Type="varchar" MaxLength="50" />
+          <Property Name="FechaSalida" Type="datetime" />
+          <Property Name="HoraProgramadaSalida" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalidaPuente" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalidaPlataforma" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraDespegue" Type="nvarchar" MaxLength="20" />
+          <Property Name="FechaSalidaPuente" Type="datetime" />
+          <Property Name="FechaSalidaPlataforma" Type="datetime" />
+          <Property Name="FechaDespegue" Type="datetime" />
+          <Property Name="TipoPosicionSalidaID" Type="int" />
+          <Property Name="PosicionSalidaID" Type="int" />
+          <Property Name="TipoVueloSalidaID" Type="int" />
+          <Property Name="DestinoID" Type="int" />
+          <Property Name="CargaSalida" Type="float" />
+          <Property Name="CorreoSalida" Type="float" />
+          <Property Name="HoraSalidaPuenteReal" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalidaPlataformaReal" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraDespegueReal" Type="nvarchar" MaxLength="20" />
+          <Property Name="EstadoID" Type="int" Nullable="false" />
+          <Property Name="Sala" Type="int" />
+          <Property Name="FechaProgramacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TarifaCecoa">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValorCOP" Type="float" />
+          <Property Name="ValorUSD" Type="float" />
+          <Property Name="RecargoNocturnoCOP" Type="float" />
+          <Property Name="RecargoNocturnoUSD" Type="float" />
+          <Property Name="FechaInicial" Type="datetime" />
+          <Property Name="FechaFinal" Type="datetime" />
+          <Property Name="TipoTarifaID" Type="int" />
+          <Property Name="TipoServicioID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Compañia">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ruta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Imagen" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="TipoID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MenuRol">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuID" Type="int" />
+          <Property Name="RolID" Type="int" />
+          <Property Name="CompañiaID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Agrupacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Conexion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Cadena" Type="varchar" MaxLength="255" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="TipoID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Configuracion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Valor" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoID" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tercero">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="bigint" />
+          <Property Name="Digito" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="200" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="TipoTerceroID" Type="int" />
+          <Property Name="Sincronizado" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgrupacionID" Type="int" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Codigo2" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Valor" Type="varchar" MaxLength="200" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TRM">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaInicial" Type="datetime" />
+          <Property Name="FechaFinal" Type="datetime" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="RolID" Type="int" />
+          <Property Name="CompañiaID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Aeronave__Clasif__5C4299A5">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="ClasificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeronave__Compañ__5D36BDDE">
+          <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="CompañiaFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeronave__Propie__5E2AE217">
+          <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="PropietarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeropuert__TipoA__4DF47A4E">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeropuerto">
+              <PropertyRef Name="TipoAeropuertoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__Operaci__04508AFF">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="0..1" />
+          <End Role="Bombero" Type="Self.Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__StatusI__0544AF38">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Bombero" Type="Self.Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__TipoSer__035C66C6">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Bombero" Type="Self.Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="TipoServicioBombID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Coneccion__TipoI__1798699D">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Conexion" Type="Self.Conexion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Conexion">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estado__TipoID__1D5142F3">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__BandaID__6B84DD35">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="BandaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__CIAFact__6C79016E">
+          <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="CIAFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__Clasifi__6D6D25A7">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="ClasificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__OrigenI__6E6149E0">
+          <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__Posicio__6F556E19">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="PosicionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__StatusI__70499252">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoDec__713DB68B">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoDeclaracionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoPos__7231DAC4">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoPosicionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoVue__7325FEFD">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoVueloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__TipoID__0F03239C">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__Compañi__12D3B480">
+          <End Role="Compañia" Type="Self.Compañia" Multiplicity="0..1" />
+          <End Role="MenuRol" Type="Self.MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compañia">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="CompañiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__MenuID__13C7D8B9">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="MenuRol" Type="Self.MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__RolID__14BBFCF2">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="MenuRol" Type="Self.MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Aeron__7CAF6937">
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeronave">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="AeronaveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Llega__7DA38D70">
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Llegada">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="LlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Salid__7E97B1A9">
+          <End Role="Salida" Type="Self.Salida" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="SalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Statu__7F8BD5E2">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__TipoF__007FFA1B">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="TipoFacturacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Banda__10B661E4">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Planeacion" Type="Self.Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="BandaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Compa__11AA861D">
+          <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+          <End Role="Planeacion" Type="Self.Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="CompaniaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Desti__129EAA56">
+          <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="0..1" />
+          <End Role="Planeacion" Type="Self.Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="DestinoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Orige__1392CE8F">
+          <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="0..1" />
+          <End Role="Planeacion" Type="Self.Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__DestinoI__76026BA8">
+          <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="DestinoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__Posicion__76F68FE1">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="PosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__StatusID__77EAB41A">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__TipoPosi__78DED853">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="TipoPosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__TipoVuel__79D2FC8C">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="TipoVueloSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TarifaCec__TipoS__587208C1">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="TarifaCecoa" Type="Self.TarifaCecoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="TarifaCecoa">
+              <PropertyRef Name="TipoServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TarifaCec__TipoT__59662CFA">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="TarifaCecoa" Type="Self.TarifaCecoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="TarifaCecoa">
+              <PropertyRef Name="TipoTarifaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tercero__TipoTer__55959C16">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Tercero" Type="Self.Tercero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tercero">
+              <PropertyRef Name="TipoTerceroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipo__Agrupacion__0638D371">
+          <End Role="Agrupacion" Type="Self.Agrupacion" Multiplicity="0..1" />
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agrupacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tipo">
+              <PropertyRef Name="AgrupacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Compañi__28C2F59F">
+          <End Role="Compañia" Type="Self.Compañia" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compañia">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="CompañiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__RolID__27CED166">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wmsModelStoreContainer">
+          <EntitySet Name="Aeronave" EntityType="Self.Aeronave" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Aeropuerto" EntityType="Self.Aeropuerto" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Bombero" EntityType="Self.Bombero" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Llegada" EntityType="Self.Llegada" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Operacion" EntityType="Self.Operacion" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Planeacion" EntityType="Self.Planeacion" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Salida" EntityType="Self.Salida" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="TarifaCecoa" EntityType="Self.TarifaCecoa" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Compañia" EntityType="Self.Compañia" Schema="General" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="General" store:Type="Tables" />
+          <EntitySet Name="MenuRol" EntityType="Self.MenuRol" Schema="General" store:Type="Tables" />
+          <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Conexion" EntityType="Self.Conexion" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Configuracion" EntityType="Self.Configuracion" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Tercero" EntityType="Self.Tercero" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Tipo" EntityType="Self.Tipo" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="TRM" EntityType="Self.TRM" Schema="Maestro" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Perfil" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Perfil" store:Type="Tables" />
+          <AssociationSet Name="FK__Aeronave__Clasif__5C4299A5" Association="Self.FK__Aeronave__Clasif__5C4299A5">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeronave__Compañ__5D36BDDE" Association="Self.FK__Aeronave__Compañ__5D36BDDE">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeronave__Propie__5E2AE217" Association="Self.FK__Aeronave__Propie__5E2AE217">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeropuert__TipoA__4DF47A4E" Association="Self.FK__Aeropuert__TipoA__4DF47A4E">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__Operaci__04508AFF" Association="Self.FK__Bombero__Operaci__04508AFF">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__StatusI__0544AF38" Association="Self.FK__Bombero__StatusI__0544AF38">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__TipoSer__035C66C6" Association="Self.FK__Bombero__TipoSer__035C66C6">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Coneccion__TipoI__1798699D" Association="Self.FK__Coneccion__TipoI__1798699D">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Conexion" EntitySet="Conexion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estado__TipoID__1D5142F3" Association="Self.FK__Estado__TipoID__1D5142F3">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__BandaID__6B84DD35" Association="Self.FK__Llegada__BandaID__6B84DD35">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__CIAFact__6C79016E" Association="Self.FK__Llegada__CIAFact__6C79016E">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__Clasifi__6D6D25A7" Association="Self.FK__Llegada__Clasifi__6D6D25A7">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__OrigenI__6E6149E0" Association="Self.FK__Llegada__OrigenI__6E6149E0">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__Posicio__6F556E19" Association="Self.FK__Llegada__Posicio__6F556E19">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__StatusI__70499252" Association="Self.FK__Llegada__StatusI__70499252">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoDec__713DB68B" Association="Self.FK__Llegada__TipoDec__713DB68B">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoPos__7231DAC4" Association="Self.FK__Llegada__TipoPos__7231DAC4">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoVue__7325FEFD" Association="Self.FK__Llegada__TipoVue__7325FEFD">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__TipoID__0F03239C" Association="Self.FK__Menu__TipoID__0F03239C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__Compañi__12D3B480" Association="Self.FK__MenuRol__Compañi__12D3B480">
+            <End Role="Compañia" EntitySet="Compañia" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__MenuID__13C7D8B9" Association="Self.FK__MenuRol__MenuID__13C7D8B9">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__RolID__14BBFCF2" Association="Self.FK__MenuRol__RolID__14BBFCF2">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Aeron__7CAF6937" Association="Self.FK__Operacion__Aeron__7CAF6937">
+            <End Role="Aeronave" EntitySet="Aeronave" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Llega__7DA38D70" Association="Self.FK__Operacion__Llega__7DA38D70">
+            <End Role="Llegada" EntitySet="Llegada" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Salid__7E97B1A9" Association="Self.FK__Operacion__Salid__7E97B1A9">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Statu__7F8BD5E2" Association="Self.FK__Operacion__Statu__7F8BD5E2">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__TipoF__007FFA1B" Association="Self.FK__Operacion__TipoF__007FFA1B">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Banda__10B661E4" Association="Self.FK__Planeacio__Banda__10B661E4">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Compa__11AA861D" Association="Self.FK__Planeacio__Compa__11AA861D">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Desti__129EAA56" Association="Self.FK__Planeacio__Desti__129EAA56">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Orige__1392CE8F" Association="Self.FK__Planeacio__Orige__1392CE8F">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__DestinoI__76026BA8" Association="Self.FK__Salida__DestinoI__76026BA8">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__Posicion__76F68FE1" Association="Self.FK__Salida__Posicion__76F68FE1">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__StatusID__77EAB41A" Association="Self.FK__Salida__StatusID__77EAB41A">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__TipoPosi__78DED853" Association="Self.FK__Salida__TipoPosi__78DED853">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__TipoVuel__79D2FC8C" Association="Self.FK__Salida__TipoVuel__79D2FC8C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TarifaCec__TipoS__587208C1" Association="Self.FK__TarifaCec__TipoS__587208C1">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TarifaCec__TipoT__59662CFA" Association="Self.FK__TarifaCec__TipoT__59662CFA">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tercero__TipoTer__55959C16" Association="Self.FK__Tercero__TipoTer__55959C16">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Tercero" EntitySet="Tercero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipo__Agrupacion__0638D371" Association="Self.FK__Tipo__Agrupacion__0638D371">
+            <End Role="Agrupacion" EntitySet="Agrupacion" />
+            <End Role="Tipo" EntitySet="Tipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Compañi__28C2F59F" Association="Self.FK__Usuario__Compañi__28C2F59F">
+            <End Role="Compañia" EntitySet="Compañia" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__RolID__27CED166" Association="Self.FK__Usuario__RolID__27CED166">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="wmsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aeronave" EntityType="wmsModel.Aeronave" />
+          <EntitySet Name="Aeropuerto" EntityType="wmsModel.Aeropuerto" />
+          <EntitySet Name="Bombero" EntityType="wmsModel.Bombero" />
+          <EntitySet Name="Llegada" EntityType="wmsModel.Llegada" />
+          <EntitySet Name="Operacion" EntityType="wmsModel.Operacion" />
+          <EntitySet Name="Planeacion" EntityType="wmsModel.Planeacion" />
+          <EntitySet Name="Salida" EntityType="wmsModel.Salida" />
+          <EntitySet Name="TarifaCecoa" EntityType="wmsModel.TarifaCecoa" />
+          <EntitySet Name="Compañia" EntityType="wmsModel.Compañia" />
+          <EntitySet Name="Menu" EntityType="wmsModel.Menu" />
+          <EntitySet Name="MenuRol" EntityType="wmsModel.MenuRol" />
+          <EntitySet Name="Agrupacion" EntityType="wmsModel.Agrupacion" />
+          <EntitySet Name="Conexion" EntityType="wmsModel.Conexion" />
+          <EntitySet Name="Configuracion" EntityType="wmsModel.Configuracion" />
+          <EntitySet Name="Estado" EntityType="wmsModel.Estado" />
+          <EntitySet Name="Tercero" EntityType="wmsModel.Tercero" />
+          <EntitySet Name="Tipo" EntityType="wmsModel.Tipo" />
+          <EntitySet Name="TRM" EntityType="wmsModel.TRM" />
+          <EntitySet Name="Rol" EntityType="wmsModel.Rol" />
+          <EntitySet Name="Usuario" EntityType="wmsModel.Usuario" />
+          <AssociationSet Name="FK__Aeronave__Clasif__5C4299A5" Association="wmsModel.FK__Aeronave__Clasif__5C4299A5">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeronave__Compañ__5D36BDDE" Association="wmsModel.FK__Aeronave__Compañ__5D36BDDE">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeronave__Propie__5E2AE217" Association="wmsModel.FK__Aeronave__Propie__5E2AE217">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Aeronave" EntitySet="Aeronave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Aeron__7CAF6937" Association="wmsModel.FK__Operacion__Aeron__7CAF6937">
+            <End Role="Aeronave" EntitySet="Aeronave" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Aeropuert__TipoA__4DF47A4E" Association="wmsModel.FK__Aeropuert__TipoA__4DF47A4E">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__OrigenI__6E6149E0" Association="wmsModel.FK__Llegada__OrigenI__6E6149E0">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Desti__129EAA56" Association="wmsModel.FK__Planeacio__Desti__129EAA56">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Orige__1392CE8F" Association="wmsModel.FK__Planeacio__Orige__1392CE8F">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__DestinoI__76026BA8" Association="wmsModel.FK__Salida__DestinoI__76026BA8">
+            <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__Operaci__04508AFF" Association="wmsModel.FK__Bombero__Operaci__04508AFF">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__StatusI__0544AF38" Association="wmsModel.FK__Bombero__StatusI__0544AF38">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bombero__TipoSer__035C66C6" Association="wmsModel.FK__Bombero__TipoSer__035C66C6">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Bombero" EntitySet="Bombero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__BandaID__6B84DD35" Association="wmsModel.FK__Llegada__BandaID__6B84DD35">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__CIAFact__6C79016E" Association="wmsModel.FK__Llegada__CIAFact__6C79016E">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__Clasifi__6D6D25A7" Association="wmsModel.FK__Llegada__Clasifi__6D6D25A7">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__Posicio__6F556E19" Association="wmsModel.FK__Llegada__Posicio__6F556E19">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__StatusI__70499252" Association="wmsModel.FK__Llegada__StatusI__70499252">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoDec__713DB68B" Association="wmsModel.FK__Llegada__TipoDec__713DB68B">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoPos__7231DAC4" Association="wmsModel.FK__Llegada__TipoPos__7231DAC4">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Llegada__TipoVue__7325FEFD" Association="wmsModel.FK__Llegada__TipoVue__7325FEFD">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Llega__7DA38D70" Association="wmsModel.FK__Operacion__Llega__7DA38D70">
+            <End Role="Llegada" EntitySet="Llegada" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Salid__7E97B1A9" Association="wmsModel.FK__Operacion__Salid__7E97B1A9">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__Statu__7F8BD5E2" Association="wmsModel.FK__Operacion__Statu__7F8BD5E2">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Operacion__TipoF__007FFA1B" Association="wmsModel.FK__Operacion__TipoF__007FFA1B">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Operacion" EntitySet="Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Banda__10B661E4" Association="wmsModel.FK__Planeacio__Banda__10B661E4">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Planeacio__Compa__11AA861D" Association="wmsModel.FK__Planeacio__Compa__11AA861D">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="Planeacion" EntitySet="Planeacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__Posicion__76F68FE1" Association="wmsModel.FK__Salida__Posicion__76F68FE1">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__StatusID__77EAB41A" Association="wmsModel.FK__Salida__StatusID__77EAB41A">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__TipoPosi__78DED853" Association="wmsModel.FK__Salida__TipoPosi__78DED853">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salida__TipoVuel__79D2FC8C" Association="wmsModel.FK__Salida__TipoVuel__79D2FC8C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TarifaCec__TipoS__587208C1" Association="wmsModel.FK__TarifaCec__TipoS__587208C1">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TarifaCec__TipoT__59662CFA" Association="wmsModel.FK__TarifaCec__TipoT__59662CFA">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__Compañi__12D3B480" Association="wmsModel.FK__MenuRol__Compañi__12D3B480">
+            <End Role="Compañia" EntitySet="Compañia" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__Compañi__28C2F59F" Association="wmsModel.FK__Usuario__Compañi__28C2F59F">
+            <End Role="Compañia" EntitySet="Compañia" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__TipoID__0F03239C" Association="wmsModel.FK__Menu__TipoID__0F03239C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__MenuID__13C7D8B9" Association="wmsModel.FK__MenuRol__MenuID__13C7D8B9">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MenuRol__RolID__14BBFCF2" Association="wmsModel.FK__MenuRol__RolID__14BBFCF2">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="MenuRol" EntitySet="MenuRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipo__Agrupacion__0638D371" Association="wmsModel.FK__Tipo__Agrupacion__0638D371">
+            <End Role="Agrupacion" EntitySet="Agrupacion" />
+            <End Role="Tipo" EntitySet="Tipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Coneccion__TipoI__1798699D" Association="wmsModel.FK__Coneccion__TipoI__1798699D">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Conexion" EntitySet="Conexion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estado__TipoID__1D5142F3" Association="wmsModel.FK__Estado__TipoID__1D5142F3">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tercero__TipoTer__55959C16" Association="wmsModel.FK__Tercero__TipoTer__55959C16">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Tercero" EntitySet="Tercero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__RolID__27CED166" Association="wmsModel.FK__Usuario__RolID__27CED166">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aeronave">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Matricula" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClasificacionID" Type="Int32" />
+          <Property Name="PropietarioID" Type="Int32" />
+          <Property Name="CompañiaFacturaID" Type="Int32" />
+          <Property Name="PBMOKG" Type="Int32" />
+          <Property Name="FechaVencimientoMatricula" Type="DateTime" Precision="3" />
+          <Property Name="TipoAeronave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapacidadPasajeros" Type="Int32" />
+          <Property Name="PermisoExplotacion" Type="Boolean" />
+          <Property Name="Extranjera" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Aeronave__Clasif__5C4299A5" FromRole="Aeronave" ToRole="Tipo" />
+          <NavigationProperty Name="Tercero" Relationship="wmsModel.FK__Aeronave__Compañ__5D36BDDE" FromRole="Aeronave" ToRole="Tercero" />
+          <NavigationProperty Name="Tercero1" Relationship="wmsModel.FK__Aeronave__Propie__5E2AE217" FromRole="Aeronave" ToRole="Tercero" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__Aeron__7CAF6937" FromRole="Aeronave" ToRole="Operacion" />
+        </EntityType>
+        <EntityType Name="Aeropuerto">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SiglaIATA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SiglaOACI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoAeropuertoID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Aeropuert__TipoA__4DF47A4E" FromRole="Aeropuerto" ToRole="Tipo" />
+          <NavigationProperty Name="Llegada" Relationship="wmsModel.FK__Llegada__OrigenI__6E6149E0" FromRole="Aeropuerto" ToRole="Llegada" />
+          <NavigationProperty Name="Planeacion" Relationship="wmsModel.FK__Planeacio__Desti__129EAA56" FromRole="Aeropuerto" ToRole="Planeacion" />
+          <NavigationProperty Name="Planeacion1" Relationship="wmsModel.FK__Planeacio__Orige__1392CE8F" FromRole="Aeropuerto" ToRole="Planeacion" />
+          <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Salida__DestinoI__76026BA8" FromRole="Aeropuerto" ToRole="Salida" />
+        </EntityType>
+        <EntityType Name="Bombero">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperacionID" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="TipoServicioBombID" Type="Int32" />
+          <Property Name="ValorServicio" Type="Double" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Bombero__Operaci__04508AFF" FromRole="Bombero" ToRole="Operacion" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Bombero__StatusI__0544AF38" FromRole="Bombero" ToRole="Estado" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Bombero__TipoSer__035C66C6" FromRole="Bombero" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Llegada">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NVuelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HoraProgramadaLlegada" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraAterrizaje" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraPlataforma" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraPuente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAterrizaje" Type="DateTime" Precision="3" />
+          <Property Name="FechaLLegadaPlataforma" Type="DateTime" Precision="3" />
+          <Property Name="FechaLlegadaPuente" Type="DateTime" Precision="3" />
+          <Property Name="TipoPosicionID" Type="Int32" />
+          <Property Name="PosicionID" Type="Int32" />
+          <Property Name="TipoDeclaracionID" Type="Int32" />
+          <Property Name="TipoVueloID" Type="Int32" />
+          <Property Name="BandaID" Type="Int32" />
+          <Property Name="CargaEntrada" Type="Double" />
+          <Property Name="CorreoEntrada" Type="Double" />
+          <Property Name="CantPax" Type="Int32" />
+          <Property Name="Sala" Type="Int32" />
+          <Property Name="ClasificacionID" Type="Int32" />
+          <Property Name="CIAFacturaID" Type="Int32" />
+          <Property Name="OrigenID" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaProgramacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeropuerto" Relationship="wmsModel.FK__Llegada__OrigenI__6E6149E0" FromRole="Llegada" ToRole="Aeropuerto" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Llegada__BandaID__6B84DD35" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Tercero" Relationship="wmsModel.FK__Llegada__CIAFact__6C79016E" FromRole="Llegada" ToRole="Tercero" />
+          <NavigationProperty Name="Tipo1" Relationship="wmsModel.FK__Llegada__Clasifi__6D6D25A7" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo2" Relationship="wmsModel.FK__Llegada__Posicio__6F556E19" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Llegada__StatusI__70499252" FromRole="Llegada" ToRole="Estado" />
+          <NavigationProperty Name="Tipo3" Relationship="wmsModel.FK__Llegada__TipoDec__713DB68B" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo4" Relationship="wmsModel.FK__Llegada__TipoPos__7231DAC4" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo5" Relationship="wmsModel.FK__Llegada__TipoVue__7325FEFD" FromRole="Llegada" ToRole="Tipo" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__Llega__7DA38D70" FromRole="Llegada" ToRole="Operacion" />
+        </EntityType>
+        <EntityType Name="Operacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoFacturacionID" Type="Int32" />
+          <Property Name="AeronaveID" Type="Int32" />
+          <Property Name="LlegadaID" Type="Int32" Nullable="false" />
+          <Property Name="SalidaID" Type="Int32" />
+          <Property Name="FechaOP" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaAnulado" Type="DateTime" Precision="3" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="Facturado" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeronave" Relationship="wmsModel.FK__Operacion__Aeron__7CAF6937" FromRole="Operacion" ToRole="Aeronave" />
+          <NavigationProperty Name="Bombero" Relationship="wmsModel.FK__Bombero__Operaci__04508AFF" FromRole="Operacion" ToRole="Bombero" />
+          <NavigationProperty Name="Llegada" Relationship="wmsModel.FK__Operacion__Llega__7DA38D70" FromRole="Operacion" ToRole="Llegada" />
+          <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Operacion__Salid__7E97B1A9" FromRole="Operacion" ToRole="Salida" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Operacion__Statu__7F8BD5E2" FromRole="Operacion" ToRole="Estado" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Operacion__TipoF__007FFA1B" FromRole="Operacion" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Planeacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompaniaID" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="NVueloEntrada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NVueloSalida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HoraEntrada" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalida" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Stand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sala" Type="Int32" />
+          <Property Name="TipoAeronave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BandaID" Type="Int32" />
+          <Property Name="OrigenID" Type="Int32" />
+          <Property Name="DestinoID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeropuerto" Relationship="wmsModel.FK__Planeacio__Desti__129EAA56" FromRole="Planeacion" ToRole="Aeropuerto" />
+          <NavigationProperty Name="Aeropuerto1" Relationship="wmsModel.FK__Planeacio__Orige__1392CE8F" FromRole="Planeacion" ToRole="Aeropuerto" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Planeacio__Banda__10B661E4" FromRole="Planeacion" ToRole="Tipo" />
+          <NavigationProperty Name="Tercero" Relationship="wmsModel.FK__Planeacio__Compa__11AA861D" FromRole="Planeacion" ToRole="Tercero" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NVueloSalida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="HoraProgramadaSalida" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalidaPuente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalidaPlataforma" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraDespegue" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FechaSalidaPuente" Type="DateTime" Precision="3" />
+          <Property Name="FechaSalidaPlataforma" Type="DateTime" Precision="3" />
+          <Property Name="FechaDespegue" Type="DateTime" Precision="3" />
+          <Property Name="TipoPosicionSalidaID" Type="Int32" />
+          <Property Name="PosicionSalidaID" Type="Int32" />
+          <Property Name="TipoVueloSalidaID" Type="Int32" />
+          <Property Name="DestinoID" Type="Int32" />
+          <Property Name="CargaSalida" Type="Double" />
+          <Property Name="CorreoSalida" Type="Double" />
+          <Property Name="HoraSalidaPuenteReal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalidaPlataformaReal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraDespegueReal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="Sala" Type="Int32" />
+          <Property Name="FechaProgramacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeropuerto" Relationship="wmsModel.FK__Salida__DestinoI__76026BA8" FromRole="Salida" ToRole="Aeropuerto" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__Salid__7E97B1A9" FromRole="Salida" ToRole="Operacion" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Salida__Posicion__76F68FE1" FromRole="Salida" ToRole="Tipo" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Salida__StatusID__77EAB41A" FromRole="Salida" ToRole="Estado" />
+          <NavigationProperty Name="Tipo1" Relationship="wmsModel.FK__Salida__TipoPosi__78DED853" FromRole="Salida" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo2" Relationship="wmsModel.FK__Salida__TipoVuel__79D2FC8C" FromRole="Salida" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="TarifaCecoa">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValorCOP" Type="Double" />
+          <Property Name="ValorUSD" Type="Double" />
+          <Property Name="RecargoNocturnoCOP" Type="Double" />
+          <Property Name="RecargoNocturnoUSD" Type="Double" />
+          <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="TipoTarifaID" Type="Int32" />
+          <Property Name="TipoServicioID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__TarifaCec__TipoS__587208C1" FromRole="TarifaCecoa" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo1" Relationship="wmsModel.FK__TarifaCec__TipoT__59662CFA" FromRole="TarifaCecoa" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Compañia">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuRol" Relationship="wmsModel.FK__MenuRol__Compañi__12D3B480" FromRole="Compañia" ToRole="MenuRol" />
+          <NavigationProperty Name="Usuario" Relationship="wmsModel.FK__Usuario__Compañi__28C2F59F" FromRole="Compañia" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ruta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="TipoID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Menu__TipoID__0F03239C" FromRole="Menu" ToRole="Tipo" />
+          <NavigationProperty Name="MenuRol" Relationship="wmsModel.FK__MenuRol__MenuID__13C7D8B9" FromRole="Menu" ToRole="MenuRol" />
+        </EntityType>
+        <EntityType Name="MenuRol">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuID" Type="Int32" />
+          <Property Name="RolID" Type="Int32" />
+          <Property Name="CompañiaID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Compañia" Relationship="wmsModel.FK__MenuRol__Compañi__12D3B480" FromRole="MenuRol" ToRole="Compañia" />
+          <NavigationProperty Name="Menu" Relationship="wmsModel.FK__MenuRol__MenuID__13C7D8B9" FromRole="MenuRol" ToRole="Menu" />
+          <NavigationProperty Name="Rol" Relationship="wmsModel.FK__MenuRol__RolID__14BBFCF2" FromRole="MenuRol" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Agrupacion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Tipo__Agrupacion__0638D371" FromRole="Agrupacion" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Conexion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cadena" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Coneccion__TipoI__1798699D" FromRole="Conexion" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Configuracion">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Valor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoID" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Bombero" Relationship="wmsModel.FK__Bombero__StatusI__0544AF38" FromRole="Estado" ToRole="Bombero" />
+          <NavigationProperty Name="Llegada" Relationship="wmsModel.FK__Llegada__StatusI__70499252" FromRole="Estado" ToRole="Llegada" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__Statu__7F8BD5E2" FromRole="Estado" ToRole="Operacion" />
+          <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Salida__StatusID__77EAB41A" FromRole="Estado" ToRole="Salida" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Estado__TipoID__1D5142F3" FromRole="Estado" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Tercero">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="Int64" />
+          <Property Name="Digito" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TipoTerceroID" Type="Int32" />
+          <Property Name="Sincronizado" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeronave" Relationship="wmsModel.FK__Aeronave__Compañ__5D36BDDE" FromRole="Tercero" ToRole="Aeronave" />
+          <NavigationProperty Name="Aeronave1" Relationship="wmsModel.FK__Aeronave__Propie__5E2AE217" FromRole="Tercero" ToRole="Aeronave" />
+          <NavigationProperty Name="Llegada" Relationship="wmsModel.FK__Llegada__CIAFact__6C79016E" FromRole="Tercero" ToRole="Llegada" />
+          <NavigationProperty Name="Planeacion" Relationship="wmsModel.FK__Planeacio__Compa__11AA861D" FromRole="Tercero" ToRole="Planeacion" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Tercero__TipoTer__55959C16" FromRole="Tercero" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgrupacionID" Type="Int32" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aeronave" Relationship="wmsModel.FK__Aeronave__Clasif__5C4299A5" FromRole="Tipo" ToRole="Aeronave" />
+          <NavigationProperty Name="Aeropuerto" Relationship="wmsModel.FK__Aeropuert__TipoA__4DF47A4E" FromRole="Tipo" ToRole="Aeropuerto" />
+          <NavigationProperty Name="Bombero" Relationship="wmsModel.FK__Bombero__TipoSer__035C66C6" FromRole="Tipo" ToRole="Bombero" />
+          <NavigationProperty Name="Llegada" Relationship="wmsModel.FK__Llegada__BandaID__6B84DD35" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Llegada1" Relationship="wmsModel.FK__Llegada__Clasifi__6D6D25A7" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Llegada2" Relationship="wmsModel.FK__Llegada__Posicio__6F556E19" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Llegada3" Relationship="wmsModel.FK__Llegada__TipoDec__713DB68B" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Llegada4" Relationship="wmsModel.FK__Llegada__TipoPos__7231DAC4" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Llegada5" Relationship="wmsModel.FK__Llegada__TipoVue__7325FEFD" FromRole="Tipo" ToRole="Llegada" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__TipoF__007FFA1B" FromRole="Tipo" ToRole="Operacion" />
+          <NavigationProperty Name="Planeacion" Relationship="wmsModel.FK__Planeacio__Banda__10B661E4" FromRole="Tipo" ToRole="Planeacion" />
+          <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Salida__Posicion__76F68FE1" FromRole="Tipo" ToRole="Salida" />
+          <NavigationProperty Name="Salida1" Relationship="wmsModel.FK__Salida__TipoPosi__78DED853" FromRole="Tipo" ToRole="Salida" />
+          <NavigationProperty Name="Salida2" Relationship="wmsModel.FK__Salida__TipoVuel__79D2FC8C" FromRole="Tipo" ToRole="Salida" />
+          <NavigationProperty Name="TarifaCecoa" Relationship="wmsModel.FK__TarifaCec__TipoS__587208C1" FromRole="Tipo" ToRole="TarifaCecoa" />
+          <NavigationProperty Name="TarifaCecoa1" Relationship="wmsModel.FK__TarifaCec__TipoT__59662CFA" FromRole="Tipo" ToRole="TarifaCecoa" />
+          <NavigationProperty Name="Menu" Relationship="wmsModel.FK__Menu__TipoID__0F03239C" FromRole="Tipo" ToRole="Menu" />
+          <NavigationProperty Name="Agrupacion" Relationship="wmsModel.FK__Tipo__Agrupacion__0638D371" FromRole="Tipo" ToRole="Agrupacion" />
+          <NavigationProperty Name="Conexion" Relationship="wmsModel.FK__Coneccion__TipoI__1798699D" FromRole="Tipo" ToRole="Conexion" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Estado__TipoID__1D5142F3" FromRole="Tipo" ToRole="Estado" />
+          <NavigationProperty Name="Tercero" Relationship="wmsModel.FK__Tercero__TipoTer__55959C16" FromRole="Tipo" ToRole="Tercero" />
+        </EntityType>
+        <EntityType Name="TRM">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuRol" Relationship="wmsModel.FK__MenuRol__RolID__14BBFCF2" FromRole="Rol" ToRole="MenuRol" />
+          <NavigationProperty Name="Usuario" Relationship="wmsModel.FK__Usuario__RolID__27CED166" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RolID" Type="Int32" />
+          <Property Name="CompañiaID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Compañia" Relationship="wmsModel.FK__Usuario__Compañi__28C2F59F" FromRole="Usuario" ToRole="Compañia" />
+          <NavigationProperty Name="Rol" Relationship="wmsModel.FK__Usuario__RolID__27CED166" FromRole="Usuario" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__Aeronave__Clasif__5C4299A5">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Aeronave" Role="Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="ClasificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeronave__Compañ__5D36BDDE">
+          <End Type="wmsModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+          <End Type="wmsModel.Aeronave" Role="Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="CompañiaFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeronave__Propie__5E2AE217">
+          <End Type="wmsModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+          <End Type="wmsModel.Aeronave" Role="Aeronave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeronave">
+              <PropertyRef Name="PropietarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Aeron__7CAF6937">
+          <End Type="wmsModel.Aeronave" Role="Aeronave" Multiplicity="0..1" />
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeronave">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="AeronaveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Aeropuert__TipoA__4DF47A4E">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Aeropuerto" Role="Aeropuerto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Aeropuerto">
+              <PropertyRef Name="TipoAeropuertoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__OrigenI__6E6149E0">
+          <End Type="wmsModel.Aeropuerto" Role="Aeropuerto" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Desti__129EAA56">
+          <End Type="wmsModel.Aeropuerto" Role="Aeropuerto" Multiplicity="0..1" />
+          <End Type="wmsModel.Planeacion" Role="Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="DestinoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Orige__1392CE8F">
+          <End Type="wmsModel.Aeropuerto" Role="Aeropuerto" Multiplicity="0..1" />
+          <End Type="wmsModel.Planeacion" Role="Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__DestinoI__76026BA8">
+          <End Type="wmsModel.Aeropuerto" Role="Aeropuerto" Multiplicity="0..1" />
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeropuerto">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="DestinoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__Operaci__04508AFF">
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="0..1" />
+          <End Type="wmsModel.Bombero" Role="Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__StatusI__0544AF38">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="wmsModel.Bombero" Role="Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bombero__TipoSer__035C66C6">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Bombero" Role="Bombero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Bombero">
+              <PropertyRef Name="TipoServicioBombID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__BandaID__6B84DD35">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="BandaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__CIAFact__6C79016E">
+          <End Type="wmsModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="CIAFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__Clasifi__6D6D25A7">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="ClasificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__Posicio__6F556E19">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="PosicionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__StatusI__70499252">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoDec__713DB68B">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoDeclaracionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoPos__7231DAC4">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoPosicionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Llegada__TipoVue__7325FEFD">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="TipoVueloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Llega__7DA38D70">
+          <End Type="wmsModel.Llegada" Role="Llegada" Multiplicity="1" />
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Llegada">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="LlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Salid__7E97B1A9">
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="0..1" />
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="SalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__Statu__7F8BD5E2">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Operacion__TipoF__007FFA1B">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Operacion">
+              <PropertyRef Name="TipoFacturacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Banda__10B661E4">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Planeacion" Role="Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="BandaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Planeacio__Compa__11AA861D">
+          <End Type="wmsModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+          <End Type="wmsModel.Planeacion" Role="Planeacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Planeacion">
+              <PropertyRef Name="CompaniaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__Posicion__76F68FE1">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="PosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__StatusID__77EAB41A">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__TipoPosi__78DED853">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="TipoPosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salida__TipoVuel__79D2FC8C">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Salida" Role="Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="TipoVueloSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TarifaCec__TipoS__587208C1">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.TarifaCecoa" Role="TarifaCecoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="TarifaCecoa">
+              <PropertyRef Name="TipoServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TarifaCec__TipoT__59662CFA">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.TarifaCecoa" Role="TarifaCecoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="TarifaCecoa">
+              <PropertyRef Name="TipoTarifaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__Compañi__12D3B480">
+          <End Type="wmsModel.Compañia" Role="Compañia" Multiplicity="0..1" />
+          <End Type="wmsModel.MenuRol" Role="MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compañia">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="CompañiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__Compañi__28C2F59F">
+          <End Type="wmsModel.Compañia" Role="Compañia" Multiplicity="0..1" />
+          <End Type="wmsModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compañia">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="CompañiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__TipoID__0F03239C">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__MenuID__13C7D8B9">
+          <End Type="wmsModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="wmsModel.MenuRol" Role="MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MenuRol__RolID__14BBFCF2">
+          <End Type="wmsModel.Rol" Role="Rol" Multiplicity="0..1" />
+          <End Type="wmsModel.MenuRol" Role="MenuRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="MenuRol">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipo__Agrupacion__0638D371">
+          <End Type="wmsModel.Agrupacion" Role="Agrupacion" Multiplicity="0..1" />
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agrupacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tipo">
+              <PropertyRef Name="AgrupacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Coneccion__TipoI__1798699D">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Conexion" Role="Conexion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Conexion">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estado__TipoID__1D5142F3">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="TipoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tercero__TipoTer__55959C16">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Tercero" Role="Tercero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tercero">
+              <PropertyRef Name="TipoTerceroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__RolID__27CED166">
+          <End Type="wmsModel.Rol" Role="Rol" Multiplicity="0..1" />
+          <End Type="wmsModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wmsModelStoreContainer" CdmEntityContainer="wmsEntities">
+          <EntitySetMapping Name="Aeronave">
+            <EntityTypeMapping TypeName="wmsModel.Aeronave">
+              <MappingFragment StoreEntitySet="Aeronave">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Extranjera" ColumnName="Extranjera" />
+                <ScalarProperty Name="PermisoExplotacion" ColumnName="PermisoExplotacion" />
+                <ScalarProperty Name="CapacidadPasajeros" ColumnName="CapacidadPasajeros" />
+                <ScalarProperty Name="TipoAeronave" ColumnName="TipoAeronave" />
+                <ScalarProperty Name="FechaVencimientoMatricula" ColumnName="FechaVencimientoMatricula" />
+                <ScalarProperty Name="PBMOKG" ColumnName="PBMOKG" />
+                <ScalarProperty Name="CompañiaFacturaID" ColumnName="CompañiaFacturaID" />
+                <ScalarProperty Name="PropietarioID" ColumnName="PropietarioID" />
+                <ScalarProperty Name="ClasificacionID" ColumnName="ClasificacionID" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aeropuerto">
+            <EntityTypeMapping TypeName="wmsModel.Aeropuerto">
+              <MappingFragment StoreEntitySet="Aeropuerto">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="TipoAeropuertoID" ColumnName="TipoAeropuertoID" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="SiglaOACI" ColumnName="SiglaOACI" />
+                <ScalarProperty Name="SiglaIATA" ColumnName="SiglaIATA" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bombero">
+            <EntityTypeMapping TypeName="wmsModel.Bombero">
+              <MappingFragment StoreEntitySet="Bombero">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="ValorServicio" ColumnName="ValorServicio" />
+                <ScalarProperty Name="TipoServicioBombID" ColumnName="TipoServicioBombID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="OperacionID" ColumnName="OperacionID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Llegada">
+            <EntityTypeMapping TypeName="wmsModel.Llegada">
+              <MappingFragment StoreEntitySet="Llegada">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaProgramacion" ColumnName="FechaProgramacion" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="CIAFacturaID" ColumnName="CIAFacturaID" />
+                <ScalarProperty Name="ClasificacionID" ColumnName="ClasificacionID" />
+                <ScalarProperty Name="Sala" ColumnName="Sala" />
+                <ScalarProperty Name="CantPax" ColumnName="CantPax" />
+                <ScalarProperty Name="CorreoEntrada" ColumnName="CorreoEntrada" />
+                <ScalarProperty Name="CargaEntrada" ColumnName="CargaEntrada" />
+                <ScalarProperty Name="BandaID" ColumnName="BandaID" />
+                <ScalarProperty Name="TipoVueloID" ColumnName="TipoVueloID" />
+                <ScalarProperty Name="TipoDeclaracionID" ColumnName="TipoDeclaracionID" />
+                <ScalarProperty Name="PosicionID" ColumnName="PosicionID" />
+                <ScalarProperty Name="TipoPosicionID" ColumnName="TipoPosicionID" />
+                <ScalarProperty Name="FechaLlegadaPuente" ColumnName="FechaLlegadaPuente" />
+                <ScalarProperty Name="FechaLLegadaPlataforma" ColumnName="FechaLLegadaPlataforma" />
+                <ScalarProperty Name="FechaAterrizaje" ColumnName="FechaAterrizaje" />
+                <ScalarProperty Name="HoraPuente" ColumnName="HoraPuente" />
+                <ScalarProperty Name="HoraPlataforma" ColumnName="HoraPlataforma" />
+                <ScalarProperty Name="HoraAterrizaje" ColumnName="HoraAterrizaje" />
+                <ScalarProperty Name="HoraProgramadaLlegada" ColumnName="HoraProgramadaLlegada" />
+                <ScalarProperty Name="NVuelo" ColumnName="NVuelo" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operacion">
+            <EntityTypeMapping TypeName="wmsModel.Operacion">
+              <MappingFragment StoreEntitySet="Operacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="FechaAnulado" ColumnName="FechaAnulado" />
+                <ScalarProperty Name="FechaOP" ColumnName="FechaOP" />
+                <ScalarProperty Name="SalidaID" ColumnName="SalidaID" />
+                <ScalarProperty Name="LlegadaID" ColumnName="LlegadaID" />
+                <ScalarProperty Name="AeronaveID" ColumnName="AeronaveID" />
+                <ScalarProperty Name="TipoFacturacionID" ColumnName="TipoFacturacionID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planeacion">
+            <EntityTypeMapping TypeName="wmsModel.Planeacion">
+              <MappingFragment StoreEntitySet="Planeacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="BandaID" ColumnName="BandaID" />
+                <ScalarProperty Name="TipoAeronave" ColumnName="TipoAeronave" />
+                <ScalarProperty Name="Sala" ColumnName="Sala" />
+                <ScalarProperty Name="Stand" ColumnName="Stand" />
+                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+                <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
+                <ScalarProperty Name="NVueloSalida" ColumnName="NVueloSalida" />
+                <ScalarProperty Name="NVueloEntrada" ColumnName="NVueloEntrada" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CompaniaID" ColumnName="CompaniaID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salida">
+            <EntityTypeMapping TypeName="wmsModel.Salida">
+              <MappingFragment StoreEntitySet="Salida">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaProgramacion" ColumnName="FechaProgramacion" />
+                <ScalarProperty Name="Sala" ColumnName="Sala" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="HoraDespegueReal" ColumnName="HoraDespegueReal" />
+                <ScalarProperty Name="HoraSalidaPlataformaReal" ColumnName="HoraSalidaPlataformaReal" />
+                <ScalarProperty Name="HoraSalidaPuenteReal" ColumnName="HoraSalidaPuenteReal" />
+                <ScalarProperty Name="CorreoSalida" ColumnName="CorreoSalida" />
+                <ScalarProperty Name="CargaSalida" ColumnName="CargaSalida" />
+                <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
+                <ScalarProperty Name="TipoVueloSalidaID" ColumnName="TipoVueloSalidaID" />
+                <ScalarProperty Name="PosicionSalidaID" ColumnName="PosicionSalidaID" />
+                <ScalarProperty Name="TipoPosicionSalidaID" ColumnName="TipoPosicionSalidaID" />
+                <ScalarProperty Name="FechaDespegue" ColumnName="FechaDespegue" />
+                <ScalarProperty Name="FechaSalidaPlataforma" ColumnName="FechaSalidaPlataforma" />
+                <ScalarProperty Name="FechaSalidaPuente" ColumnName="FechaSalidaPuente" />
+                <ScalarProperty Name="HoraDespegue" ColumnName="HoraDespegue" />
+                <ScalarProperty Name="HoraSalidaPlataforma" ColumnName="HoraSalidaPlataforma" />
+                <ScalarProperty Name="HoraSalidaPuente" ColumnName="HoraSalidaPuente" />
+                <ScalarProperty Name="HoraProgramadaSalida" ColumnName="HoraProgramadaSalida" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="NVueloSalida" ColumnName="NVueloSalida" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TarifaCecoa">
+            <EntityTypeMapping TypeName="wmsModel.TarifaCecoa">
+              <MappingFragment StoreEntitySet="TarifaCecoa">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="TipoServicioID" ColumnName="TipoServicioID" />
+                <ScalarProperty Name="TipoTarifaID" ColumnName="TipoTarifaID" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="RecargoNocturnoUSD" ColumnName="RecargoNocturnoUSD" />
+                <ScalarProperty Name="RecargoNocturnoCOP" ColumnName="RecargoNocturnoCOP" />
+                <ScalarProperty Name="ValorUSD" ColumnName="ValorUSD" />
+                <ScalarProperty Name="ValorCOP" ColumnName="ValorCOP" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compañia">
+            <EntityTypeMapping TypeName="wmsModel.Compañia">
+              <MappingFragment StoreEntitySet="Compañia">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="wmsModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="TipoID" ColumnName="TipoID" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuRol">
+            <EntityTypeMapping TypeName="wmsModel.MenuRol">
+              <MappingFragment StoreEntitySet="MenuRol">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="CompañiaID" ColumnName="CompañiaID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agrupacion">
+            <EntityTypeMapping TypeName="wmsModel.Agrupacion">
+              <MappingFragment StoreEntitySet="Agrupacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conexion">
+            <EntityTypeMapping TypeName="wmsModel.Conexion">
+              <MappingFragment StoreEntitySet="Conexion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="TipoID" ColumnName="TipoID" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Cadena" ColumnName="Cadena" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuracion">
+            <EntityTypeMapping TypeName="wmsModel.Configuracion">
+              <MappingFragment StoreEntitySet="Configuracion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="wmsModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoID" ColumnName="TipoID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tercero">
+            <EntityTypeMapping TypeName="wmsModel.Tercero">
+              <MappingFragment StoreEntitySet="Tercero">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+                <ScalarProperty Name="TipoTerceroID" ColumnName="TipoTerceroID" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Digito" ColumnName="Digito" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo">
+            <EntityTypeMapping TypeName="wmsModel.Tipo">
+              <MappingFragment StoreEntitySet="Tipo">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo2" ColumnName="Codigo2" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="AgrupacionID" ColumnName="AgrupacionID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRM">
+            <EntityTypeMapping TypeName="wmsModel.TRM">
+              <MappingFragment StoreEntitySet="TRM">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="wmsModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="wmsModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="CompañiaID" ColumnName="CompañiaID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

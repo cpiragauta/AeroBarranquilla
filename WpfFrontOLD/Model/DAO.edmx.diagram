@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9885e0e4f4b341acb0e414452728ef62" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="wmsModel.Aeronave" Width="1.5" PointX="7.5" PointY="28.875" />
+        <EntityTypeShape EntityType="wmsModel.Aeropuerto" Width="1.5" PointX="5.25" PointY="38.875" />
+        <EntityTypeShape EntityType="wmsModel.Bombero" Width="1.5" PointX="18" PointY="21.625" />
+        <EntityTypeShape EntityType="wmsModel.Llegada" Width="1.5" PointX="13.5" PointY="25.75" />
+        <EntityTypeShape EntityType="wmsModel.Operacion" Width="1.5" PointX="15.75" PointY="22.25" />
+        <EntityTypeShape EntityType="wmsModel.Planeacion" Width="1.5" PointX="10.5" PointY="34.125" />
+        <EntityTypeShape EntityType="wmsModel.Salida" Width="1.5" PointX="10.5" PointY="25.375" />
+        <EntityTypeShape EntityType="wmsModel.TarifaCecoa" Width="1.5" PointX="5.25" PointY="23.5" />
+        <EntityTypeShape EntityType="wmsModel.Compañia" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="wmsModel.Menu" Width="1.5" PointX="5.25" PointY="19.25" />
+        <EntityTypeShape EntityType="wmsModel.MenuRol" Width="1.5" PointX="7.5" PointY="19.375" />
+        <EntityTypeShape EntityType="wmsModel.Agrupacion" Width="1.5" PointX="0.75" PointY="26.875" />
+        <EntityTypeShape EntityType="wmsModel.Conexion" Width="1.5" PointX="5.25" PointY="43.75" />
+        <EntityTypeShape EntityType="wmsModel.Configuracion" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="wmsModel.Estado" Width="1.5" PointX="5.25" PointY="15" />
+        <EntityTypeShape EntityType="wmsModel.Tercero" Width="1.5" PointX="5.25" PointY="33.625" />
+        <EntityTypeShape EntityType="wmsModel.Tipo" Width="1.5" PointX="3" PointY="24.375" />
+        <EntityTypeShape EntityType="wmsModel.TRM" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="wmsModel.Rol" Width="1.5" PointX="5.25" PointY="28.375" />
+        <EntityTypeShape EntityType="wmsModel.Usuario" Width="1.5" PointX="10.5" PointY="19.25" />
+        <AssociationConnector Association="wmsModel.FK__Aeronave__Clasif__5C4299A5" />
+        <AssociationConnector Association="wmsModel.FK__Aeronave__Compañ__5D36BDDE" />
+        <AssociationConnector Association="wmsModel.FK__Aeronave__Propie__5E2AE217" />
+        <AssociationConnector Association="wmsModel.FK__Operacion__Aeron__7CAF6937" />
+        <AssociationConnector Association="wmsModel.FK__Aeropuert__TipoA__4DF47A4E" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__OrigenI__6E6149E0" />
+        <AssociationConnector Association="wmsModel.FK__Planeacio__Desti__129EAA56" />
+        <AssociationConnector Association="wmsModel.FK__Planeacio__Orige__1392CE8F" />
+        <AssociationConnector Association="wmsModel.FK__Salida__DestinoI__76026BA8" />
+        <AssociationConnector Association="wmsModel.FK__Bombero__Operaci__04508AFF" />
+        <AssociationConnector Association="wmsModel.FK__Bombero__StatusI__0544AF38" />
+        <AssociationConnector Association="wmsModel.FK__Bombero__TipoSer__035C66C6" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__BandaID__6B84DD35" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__CIAFact__6C79016E" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__Clasifi__6D6D25A7" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__Posicio__6F556E19" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__StatusI__70499252" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__TipoDec__713DB68B" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__TipoPos__7231DAC4" />
+        <AssociationConnector Association="wmsModel.FK__Llegada__TipoVue__7325FEFD" />
+        <AssociationConnector Association="wmsModel.FK__Operacion__Llega__7DA38D70" />
+        <AssociationConnector Association="wmsModel.FK__Operacion__Salid__7E97B1A9" />
+        <AssociationConnector Association="wmsModel.FK__Operacion__Statu__7F8BD5E2" />
+        <AssociationConnector Association="wmsModel.FK__Operacion__TipoF__007FFA1B" />
+        <AssociationConnector Association="wmsModel.FK__Planeacio__Banda__10B661E4" />
+        <AssociationConnector Association="wmsModel.FK__Planeacio__Compa__11AA861D" />
+        <AssociationConnector Association="wmsModel.FK__Salida__Posicion__76F68FE1" />
+        <AssociationConnector Association="wmsModel.FK__Salida__StatusID__77EAB41A" />
+        <AssociationConnector Association="wmsModel.FK__Salida__TipoPosi__78DED853" />
+        <AssociationConnector Association="wmsModel.FK__Salida__TipoVuel__79D2FC8C" />
+        <AssociationConnector Association="wmsModel.FK__TarifaCec__TipoS__587208C1" />
+        <AssociationConnector Association="wmsModel.FK__TarifaCec__TipoT__59662CFA" />
+        <AssociationConnector Association="wmsModel.FK__MenuRol__Compañi__12D3B480" />
+        <AssociationConnector Association="wmsModel.FK__Usuario__Compañi__28C2F59F" />
+        <AssociationConnector Association="wmsModel.FK__Menu__TipoID__0F03239C" />
+        <AssociationConnector Association="wmsModel.FK__MenuRol__MenuID__13C7D8B9" />
+        <AssociationConnector Association="wmsModel.FK__MenuRol__RolID__14BBFCF2" />
+        <AssociationConnector Association="wmsModel.FK__Tipo__Agrupacion__0638D371" />
+        <AssociationConnector Association="wmsModel.FK__Coneccion__TipoI__1798699D" />
+        <AssociationConnector Association="wmsModel.FK__Estado__TipoID__1D5142F3" />
+        <AssociationConnector Association="wmsModel.FK__Tercero__TipoTer__55959C16" />
+        <AssociationConnector Association="wmsModel.FK__Usuario__RolID__27CED166" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

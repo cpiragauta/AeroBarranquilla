@@ -1,0 +1,111 @@
+﻿<WMCore:UserControlBase x:Uid="ListaOperaciones" x:Class="WpfFront.Vista.ListaOperacionesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Controles"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="ListaOperaciones">
+
+    <AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" >
+                <TabControl Margin="7,0,7,0" Name="tabMenu" TabStripPlacement="Top" Style="{DynamicResource TabControlStyle}" Width="auto">
+                    <TabItem Header="Listado de Operaciones" Name="Tab_ListadoSalidasAlmacen" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto">
+                        <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                                <StackPanel Orientation="Vertical" Width="auto" >
+                                    <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Width="auto">
+                                            <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="Vuelo:"/>
+                                                <ComboBox x:Name="cmb_TipoOP" Width="100" Height="23" ItemsSource="{Binding ListaTipoOp}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cmb_TipoOP_SelectionChanged"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock Name="LblNroVuelo" FontWeight="Bold"  Text="Nro Vuelo:" />
+                                                <TextBox Height="24" Name="txt_Vuelo" Width="80" Text="{Binding Path=RecordBusqueda.NVuelo}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="Tipo Factura:"/>
+                                                <ComboBox x:Name="cmb_TipoFactura" Width="140" Height="23" ItemsSource="{Binding ListaTipoFacturacion}" DisplayMemberPath="Nombre" SelectedValue="{Binding Record.TipoFacturacion.RowID}" SelectedValuePath="RowID" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock Name="LblOrigen" FontWeight="Bold"  Text="Origen:" />
+                                                <uc:SearchAeropuertos Height="40" x:Name="SearchAeropuertoOrigen" VerticalAlignment="Top" Width="auto"  OnSelected="SearchAeropuertoOrigen_OnSelected_1"/>
+                                                <!--<uc:SearchAeropuerto Height="25" x:Name="txt_SearchAeropuertoOrigen" VerticalAlignment="Top" Width="auto" OnLoadRecord="txt_SearchAeropuertoOrigen_OnLoadRecord" />-->
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0" >
+                                                <TextBlock FontWeight="Bold"  Text="Compañia:" />
+                                                <!--<ComboBox Name="FiltroAerolinea" Height="25" Width="120" ItemsSource="{Binding Path=ListaAerolineas}" 
+                                              DisplayMemberPath="ExtName" SelectedValuePath="MetaMasterID" />-->
+                                                <uc:SearchTerceros Height="40" x:Name="SearchTerceros" VerticalAlignment="Top" Width="auto"  />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock FontWeight="Bold"  Text="Matrícula:" />
+                                                <uc:SearchAeronaves Height="40" x:Name="SearchAeronaves" VerticalAlignment="Top" Width="auto"  />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock Name="LblFechaLlegada" FontWeight="Bold" Text="Fecha Llegada:" />
+                                                <toolkit:DatePicker Name="DTP_FechaLlegada" SelectedDate="{Binding Path=RecordBusqueda.FechaOP}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                <awc:ImageButton x:Name="btnBuscarVuelos" Height="26" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Buscar Operaciones" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarVuelos_Click_1" />
+                                                <awc:ImageButton x:Name="btnNuevoRegistro" Height="32" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Nuevo Registro de Vuelo" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                                <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Actualizar lista de Operaciones" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <StackPanel Margin="0,0,0,0">
+                                        <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListaOperaciones}" Margin="0,4,0,0" MaxHeight="750" Height="400" Name="ListadoVuelos" AllowDrop="True" MouseDoubleClick="ListadoVuelos_MouseDoubleClick_1" >
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Header="Consecutivo" Width="60" DisplayMemberBinding="{Binding Path=RowID}" />
+                                                    <GridViewColumn Header="Tipo" Width="70" DisplayMemberBinding="{Binding Path=TipoFacturacion.Nombre}" />
+                                                    <GridViewColumn Header="Vuelo L"  DisplayMemberBinding="{Binding Path=Llegada.NVuelo}" />
+                                                    <GridViewColumn Header="Fecha L" DisplayMemberBinding="{Binding Path=FechaOP, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                    <GridViewColumn Header="Origen"  DisplayMemberBinding="{Binding Path=Llegada.Origen.Ubicacion}" />
+                                                    <GridViewColumn Header="Compañia Factura" Width="250" DisplayMemberBinding="{Binding Path=Llegada.CIAFactura.NombreCompleto}" />
+                                                    <GridViewColumn Header="Matricula" DisplayMemberBinding="{Binding Path=Aeronave.Matricula}" />
+                                                    <GridViewColumn Header="Fecha S" DisplayMemberBinding="{Binding Path=Salida.FechaSalida, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                    <GridViewColumn Header="Vuelo S" DisplayMemberBinding="{Binding Path=Salida.NVueloSalida}" />
+                                                    <GridViewColumn Header="Destino"  DisplayMemberBinding="{Binding Path=Salida.Destino.Ubicacion}" />
+                                                    <GridViewColumn Header="Hr Arterrizaje" DisplayMemberBinding="{Binding Path=Llegada.HoraAterrizaje}" />
+                                                    <GridViewColumn Header="Posicion" DisplayMemberBinding="{Binding Path=Llegada.TipoPosicion.Nombre}" />
+                                                    <GridViewColumn Header="Lleg" DisplayMemberBinding="{Binding Path=Llegada.Posicion.Codigo}" />
+                                                    <GridViewColumn Header="Estado Op" DisplayMemberBinding="{Binding Path=Status.Nombre}" />
+                                                    <GridViewColumn Header="Modificado Por" Width="80" DisplayMemberBinding="{Binding Path=UsuarioModificacion}" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                            <TextBlock Margin="0,0,4,0" FontWeight="Bold" Text="Cantidad: "/>
+                                            <TextBlock Margin="0,0,4,0" FontWeight="Bold" Name="TxtCantidadAgrupada" Text="{Binding ListaOperaciones.Count}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Border>
+                        </StackPanel>
+
+                    </TabItem>
+                </TabControl>
+
+
+
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>

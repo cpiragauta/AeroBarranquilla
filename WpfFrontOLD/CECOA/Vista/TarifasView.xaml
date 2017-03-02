@@ -1,0 +1,424 @@
+﻿<WMCore:UserControlBase x:Uid="Tarifas" x:Class="WpfFront.Views.TarifasView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Common.UserControls"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Tarifas">
+
+    <!--<AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  >
+            <StackPanel Name="STK_MAIN1" Orientation="Vertical"  >
+                <StackPanel DockPanel.Dock="Top" Margin="4,4,4,4" Orientation="Horizontal">
+                    <TextBlock FontSize="17" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Maestro Tarifas" />
+
+                </StackPanel>
+                <StackPanel Name="STK_MAIN" Orientation="Horizontal">
+                    <Border Name="BorderP" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0"  >
+                            <TabControl Width="auto" >
+                                <TabItem Header="Tarifas Aerodromo" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0"  >
+                                            <Border x:Uid="Border_2" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"  Margin="0,0,0,4">
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor COP:" />
+                                                        <TextBox Height="23" Name="txt_ValorCOP" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor USD:" />
+                                                        <TextBox Height="23" Name="txt_ValorUSD" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Recargo Nocturno COP:" />
+                                                        <TextBox Height="23" Name="txt_RecargoCOP" KeyDown="soloNumerosKeyDownEvent" Width="130"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Recargo Nocturno USD:" />
+                                                        <TextBox Height="23" Name="txt_RecargoUSD" KeyDown="soloNumerosKeyDownEvent" Width="130"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  />
+                                                        <toolkit:DatePicker Name="DTP_BuscarFechaInicial1" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  />
+                                                        <toolkit:DatePicker  Name="DTP_BuscarFechaFinal1" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                        <awc:ImageButton x:Name="btnBuscarAeropuertos" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tarifa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAerpuertos_Click_1" />
+                                                        <awc:ImageButton x:Name="btnMostrarAgregar" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Agregar Tarifa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnMostrarAgregar_Click"  />
+                                                        <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tarifas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel Margin="0,10,0,0" >
+                                                <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListTarifas}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTarifas" AllowDrop="True"  Width="auto" MouseDoubleClick="ListTarifass_MouseDoubleClick_1" >
+                                                    <ListView.View>
+                                                        <GridView x:Name="GridViewDetailsAeropuerto" >
+                                                            <GridViewColumn Header="Valor COP" Width="100" DisplayMemberBinding="{Binding Path=ValorCOP}" />
+                                                            <GridViewColumn Header="Valor USD" Width="100" DisplayMemberBinding="{Binding Path=ValorUSD}" />
+                                                            <GridViewColumn Header="Recargo Nocturno COP" Width="140" DisplayMemberBinding="{Binding Path=RecargoNocturnoCOP}" />
+                                                            <GridViewColumn Header="Recargo Nocturno USD" Width="140" DisplayMemberBinding="{Binding Path=RecargoNocturnoUSD}" />
+
+                                                            <GridViewColumn Header="Fecha Inicial" Width="190" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Fecha Final" Width="190" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                                            <GroupBox Name="gb_nuevoRegistro" Visibility="Collapsed">
+                                                <StackPanel DockPanel.Dock="Top">
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor COP: ($)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorCOP1" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Path=Tarifas.ValorCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor USD: ($)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorUSD1" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Tarifas.ValorUSD}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Recargo Nocturno COP: (%)" HorizontalAlignment="Left"/>
+                                                        <TextBox Name="txt_RecargoCOP1" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Tarifas.RecargoNocturnoCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Recargo Nocturno USD: (%)" HorizontalAlignment="Left"/>
+                                                        <TextBox Name="txt_RecargoUSD1" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Tarifas.RecargoNocturnoUSD}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"   HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker Name="DTP_FechaInicial1" SelectedDate="{Binding Tarifas.FechaInicial}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"   HorizontalAlignment="Left" />
+
+                                                        <toolkit:DatePicker  Name="DTP_FechaFinal1" SelectedDate="{Binding Tarifas.FechaFinal}"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="4,4,0,0">
+                                                        <awc:ImageButton x:Name="btnAgregarAerpuerto"  ToolTip="Guardar Registro" IsToolStyle="False" Content="Guardar Registro" ImageSource="/WpfFront;component/Images/save.png"  Click="btnGuardarAerpuerto_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <TabItem Header="Tarifas Tasas" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0"  >
+                                            <Border x:Uid="Border_2" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"  Margin="0,0,0,4">
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor COP:" />
+                                                        <TextBox Height="23" Name="txt_ValorCOPArptrs" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor USD:" />
+                                                        <TextBox Height="23" Name="txt_ValorUSDArptrs" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  />
+                                                        <toolkit:DatePicker Name="DTP_BuscarFechaInicial1Arptrs" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  />
+                                                        <toolkit:DatePicker  Name="DTP_BuscarFechaFinal1Arptrs" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                        <awc:ImageButton x:Name="btnBuscarAeropuertosArptrs" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tarifa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAeropuertosArptrs_Click_1" />
+                                                        <awc:ImageButton x:Name="btnMostrarAgregarArptrs" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Agregar Tarifa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnMostrarAgregarArptrs_Click"  />
+                                                        <awc:ImageButton x:Name="btnActualizarListaArptrs" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tarifas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarListaArptrs_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel Margin="0,10,0,0" >
+                                                <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListTarifasArptrs}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTarifasArptrs" AllowDrop="True"  Width="auto" MouseDoubleClick="ListTarifass_MouseDoubleArptrsClick_1" >
+                                                    <ListView.View>
+                                                        <GridView x:Name="GridViewDetailsAeropuertoArptrs" >
+                                                            <GridViewColumn Header="Valor COP" Width="130" DisplayMemberBinding="{Binding Path=ValorCOP}" />
+                                                            <GridViewColumn Header="Valor USD" Width="170" DisplayMemberBinding="{Binding Path=ValorUSD}" />
+                                                            <GridViewColumn Header="Fecha Inicial" Width="190" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Fecha Final" Width="190" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                                            <GroupBox Name="gb_nuevoRegistroArptrs" Visibility="Collapsed">
+                                                <StackPanel DockPanel.Dock="Top">
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor COP: ($)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorCOP1Arptrs" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Path=TarifasArptrs.ValorCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor USD: ($)"  HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorUSD1Arptrs" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding TarifasArptrs.ValorUSD}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:" HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker Name="DTP_FechaInicial1Arptrs" SelectedDate="{Binding TarifasArptrs.FechaInicial}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"   HorizontalAlignment="Left" />
+
+                                                        <toolkit:DatePicker  Name="DTP_FechaFinal1Arptrs" SelectedDate="{Binding TarifasArptrs.FechaFinal}"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="4,4,0,0">
+                                                        <awc:ImageButton x:Name="btnAgregarAerpuertoArptrs"  ToolTip="Guardar Registro" IsToolStyle="False" Content="Guardar Registro" ImageSource="/WpfFront;component/Images/save.png"  Click="btnGuardarAerpuertoArptrs_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <TabItem Header="Tarifas Bomberos" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0"  >
+                                            <Border  Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"  Margin="0,0,0,4">
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor COP:" />
+                                                        <TextBox Height="23" Name="txt_ValorCOPBomber" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  />
+                                                        <toolkit:DatePicker Name="DTP_BuscarFechaInicial1Bomber" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  />
+                                                        <toolkit:DatePicker  Name="DTP_BuscarFechaFinal1Bomber" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                        <awc:ImageButton x:Name="btnBuscarAeropuertosBomber" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tarifa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAeropuertosBomber_Click_1" />
+                                                        <awc:ImageButton x:Name="btnMostrarAgregarBomber" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Agregar Tarifa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnMostrarAgregarBomber_Click"  />
+                                                        <awc:ImageButton x:Name="btnActualizarListaBomber" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tarifas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarListaBomber_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel Margin="0,10,0,0" >
+                                                <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListTarifasBomber}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTarifasBomber" AllowDrop="True"  Width="auto" MouseDoubleClick="ListTarifass_MouseDoubleBomberClick_1" >
+                                                    <ListView.View>
+                                                        <GridView x:Name="GridViewDetailsAeropuertoBomber" >
+                                                            <GridViewColumn Header="Valor COP" Width="100" DisplayMemberBinding="{Binding Path=ValorCOP}" />
+                                                            <GridViewColumn Header="Fecha Inicial" Width="190" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Fecha Final" Width="190" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Tipo Servicio" Width="190" DisplayMemberBinding="{Binding Path=TipoServicio.Name}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                                            <GroupBox Name="gb_nuevoRegistroBomber" Visibility="Collapsed">
+                                                <StackPanel DockPanel.Dock="Top">
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor COP: ($)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorCOP1Bomber" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Path=TarifasBomber.ValorCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4" Visibility="Collapsed">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor USD: ($)"  HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorUSD1Bomber" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding TarifasBomber.ValorUSD}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Tipo de Servicio:" />
+                                                        <ComboBox x:Name="cbxServicio" Width="120" HorizontalAlignment="Left" ItemsSource="{Binding ListaTipoServicio}" SelectedValue="{Binding TarifasBomber.TipoServicio.MetaMasterID}" SelectedValuePath="MetaMasterID" DisplayMemberPath="Name" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:" HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker Name="DTP_FechaInicial1Bomber" SelectedDate="{Binding TarifasBomber.FechaInicial}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"   HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker  Name="DTP_FechaFinal1Bomber" SelectedDate="{Binding TarifasBomber.FechaFinal}"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="4,4,0,0">
+                                                        <awc:ImageButton x:Name="btnAgregarAerpuertoBomber"  ToolTip="Guardar Registro" IsToolStyle="False" Content="Guardar Registro" ImageSource="/WpfFront;component/Images/save.png"  Click="btnGuardarAerpuertoBomber_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <TabItem Header="Tarifas Puentes" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0"  >
+                                            <Border x:Uid="Border_2" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"  Margin="0,0,0,4">
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor COP:" />
+                                                        <TextBox Height="23" Name="txt_ValorCOPPuents" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor USD:" />
+                                                        <TextBox Height="23" Name="txt_ValorUSDPuents" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  />
+                                                        <toolkit:DatePicker Name="DTP_BuscarFechaInicial1Puents" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  />
+                                                        <toolkit:DatePicker  Name="DTP_BuscarFechaFinal1Puents" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                        <awc:ImageButton x:Name="btnBuscarAeropuertosPuents" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tarifa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAeropuertosPuents_Click_1" />
+                                                        <awc:ImageButton x:Name="btnMostrarAgregarPuents" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Agregar Tarifa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnMostrarAgregarPuents_Click"  />
+                                                        <awc:ImageButton x:Name="btnActualizarListaPuents" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tarifas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarListaPuents_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel Margin="0,10,0,0" >
+                                                <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListTarifasPuents}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTarifasPuents" AllowDrop="True"  Width="auto" MouseDoubleClick="ListTarifass_MouseDoublePuentsClick_1" >
+                                                    <ListView.View>
+                                                        <GridView x:Name="GridViewDetailsAeropuertoPuents" >
+                                                            <GridViewColumn Header="Valor COP" Width="130" DisplayMemberBinding="{Binding Path=ValorCOP}" />
+                                                            <GridViewColumn Header="Valor USD" Width="170" DisplayMemberBinding="{Binding Path=ValorUSD}" />
+                                                            <GridViewColumn Header="Fecha Inicial" Width="190" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Fecha Final" Width="190" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                                            <GroupBox Name="gb_nuevoRegistroPuents" Visibility="Collapsed">
+                                                <StackPanel DockPanel.Dock="Top">
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor COP: ($)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorCOP1Puents" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Path=TarifasPuents.ValorCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor USD: ($)"  HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorUSD1Puents" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding TarifasPuents.ValorUSD}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:" HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker Name="DTP_FechaInicial1Puents" SelectedDate="{Binding TarifasPuents.FechaInicial}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"   HorizontalAlignment="Left" />
+
+                                                        <toolkit:DatePicker  Name="DTP_FechaFinal1Puents" SelectedDate="{Binding TarifasPuents.FechaFinal}"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="4,4,0,0">
+                                                        <awc:ImageButton x:Name="btnAgregarAerpuertoPuents"  ToolTip="Guardar Registro" IsToolStyle="False" Content="Guardar Registro" ImageSource="/WpfFront;component/Images/save.png"  Click="btnGuardarAerpuertoPuents_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <TabItem Header="Tarifas Parqueos" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0"  >
+                                            <Border x:Uid="Border_2" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"  Margin="0,0,0,4">
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor COP:" />
+                                                        <TextBox Height="23" Name="txt_ValorCOPParqos" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock  FontWeight="Bold"  Text="Valor USD:" />
+                                                        <TextBox Height="23" Name="txt_ValorUSDParqos" KeyDown="soloNumerosKeyDownEvent" Width="70"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  />
+                                                        <toolkit:DatePicker Name="DTP_BuscarFechaInicial1Parqos" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  />
+                                                        <toolkit:DatePicker  Name="DTP_BuscarFechaFinal1Parqos" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                        <awc:ImageButton x:Name="btnBuscarAeropuertosParqos" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tarifa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAeropuertosParqos_Click_1" />
+                                                        <awc:ImageButton x:Name="btnMostrarAgregarParqos" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Agregar Tarifa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnMostrarAgregarParqos_Click"  />
+                                                        <awc:ImageButton x:Name="btnActualizarListaParqos" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tarifas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarListaParqos_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel Margin="0,10,0,0" >
+                                                <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListTarifasParqos}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTarifasParqos" AllowDrop="True"  Width="auto" MouseDoubleClick="ListTarifass_MouseDoubleParqosClick_1" >
+                                                    <ListView.View>
+                                                        <GridView x:Name="GridViewDetailsAeropuertoParqos" >
+                                                            <GridViewColumn Header="Valor COP" Width="130" DisplayMemberBinding="{Binding Path=ValorCOP}" />
+                                                            <GridViewColumn Header="Valor USD" Width="170" DisplayMemberBinding="{Binding Path=ValorUSD}" />
+                                                            <GridViewColumn Header="Fecha Inicial" Width="190" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Fecha Final" Width="190" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                                            <GroupBox Name="gb_nuevoRegistroParqos" Visibility="Collapsed">
+                                                <StackPanel DockPanel.Dock="Top">
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor COP: (%)"   HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorCOP1Parqos" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding Path=TarifasParqos.ValorCOP}"/>
+                                                    </StackPanel>
+                                                    <StackPanel  Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Valor USD: (%)"  HorizontalAlignment="Left" />
+                                                        <TextBox Name="txt_ValorUSD1Parqos" Width="120" Height="23" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding TarifasParqos.ValorUSD}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicial:" HorizontalAlignment="Left" />
+                                                        <toolkit:DatePicker Name="DTP_FechaInicial1Parqos" SelectedDate="{Binding TarifasParqos.FechaInicial}" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"   HorizontalAlignment="Left" />
+
+                                                        <toolkit:DatePicker  Name="DTP_FechaFinal1Parqos" SelectedDate="{Binding TarifasParqos.FechaFinal}"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="4,4,0,0">
+                                                        <awc:ImageButton x:Name="btnAgregarAerpuertoParqos"  ToolTip="Guardar Registro" IsToolStyle="False" Content="Guardar Registro" ImageSource="/WpfFront;component/Images/save.png"  Click="btnGuardarAerpuertoParqos_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+
+
+
+
+
+                            </TabControl>
+
+
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>-->
+
+
+</WMCore:UserControlBase>

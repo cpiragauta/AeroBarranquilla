@@ -1,0 +1,200 @@
+﻿<WMCore:UserControlBase x:Uid="Pasajero" x:Class="WpfFront.Vista.PlaneacionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Controles"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Planeacion">
+
+    <AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" >
+                <StackPanel DockPanel.Dock="Top" Margin="4,4,4,4" Orientation="Horizontal">
+                    <TextBlock FontSize="17" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Text="PROGRAMACIÓN DE VUELOS" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical" Margin="4,0,0,4">
+                                <Border  Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" >
+                                    <StackPanel Orientation="Horizontal" >
+                                        <StackPanel  Margin="0,0,0,0" >
+                                            <TextBlock  FontWeight="Bold" Text="# Vuelo Entrada:" />
+                                            <TextBox Name="txtFiltroNVueloEntrada" Height="23" Width="100" KeyDown="soloNumerosKeyDownEvent" ToolTip="Ingrese Numero de vuelo Entrada" Text="{Binding RecordBusquedaPlaneacion.NVueloEntrada}" ></TextBox>
+                                        </StackPanel>
+                                        <StackPanel  Margin="8,0,0,0" >
+                                            <TextBlock  FontWeight="Bold" Text="# Vuelo Salida:" />
+                                            <TextBox Name="txtFiltroNVueloSalida" Height="23" Width="100" KeyDown="soloNumerosKeyDownEvent" ToolTip="Ingrese Numero de vuelo Salida" Text="{Binding RecordBusquedaPlaneacion.NVueloSalida}"  ></TextBox>
+                                        </StackPanel>
+                                        <StackPanel  Margin="8,0,0,0" >
+                                            <TextBlock  FontWeight="Bold" Text="Compañia:" />
+                                            <uc:SearchTerceros x:Name="SearchFiltroCompañia" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        <StackPanel  Margin="8,0,0,0" >
+                                            <TextBlock  FontWeight="Bold" Text="Fecha:" />
+                                            <toolkit:DatePicker Name="DTP_FiltroFechaOp" SelectedDate="{Binding RecordBusquedaPlaneacion.Fecha}" />
+                                        </StackPanel>
+
+
+                                        <StackPanel Orientation="Horizontal" Margin="4">
+                                            <awc:ImageButton x:Name="btnBuscarPlaneacion" Height="32" Width="30" VerticalAlignment="Bottom" ToolTip="Buscar Planeación" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarPlaneacion_Click_1"  />
+                                            <awc:ImageButton x:Name="btnNuevaPlaneacion" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Nuevo Registro de Planeación" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                            <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Planeación" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                <StackPanel >
+                                    <ListView  Name="ListadoPlaneacion" SelectionMode="Single" ItemsSource="{Binding Path=ListadoPlaneacion}" Margin="0,4,0,0" MaxHeight="400" Height="300"  AllowDrop="True" MouseDoubleClick="ListadoPlaneacion_MouseDoubleClick_2" >
+                                        <ListView.View>
+                                            <GridView x:Name="GridViewPlaneacion">
+                                                <GridViewColumn Header="Fecha" Width="90" DisplayMemberBinding="{Binding Path=Fecha, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                <GridViewColumn Header="Compañia" Width="200" DisplayMemberBinding="{Binding Path=Tercero.Nombre}" />
+                                                <GridViewColumn Header="V. Llegada" Width="60" DisplayMemberBinding="{Binding Path=NVueloEntrada}" />
+                                                <GridViewColumn Header="Hora Llegada" Width="80" DisplayMemberBinding="{Binding Path=HoraEntrada}" />
+                                                <GridViewColumn Header="Origen" Width="150" DisplayMemberBinding="{Binding Path=Aeropuerto1.Ciudad}" />
+                                                <GridViewColumn Header="V. Salida" Width="60" DisplayMemberBinding="{Binding Path=NVueloSalida}" />
+                                                <GridViewColumn Header="Hora Salida" Width="80" DisplayMemberBinding="{Binding Path=HoraSalida}" />
+                                                <GridViewColumn Header="Destino" Width="150" DisplayMemberBinding="{Binding Path=Aeropuerto.Ciudad}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,0">
+                                    <TextBlock Margin="0,0,4,0" FontWeight="Bold" Text="Cantidad: "/>
+                                    <TextBlock Margin="0,0,4,0" FontWeight="Bold" Text="{Binding ListadoPlaneacion.Count}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0" >
+                                    <StackPanel Orientation="Vertical" >
+                                        <TextBlock FontWeight="Bold"  Text="Fecha a Exportar:"/>
+                                        <toolkit:DatePicker Name="DTP_FechaAExportar" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Cursor="Hand"  MouseDown="ExportarPlaneacion_MouseDown">
+                                        <Image  x:Name="ExportarPlaneacion"  Source="/WpfFront;component/Images/excel2.png" ToolTip="Exportar lista de Programacion a un archivo de excel" />
+                                        <TextBlock Text="Exportar&#xA;Programación" FontWeight="bold" Height="32" Width="90"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+
+                                <GroupBox Name="gb_NuevoRegistro" Visibility="Collapsed" Margin="4,0,0,0">
+                                    <StackPanel>
+                                       
+                                        <StackPanel Orientation="Horizontal" >
+
+                                            <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <StackPanel Orientation="Vertical" Margin="4,0,0,2">
+                                                                    <TextBlock FontWeight="Bold"  Text="Fecha:"/>
+                                                                    <toolkit:DatePicker Name="DTP_FechaEntrada" SelectedDate="{Binding RecordPlaneacion.Fecha}" Width="170" />
+                                                                </StackPanel>
+                                                                <StackPanel  Margin="4,0,0,2" >
+                                                                    <TextBlock  FontWeight="Bold" Text="Tipo Aeronave:" />
+                                                                    <TextBox Width="100" Height="23" x:Name="txt_TipoAeronave" HorizontalAlignment="Left" Text="{Binding RecordPlaneacion.TipoAeronave}" />
+                                                                </StackPanel>
+
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" >
+                                                                <StackPanel  Margin="4,0,0,0" >
+                                                                    <TextBlock  FontWeight="Bold" Text="Compañia:" />
+                                                                    <uc:SearchTerceros x:Name="SearchCompañia" VerticalAlignment="Top" />
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                        <StackPanel HorizontalAlignment="Right" Margin="4,4,0,0">
+                                                            <awc:ImageButton  Name="btn_Close" ToolTip="Cerrar" IsToolStyle="False" ImageSource="/WpfFront;component/Images/Delete.png" Content="Cerrar" Margin="8,0,0,0" Click="btn_Close_Click" />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                <Separator Margin="2,8,2,8" Background="Black"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Información Llegada:" FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,0,2,0" />
+                                                            <CheckBox Margin="2" Name="chkLlegada" Click="chkLlegada_Click_1"/>
+                                                        </StackPanel>
+                                                        <StackPanel Name="stkLlegada" IsEnabled="False">
+                                                            <Separator Width="auto" Margin="0,2,10,5" />
+                                                            <StackPanel  Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="No. vuelo Llegada:" />
+                                                                <TextBox Width="100" Height="23" x:Name="txt_NVueloEntrada" HorizontalAlignment="Left" Text="{Binding RecordPlaneacion.NVueloEntrada}" />
+                                                            </StackPanel>
+                                                            <StackPanel Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="Hora Programada Llegada:" />
+                                                                <xcdg:MaskedTextBox Name="MaskedHoraEntrada"  Width="100" Height="23" Mask="00:00" HorizontalAlignment="Left" KeyUp="ValidarHora" Text="{Binding RecordPlaneacion.HoraEntrada}"/>
+                                                            </StackPanel>
+
+                                                            <StackPanel  Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="Stand:" />
+                                                                <TextBox Width="100" Height="23" x:Name="txt_Stand" HorizontalAlignment="Left" Text="{Binding RecordPlaneacion.Stand}" />
+                                                            </StackPanel>
+
+
+                                                            <StackPanel Margin="4,0,0,0" >
+                                                                <TextBlock  FontWeight="Bold" Text="Origen:" />
+                                                                <uc:SearchAeropuertos x:Name="SearchOrigen"/>
+                                                            </StackPanel>
+                                                            <StackPanel Margin="4,0,0,2">
+                                                                <TextBlock  FontWeight="Bold" Text="Banda:"/>
+                                                                <ComboBox x:Name="cmb_Banda" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaBanda}" DisplayMemberPath="Nombre" SelectedValue="{Binding Record.Tipo.RowID}" SelectedValuePath="RowID"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Información Salida:" FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,0,2,0" />
+                                                            <CheckBox Margin="2" Name="chkSalida" Click="chkSalida_Click_1"/>
+                                                        </StackPanel>
+                                                        <StackPanel Name="stkSalida" IsEnabled="False">
+                                                            <Separator Width="auto" Margin="0,2,10,5" />
+
+                                                            <StackPanel Margin="4,0,0,2">
+                                                                <TextBlock  FontWeight="Bold" Text="No. vuelo Salida:" />
+                                                                <TextBox Width="100" Height="23" x:Name="txt_NVueloSalida" HorizontalAlignment="Left" Text="{Binding RecordPlaneacion.NVueloSalida}" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="Hora Programada Salida:" />
+                                                                <xcdg:MaskedTextBox Name="MaskedHoraSalida"  Width="100" Height="23" Mask="00:00" KeyUp="ValidarHora" HorizontalAlignment="Left" Text="{Binding RecordPlaneacion.HoraSalida}"/>
+                                                            </StackPanel>
+                                                            <StackPanel  Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="Sala:" />
+                                                                <TextBox Width="100" Height="23" x:Name="txt_Sala" HorizontalAlignment="Left" KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordPlaneacion.Sala}" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Margin="4,0,0,2" >
+                                                                <TextBlock  FontWeight="Bold" Text="Destino:"/>
+                                                                <uc:SearchAeropuertos x:Name="SearchDestino"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+
+                                                <StackPanel Name="stk_botones" Orientation="Horizontal" Margin="4,20,4,4" >
+                                                    <awc:ImageButton Name="btn_Save" VerticalAlignment="Bottom" ToolTip="Guardar Registro" IsToolStyle="False"  ImageSource="/WpfFront;component/Images/save.png" Click="btn_Save_Click_1"  Content="Guardar" />
+                                                    <awc:ImageButton Name="btn_Delete" ToolTip="Eliminar Registro" IsToolStyle="False" ImageSource="/WpfFront;component/Images/Delete.png"  Click="btn_Delete_Click_1" Content="Eliminar" Margin="8,0,0,0" />
+                                                </StackPanel>
+                                            </StackPanel>
+
+
+
+
+
+                                        </StackPanel>
+                                    </StackPanel>
+                                </GroupBox>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>
