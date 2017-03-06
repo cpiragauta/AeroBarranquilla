@@ -67,6 +67,26 @@
         <AssociationConnector Association="wmsModel.FK__Estado__TipoID__1D5142F3" />
         <AssociationConnector Association="wmsModel.FK__Tercero__TipoTer__55959C16" />
         <AssociationConnector Association="wmsModel.FK__Usuario__RolID__27CED166" />
+        <EntityTypeShape EntityType="wmsModel.Facturas" Width="1.5" PointX="7.5" PointY="23.5" />
+        <EntityTypeShape EntityType="wmsModel.Servicios" Width="1.5" PointX="21" PointY="21.75" />
+        <EntityTypeShape EntityType="wmsModel.Tasas" Width="1.5" PointX="18" PointY="26.5" />
+        <AssociationConnector Association="wmsModel.FK__Servicios__Factu__1FF8A574" />
+        <AssociationConnector Association="wmsModel.FK_Factura_MMaster" />
+        <AssociationConnector Association="wmsModel.FK_Facturas_Status" />
+        <AssociationConnector Association="wmsModel.FK__Servicios__Opera__1F04813B" />
+        <AssociationConnector Association="wmsModel.FK__Tasas__Operacion__166F3B3A" />
+        <AssociationConnector Association="wmsModel.FK__Servicios__Estad__21E0EDE6" />
+        <AssociationConnector Association="wmsModel.FK__Servicios__TipoS__20ECC9AD" />
+        <AssociationConnector Association="wmsModel.FK__Tasas__EstadoID__17635F73" />
+        <AssociationConnector Association="wmsModel.FK__Tasas__TipoTasaI__185783AC" />
+        <EntityTypeShape EntityType="wmsModel.AdicionalesPyP" Width="1.5" PointX="21" PointY="27" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__Estad__26A5A303" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__Opera__2A7633E7" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__Posic__24BD5A91" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__Posic__25B17ECA" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__TipoL__2799C73C" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__TipoP__288DEB75" />
+        <AssociationConnector Association="wmsModel.FK__Adicional__TipoP__29820FAE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

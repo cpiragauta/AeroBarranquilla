@@ -24,8 +24,8 @@
         </awc:HeaderedPanel>
 
         <StackPanel x:Uid="StackPanel_1" Margin="4,10,4,10" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Uid="btnCancel" HorizontalAlignment="Right" Width="90" Height="30" Name="btnCancel" Content="Close" FontSize="11" Click="btnCancel_Click"></Button>
-            <Button x:Uid="btnConfirm" Margin="20,0,0,0" HorizontalAlignment="Right" Width="90" Height="30" Name="btnConfirm" Content="Confirm" FontSize="11" FontWeight="Bold" Click="btnConfirm_Click" IsEnabled="False"></Button>
+            <Button x:Uid="btnCancel" HorizontalAlignment="Right" Width="90" Height="30" Name="btnCancel" Content="Cerrar" FontSize="11" Click="btnCancel_Click"></Button>
+            <Button x:Uid="btnConfirm" Margin="20,0,0,0" HorizontalAlignment="Right" Width="90" Height="30" Name="btnConfirm" Content="Confirmar" FontSize="11" FontWeight="Bold" Click="btnConfirm_Click" IsEnabled="False"></Button>
         </StackPanel>
     </Grid>
 

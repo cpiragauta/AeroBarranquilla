@@ -5,6 +5,32 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="wmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdicionalesPyP">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="OperacionID" Type="int" />
+          <Property Name="FechaInicial" Type="datetime" />
+          <Property Name="FechaFinal" Type="datetime" />
+          <Property Name="HoraLlegada" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalida" Type="nvarchar" MaxLength="20" />
+          <Property Name="TipoPosicionLlegadaID" Type="int" />
+          <Property Name="TipoPosicionSalidaID" Type="int" />
+          <Property Name="TipoLlegadaID" Type="int" />
+          <Property Name="PosicionLlegadaID" Type="int" />
+          <Property Name="PosicionSalidaID" Type="int" />
+          <Property Name="Despego" Type="bit" />
+          <Property Name="HoraDespegue" Type="nvarchar" MaxLength="20" />
+          <Property Name="EstadoID" Type="int" />
+          <Property Name="HoraLlegadaPuente" Type="nvarchar" MaxLength="20" />
+          <Property Name="HoraSalidaPuente" Type="nvarchar" MaxLength="20" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Aeronave">
           <Key>
             <PropertyRef Name="RowID" />
@@ -52,6 +78,26 @@
           <Property Name="ValorServicio" Type="float" />
           <Property Name="EstadoID" Type="int" />
           <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+          <Property Name="FechaEmision" Type="datetime" />
+          <Property Name="FechaVencimiento" Type="datetime" />
+          <Property Name="FechaEntrega" Type="datetime" />
+          <Property Name="FechaDocERP" Type="datetime" />
+          <Property Name="NoDocERP" Type="nvarchar" MaxLength="50" />
+          <Property Name="TipoFacturaID" Type="int" />
+          <Property Name="NumeroFactura" Type="varchar" MaxLength="100" />
+          <Property Name="EstadoID" Type="int" Nullable="false" />
           <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
@@ -161,6 +207,23 @@
           <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperacionID" Type="int" Nullable="false" />
+          <Property Name="TipoServicioID" Type="int" />
+          <Property Name="FacturaID" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="EstadoID" Type="int" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="TarifaCecoa">
           <Key>
             <PropertyRef Name="RowID" />
@@ -174,6 +237,26 @@
           <Property Name="FechaFinal" Type="datetime" />
           <Property Name="TipoTarifaID" Type="int" />
           <Property Name="TipoServicioID" Type="int" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tasas">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="OperacionID" Type="int" />
+          <Property Name="TipoTasaID" Type="int" />
+          <Property Name="PaganTasa" Type="int" />
+          <Property Name="Infantes" Type="int" />
+          <Property Name="Tripulantes" Type="int" />
+          <Property Name="Militares" Type="int" />
+          <Property Name="Transitos" Type="int" />
+          <Property Name="Otros" Type="int" />
+          <Property Name="EstadoID" Type="int" />
           <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" />
@@ -353,6 +436,90 @@
           <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <Association Name="FK__Adicional__Estad__26A5A303">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Opera__2A7633E7">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Posic__24BD5A91">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="PosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Posic__25B17ECA">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="PosicionLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoL__2799C73C">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoP__288DEB75">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoPosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoP__29820FAE">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="AdicionalesPyP" Type="Self.AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoPosicionLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Aeronave__Clasif__5C4299A5">
           <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
           <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="*" />
@@ -785,6 +952,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Servicios__Estad__21E0EDE6">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Factu__1FF8A574">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="FacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Opera__1F04813B">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="1" />
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__TipoS__20ECC9AD">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="TipoServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TarifaCec__TipoS__587208C1">
           <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
           <End Role="TarifaCecoa" Type="Self.TarifaCecoa" Multiplicity="*" />
@@ -806,6 +1021,42 @@
             </Principal>
             <Dependent Role="TarifaCecoa">
               <PropertyRef Name="TipoTarifaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__EstadoID__17635F73">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Tasas" Type="Self.Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__Operacion__166F3B3A">
+          <End Role="Operacion" Type="Self.Operacion" Multiplicity="0..1" />
+          <End Role="Tasas" Type="Self.Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__TipoTasaI__185783AC">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Tasas" Type="Self.Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="TipoTasaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -857,15 +1108,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Factura_MMaster">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="TipoFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Status">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="wmsModelStoreContainer">
+          <EntitySet Name="AdicionalesPyP" EntityType="Self.AdicionalesPyP" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Aeronave" EntityType="Self.Aeronave" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Aeropuerto" EntityType="Self.Aeropuerto" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Bombero" EntityType="Self.Bombero" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Llegada" EntityType="Self.Llegada" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Operacion" EntityType="Self.Operacion" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Planeacion" EntityType="Self.Planeacion" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Salida" EntityType="Self.Salida" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="TarifaCecoa" EntityType="Self.TarifaCecoa" Schema="Cecoa" store:Type="Tables" />
+          <EntitySet Name="Tasas" EntityType="Self.Tasas" Schema="Cecoa" store:Type="Tables" />
           <EntitySet Name="Compañia" EntityType="Self.Compañia" Schema="General" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="General" store:Type="Tables" />
           <EntitySet Name="MenuRol" EntityType="Self.MenuRol" Schema="General" store:Type="Tables" />
@@ -878,6 +1157,34 @@
           <EntitySet Name="TRM" EntityType="Self.TRM" Schema="Maestro" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Perfil" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Perfil" store:Type="Tables" />
+          <AssociationSet Name="FK__Adicional__Estad__26A5A303" Association="Self.FK__Adicional__Estad__26A5A303">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Opera__2A7633E7" Association="Self.FK__Adicional__Opera__2A7633E7">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Posic__24BD5A91" Association="Self.FK__Adicional__Posic__24BD5A91">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Posic__25B17ECA" Association="Self.FK__Adicional__Posic__25B17ECA">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoL__2799C73C" Association="Self.FK__Adicional__TipoL__2799C73C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoP__288DEB75" Association="Self.FK__Adicional__TipoP__288DEB75">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoP__29820FAE" Association="Self.FK__Adicional__TipoP__29820FAE">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
           <AssociationSet Name="FK__Aeronave__Clasif__5C4299A5" Association="Self.FK__Aeronave__Clasif__5C4299A5">
             <End Role="Tipo" EntitySet="Tipo" />
             <End Role="Aeronave" EntitySet="Aeronave" />
@@ -1022,6 +1329,22 @@
             <End Role="Tipo" EntitySet="Tipo" />
             <End Role="Salida" EntitySet="Salida" />
           </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Estad__21E0EDE6" Association="Self.FK__Servicios__Estad__21E0EDE6">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Factu__1FF8A574" Association="Self.FK__Servicios__Factu__1FF8A574">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Opera__1F04813B" Association="Self.FK__Servicios__Opera__1F04813B">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__TipoS__20ECC9AD" Association="Self.FK__Servicios__TipoS__20ECC9AD">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
           <AssociationSet Name="FK__TarifaCec__TipoS__587208C1" Association="Self.FK__TarifaCec__TipoS__587208C1">
             <End Role="Tipo" EntitySet="Tipo" />
             <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
@@ -1029,6 +1352,18 @@
           <AssociationSet Name="FK__TarifaCec__TipoT__59662CFA" Association="Self.FK__TarifaCec__TipoT__59662CFA">
             <End Role="Tipo" EntitySet="Tipo" />
             <End Role="TarifaCecoa" EntitySet="TarifaCecoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__EstadoID__17635F73" Association="Self.FK__Tasas__EstadoID__17635F73">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Tasas" EntitySet="Tasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__Operacion__166F3B3A" Association="Self.FK__Tasas__Operacion__166F3B3A">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Tasas" EntitySet="Tasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__TipoTasaI__185783AC" Association="Self.FK__Tasas__TipoTasaI__185783AC">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Tasas" EntitySet="Tasas" />
           </AssociationSet>
           <AssociationSet Name="FK__Tercero__TipoTer__55959C16" Association="Self.FK__Tercero__TipoTer__55959C16">
             <End Role="Tipo" EntitySet="Tipo" />
@@ -1045,6 +1380,14 @@
           <AssociationSet Name="FK__Usuario__RolID__27CED166" Association="Self.FK__Usuario__RolID__27CED166">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_MMaster" Association="Self.FK_Factura_MMaster">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Status" Association="Self.FK_Facturas_Status">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1240,6 +1583,74 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="Facturas" EntityType="wmsModel.Facturas" />
+          <EntitySet Name="Servicios" EntityType="wmsModel.Servicios" />
+          <EntitySet Name="Tasas" EntityType="wmsModel.Tasas" />
+          <AssociationSet Name="FK__Servicios__Factu__1FF8A574" Association="wmsModel.FK__Servicios__Factu__1FF8A574">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_MMaster" Association="wmsModel.FK_Factura_MMaster">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Status" Association="wmsModel.FK_Facturas_Status">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Opera__1F04813B" Association="wmsModel.FK__Servicios__Opera__1F04813B">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__Operacion__166F3B3A" Association="wmsModel.FK__Tasas__Operacion__166F3B3A">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="Tasas" EntitySet="Tasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Estad__21E0EDE6" Association="wmsModel.FK__Servicios__Estad__21E0EDE6">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__TipoS__20ECC9AD" Association="wmsModel.FK__Servicios__TipoS__20ECC9AD">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Servicios" EntitySet="Servicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__EstadoID__17635F73" Association="wmsModel.FK__Tasas__EstadoID__17635F73">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Tasas" EntitySet="Tasas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasas__TipoTasaI__185783AC" Association="wmsModel.FK__Tasas__TipoTasaI__185783AC">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Tasas" EntitySet="Tasas" />
+          </AssociationSet>
+          <EntitySet Name="AdicionalesPyP" EntityType="wmsModel.AdicionalesPyP" />
+          <AssociationSet Name="FK__Adicional__Estad__26A5A303" Association="wmsModel.FK__Adicional__Estad__26A5A303">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Opera__2A7633E7" Association="wmsModel.FK__Adicional__Opera__2A7633E7">
+            <End Role="Operacion" EntitySet="Operacion" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Posic__24BD5A91" Association="wmsModel.FK__Adicional__Posic__24BD5A91">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__Posic__25B17ECA" Association="wmsModel.FK__Adicional__Posic__25B17ECA">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoL__2799C73C" Association="wmsModel.FK__Adicional__TipoL__2799C73C">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoP__288DEB75" Association="wmsModel.FK__Adicional__TipoP__288DEB75">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adicional__TipoP__29820FAE" Association="wmsModel.FK__Adicional__TipoP__29820FAE">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="AdicionalesPyP" EntitySet="AdicionalesPyP" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aeronave">
           <Key>
@@ -1371,6 +1782,9 @@
           <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Operacion__Salid__7E97B1A9" FromRole="Operacion" ToRole="Salida" />
           <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Operacion__Statu__7F8BD5E2" FromRole="Operacion" ToRole="Estado" />
           <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Operacion__TipoF__007FFA1B" FromRole="Operacion" ToRole="Tipo" />
+          <NavigationProperty Name="Servicios" Relationship="wmsModel.FK__Servicios__Opera__1F04813B" FromRole="Operacion" ToRole="Servicios" />
+          <NavigationProperty Name="Tasas" Relationship="wmsModel.FK__Tasas__Operacion__166F3B3A" FromRole="Operacion" ToRole="Tasas" />
+          <NavigationProperty Name="AdicionalesPyP" Relationship="wmsModel.FK__Adicional__Opera__2A7633E7" FromRole="Operacion" ToRole="AdicionalesPyP" />
         </EntityType>
         <EntityType Name="Planeacion">
           <Key>
@@ -1565,6 +1979,10 @@
           <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Operacion__Statu__7F8BD5E2" FromRole="Estado" ToRole="Operacion" />
           <NavigationProperty Name="Salida" Relationship="wmsModel.FK__Salida__StatusID__77EAB41A" FromRole="Estado" ToRole="Salida" />
           <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Estado__TipoID__1D5142F3" FromRole="Estado" ToRole="Tipo" />
+          <NavigationProperty Name="Facturas" Relationship="wmsModel.FK_Facturas_Status" FromRole="Estado" ToRole="Facturas" />
+          <NavigationProperty Name="Servicios" Relationship="wmsModel.FK__Servicios__Estad__21E0EDE6" FromRole="Estado" ToRole="Servicios" />
+          <NavigationProperty Name="Tasas" Relationship="wmsModel.FK__Tasas__EstadoID__17635F73" FromRole="Estado" ToRole="Tasas" />
+          <NavigationProperty Name="AdicionalesPyP" Relationship="wmsModel.FK__Adicional__Estad__26A5A303" FromRole="Estado" ToRole="AdicionalesPyP" />
         </EntityType>
         <EntityType Name="Tercero">
           <Key>
@@ -1627,6 +2045,14 @@
           <NavigationProperty Name="Conexion" Relationship="wmsModel.FK__Coneccion__TipoI__1798699D" FromRole="Tipo" ToRole="Conexion" />
           <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Estado__TipoID__1D5142F3" FromRole="Tipo" ToRole="Estado" />
           <NavigationProperty Name="Tercero" Relationship="wmsModel.FK__Tercero__TipoTer__55959C16" FromRole="Tipo" ToRole="Tercero" />
+          <NavigationProperty Name="Facturas" Relationship="wmsModel.FK_Factura_MMaster" FromRole="Tipo" ToRole="Facturas" />
+          <NavigationProperty Name="Servicios" Relationship="wmsModel.FK__Servicios__TipoS__20ECC9AD" FromRole="Tipo" ToRole="Servicios" />
+          <NavigationProperty Name="Tasas" Relationship="wmsModel.FK__Tasas__TipoTasaI__185783AC" FromRole="Tipo" ToRole="Tasas" />
+          <NavigationProperty Name="AdicionalesPyP" Relationship="wmsModel.FK__Adicional__Posic__24BD5A91" FromRole="Tipo" ToRole="AdicionalesPyP" />
+          <NavigationProperty Name="AdicionalesPyP1" Relationship="wmsModel.FK__Adicional__Posic__25B17ECA" FromRole="Tipo" ToRole="AdicionalesPyP" />
+          <NavigationProperty Name="AdicionalesPyP2" Relationship="wmsModel.FK__Adicional__TipoL__2799C73C" FromRole="Tipo" ToRole="AdicionalesPyP" />
+          <NavigationProperty Name="AdicionalesPyP3" Relationship="wmsModel.FK__Adicional__TipoP__288DEB75" FromRole="Tipo" ToRole="AdicionalesPyP" />
+          <NavigationProperty Name="AdicionalesPyP4" Relationship="wmsModel.FK__Adicional__TipoP__29820FAE" FromRole="Tipo" ToRole="AdicionalesPyP" />
         </EntityType>
         <EntityType Name="TRM">
           <Key>
@@ -2177,6 +2603,298 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEmision" Type="DateTime" Precision="3" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+          <Property Name="FechaDocERP" Type="DateTime" Precision="3" />
+          <Property Name="NoDocERP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFacturaID" Type="Int32" />
+          <Property Name="NumeroFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Servicios" Relationship="wmsModel.FK__Servicios__Factu__1FF8A574" FromRole="Facturas" ToRole="Servicios" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK_Factura_MMaster" FromRole="Facturas" ToRole="Tipo" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK_Facturas_Status" FromRole="Facturas" ToRole="Estado" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperacionID" Type="Int32" Nullable="false" />
+          <Property Name="TipoServicioID" Type="Int32" />
+          <Property Name="FacturaID" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Facturas" Relationship="wmsModel.FK__Servicios__Factu__1FF8A574" FromRole="Servicios" ToRole="Facturas" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Servicios__Opera__1F04813B" FromRole="Servicios" ToRole="Operacion" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Servicios__Estad__21E0EDE6" FromRole="Servicios" ToRole="Estado" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Servicios__TipoS__20ECC9AD" FromRole="Servicios" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Tasas">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="OperacionID" Type="Int32" />
+          <Property Name="TipoTasaID" Type="Int32" />
+          <Property Name="PaganTasa" Type="Int32" />
+          <Property Name="Infantes" Type="Int32" />
+          <Property Name="Tripulantes" Type="Int32" />
+          <Property Name="Militares" Type="Int32" />
+          <Property Name="Transitos" Type="Int32" />
+          <Property Name="Otros" Type="Int32" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Tasas__Operacion__166F3B3A" FromRole="Tasas" ToRole="Operacion" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Tasas__EstadoID__17635F73" FromRole="Tasas" ToRole="Estado" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Tasas__TipoTasaI__185783AC" FromRole="Tasas" ToRole="Tipo" />
+        </EntityType>
+        <Association Name="FK__Servicios__Factu__1FF8A574">
+          <End Type="wmsModel.Facturas" Role="Facturas" Multiplicity="0..1" />
+          <End Type="wmsModel.Servicios" Role="Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="FacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_MMaster">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="TipoFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Status">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="wmsModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Opera__1F04813B">
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="1" />
+          <End Type="wmsModel.Servicios" Role="Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__Operacion__166F3B3A">
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="0..1" />
+          <End Type="wmsModel.Tasas" Role="Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Estad__21E0EDE6">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="wmsModel.Servicios" Role="Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__TipoS__20ECC9AD">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Servicios" Role="Servicios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Servicios">
+              <PropertyRef Name="TipoServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__EstadoID__17635F73">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="wmsModel.Tasas" Role="Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasas__TipoTasaI__185783AC">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.Tasas" Role="Tasas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Tasas">
+              <PropertyRef Name="TipoTasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdicionalesPyP">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="OperacionID" Type="Int32" />
+          <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="HoraLlegada" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalida" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TipoPosicionLlegadaID" Type="Int32" />
+          <Property Name="TipoPosicionSalidaID" Type="Int32" />
+          <Property Name="TipoLlegadaID" Type="Int32" />
+          <Property Name="PosicionLlegadaID" Type="Int32" />
+          <Property Name="PosicionSalidaID" Type="Int32" />
+          <Property Name="Despego" Type="Boolean" />
+          <Property Name="HoraDespegue" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="HoraLlegadaPuente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoraSalidaPuente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Estado" Relationship="wmsModel.FK__Adicional__Estad__26A5A303" FromRole="AdicionalesPyP" ToRole="Estado" />
+          <NavigationProperty Name="Operacion" Relationship="wmsModel.FK__Adicional__Opera__2A7633E7" FromRole="AdicionalesPyP" ToRole="Operacion" />
+          <NavigationProperty Name="Tipo" Relationship="wmsModel.FK__Adicional__Posic__24BD5A91" FromRole="AdicionalesPyP" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo1" Relationship="wmsModel.FK__Adicional__Posic__25B17ECA" FromRole="AdicionalesPyP" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo2" Relationship="wmsModel.FK__Adicional__TipoL__2799C73C" FromRole="AdicionalesPyP" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo3" Relationship="wmsModel.FK__Adicional__TipoP__288DEB75" FromRole="AdicionalesPyP" ToRole="Tipo" />
+          <NavigationProperty Name="Tipo4" Relationship="wmsModel.FK__Adicional__TipoP__29820FAE" FromRole="AdicionalesPyP" ToRole="Tipo" />
+        </EntityType>
+        <Association Name="FK__Adicional__Estad__26A5A303">
+          <End Type="wmsModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Opera__2A7633E7">
+          <End Type="wmsModel.Operacion" Role="Operacion" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operacion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="OperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Posic__24BD5A91">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="PosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__Posic__25B17ECA">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="PosicionLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoL__2799C73C">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoP__288DEB75">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoPosicionSalidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adicional__TipoP__29820FAE">
+          <End Type="wmsModel.Tipo" Role="Tipo" Multiplicity="0..1" />
+          <End Type="wmsModel.AdicionalesPyP" Role="AdicionalesPyP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AdicionalesPyP">
+              <PropertyRef Name="TipoPosicionLlegadaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2547,6 +3265,93 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="wmsModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="TipoFacturaID" ColumnName="TipoFacturaID" />
+                <ScalarProperty Name="NoDocERP" ColumnName="NoDocERP" />
+                <ScalarProperty Name="FechaDocERP" ColumnName="FechaDocERP" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="wmsModel.Servicios">
+              <MappingFragment StoreEntitySet="Servicios">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+                <ScalarProperty Name="TipoServicioID" ColumnName="TipoServicioID" />
+                <ScalarProperty Name="OperacionID" ColumnName="OperacionID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasas">
+            <EntityTypeMapping TypeName="wmsModel.Tasas">
+              <MappingFragment StoreEntitySet="Tasas">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Otros" ColumnName="Otros" />
+                <ScalarProperty Name="Transitos" ColumnName="Transitos" />
+                <ScalarProperty Name="Militares" ColumnName="Militares" />
+                <ScalarProperty Name="Tripulantes" ColumnName="Tripulantes" />
+                <ScalarProperty Name="Infantes" ColumnName="Infantes" />
+                <ScalarProperty Name="PaganTasa" ColumnName="PaganTasa" />
+                <ScalarProperty Name="TipoTasaID" ColumnName="TipoTasaID" />
+                <ScalarProperty Name="OperacionID" ColumnName="OperacionID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdicionalesPyP">
+            <EntityTypeMapping TypeName="wmsModel.AdicionalesPyP">
+              <MappingFragment StoreEntitySet="AdicionalesPyP">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="HoraSalidaPuente" ColumnName="HoraSalidaPuente" />
+                <ScalarProperty Name="HoraLlegadaPuente" ColumnName="HoraLlegadaPuente" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="HoraDespegue" ColumnName="HoraDespegue" />
+                <ScalarProperty Name="Despego" ColumnName="Despego" />
+                <ScalarProperty Name="PosicionSalidaID" ColumnName="PosicionSalidaID" />
+                <ScalarProperty Name="PosicionLlegadaID" ColumnName="PosicionLlegadaID" />
+                <ScalarProperty Name="TipoLlegadaID" ColumnName="TipoLlegadaID" />
+                <ScalarProperty Name="TipoPosicionSalidaID" ColumnName="TipoPosicionSalidaID" />
+                <ScalarProperty Name="TipoPosicionLlegadaID" ColumnName="TipoPosicionLlegadaID" />
+                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+                <ScalarProperty Name="HoraLlegada" ColumnName="HoraLlegada" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="OperacionID" ColumnName="OperacionID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
               </MappingFragment>
             </EntityTypeMapping>

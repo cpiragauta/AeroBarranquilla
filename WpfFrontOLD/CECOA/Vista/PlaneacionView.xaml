@@ -23,7 +23,7 @@
                                 <Border  Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" >
                                     <StackPanel Orientation="Horizontal" >
                                         <StackPanel  Margin="0,0,0,0" >
-                                            <TextBlock  FontWeight="Bold" Text="# Vuelo Entrada:" />
+                                            <TextBlock  FontWeight="Bold" Text="# Vuelo Llegada:" />
                                             <TextBox Name="txtFiltroNVueloEntrada" Height="23" Width="100" KeyDown="soloNumerosKeyDownEvent" ToolTip="Ingrese Numero de vuelo Entrada" Text="{Binding RecordBusquedaPlaneacion.NVueloEntrada}" ></TextBox>
                                         </StackPanel>
                                         <StackPanel  Margin="8,0,0,0" >

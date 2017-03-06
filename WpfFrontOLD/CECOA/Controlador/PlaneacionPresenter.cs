@@ -83,24 +83,27 @@ namespace WpfFront.Controlador
 
             if (!String.IsNullOrEmpty(View.Model.RecordBusquedaPlaneacion.NVueloEntrada))
             {
-                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.NVueloEntrada == View.Model.RecordBusquedaPlaneacion.NVueloEntrada).ToList();
+                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.NVueloEntrada.StartsWith(View.Model.RecordBusquedaPlaneacion.NVueloEntrada)).ToList();
             }
 
 
             if (!String.IsNullOrEmpty(View.Model.RecordBusquedaPlaneacion.NVueloSalida))
             {
-                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.NVueloSalida == View.Model.RecordBusquedaPlaneacion.NVueloSalida).ToList();
+                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.NVueloSalida.StartsWith(View.Model.RecordBusquedaPlaneacion.NVueloSalida)).ToList();
             }
 
 
             if (View.Model.RecordBusquedaPlaneacion.Fecha != null)
             {
-                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.Fecha == View.Model.RecordBusquedaPlaneacion.Fecha).ToList();
+                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.Fecha.Value == View.Model.RecordBusquedaPlaneacion.Fecha.Value).ToList();
             }
 
             if (View.Model.RecordBusquedaPlaneacion.Tercero != null)
             {
-                View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.CompaniaID == View.Model.RecordBusquedaPlaneacion.Tercero.RowID).ToList();
+                if (View.Model.RecordBusquedaPlaneacion.Tercero.RowID != 0)
+                {
+                    View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.Where(f => f.CompaniaID == View.Model.RecordBusquedaPlaneacion.Tercero.RowID).ToList();
+                }
             }
 
             View.Model.ListadoPlaneacion = View.Model.ListadoPlaneacion.OrderByDescending(f => f.RowID).ToList();
@@ -253,11 +256,17 @@ namespace WpfFront.Controlador
         public void OnDeletePlaneacion(Object sender, EventArgs e)
         {
 
+            
             if (View.Model.RecordPlaneacion.RowID == 0)
             {
                 return;
             }
-            db.Planeacion.Remove(View.Model.RecordPlaneacion);
+            bool? respuesta = UtilWindow.ConfirmOK("Confirma Eliminar este Registro?");
+            if (respuesta == true)
+            {
+                db.Planeacion.Remove(View.Model.RecordPlaneacion);
+                db.SaveChanges();
+            }
             this.ActualizarListaPlaneacion();
             this.controlarPanelNuevoRegistro(false);
             CleanToCreate();
@@ -509,7 +518,7 @@ namespace WpfFront.Controlador
 
             if (View.FechaAExportar.SelectedDate != null)
             {
-                lista = lista.Where( f=> f.Fecha == View.FechaAExportar.SelectedDate).ToList();
+                lista = lista.Where( f=> f.Fecha.Value == View.FechaAExportar.SelectedDate.Value).ToList();
             }
             return lista;
         }

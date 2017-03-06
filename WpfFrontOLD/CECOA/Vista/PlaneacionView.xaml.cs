@@ -202,11 +202,11 @@ namespace WpfFront.Vista
                 Util.ShowError("Por favor seleccione una Fecha.");
                 return;
             }
-            //if (SearchCompañia.Terceros.RowID == 0)
-            //{
-            //    Util.ShowError("Por favor seleccione una compañia");
-            //    return;
-            //}
+            if (SearchCompañia.Terceros.RowID == 0)
+            {
+                Util.ShowError("Por favor seleccione una compañia");
+                return;
+            }
 
             if (string.IsNullOrEmpty(txt_TipoAeronave.Text))
             {
@@ -232,11 +232,11 @@ namespace WpfFront.Vista
                     Util.ShowError("Por favor seleccione un Origen");
                     return;
                 }
-                //if (cbxBanda.SelectedIndex == -1)
-                //{
-                //    Util.ShowError("Por favor seleccione una banda");
-                //    return;
-                //}
+                if (cbxBanda.SelectedIndex == -1)
+                {
+                    Util.ShowError("Por favor seleccione una banda");
+                    return;
+                }
             }
 
             if (chkSalida.IsChecked == true)

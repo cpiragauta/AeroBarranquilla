@@ -36,6 +36,14 @@ namespace WpfFront.Model
             this.Conexion = new HashSet<Conexion>();
             this.Estado = new HashSet<Estado>();
             this.Tercero = new HashSet<Tercero>();
+            this.Facturas = new HashSet<Facturas>();
+            this.Servicios = new HashSet<Servicios>();
+            this.Tasas = new HashSet<Tasas>();
+            this.AdicionalesPyP = new HashSet<AdicionalesPyP>();
+            this.AdicionalesPyP1 = new HashSet<AdicionalesPyP>();
+            this.AdicionalesPyP2 = new HashSet<AdicionalesPyP>();
+            this.AdicionalesPyP3 = new HashSet<AdicionalesPyP>();
+            this.AdicionalesPyP4 = new HashSet<AdicionalesPyP>();
         }
     
         public int RowID { get; set; }
@@ -73,5 +81,13 @@ namespace WpfFront.Model
         public virtual ICollection<Conexion> Conexion { get; set; }
         public virtual ICollection<Estado> Estado { get; set; }
         public virtual ICollection<Tercero> Tercero { get; set; }
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<Servicios> Servicios { get; set; }
+        public virtual ICollection<Tasas> Tasas { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP1 { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP2 { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP3 { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP4 { get; set; }
     }
 }

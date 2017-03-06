@@ -17,6 +17,9 @@ namespace WpfFront.Model
         public Operacion()
         {
             this.Bombero = new HashSet<Bombero>();
+            this.Servicios = new HashSet<Servicios>();
+            this.Tasas = new HashSet<Tasas>();
+            this.AdicionalesPyP = new HashSet<AdicionalesPyP>();
         }
     
         public int RowID { get; set; }
@@ -39,5 +42,8 @@ namespace WpfFront.Model
         public virtual Salida Salida { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Tipo Tipo { get; set; }
+        public virtual ICollection<Servicios> Servicios { get; set; }
+        public virtual ICollection<Tasas> Tasas { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP { get; set; }
     }
 }

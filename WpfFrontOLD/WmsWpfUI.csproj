@@ -270,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="CECOA\Vista\OperacionesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CECOA\Vista\PlaneacionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -419,11 +423,13 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="CECOA\Controlador\AeropuertoPresenter.cs" />
+    <Compile Include="CECOA\Controlador\OperacionesPresenter.cs" />
     <Compile Include="CECOA\Controlador\PlaneacionPresenter.cs" />
     <Compile Include="CECOA\Controlador\TarifasPresenter.cs" />
     <Compile Include="CECOA\Modelo\ListaOperacionesModel.cs" />
     <Compile Include="CECOA\Modelo\AeropuertoModel.cs" />
     <Compile Include="CECOA\Controlador\ListaOperacionesPresenter.cs" />
+    <Compile Include="CECOA\Modelo\OperacionesModel.cs" />
     <Compile Include="CECOA\Modelo\PlaneacionModel.cs" />
     <Compile Include="CECOA\Modelo\TarifasModel.cs" />
     <Compile Include="CECOA\Vista\AeropuertoView.xaml.cs">
@@ -431,6 +437,9 @@
     </Compile>
     <Compile Include="CECOA\Vista\ListaOperacionesView.xaml.cs">
       <DependentUpon>ListaOperacionesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\OperacionesView.xaml.cs">
+      <DependentUpon>OperacionesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CECOA\Vista\PlaneacionView.xaml.cs">
       <DependentUpon>PlaneacionView.xaml</DependentUpon>
@@ -524,6 +533,9 @@
     <Compile Include="Controles\SearchTerceros.xaml.cs">
       <DependentUpon>SearchTerceros.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AdicionalesPyP.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Aeronave.cs">
       <DependentUpon>DAO.tt</DependentUpon>
     </Compile>
@@ -563,6 +575,9 @@
     <Compile Include="Model\Estado.cs">
       <DependentUpon>DAO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Facturas.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Llegada.cs">
       <DependentUpon>DAO.tt</DependentUpon>
     </Compile>
@@ -584,7 +599,13 @@
     <Compile Include="Model\Salida.cs">
       <DependentUpon>DAO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Servicios.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TarifaCecoa.cs">
+      <DependentUpon>DAO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tasas.cs">
       <DependentUpon>DAO.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tercero.cs">

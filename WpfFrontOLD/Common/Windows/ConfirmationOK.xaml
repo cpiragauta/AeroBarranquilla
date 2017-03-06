@@ -26,7 +26,7 @@
             
             <Button  x:Uid="btnConfirm" HorizontalAlignment="Right" Width="90" Height="30" Name="btnConfirm" Content="OK" FontSize="11" FontWeight="Bold" Click="btnConfirm_Click" ></Button>
             
-            <Button x:Uid="btnCancel" HorizontalAlignment="Right" Width="90" Height="30" Margin="20,0,0,0" Name="btnCancel" Content="Cancel" FontSize="11" Click="btnCancel_Click"></Button>
+            <Button x:Uid="btnCancel" HorizontalAlignment="Right" Width="90" Height="30" Margin="20,0,0,0" Name="btnCancel" Content="Cancelar" FontSize="11" Click="btnCancel_Click"></Button>
             
         </StackPanel>
     </Grid>

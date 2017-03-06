@@ -45,5 +45,9 @@ namespace WpfFront.Model
         public DbSet<TRM> TRM { get; set; }
         public DbSet<Rol> Rol { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Facturas> Facturas { get; set; }
+        public DbSet<Servicios> Servicios { get; set; }
+        public DbSet<Tasas> Tasas { get; set; }
+        public DbSet<AdicionalesPyP> AdicionalesPyP { get; set; }
     }
 }

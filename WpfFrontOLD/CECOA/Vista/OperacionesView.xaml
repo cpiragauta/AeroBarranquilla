@@ -1,0 +1,951 @@
+﻿<WMCore:UserControlBase x:Uid="Operaciones" x:Class="WpfFront.Vista.OperacionesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Controles"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Operaciones">
+    <AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel x:Uid="DockPanel_1" Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--<StackPanel x:Uid="StackPanel_1" Orientation="Vertical" >-->
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="auto" Height="auto">
+                <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                    <!--<StackPanel x:Uid="INVM" Orientation="Vertical" Margin="5,0,3,0" Height="auto" Width="auto">-->
+                    <StackPanel>
+                        <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0,0,0,2">
+                            <StackPanel x:Uid="STP_HEADER" Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto" >
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                    <TextBlock Text="Consecutivo:" FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Record.RowID}" FontSize="12" VerticalAlignment="Center" Foreground="Brown" FontWeight="bold"/>
+                                </StackPanel>
+                                <StackPanel Name="stkDatosCabecera" Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                        <TextBlock Text="Tipo Factura:"  />
+                                        <ComboBox x:Name="cmb_TipoFactura" HorizontalAlignment="Left" Margin="0,0,0,4" Width="160" ItemsSource="{Binding ListaTipoFacturacion}" DisplayMemberPath="Name" SelectedValue="{Binding Record.TipoFacturacion.MetaMasterID}" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoFactura_SelectionChanged_1" TabIndex="0"  />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                        <TextBlock Text="Aeronave:" FontSize="12" Width="58" HorizontalAlignment="Left"/>
+                                        <uc:SearchAeronaves x:Name="SearchAeronave" Width="auto" OnSelected="SearchAeronave_OnSelected_1" IsTabStop="True"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                        <TextBlock Text="Fecha Operacion:"/>
+                                        <toolkit:DatePicker x:Name="DTP_FechaOperacion" SelectedDate="{Binding Record.FechaOP}" SelectedDateChanged="DTP_FechaOperacion_SelectedDateChanged_1" TabIndex="2" />
+                                    </StackPanel>
+
+                                    
+                                    
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Vertical"  Margin="8,15,0,0">
+                                    <awc:ImageButton x:Name="Btn_AbrirOperacion" Width="100" VerticalAlignment="Bottom" Content="Abrir Operacion" TabIndex="4" Click="BtnAbrirOperacion_Click" IsEnabled="False"/>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Vertical"  Margin="8,16,0,0">
+                                    <awc:ImageButton x:Name="btnImprimirDetalleOperacion"  ToolTip="Imprimir Detalle Operacion"   ImageSource="/WpfFront;component/Images/16X16/print.png"  IsToolStyle="True" Click="btnImprimirDetalle_Click" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical"  Margin="8,12,0,0">
+                                    <awc:ImageButton x:Name="btnActualizarOperacion"  ToolTip="Actualizar datos de la Operacion" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarOperacion_Click" TabIndex="6"/>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                    <awc:ImageButton x:Name="btnCerrarTab" Margin="0,15,0,0" ToolTip="Cerrar Tab" Content="Cerrar Pestaña" ImageSource="/WpfFront;component/Images/Delete.png" Click="btnCerrarTab_Click_1" TabIndex="3"  />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="auto" Width="auto">
+
+                            <TabControl Width="auto" >
+                                <TabItem Header="Operación" Height="26" VerticalAlignment="Top" >
+                                    <StackPanel Orientation="Vertical" Name="stkDatosOperacion">
+                                        <StackPanel Orientation="Horizontal"  Margin="0,0,0,0" Height="auto" Width="auto" >
+                                            <StackPanel Orientation="Vertical" Margin="0,0,8,0" Height="auto" Width="auto" >
+                                                <GroupBox>
+                                                    <StackPanel Name="stkDatosOperacionLlegada" Orientation="Vertical"  >
+                                                        <TextBlock Text="Información Llegada:" FontSize="12" Foreground="Brown" FontWeight="bold"  />
+                                                        <Separator Width="auto" Margin="0,0,0,5" />
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <StackPanel Orientation="Vertical" >
+
+                                                                <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="No. Vuelo de Llegada:" FontSize="12" VerticalAlignment="Center"/>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBox x:Name="txt_NumVuelo" Width="90" Height="22" HorizontalAlignment="Left" Text="{Binding RecordLlegada.NVuelo}" KeyDown="BuscarVuelosKeyDownEvent" />
+                                                                        <awc:ImageButton x:Name="BuscarProgramacionLlegada" Margin="0,0,0,0" Width="30" ToolTip="Buscar Programación" ImageSource="/WpfFront;component/Images/Buscar.png" Click="BuscarProgramacionLlegada_Click" IsToolStyle="false"  />
+                                                                    </StackPanel>
+                                                                </StackPanel>
+
+                                                                <StackPanel Orientation="Vertical" Margin="0,0,0,4" Visibility="Collapsed">
+                                                                    <TextBlock Text="Fecha Llegada:"/>
+                                                                    <toolkit:DatePicker x:Name="DTP_FechaLlegada" SelectedDate="{Binding Record.FechaLlegada}"/>
+                                                                </StackPanel>
+                                                                <StackPanel x:Name="stkHoraProgLlegada">
+                                                                    <TextBlock Text="Hora/Fecha Programación:"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                                        <xcdg:MaskedTextBox x:Name="MaskedHoraProgramada"  FontSize="15" Width="58" Height="22" Mask="00:00" Text="{Binding RecordLlegada.HoraProgramadaLlegada}" KeyUp="ValidarHora" TextChanged="MaskedHoraProgramadaSalida_TextChanged" GotFocus="SeleccionarCampo_GotFocus" KeyDown="NavegarEnter"/>
+                                                                        <toolkit:DatePicker Margin="8,0,0,4" x:Name="DTP_FechaProgramadaLleg" MouseLeave="DTP_FechasLlegada_MouseLeave_1" SelectedDate="{Binding RecordLlegada.FechaProgramacion}" Height="27" Width="70"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                                <StackPanel>
+                                                                    <TextBlock Text="Hora/Fecha Aterrizaje:"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                                        <xcdg:MaskedTextBox x:Name="MaskedHoraAterrizaje" FontSize="15" Width="58" Height="22" Mask="00:00" Text="{Binding RecordLlegada.HoraAterrizaje}" KeyUp="ValidarHora" TextChanged="MaskedHoraProgramadaSalida_TextChanged"  KeyDown="ValidarHorasLlegada_KeyDown_1" GotFocus="SeleccionarCampo_GotFocus" />
+                                                                        <toolkit:DatePicker Margin="8,0,0,4" x:Name="DTP_FechaAterrizaje" MouseLeave="DTP_FechasLlegada_MouseLeave_1" SelectedDate="{Binding RecordLlegada.FechaAterrizaje}" Height="27" Width="70" IsTabStop="False" Focusable="False" KeyDown="NO_tab_KeyDown_1"  GotFocus="DTP_FechaAterrizaje_GotFocus"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+
+                                                                <StackPanel Orientation="Vertical">
+                                                                    <TextBlock Text="Hora/Fecha Plataforma:"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                                        <xcdg:MaskedTextBox x:Name="MaskedHoraPlataforma" FontSize="15" Width="58" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordLlegada.HoraPlataforma}" KeyUp="ValidarHora" KeyDown="ValidarHorasLlegada_KeyDown_1" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                                        <toolkit:DatePicker Margin="8,0,0,4" x:Name="DTP_FechaLlegadaPlataforma" SelectedDate="{Binding RecordLlegada.FechaLLegadaPlataforma}" MouseLeave="DTP_FechasLlegada_MouseLeave_1" Height="27" Width="70" IsTabStop="False" Focusable="False" GotFocus="DTP_FechaLlegadaPlataforma_GotFocus" />
+                                                                    </StackPanel>
+                                                                </StackPanel>
+
+                                                                <StackPanel Margin="0,0,0,4">
+                                                                    <TextBlock Text="Tipo de Posición Llegada:"/>
+                                                                    <ComboBox x:Name="cmb_TipoPosicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoPosicion_SelectionChanged_1" />
+                                                                </StackPanel>
+                                                                <StackPanel x:Name="stkPosicionLleg" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Posición de llegada:"/>
+                                                                    <ComboBox x:Name="cmb_Posicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Vertical">
+                                                                    <TextBlock Text="Hora/Fecha Llegada Puente:"/>
+                                                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                                        <xcdg:MaskedTextBox x:Name="MaskedHoraPuente" FontSize="15" Width="58" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordLlegada.HoraPuente}" KeyUp="ValidarHora" KeyDown="ValidarHorasLlegada_KeyDown_1" />
+                                                                        <toolkit:DatePicker Margin="8,0,0,0" x:Name="DTP_FechaLlegadaPuente" SelectedDate="{Binding RecordLlegada.FechaLlegadaPuente}" MouseLeave="DTP_FechasLlegada_MouseLeave_1" Height="27" Width="70" IsTabStop="False" Focusable="False" GotFocus="DTP_FechaLlegadaPuente_GotFocus" />
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                                <StackPanel Margin="0,0,0,4">
+                                                                    <TextBlock Text="Declaración Vuelo:"/>
+                                                                    <ComboBox x:Name="cmb_TipoDeclaracion" HorizontalAlignment="Left" Width="120"  Height="22" ItemsSource="{Binding ListaTipoDeclaracion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" KeyDown="cmb_TipoDeclaracion_KeyDown"/>
+                                                                </StackPanel>
+
+
+
+
+
+
+
+
+
+
+                                                            </StackPanel>
+
+
+                                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0" >
+                                                                <StackPanel Name="panelEstadoVueloLlegada" Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Estado Vuelo:" />
+                                                                    <TextBlock x:Name="txtEstadoVuelo" Width="80" Height="22" Foreground="Brown" HorizontalAlignment="Left" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                                <StackPanel Margin="0,0,0,4">
+                                                                    <TextBlock Text="Banda:"/>
+                                                                    <ComboBox x:Name="cmb_Banda" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaBanda}" DisplayMemberPath="Name" SelectedValue="{Binding RecordLlegada.Banda.MetaMasterID}" SelectedValuePath="MetaMasterID"/>
+                                                                </StackPanel>
+                                                                <StackPanel Margin="0,0,0,4" HorizontalAlignment="Left">
+                                                                    <TextBlock Text="Clasificación de la Operación:"/>
+                                                                    <ComboBox x:Name="cmb_TipoOperacion" HorizontalAlignment="Left" Width="120" ItemsSource="{Binding ListaTipoOperacion}" DisplayMemberPath="Name" SelectedValue="{Binding RecordLlegada.Clasificacion.MetaMasterID}" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoOperacion_SelectionChanged_1" />
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Pax Llegados:" />
+                                                                    <TextBox x:Name="txtPaxLlegados" Width="120" Height="22" HorizontalAlignment="Left" Text="{Binding RecordLlegada.CantPax}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus" />
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Carga (Kg):" />
+                                                                    <TextBox x:Name="txtCargaEntrada" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordLlegada.CargaEntrada}" GotFocus="SeleccionarCampo_GotFocus" />
+                                                                </StackPanel>
+
+                                                                <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Correo (Kg):" />
+                                                                    <TextBox x:Name="txtCorreoEntrada" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordLlegada.CorreoEntrada}" GotFocus="SeleccionarCampo_GotFocus" />
+                                                                </StackPanel>
+                                                                <StackPanel Name="stkPSala" Orientation="Vertical" Margin="0,0,0,4">
+                                                                    <TextBlock Text="Sala:" FontSize="12" VerticalAlignment="Center"/>
+                                                                    <TextBox x:Name="txt_Sala" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordLlegada.Sala}" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                                </StackPanel>
+
+
+
+
+
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                                                               
+                                                                <StackPanel Margin="0,0,0,4">
+                                                                    <TextBlock Text="Compañia Explotadora:"/>
+                                                                    <TextBlock x:Name="lblCIAExplotadora" Height="22" Text="{Binding Record.Aeronave.Propietario.NombreCompleto}" FontWeight="bold" />
+                                                                </StackPanel>
+                                                                <StackPanel >
+                                                                    <TextBlock Text="Compañia Factura:"/>
+                                                                    <uc:SearchTerceros Height="40" x:Name="SearchCompañiaFactura" KeyDown="SearchCompañiaFactura_KeyDown_1" IsTabStop="True" />
+                                                                </StackPanel>
+                                                                <StackPanel>
+                                                                    <TextBlock Text="Origen:"/>
+                                                                    <uc:SearchAeropuertos x:Name="SearchAeropuertoOrigen" Height="40" OnSelected="SearchOrigen_OnSelected_1" IsTabStop="True"/>
+                                                                </StackPanel>
+                                                                <StackPanel Margin="0,0,0,4">
+                                                                    <TextBlock Text="Tipo Vuelo Llegada:"/>
+                                                                    <ComboBox x:Name="cmb_TipoVuelo" HorizontalAlignment="Left" Height="22" Width="160" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoVuelo_SelectionChanged_1" />
+                                                                </StackPanel>
+                                                                <StackPanel Margin="0,0,0,4" >
+                                                                    <TextBlock Text="Observaciones:" />
+                                                                    <TextBox Name="txtArObservaciones" Width="160" Height="85" Text="{Binding RecordLlegada.Observaciones}" TextWrapping="Wrap"  HorizontalAlignment="Left" AcceptsReturn="True" />
+                                                                </StackPanel>
+                                                            </StackPanel>
+
+
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </GroupBox>
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Vertical" Margin="5,5,0,0" >
+                                                        <awc:ImageButton x:Name="btnGuardar2"  Width="150" ToolTip="Guardar datos Llegada" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" Content="Guardar Datos Llegada" Click="btnGuardarDatosLlegada_Click" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="5,5,0,0">
+                                                        <awc:ImageButton x:Name="btnConfirmarLlegada"  Width="170"  ToolTip="Confirmar datos Llegada" ImageSource="/WpfFront;component/Images/16X16/Check.png" IsToolStyle="false" Click="btnConfirmarLlegada_Click_1" Content="Confirmar Datos Llegada" IsEnabled="False" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" >
+                                                <GroupBox >
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <StackPanel Orientation="Vertical" >
+                                                            
+
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Información Salida:" FontSize="12" Foreground="Brown" FontWeight="bold"  />
+                                                                <awc:ImageButton x:Name="btnLimpiarDatosSAlida" FontSize="10"  Margin="190,0,8,0" Width="50" Content="Limpiar" ToolTip="Limpiar Datos de Salida" Click="btnLimpiarDatosSAlida_Click"  />
+                                                            </StackPanel>
+                                                            
+                                                            <Separator Width="auto" Margin="0,0,0,5" />
+
+                                                            <StackPanel Orientation="Horizontal">
+
+                                                                <StackPanel Orientation="Vertical" Name="stkDatosOperacionSalida1">
+                                                                    <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                        <TextBlock Text="No. Vuelo de Salida:" FontSize="12" VerticalAlignment="Center"/>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBox x:Name="txt_NumVueloSalida" Width="90" Height="22" HorizontalAlignment="Left" Text="{Binding RecordSalida.NVueloSalida}"  KeyDown="BuscarVuelosSalidaKeyDownEvent" />
+                                                                            <awc:ImageButton x:Name="BuscarProgramacionSalida" Margin="0,0,0,0" Width="30" ToolTip="Buscar Programación" ImageSource="/WpfFront;component/Images/Buscar.png" Click="BuscarProgramacionSalida_Click" IsToolStyle="false"  />
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+                                                                    <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                        <TextBlock Text="Fecha Salida:"/>
+                                                                        <toolkit:DatePicker x:Name="DTP_FechaSalida" SelectedDate="{Binding RecordSalida.FechaSalida}" SelectedDateChanged="DTP_FechaSalida_SelectedDateChanged_1" />
+                                                                    </StackPanel>
+
+                                                                    <StackPanel x:Name="stkHoraProgSalida">
+                                                                        <TextBlock Text="Hora/Fecha Programación:"/>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                                            <xcdg:MaskedTextBox x:Name="MaskedHoraProgramadaSalida" FontSize="15" Width="58" Height="22"  Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordSalida.HoraProgramadaSalida}" KeyUp="ValidarHora" TextChanged="MaskedHoraProgramadaSalida_TextChanged" />
+                                                                            <toolkit:DatePicker Margin="8,0,0,4" x:Name="DTP_FechaProgramadaSal" MouseLeave="MouseLeaveMostrarFecha" SelectedDate="{Binding RecordSalida.FechaProgramacion}" Height="27" Width="70"/>
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+                                                                    
+                                                                    <StackPanel Margin="0,0,0,4">
+                                                                        <TextBlock Text="Tipo Posición Salida:"/>
+                                                                        <ComboBox  x:Name="cbxTipoPoscinSalid" Height="22"  ItemsSource="{Binding ListaTipoPosicionSalida}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipoPoscinSalid_SelectionChanged_1"/>
+                                                                    </StackPanel>
+                                                                    <StackPanel Name="stkPosicionSalida" Margin="0,0,0,2">
+                                                                        <TextBlock Text="Posición Salida:"/>
+                                                                        <ComboBox x:Name="cbxPoscinSalid" Height="22" ItemsSource="{Binding ListaPosicionSalida}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" />
+                                                                    </StackPanel>
+
+
+                                                                    <StackPanel Orientation="Vertical">
+                                                                        <TextBlock Name="lblHoraSalPuentContado" Text="Hora/Fecha Salida Puente Aprox:" Visibility="Collapsed"/>
+                                                                        <TextBlock Name="lblHoraSalPuentCredito" Text="Hora/Fecha Salida Puente:"/>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                                                                            <xcdg:MaskedTextBox  x:Name="MaskedHoraSalidaPuente" FontSize="15" Width="58" Height="22"  Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordSalida.HoraSalidaPuente}" KeyUp="ValidarHoraSalidaPuente_KeyUp_1" KeyDown="validarHorasSalida" />
+                                                                            <toolkit:DatePicker Margin="8,0,0,0" x:Name="DTP_FechaSalidaPuente" MouseLeave="MouseLeaveMostrarFecha" SelectedDate="{Binding RecordSalida.FechaSalidaPuente}" Height="27" Width="70" IsTabStop="False" GotFocus="DTP_FechaSalidaPuente_GotFocus"/>
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+
+
+                                                                    <StackPanel Orientation="Vertical">
+                                                                        <TextBlock Name="lblHoraSalPlatContado" Text="Hora/Fecha Salida Plataforma Aprox:" Visibility="Collapsed"/>
+                                                                        <TextBlock Name="lblHoraSalPlatCredito" Text="Hora/Fecha Salida Plataforma:"/>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                                                                            <xcdg:MaskedTextBox x:Name="MaskedHoraSalidaPlataforma" FontSize="15" Width="58" Height="22"  Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordSalida.HoraSalidaPlataforma}" KeyUp="ValidarHoraSalidaPlataforma_KeyUp_1" KeyDown="validarHorasSalida" />
+                                                                            <toolkit:DatePicker Margin="8,0,0,0" x:Name="DTP_FechaSalidaPlataforma" MouseLeave="MouseLeaveMostrarFecha" SelectedDate="{Binding RecordSalida.FechaSalidaPlataforma}" Height="27" Width="70" IsTabStop="False" GotFocus="DTP_FechaSalidaPlataforma_GotFocus"/>
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+
+                                                                    <StackPanel Orientation="Vertical">
+                                                                        <TextBlock Name="lblDespegueContado" Text="Hora/Fecha Despegue Aproximado:" Visibility="Collapsed"/>
+                                                                        <TextBlock Name="lblDespegueCredito" Text="Hora/Fecha Despegue:"/>
+                                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                                                                            <xcdg:MaskedTextBox x:Name="MaskedHoraDespegue" FontSize="15" Width="58" Height="22"  Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordSalida.HoraDespegue}" KeyUp="ValidarHoraDespegue_KeyUp_1"  TextChanged="MaskedHoraProgramadaSalida_TextChanged" KeyDown="validarHorasSalida" />
+                                                                            <toolkit:DatePicker Margin="8,0,0,0" x:Name="DTP_FechaDespegue" MouseLeave="MouseLeaveMostrarFecha" SelectedDate="{Binding RecordSalida.FechaDespegue}" Height="27" Width="70" IsTabStop="False" GotFocus="DTP_FechaDespegue_GotFocus" />
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+
+
+                                                                </StackPanel>
+
+                                                                <StackPanel >
+
+                                                                    <StackPanel Orientation="Vertical" Margin="30,0,0,0" Name="stkDatosOperacionSalida2">
+                                                                        <StackPanel  Name="panelEstadoVueloSalida" Orientation="Vertical" Margin="0,0,0,4">
+                                                                            <TextBlock Text="Estado Vuelo:" />
+                                                                            <TextBlock x:Name="txtEstadoVueloSalida" Width="80" Height="22"  HorizontalAlignment="Left" Foreground="Brown"  FontWeight="bold"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel>
+                                                                            <TextBlock Text="Destino:"/>
+                                                                            <uc:SearchAeropuertos x:Name="SearchAeropuertoDestino" OnSelected="SearchDestino_OnSelected_1" KeyUp="SearchDestino_KeyUp_1" IsTabStop="True"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel Margin="0,0,0,4">
+                                                                            <TextBlock Text="Tipo Vuelo Salida:"/>
+                                                                            <ComboBox  x:Name="cbxTipoVuelSalid" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectionChanged="cbxTipoVuelSalid_SelectionChanged_1" SelectedValuePath="MetaMasterID" />
+                                                                        </StackPanel>
+
+                                                                      
+
+                                                                        <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                            <TextBlock Text="Carga (Kg):" />
+                                                                            <TextBox x:Name="txtCargaSalida" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordSalida.CargaSalida}" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                                        </StackPanel>
+
+                                                                        <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                                            <TextBlock Text="Correo (Kg):" />
+                                                                            <TextBox x:Name="txtCorreoSalida" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordSalida.CorreoSalida}" GotFocus="SeleccionarCampo_GotFocus" />
+                                                                        </StackPanel>
+
+                                                                        <StackPanel Name="stkPSalaSalida" Orientation="Vertical" Margin="0,0,0,4" Visibility="Collapsed">
+                                                                            <TextBlock Text="Sala:" FontSize="12" VerticalAlignment="Center"/>
+                                                                            <TextBox x:Name="txt_SalaSalida" Width="120" Height="22" HorizontalAlignment="Left"  KeyDown="soloNumerosKeyDownEvent" Text="{Binding RecordSalida.Sala}"  />
+                                                                        </StackPanel>
+
+                                                                    </StackPanel>
+
+                                                                    <StackPanel Orientation="Vertical" Margin="30,0,0,0" Name="stkDatosOperacionSalida3Contado" IsEnabled="False" >
+                                                                        <StackPanel Margin="0,0,0,4" Name="stkHoraSalPuentReal" Visibility="Visible" >
+                                                                            <TextBlock Text="Hora Salida Puente Real:"/>
+                                                                            <xcdg:MaskedTextBox  x:Name="MaskedHoraSalidaPuenteContado" Width="120" Height="22" Mask="00:00" HorizontalAlignment="Left" KeyUp="ValidarHoraSalidaPuente_KeyUp_1" Text="{Binding RecordSalida.HoraSalidaPuenteReal}"  />
+                                                                        </StackPanel>
+
+                                                                        <StackPanel  Name="stkHoraSalPlatCreditoReal" Margin="0,0,0,4" Visibility="Visible">
+                                                                            <TextBlock Text="Hora Salida Plataforma Real:"/>
+                                                                            <xcdg:MaskedTextBox x:Name="MaskedHoraSalidaPlataformaContado" Width="120" Height="22" Mask="00:00" HorizontalAlignment="Left" KeyUp="ValidarHoraSalidaPlataforma_KeyUp_1" Text="{Binding RecordSalida.HoraSalidaPlataformaReal}"  />
+                                                                        </StackPanel>
+                                                                        <StackPanel Name="stkHoraDespegueReal" Margin="0,0,0,4"  Visibility="Visible">
+                                                                            <TextBlock  Text="Hora Despegue Real:"/>
+                                                                            <xcdg:MaskedTextBox x:Name="MaskedHoraDespegueReal" Width="120" Height="22" Mask="00:00" HorizontalAlignment="Left"  KeyUp="ValidarHoraDespegue_KeyUp_1"  Text="{Binding RecordSalida.HoraDespegueReal}" />
+                                                                        </StackPanel>
+
+                                                                    </StackPanel>
+
+                                                                </StackPanel>
+                                                            </StackPanel>
+
+                                                        </StackPanel>
+
+                                                    </StackPanel>
+                                                </GroupBox>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <awc:ImageButton x:Name="btnGuardarDatosSalida"  Width="150"  Margin="5,5,0,0" ToolTip="Guardar datos Salida" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" Content="Guardar Datos Salida" Click="btnGuardarDatosSalida_Click"  />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <awc:ImageButton x:Name="btnConfirmarDatosSalida"  Width="170"  Margin="5,5,0,0" ToolTip="Confirmar datos Salida" ImageSource="/WpfFront;component/Images/16X16/Check.png" IsToolStyle="false" IsEnabled="False" Content="Confirmar Datos Salida" Click="btnConfirmarDatosSalida_Click_1"  />
+                                                    </StackPanel>
+                                                </StackPanel>
+
+
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical">
+                                            <Expander Margin="0,10,0,0" x:Name="Expander_Bomberos" VerticalAlignment="Bottom" Cursor="Hand" Width="1020" Visibility="Visible">
+                                                <Expander.Header>
+                                                    <Border Background="WhiteSmoke">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock><Run Text="Servicio Bomberos"/></TextBlock>
+                                                            <TextBlock  Margin="6,1,0,0" FontWeight="Bold" Text="{Binding RegistroBomberosList.Count}"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander.Header>
+
+                                                    <StackPanel Orientation="Vertical"  Width="auto" Name="stkDatosBomberos">
+
+                                                        <StackPanel Orientation="Horizontal" Margin="4" >
+                                                            <StackPanel Orientation="Vertical" >
+                                                                <TextBlock FontWeight="Bold"  Text="Cliente:" />
+                                                                <TextBlock  Name="txtNombreClienteBomberos" Foreground="Brown" IsEnabled="False" Width="auto" FontWeight="bold" Text="{Binding Path=Record.Aeronave.CompañiaFactura.NombreCompleto}" />
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Vertical" Margin="4,0,0,0" >
+                                                                <TextBlock FontWeight="Bold"  Text="NIT:" />
+                                                                <TextBlock  x:Name="lblNIT" Foreground="Brown" IsEnabled="False" Width="auto" FontWeight="bold" Text="{Binding Path=Record.Aeronave.CompañiaFactura.IdentificacionCompleto}"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                                <TextBlock FontWeight="Bold"  Text="Servicio:" />
+                                                                <ComboBox Margin="0,3,0,0" x:Name="cbxServicio" Height="24" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Name" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.MetaMasterID}" SelectedValuePath="MetaMasterID" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                                <TextBlock FontWeight="Bold" Text="Fecha del Servicio:" />
+                                                                <toolkit:DatePicker x:Name="DTP_FechaServicio" />
+                                                            </StackPanel>
+
+                                                            <!--<StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                            <TextBlock  FontWeight="Bold"  Text="Estado:" />
+                                                            <TextBlock x:Name="lblEstadoServBomb" Width="70" Foreground="Brown" IsEnabled="False" FontWeight="bold"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                            <TextBlock  FontWeight="Bold"  Text="No Doc. ERP:" />
+                                                            <TextBlock x:Name="lblNoDocERP" Width="70" Foreground="Brown" IsEnabled="False" FontWeight="bold"/>
+                                                        </StackPanel>-->
+
+                                                            <StackPanel Orientation="Horizontal"  Margin="4">
+                                                                <awc:ImageButton x:Name="btnGuardarServicioBomberos" VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/Save.png" ToolTip="Guardar Servicio Bombero"  Content="Guardar" Click="btnGuardarServicioBomberos_Click" />
+                                                            </StackPanel>
+
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Horizontal" Margin="0,4,0,4" >
+                                                            <StackPanel Orientation="Horizontal" >
+                                                                <ListView x:Name="lvRegistroServicioBomberos" ItemsSource="{Binding RegistroBomberosList}">
+                                                                    <ListView.View>
+                                                                        <GridView  >
+                                                                            <GridViewColumn   Width="80" Header="Item"  DisplayMemberBinding="{Binding RowID}" />
+                                                                            <GridViewColumn   Width="80" Header="Fecha" DisplayMemberBinding="{Binding Fecha, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                                            <GridViewColumn   Width="170" Header="Cliente" DisplayMemberBinding="{Binding Operacion.Aeronave.CompañiaFactura.NombreCompleto}"/>
+                                                                            <GridViewColumn   Width="100" Header="NIT" DisplayMemberBinding="{Binding Operacion.Aeronave.CompañiaFactura.IdentificacionCompleto}"/>
+                                                                            <GridViewColumn   Width="130" Header="Tipo de Servicio" DisplayMemberBinding="{Binding TipoServicioBomb.Code}"/>
+                                                                            <GridViewColumn   Width="120" Header="Valor del Servicio" DisplayMemberBinding="{Binding ValorServicio}"/>
+                                                                            <GridViewColumn   Width="100" Header="Estado" DisplayMemberBinding="{Binding Status.Name}"/>
+                                                                        </GridView>
+                                                                    </ListView.View>
+                                                                </ListView>
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="50">
+                                                                <awc:ImageButton x:Name="btnEliminar" Height="25" ToolTip="Eliminar" Margin="2" ImageSource="/WpfFront;component/Images/delete.png" Click="btnEliminarServicioBomberos_Click" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+
+                                                    </StackPanel>
+
+                                            </Expander>
+                                            
+
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                </TabItem>
+
+                                <TabItem Name="TabLiquidacion" Header="Liquidación Tasas" Height="23" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal" Height="auto" Width="auto">
+                                        <StackPanel  Orientation="Vertical" Height="auto" Width="auto">
+                                            <StackPanel Name="stkDatosLiquidacionTasas">
+                                                <StackPanel  Orientation="Vertical" >
+                                                    <StackPanel Name="EncabezadoTasasNacional">
+                                                        <TextBlock Text="Nacional" FontSize="12" Foreground="Brown" FontWeight="bold"  />
+                                                    </StackPanel>
+                                                    <StackPanel Name="EncabezadoTasasInternacional" Visibility="Collapsed" >
+                                                        <TextBlock Text="Interacional" FontSize="12" Foreground="Brown" FontWeight="bold"  />
+                                                    </StackPanel>
+                                                    <Separator Width="auto" Margin="0,0,5,5" />
+
+                                                    <StackPanel Orientation="Horizontal" Margin="4,0,0,8">
+
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Pagan Tasa:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.PaganTasa}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Infantes:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.Infantes}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Tripadi:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.Tripulantes}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Militares:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.Militares}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Transitos:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.Transitos}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock Text="# Otros:" />
+                                                            <TextBox Width="80" Text="{Binding RecordTasas.Otros}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+
+                                                </StackPanel>
+
+                                                <StackPanel Margin="8,14,0,8" >
+                                                    <awc:ImageButton x:Name="btn_GuardarLiquidacion"  ToolTip="Guardar" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" HorizontalAlignment="Left" Width="100" Content="Guardar" Click="btn_GuardarLiquidacion_Click_1"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ListView x:Name="lvRegistroServicioTasa" ItemsSource="{Binding RegistroTasasList}" >
+                                                    <ListView.View>
+                                                        <GridView  >
+                                                            <GridViewColumn Header="No" DisplayMemberBinding="{Binding RowID}"/>
+                                                            <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Fecha, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                            <GridViewColumn Header="Pagan Tasa"  DisplayMemberBinding="{Binding PaganTasa}" />
+                                                            <GridViewColumn Header="Infantes" DisplayMemberBinding="{Binding Infantes}"/>
+                                                            <GridViewColumn Header="Tripulantes" DisplayMemberBinding="{Binding Tripulantes}"/>
+                                                            <GridViewColumn Header="Militares" DisplayMemberBinding="{Binding Militares}"/>
+                                                            <GridViewColumn Header="Transitos" DisplayMemberBinding="{Binding Transitos}"/>
+                                                            <GridViewColumn Header="Otros" DisplayMemberBinding="{Binding Otros}"/>
+                                                            <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding TipoTasa.Name}"/>
+                                                            <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Status.Name}"/>
+
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+
+
+                                            <GroupBox Header="A cobrar" >
+                                                <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock FontWeight="Bold" TextAlignment="Center" Text="Moneda:" Width="80" />
+                                                            <Separator/>
+                                                            <TextBlock  Name="lblCOP" TextAlignment="Center" FontWeight="Bold" Text="COP" Width="80" />
+                                                            <TextBlock  Name="lblUSD" TextAlignment="Center" FontWeight="Bold" Text="USD" Width="80" Visibility="Collapsed"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock FontWeight="Bold" Text="# Pasajeros" Width="80" />
+                                                            <Separator/>
+                                                            <TextBlock  Name="lblNumPaxCOP" Width="80" TextAlignment="Center" Text="{Binding RecordTasas.PaganTasa}" />
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                            <TextBlock FontWeight="Bold" Text="Tasa"/>
+                                                            <Separator/>
+                                                            <TextBlock Name="lblTasaCOP" Text="{Binding RecordTasas.TasaCOP, StringFormat=\{0:C0\}}" Width="80"/>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <TextBlock FontWeight="Bold" Text="Total"/>
+                                                            <Separator/>
+                                                            <TextBlock x:Name="txt_TotalCOP" Text="{Binding RecordTasas.TotalCOP, StringFormat=\{0:C0\}}"  Width="80" />
+                                                        </StackPanel>
+
+                                                    </StackPanel>
+                                                    <Separator Margin="0,8,165,-5"/>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Name="stkExcentoCOP" Orientation="Horizontal" Margin="0,4,4,0">
+                                                            <TextBlock FontWeight="Bold"  Text="Exento tasa:" Width="190" />
+                                                            <TextBlock TextAlignment="Left" FontWeight="Bold" Width="80" Text="{Binding RecordTasas.Exentos}" />
+                                                        </StackPanel>
+                                                        <StackPanel Name="stkEmbarcadosNal" Orientation="Horizontal" Margin="0,0,4,0">
+                                                            <TextBlock FontWeight="Bold"  Text="Total Embarcados Nacional:" Width="190"/>
+                                                            <TextBlock x:Name="txtPaxEmNal" TextAlignment="Left" FontWeight="Bold"  Width="80" Text="{Binding RecordTasas.PasajerosEmbarcados}" />
+                                                        </StackPanel>
+                                                        <StackPanel Name="stkEmbarcadosInternal" Orientation="Horizontal" Margin="0,0,4,0" Visibility="Collapsed">
+                                                            <TextBlock FontWeight="Bold" Text="Total Embarcados Internacional:" Width="190" />
+                                                            <TextBlock x:Name="txtPaxEmIntrNal" TextAlignment="Left" FontWeight="Bold"  Width="80" Text="{Binding RecordTasas.PasajerosEmbarcados}"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+
+                                            </GroupBox>
+
+
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </TabItem>
+
+                                <TabItem Header="Adicionados">
+                                    <StackPanel Orientation="Vertical" Margin="0,0,3,0" >
+                                        <GroupBox Header="BOMBEROS" Name="gbxBomberos">
+                                            <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" Width="auto">
+                                                <StackPanel Orientation="Horizontal" Margin="4" >
+                                                    <StackPanel Orientation="Vertical" >
+                                                        <TextBlock FontWeight="Bold"  Text="Cliente:" />
+                                                        <TextBlock  Name="txtNombreClienteBomberosAdicional" Foreground="Brown" IsEnabled="False" Width="auto" FontWeight="bold" Text="{Binding Path=Record.Aeronave.CompañiaFactura.NombreCompleto}" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0" >
+                                                        <TextBlock FontWeight="Bold"  Text="NIT:" />
+                                                        <TextBlock  x:Name="lblNITAdicional" Foreground="Brown" IsEnabled="False" Width="auto" FontWeight="bold" Text="{Binding Path=Record.Aeronave.CompañiaFactura.IdentificacionCompleto}"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                        <TextBlock FontWeight="Bold"  Text="Servicio:" />
+                                                        <ComboBox x:Name="tipoBomberoAdicional" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Name" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.MetaMasterID}" SelectedValuePath="MetaMasterID" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                                                        <TextBlock FontWeight="Bold" Text="Fecha del Servicio:" />
+                                                        <toolkit:DatePicker x:Name="DTP_FechaServicioAdicional" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal"  Margin="4">
+                                                        <awc:ImageButton x:Name="btnGuardarServicioBomberosAdicional" VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/Save.png" ToolTip="Guardar Servicio Bombero"  Content="Guardar" Click="btnGuardarServicioBomberosAdicional_Click" />
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4"  >
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <ListView x:Name="lvRegistroServicioBomberosAdicionales" ItemsSource="{Binding RegistroBomberosAdicionalesList}" >
+                                                            <ListView.View >
+                                                                <GridView  >
+                                                                    <GridViewColumn Header="Item"  DisplayMemberBinding="{Binding RowID}" />
+                                                                    <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Fecha, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                                        <GridViewColumn Header="Cliente" DisplayMemberBinding="{Binding Operacion.Aeronave.CompañiaFactura.NombreCompleto}"/>
+                                                                    <GridViewColumn Header="NIT" DisplayMemberBinding="{Binding Operacion.Aeronave.CompañiaFactura.IdentificacionCompleto}"/>
+                                                                    <GridViewColumn Header="Tipo de Servicio" DisplayMemberBinding="{Binding TipoServicioBomb.Code}"/>
+                                                                    <GridViewColumn Header="Valor del Servicio" DisplayMemberBinding="{Binding ValorServicio}"/>
+                                                                    <GridViewColumn Width="100" Header="Estado" DisplayMemberBinding="{Binding Status.Name}"/>
+                                                                    <GridViewColumn Header="Creado Por" DisplayMemberBinding="{Binding CreatedBy}"/>
+                                                                </GridView>
+                                                            </ListView.View>
+                                                        </ListView>
+                                                    </StackPanel>                                                    
+                                                    <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="50">
+                                                        <awc:ImageButton x:Name="btnEliminarBomberoAdicional" Height="25" ToolTip="Eliminar" Margin="2" ImageSource="/WpfFront;component/Images/delete.png" Click="btnEliminarBomberoAdicional_Click_1" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                                
+                                            </StackPanel>
+                                            
+                                        </GroupBox>
+
+                                        <GroupBox Header="NOTAS" Visibility="Visible" Name="gbxNotas">
+                                            <StackPanel Name="stkDatosLiquidacionTasasAdicional">
+                                                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                                    <StackPanel Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="Tipo Tasa:"/>
+                                                        <ComboBox Name="TipoTasaAdicional" Width="90" ItemsSource="{Binding ListaTipoTasas}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Pagan Tasa:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.PaganTasa}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Infantes:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.Infantes}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Tripadi:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.Tripulantes}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Militares:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.Militares}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Transitos:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.Transitos}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,4,0">
+                                                        <TextBlock FontWeight="Bold" Text="# Otros:" />
+                                                        <TextBox Width="80" Text="{Binding RecordTasasAdicionales.Otros}" KeyDown="soloNumerosKeyDownEvent" GotFocus="SeleccionarCampo_GotFocus"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal" Margin="4" >
+                                                        <awc:ImageButton x:Name="btn_GuardarLiquidacionAdicional"  ToolTip="Guardar" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" Width="100" Height="22" Content="Guardar" Click="btn_GuardarLiquidacionAdicional_Click" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4" >
+                                                        <ListView x:Name="lvRegistroServicioTasaAdicional" ItemsSource="{Binding RegistroTasasAdicionalesList}" >
+                                                            <ListView.View>
+                                                                <GridView  >
+                                                                    <GridViewColumn Header="No" DisplayMemberBinding="{Binding RowID}"/>
+                                                                    <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Fecha, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                                    <GridViewColumn Header="Pagan Tasa" DisplayMemberBinding="{Binding PaganTasa}" />
+                                                                    <GridViewColumn Header="Infantes" DisplayMemberBinding="{Binding Infantes}"/>
+                                                                    <GridViewColumn Header="Tripulantes" DisplayMemberBinding="{Binding Tripulantes}"/>
+                                                                    <GridViewColumn Header="Militares" DisplayMemberBinding="{Binding Militares}"/>
+                                                                    <GridViewColumn Header="Transitos" DisplayMemberBinding="{Binding Transitos}"/>
+                                                                    <GridViewColumn Header="Otros" DisplayMemberBinding="{Binding Otros}"/>
+                                                                    <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding TipoTasa.Name}"/>
+                                                                    <GridViewColumn Header="Creado Por" DisplayMemberBinding="{Binding CreatedBy}"/>
+                                                                    <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Status.Name}"/>
+                                                                </GridView>
+                                                            </ListView.View>
+                                                        </ListView>
+                                                        <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="50">
+                                                            <awc:ImageButton x:Name="btnEliminarTasaAdicional" Height="25" ToolTip="Eliminar" Margin="2" ImageSource="/WpfFront;component/Images/delete.png" Click="btnEliminarTasaAdicional_Click"  />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal"  Margin="4"/>
+                                                    
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal"  Margin="4,4,4,15">
+                                                    <awc:ImageButton Name="FacturarServiciosAdicionales"  VerticalAlignment="Bottom" FontWeight="Bold" ToolTip="Facturar Servicios Adicionales" Content="Liquidar Adicionales" Width="130" Click="FacturarServiciosAdicionales_Click_1" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </GroupBox>
+                                        
+                                        <GroupBox Header="PUENTES Y PARQUEO" >
+
+                                            <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" Width="auto">
+                                                <StackPanel Name="panelIngresoAdicionales" Margin="0,4,0,4">
+
+                                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0" >
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Fecha Inicial:" />
+                                                            <toolkit:DatePicker x:Name="DTP_FechaInicialPyP" SelectedDate="{Binding RecordAdicionalesPyP.FechaInicial}"/>
+                                                        </StackPanel>
+
+
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Tipo Pos. de Llegada:"/>
+                                                            <ComboBox Name="cbxTipPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipPosLlegadaPyP_SelectionChanged_1"/>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Posición de llegada:"/>
+                                                            <ComboBox Name="cbxPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionPyP}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4" Name="HoraLlegadaPteAdicional" Visibility="Collapsed">
+                                                            <TextBlock FontWeight="Bold" Text="Hora Lleg Pte:"/>
+                                                            <xcdg:MaskedTextBox Name="HoraLlegadaPteAdicionalesPyP" Width="40" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordAdicionalesPyP.HoraLlegadaPuente}" />
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Hora Lleg Plat:"/>
+                                                            <xcdg:MaskedTextBox Name="HoraLlegadaAdicionalesPyP" Width="40" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordAdicionalesPyP.HoraLlegada}" />
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock  FontWeight="Bold"  Text="Tipo Llegada:"/>
+                                                            <ComboBox  x:Name="cbxTipoLlegada" Width="110" Height="22" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0" >
+                                                        <StackPanel Orientation="Vertical" Margin="0,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Fecha Final:" />
+                                                            <toolkit:DatePicker x:Name="DTP_FechaFinalPyP" SelectedDate="{Binding RecordAdicionalesPyP.FechaFinal}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Tipo Pos. de Salida:"/>
+                                                            <ComboBox HorizontalAlignment="Left" Name="cbxTipPosSalidaPyP" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipPosSalidaPyP_SelectionChanged_1"/>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Posición de Salida:"/>
+                                                            <ComboBox  Name="cbxPosSalidaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionSalidaPyP}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4" Name="HoraSalidaPteAdicional" Visibility="Collapsed">
+                                                            <TextBlock FontWeight="Bold" Text="Hora Sald Pte:"/>
+                                                            <xcdg:MaskedTextBox  Name="HoraSalidaPteAdicionalesPyP" Width="40" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordAdicionalesPyP.HoraSalidaPuente}" />
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,4">
+                                                            <TextBlock FontWeight="Bold" Text="Hora Sald Plat:"/>
+                                                            <xcdg:MaskedTextBox  Name="HoraSalidaAdicionalesPyP" Width="40" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordAdicionalesPyP.HoraSalida}" />
+                                                        </StackPanel>
+                                                        <StackPanel Margin="4,0,0,0">
+                                                            <TextBlock FontWeight="Bold"  Text="Despego:" />
+                                                            <CheckBox Name="chkDespegoPyP"  HorizontalAlignment="Center" Margin="4" IsChecked="{Binding Path=RecordAdicionalesPyP.Despego}"  Click="ClickDepegoAdicionalesPyP"/>
+                                                        </StackPanel>
+                                                        <StackPanel Name="panelHoraDespegue" Margin="4,0,0,0" Visibility="Collapsed">
+                                                            <TextBlock FontWeight="Bold" Text="Hora Despegue:"/>
+                                                            <xcdg:MaskedTextBox Name="HoraDespegueAdicionalesPyP" Width="40" Height="22" Mask="00:00" HorizontalAlignment="Left" Text="{Binding RecordAdicionalesPyP.HoraDespegue}" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal"  Margin="12,4,4,4">
+                                                            <awc:ImageButton  VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/Save.png" ToolTip="Guardar Adicionales"  Content="Guardar" Click="GuardarAdicionales_Click_1" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" Margin="8,4,4,4">
+                                                            <awc:ImageButton  VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/16X16/Check.png" ToolTip="Confirmar Adicionales"  Content="Confirmar" Click="ConfirmarAdicionalButton_Click_1" />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" Margin="0,16,0,0" >
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <ListView x:Name="lvRegistroSAdicionalesPyp" ItemsSource="{Binding RegistroAdicionalesPyPList}" MouseDoubleClick="lvRegistroSAdicionalesPyp_MouseDoubleClick_1" >
+                                                            <ListView.View>
+                                                                <GridView  >
+                                                                    <GridViewColumn Header="Fecha Ini"  DisplayMemberBinding="{Binding FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                                    <GridViewColumn Header="Hora Llegada" DisplayMemberBinding="{Binding HoraLlegada}"/>
+                                                                    <GridViewColumn Header="Tipo Pos. Llegada" DisplayMemberBinding="{Binding TipoPosicionLlegada.Name}"/>
+                                                                    <GridViewColumn Header="Pos. Llegada" DisplayMemberBinding="{Binding PosicionLlegada.Name}"/>
+                                                                    <GridViewColumn Header="Fecha Final" DisplayMemberBinding="{Binding FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                                    <GridViewColumn Header="Hora Salida" DisplayMemberBinding="{Binding HoraSalida}"/>
+                                                                    <GridViewColumn Header="Tipo Pos. salida" DisplayMemberBinding="{Binding TipoPosicionSalida.Name}"/>
+                                                                    <GridViewColumn Header="Pos. Salida" DisplayMemberBinding="{Binding PosicionSalida.Name}"/>
+                                                                    <GridViewColumn Header="Hora Despegue" DisplayMemberBinding="{Binding HoraDespegue}"/>
+                                                                    <GridViewColumn Header="Estado" DisplayMemberBinding="{Binding Status.Name}"/>
+                                                                    <GridViewColumn Header="Creado por" DisplayMemberBinding="{Binding CreatedBy}"/>
+                                                                </GridView>
+                                                            </ListView.View>
+                                                        </ListView>
+                                                    </StackPanel>
+
+                                                    <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="50">
+                                                        <awc:ImageButton x:Name="btnAgregarPyp" Height="25" ToolTip="Agregar" Margin="2" ImageSource="/WpfFront;component/Images/Add.png" Click="btnAgregarPyp_Click"/>
+                                                        <awc:ImageButton x:Name="btnEliminarPyp" Height="25" ToolTip="Eliminar" Margin="2" ImageSource="/WpfFront;component/Images/delete.png" Click="btnEliminarPyp_Click" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel  Margin="4,0,0,0" >
+                                                    <TextBlock FontWeight="Bold" Name="txtPuentesCantAdiconalesTotal"/>
+                                                    <TextBlock FontWeight="Bold" Name="txtPuentesValorAdiconalesTotal" />
+                                                    <TextBlock FontWeight="Bold" Name="txtParqueoHrsAdiconalesTotal"/>
+                                                    <TextBlock FontWeight="Bold" Name="txtParqueoValorAdiconalesTotal"/>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal"  Margin="4" Visibility="Collapsed" >
+                                                    <awc:ImageButton  VerticalAlignment="Bottom"  ToolTip="Calcular Adicionales"  Content="Calcular Adicionales" Click="btnCalcularAdicionalesPyp_Click" />
+                                                </StackPanel>
+                                                
+                                            </StackPanel>
+
+                                        </GroupBox>
+
+
+
+
+                                    </StackPanel>
+                                </TabItem>
+                                
+                                <TabItem Name="TabItemFacturaContado" Header="Facturación Contado" Visibility="Visible">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="5,0,3,0" Height="auto" Width="auto">
+                                            <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto">
+                                                <GroupBox Header="RESUMEN OPERACION">
+                                                    
+                                                    <StackPanel Orientation="Vertical" Margin="5,10,3,4" Height="auto" Width="auto">
+                                                        <StackPanel Orientation="Horizontal">
+                                                        <StackPanel IsEnabled="False">
+                                                            <StackPanel Orientation="Horizontal" Margin="5,0,3,4" Height="auto" Width="auto">
+                                                                <TextBlock Text="Aerodromo:" Width="100" Height="20"/>
+                                                                <TextBlock x:Name="txtTotalAerodromo" TextAlignment="Right" Width="140" Height="20" Foreground="Black"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal"  Margin="5,0,3,4" Height="auto" Width="auto">
+                                                                <TextBlock Text="Recargo Noc:" Width="100" Height="20"/>
+                                                                    <TextBlock x:Name="txtRecargoNocturno" TextAlignment="Right" Width="140" Height="20" Foreground="Black"/>
+                                                            </StackPanel>
+                                                            <StackPanel  Orientation="Horizontal" Margin="5,0,3,4" Height="auto" Width="auto">
+                                                                <TextBlock  Text="Tasas:" Width="100" Height="20"/>
+                                                                    <TextBlock x:Name="txtcantPasajeros" TextAlignment="Right"   Width="30" Height="20"  Foreground="Black" />
+                                                                    <TextBlock x:Name="txtValorTasas" TextAlignment="Right" Margin="2,0,0,0" Width="108" Foreground="Black" />
+                                                            </StackPanel>
+                                                            <StackPanel  Orientation="Horizontal" Margin="5,0,3,4" Height="auto" Width="auto" >
+                                                                <TextBlock  Text="Puentes:" Width="100" Height="20"/>
+                                                                    <TextBlock x:Name="txtNumPuentes" TextAlignment="Right" Width="30" Height="20" Foreground="Black" />
+                                                                    <TextBlock x:Name="txtTotalPuente" TextAlignment="Right" Margin="2,0,0,0" Width="108" Foreground="Black" />
+                                                            </StackPanel>
+                                                            <StackPanel  Orientation="Horizontal" Margin="5,0,3,4" Height="auto" Width="auto">
+                                                                <TextBlock  Text="Parqueo:" Width="100" Height="20"/>
+                                                                    <TextBlock x:Name="txtCantHoras" TextAlignment="Right"  Width="30" Height="20" Foreground="Black" />
+                                                                    <TextBlock x:Name="txtTotalParqueo" TextAlignment="Right" Margin="2,0,0,0" Width="108" Height="20" Foreground="Black" />
+                                                            </StackPanel>
+                                                            <StackPanel  Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto">
+                                                                <TextBlock Text="Serv. Bomberos:" Width="100"/>
+                                                                    <TextBlock x:Name="txtCantidadSerBomb" TextAlignment="Right" Width="30" Height="20" Foreground="Black" />
+                                                                    <TextBlock x:Name="txtValorSerBomb" TextAlignment="Right" Width="108" Height="20"  Margin="2,0,0,0" Foreground="Black" />
+                                                            </StackPanel>
+                                                            
+                                                            <Separator Margin="0,4,0,4"  />
+                                                            <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto">
+
+                                                                <StackPanel Orientation="Horizontal" Margin="0,0,3,0" Height="auto" Width="auto">
+                                                                    <TextBlock x:Uid="txtb_total" Text="Total:" Width="100" Height="20"/>
+                                                                        <TextBlock x:Name="txtTotalFacturacion" TextAlignment="Right"  Width="140" Height="20" />
+                                                                </StackPanel>
+
+                                                            </StackPanel>
+                                                            
+                                                        </StackPanel>
+                                                            <StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblAerodromoDolares" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold" TextAlignment="Right"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblRecargoDolares"  Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold" HorizontalAlignment="Right"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblTasasDolares" TextAlignment="Right" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblPuentesDolares" TextAlignment="Right" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblParqueoDolares" TextAlignment="Right" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblBomberosDolares" TextAlignment="Right" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                                <Separator Margin="0,0,0,4"  />
+                                                                <StackPanel Orientation="Horizontal"  Margin="5,0,3,4"  Height="auto" Width="auto">
+                                                                    <TextBlock Name="lblTotalDolares" TextAlignment="Right" Foreground="Brown" IsEnabled="False" Width="auto" Height="20" FontWeight="bold"/>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" Margin="2,5,3,0" Height="auto" Width="auto">
+                                                            <awc:ImageButton x:Name="btnCalcularFacturacion" Width="120" VerticalAlignment="Bottom" Margin="4,4,4,4" ToolTip="Calcular Facturacion"  Content="Calcular Facturación" Click="btnCalcularFacturacion_Click" />
+                                                        </StackPanel>
+                                                        <StackPanel>
+                                                            
+                                                            
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    
+                                                </GroupBox>
+                                            </StackPanel>
+                                            <Separator Margin="5,5,0,0"/>
+                                            <StackPanel   Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto">
+                                                <awc:ImageButton x:Name="btnFacturar" Width="70" VerticalAlignment="Bottom" Margin="4,4,4,4" ToolTip="Facturar"  Content="Facturar" Click="btnFacturar_Click" IsEnabled="False"/>
+                                                <awc:ImageButton x:Name="BtnCerrarOperacion" Margin="4,4,4,4" Width="120" VerticalAlignment="Bottom" Content="Terminar Operacion" Click="CerrarOperacion_Click" TabIndex="5" />
+                                                <awc:ImageButton x:Name="btnImprimirDetalle" Width="160" Margin="4,4,4,4" ToolTip=" Detalle Operacion" ImageSource="/WpfFront;component/Images/16X16/print.png"  Content="Detalle Operacion" Click="btnImprimirDetalle_Click" />
+                                                <awc:ImageButton x:Name="btnVerFact" Width="150" VerticalAlignment="Bottom" Margin="4,4,4,4" Content="Ver Factura" Visibility="Collapsed" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Name="Stk_PanelInfoFacturas">
+                                            <TextBlock Text="Información Facturas:" FontSize="12" Foreground="Brown" FontWeight="bold" Margin="10,4,4,0" />
+                                            <Separator Width="auto" Margin="4,0,0,5" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <ListView SelectionMode="Single" Name="ListaFacturas" ItemsSource="{Binding Path=RecordServiciosAgrupadosList}" Margin="0,4,0,0" MaxHeight="400" Height="auto"  AllowDrop="True"  >
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridViewColumn Header="Id" Width="70" DisplayMemberBinding="{Binding Path=RowID}" />
+                                                            <GridViewColumn Header="Nro Factura" Width="70" DisplayMemberBinding="{Binding Path=Factura.NumeroFactura}" />
+                                                            <GridViewColumn Header="Operacion" Width="70" DisplayMemberBinding="{Binding Path=Operacion.RowID}" />
+                                                            <GridViewColumn Header="Cant Items" Width="70" DisplayMemberBinding="{Binding Path=Cantidad}" />
+                                                            <GridViewColumn Header="Fecha Emision" Width="100" DisplayMemberBinding="{Binding Path=Factura.FechaEmision, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                            <GridViewColumn Header="Aerolinea" Width="220" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.NombreCompleto}"/>
+                                                            <GridViewColumn Header="Valor Total" TextBlock.TextAlignment="Right" Width="100" DisplayMemberBinding="{Binding Path=Valor,  StringFormat=\{0:C0\} }" />
+                                                            <GridViewColumn Header="Creada Por" Width="100" DisplayMemberBinding="{Binding Path=CreatedBy}" />
+                                                            <GridViewColumn Header="Estado" Width="90" DisplayMemberBinding="{Binding Path=Status.Name}" />
+                                                            <GridViewColumn Header="DOC ERP" Width="70" DisplayMemberBinding="{Binding Path=Factura.NoDocERP}" />
+                                                            <GridViewColumn Header="FECHA DOC ERP" Width="70" DisplayMemberBinding="{Binding Path=Factura.FechaDocERP}" />
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                                <StackPanel Orientation="Horizontal" Margin="5,0,3,0" Height="60">
+                                                    <awc:ImageButton x:Name="btnAnularFactura" Width="70" Margin="4,18,4,18" ToolTip="Anular Factura"  Content="Anular" Click="btnAnularFactura_Click_1" />
+                                                    <awc:ImageButton x:Name="btnImprimir" Width="80"  Margin="4,18,4,18" Content="Imprimir" ToolTip="Imprimir Factura"  Click="btnImprimir_Click" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </TabItem>
+
+                            </TabControl>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>

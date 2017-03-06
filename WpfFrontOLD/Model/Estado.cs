@@ -20,6 +20,10 @@ namespace WpfFront.Model
             this.Llegada = new HashSet<Llegada>();
             this.Operacion = new HashSet<Operacion>();
             this.Salida = new HashSet<Salida>();
+            this.Facturas = new HashSet<Facturas>();
+            this.Servicios = new HashSet<Servicios>();
+            this.Tasas = new HashSet<Tasas>();
+            this.AdicionalesPyP = new HashSet<AdicionalesPyP>();
         }
     
         public int RowID { get; set; }
@@ -36,5 +40,9 @@ namespace WpfFront.Model
         public virtual ICollection<Operacion> Operacion { get; set; }
         public virtual ICollection<Salida> Salida { get; set; }
         public virtual Tipo Tipo { get; set; }
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<Servicios> Servicios { get; set; }
+        public virtual ICollection<Tasas> Tasas { get; set; }
+        public virtual ICollection<AdicionalesPyP> AdicionalesPyP { get; set; }
     }
 }
