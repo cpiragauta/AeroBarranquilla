@@ -29,7 +29,8 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" Margin="8,0,0,0">
                                         <TextBlock Text="Aeronave:" FontSize="12" Width="58" HorizontalAlignment="Left"/>
-                                        <uc:SearchAeronaves x:Name="SearchAeronave" Width="auto" OnSelected="SearchAeronave_OnSelected_1" IsTabStop="True"/>
+                                        <!--<uc:SearchAeronaves x:Name="SearchAeronave" Width="auto" OnSelected="SearchAeronave_OnSelected_1" IsTabStop="True"/>-->
+                                        <uc:SearchAeronaves x:Name="SearchAeronave" Width="auto"  IsTabStop="True"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Vertical" Margin="8,0,0,0">
@@ -46,7 +47,7 @@
                                 </StackPanel>
                                 
                                 <StackPanel Orientation="Vertical"  Margin="8,16,0,0">
-                                    <awc:ImageButton x:Name="btnImprimirDetalleOperacion"  ToolTip="Imprimir Detalle Operacion"   ImageSource="/WpfFront;component/Images/16X16/print.png"  IsToolStyle="True" Click="btnImprimirDetalle_Click" />
+                                    <awc:ImageButton x:Name="btnImprimirDetalleOperacion"  ToolTip="Imprimir Detalle Operacion"   ImageSource="/WpfFront;component/Images/Icons/16X16/print.png"  IsToolStyle="True" Click="btnImprimirDetalle_Click" />
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical"  Margin="8,12,0,0">
                                     <awc:ImageButton x:Name="btnActualizarOperacion"  ToolTip="Actualizar datos de la Operacion" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarOperacion_Click" TabIndex="6"/>
@@ -190,7 +191,8 @@
                                                                 </StackPanel>
                                                                 <StackPanel>
                                                                     <TextBlock Text="Origen:"/>
-                                                                    <uc:SearchAeropuertos x:Name="SearchAeropuertoOrigen" Height="40" OnSelected="SearchOrigen_OnSelected_1" IsTabStop="True"/>
+                                                                    <!--<uc:SearchAeropuertos x:Name="SearchAeropuertoOrigen" Height="40" OnSelected="SearchOrigen_OnSelected_1" IsTabStop="True"/>-->
+                                                                    <uc:SearchAeropuertos x:Name="SearchAeropuertoOrigen" Height="40" IsTabStop="True"/>
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4">
                                                                     <TextBlock Text="Tipo Vuelo Llegada:"/>
@@ -212,7 +214,7 @@
                                                         <awc:ImageButton x:Name="btnGuardar2"  Width="150" ToolTip="Guardar datos Llegada" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" Content="Guardar Datos Llegada" Click="btnGuardarDatosLlegada_Click" />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Vertical" Margin="5,5,0,0">
-                                                        <awc:ImageButton x:Name="btnConfirmarLlegada"  Width="170"  ToolTip="Confirmar datos Llegada" ImageSource="/WpfFront;component/Images/16X16/Check.png" IsToolStyle="false" Click="btnConfirmarLlegada_Click_1" Content="Confirmar Datos Llegada" IsEnabled="False" />
+                                                        <awc:ImageButton x:Name="btnConfirmarLlegada"  Width="170"  ToolTip="Confirmar datos Llegada" ImageSource="/WpfFront;component/Images/Icons/16X16/Check.png" IsToolStyle="false" Click="btnConfirmarLlegada_Click_1" Content="Confirmar Datos Llegada" IsEnabled="False" />
                                                     </StackPanel>
                                                 </StackPanel>
                                             </StackPanel>
@@ -303,7 +305,8 @@
                                                                         </StackPanel>
                                                                         <StackPanel>
                                                                             <TextBlock Text="Destino:"/>
-                                                                            <uc:SearchAeropuertos x:Name="SearchAeropuertoDestino" OnSelected="SearchDestino_OnSelected_1" KeyUp="SearchDestino_KeyUp_1" IsTabStop="True"/>
+                                                                            <!--<uc:SearchAeropuertos x:Name="SearchAeropuertoDestino" OnSelected="SearchDestino_OnSelected_1" KeyUp="SearchDestino_KeyUp_1" IsTabStop="True"/>-->
+                                                                            <uc:SearchAeropuertos x:Name="SearchAeropuertoDestino" KeyUp="SearchDestino_KeyUp_1" IsTabStop="True"/>
                                                                         </StackPanel>
                                                                         <StackPanel Margin="0,0,0,4">
                                                                             <TextBlock Text="Tipo Vuelo Salida:"/>
@@ -358,7 +361,7 @@
                                                         <awc:ImageButton x:Name="btnGuardarDatosSalida"  Width="150"  Margin="5,5,0,0" ToolTip="Guardar datos Salida" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="false" Content="Guardar Datos Salida" Click="btnGuardarDatosSalida_Click"  />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Vertical">
-                                                        <awc:ImageButton x:Name="btnConfirmarDatosSalida"  Width="170"  Margin="5,5,0,0" ToolTip="Confirmar datos Salida" ImageSource="/WpfFront;component/Images/16X16/Check.png" IsToolStyle="false" IsEnabled="False" Content="Confirmar Datos Salida" Click="btnConfirmarDatosSalida_Click_1"  />
+                                                        <awc:ImageButton x:Name="btnConfirmarDatosSalida"  Width="170"  Margin="5,5,0,0" ToolTip="Confirmar datos Salida" ImageSource="/WpfFront;component/Images/Icons/16X16/Check.png" IsToolStyle="false" IsEnabled="False" Content="Confirmar Datos Salida" Click="btnConfirmarDatosSalida_Click_1"  />
                                                     </StackPanel>
                                                 </StackPanel>
 
@@ -762,7 +765,7 @@
                                                             <awc:ImageButton  VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/Save.png" ToolTip="Guardar Adicionales"  Content="Guardar" Click="GuardarAdicionales_Click_1" />
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal" Margin="8,4,4,4">
-                                                            <awc:ImageButton  VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/16X16/Check.png" ToolTip="Confirmar Adicionales"  Content="Confirmar" Click="ConfirmarAdicionalButton_Click_1" />
+                                                            <awc:ImageButton  VerticalAlignment="Bottom" ImageSource="/WpfFront;component/Images/Icons/16X16/Check.png" ToolTip="Confirmar Adicionales"  Content="Confirmar" Click="ConfirmarAdicionalButton_Click_1" />
                                                         </StackPanel>
                                                     </StackPanel>
                                                 </StackPanel>
@@ -902,7 +905,7 @@
                                             <StackPanel   Orientation="Horizontal" Margin="5,0,3,0" Height="auto" Width="auto">
                                                 <awc:ImageButton x:Name="btnFacturar" Width="70" VerticalAlignment="Bottom" Margin="4,4,4,4" ToolTip="Facturar"  Content="Facturar" Click="btnFacturar_Click" IsEnabled="False"/>
                                                 <awc:ImageButton x:Name="BtnCerrarOperacion" Margin="4,4,4,4" Width="120" VerticalAlignment="Bottom" Content="Terminar Operacion" Click="CerrarOperacion_Click" TabIndex="5" />
-                                                <awc:ImageButton x:Name="btnImprimirDetalle" Width="160" Margin="4,4,4,4" ToolTip=" Detalle Operacion" ImageSource="/WpfFront;component/Images/16X16/print.png"  Content="Detalle Operacion" Click="btnImprimirDetalle_Click" />
+                                                <awc:ImageButton x:Name="btnImprimirDetalle" Width="160" Margin="4,4,4,4" ToolTip=" Detalle Operacion" ImageSource="/WpfFront;component/Images/Icons/16X16/print.png"  Content="Detalle Operacion" Click="btnImprimirDetalle_Click" />
                                                 <awc:ImageButton x:Name="btnVerFact" Width="150" VerticalAlignment="Bottom" Margin="4,4,4,4" Content="Ver Factura" Visibility="Collapsed" />
                                             </StackPanel>
                                         </StackPanel>

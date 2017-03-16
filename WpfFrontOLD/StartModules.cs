@@ -57,6 +57,10 @@ namespace WpfFront
             container.RegisterType<IListaOperacionesPresenter, ListaOperacionesPresenter>();
             container.RegisterType<IListaOperacionesModel, ListaOperacionesModel>();
 
+            container.RegisterType<IOperacionesView, OperacionesView>();
+            container.RegisterType<IOperacionesPresenter, OperacionesPresenter>();
+            container.RegisterType<IOperacionesModel, OperacionesModel>();
+
             container.RegisterType<IPlaneacionView, PlaneacionView>();
             container.RegisterType<IPlaneacionPresenter, PlaneacionPresenter>();
             container.RegisterType<IPlaneacionModel, PlaneacionModel>();

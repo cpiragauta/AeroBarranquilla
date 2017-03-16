@@ -14,7 +14,7 @@ using System.Linq;
 using System.Globalization;
 
 
-namespace WpfFront.Presenters
+namespace WpfFront.Controlador
 {
 
     public interface IOperacionesPresenter
@@ -97,16 +97,16 @@ namespace WpfFront.Presenters
             //Obtengo la conexion
             //Cargo los comboBox
             //view.Model.ListaTipoFacturacion = db.GetTipo(new Tipo { MetaType = new MType { Code = "TIPOFACTURACION" }, Active = true });
-            view.Model.ListaTipoFacturacion = db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOFACTURACION" && f.Activo == true);
-            view.Model.ListaTipoPosicion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true);
-            view.Model.ListaTipoPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true);
+            view.Model.ListaTipoFacturacion = db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOFACTURACION" && f.Activo == true).ToList();
+            view.Model.ListaTipoPosicion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true).ToList();
+            view.Model.ListaTipoPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true).ToList();
             view.Model.ListaTipoOperacion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOOPERACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaTipoVuelo =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOVUELO" && f.Activo == true);
+            view.Model.ListaTipoVuelo =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOVUELO" && f.Activo == true).ToList();
             view.Model.ListaTipoDeclaracion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPODECLARACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaBanda =db.Tipo.Where(f => f.Agrupacion.Nombre == "BANDA" && f.Activo == true);
+            view.Model.ListaBanda =db.Tipo.Where(f => f.Agrupacion.Nombre == "BANDA" && f.Activo == true).ToList();
             view.Model.ListaPosicion =db.Tipo.Where(f => f.Agrupacion.Nombre == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
             view.Model.ListaPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Nombre == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaTipoServicio =db.Tipo.Where(f => f.Agrupacion.Nombre == "ServicioBomberos" && f.Activo == true);
+            view.Model.ListaTipoServicio =db.Tipo.Where(f => f.Agrupacion.Nombre == "ServicioBomberos" && f.Activo == true).ToList();
             view.Model.ListaTipoTasas =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOTASA" && f.Activo == true && f.Codigo == "NORMAL").ToList();
             view.Model.Record = new Operacion();
             //Cargo los datos de la pestaña Liquidacion
@@ -204,7 +204,7 @@ namespace WpfFront.Presenters
                     if (Documento.Llegada.EstadoID != 0)
                     {
                         //Si la Llegada esta confirmada
-                        if (Documento.Llegada.Estado.RowID == View.Model.StatusLlegadaSalidaConfirmada.StatusID)
+                        if (Documento.Llegada.Estado.RowID == View.Model.StatusLlegadaSalidaConfirmada.RowID)
                         {
                             View.BtnConfirmarLlegada.IsEnabled = false;
                             View.BtnGuardarLlegada.IsEnabled = false;
@@ -212,7 +212,7 @@ namespace WpfFront.Presenters
                             View.PanelDatosCabecera.IsEnabled = false;
                         }
                         //Si esta guardada
-                        if (Documento.Llegada.Estado.RowID == View.Model.StatusLlegadaSalidaGuardada.StatusID)
+                        if (Documento.Llegada.Estado.RowID == View.Model.StatusLlegadaSalidaGuardada.RowID)
                         {
                             View.BtnConfirmarLlegada.IsEnabled = true;
                             View.BtnGuardarLlegada.IsEnabled = true;
@@ -251,7 +251,7 @@ namespace WpfFront.Presenters
                         if (Documento.Salida.EstadoID != 0)
                         {
                             //Si la Salida esta confirmada
-                            if (Documento.Salida.Estado.RowID == View.Model.StatusLlegadaSalidaConfirmada.StatusID)
+                            if (Documento.Salida.Estado.RowID == View.Model.StatusLlegadaSalidaConfirmada.RowID)
                             {
                                 View.BtnConfirmarSalida.IsEnabled = false;
                                 View.BtnGuardarSalida.IsEnabled = false;
@@ -260,7 +260,7 @@ namespace WpfFront.Presenters
                                 View.PanelDatosOperacionSalida3Contado.IsEnabled = false;
                             }
                             //Si esta guardada
-                            if (Documento.Salida.Estado.RowID == View.Model.StatusLlegadaSalidaGuardada.StatusID)
+                            if (Documento.Salida.Estado.RowID == View.Model.StatusLlegadaSalidaGuardada.RowID)
                             {
                                 View.BtnConfirmarSalida.IsEnabled = true;
                                 View.BtnGuardarSalida.IsEnabled = true;
@@ -281,7 +281,7 @@ namespace WpfFront.Presenters
                 if (Documento.Estado.RowID != 0)
                 {
                     //Si la Operacion esta Liquidada
-                    if (Documento.Estado.RowID == View.Model.StatusOperacionLiquidada.StatusID)
+                    if (Documento.Estado.RowID == View.Model.StatusOperacionLiquidada.RowID)
                     {
                         try
                         {
@@ -380,7 +380,7 @@ namespace WpfFront.Presenters
                 }
             }
             //View.Model.RegistroBomberosList = db.GetBomberos(new Bomberos { Operacion = View.Model.Record, Activo = true }).Where(f => f.Status.StatusType.Name == "ServicioBomberos").ToList();
-            View.Model.RegistroBomberosList = db.Bombero.Where( f=>f.OperacionID == View.Model.Record && f.Activo == true && f.Estado.Tipo.Nombre == "ServicioBomberos").ToList();
+            View.Model.RegistroBomberosList = db.Bombero.Where( f=>f.OperacionID == View.Model.Record.RowID && f.Activo == true && f.Estado.Tipo.Nombre == "ServicioBomberos").ToList();
         }
 
         public void OnGuardarServicioBomberos(object sender, EventArgs e)
@@ -419,8 +419,8 @@ namespace WpfFront.Presenters
             View.Model.RecordBomberos.Operacion = View.Model.Record;
             View.Model.RecordBomberos.Activo = true;
             View.Model.RecordBomberos.Fecha = View.fechaServicio.SelectedDate;
-            View.Model.RecordBomberos.TipoServicioBomb = (Tipo)View.ListaTipoServicio.SelectedItem;
-            View.Model.RecordBomberos.Status = View.Model.StatusBomberosNuevo;
+            View.Model.RecordBomberos.TipoServicioBombID = ((Tipo)View.ListaTipoServicio.SelectedItem).RowID;
+            View.Model.RecordBomberos.EstadoID = View.Model.StatusBomberosNuevo.RowID;
             string mensajeError = this.ObtenerValorServicio();
             if (!string.IsNullOrEmpty(mensajeError))
             {
@@ -429,8 +429,8 @@ namespace WpfFront.Presenters
             }
 
             //Asigno variables de Creacion
-            View.Model.RecordBomberos.CreatedBy = App.curUser.NombreUsuario;
-            View.Model.RecordBomberos.CreationDate = DateTime.Now;
+            View.Model.RecordBomberos.UsuarioCreacion = App.curUser.NombreUsuario;
+            View.Model.RecordBomberos.FechaCreacion = DateTime.Now;
             //Guardo el registro
             db.Bombero.Add(View.Model.RecordBomberos);
             db.SaveChanges();
@@ -438,7 +438,7 @@ namespace WpfFront.Presenters
             View.ListaTipoServicio.Focus();
             //Actualizar Lista bomberos
             //View.Model.RegistroBomberosList = db.GetBomberos(new Bomberos { Operacion = View.Model.Record, Activo = true }).Where(f => f.Status.StatusType.Name == "ServicioBomberos").ToList();
-            View.Model.RegistroBomberosList = db.Bombero.Where(f => f.OperacionID == View.Model.Record && f.Activo == true && f.Estado.Tipo.Nombre == "ServicioBomberos").ToList();
+            View.Model.RegistroBomberosList = db.Bombero.Where(f => f.OperacionID == View.Model.Record.RowID && f.Activo == true && f.Estado.Tipo.Nombre == "ServicioBomberos").ToList();
             this.CleanToCreateBomberos();
 
         }
@@ -606,11 +606,11 @@ namespace WpfFront.Presenters
         {
             if (View.SearchAeronavesCbx.AeronaveSeleccionada != null)
             {
-                View.CompañiaFactura.Terceros = View.SearchAeronavesCbx.AeronaveSeleccionada.CompañiaFactura;
-                View.CIAExplotadora.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Propietario.NombreCompleto;
-                View.ClienteBomberos.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.CompañiaFactura.NombreCompleto;
-                View.NIT.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.CompañiaFactura.IdentificacionCompleto;
-                View.TipoOperacion.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Clasificacion.Name;
+                View.CompañiaFactura.Terceros = View.SearchAeronavesCbx.AeronaveSeleccionada.Tercero;
+                View.CIAExplotadora.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Tercero1.Nombre;
+                View.ClienteBomberos.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Tercero.Nombre;
+                View.NIT.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Tercero.Identificacion.ToString();
+                View.TipoOperacion.Text = View.SearchAeronavesCbx.AeronaveSeleccionada.Tipo.Nombre;
             }
 
         }
@@ -750,16 +750,16 @@ namespace WpfFront.Presenters
             //Calculo el estado de los vuelos si estan seteadas las horas
             this.onCalcularEstado();
             //Status Confirmada Para Llegada
-            View.Model.RecordLlegada.Status = View.Model.StatusLlegadaSalidaConfirmada;
+            View.Model.RecordLlegada.EstadoID = View.Model.StatusLlegadaSalidaConfirmada.RowID;
             //Datos de creacion para la llegada
-            View.Model.RecordLlegada.ModDate = DateTime.Now;
-            View.Model.RecordLlegada.ModifiedBy = App.curUser.NombreUsuario;
+            View.Model.RecordLlegada.FechaModificacion = DateTime.Now;
+            View.Model.RecordLlegada.UsuarioModificacion = App.curUser.NombreUsuario;
             //db.UpdateLlegada(View.Model.RecordLlegada);
             db.SaveChanges();
             //Asigno Llegada a la Operacion
             View.Model.Record.Llegada = View.Model.RecordLlegada;
-            View.Model.Record.ModDate = DateTime.Now;
-            View.Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+            View.Model.Record.FechaModificacion = DateTime.Now;
+            View.Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
             //db.UpdateOperacion(View.Model.Record);
             db.SaveChanges();
             this.ConfirmarOperacion();
@@ -779,10 +779,10 @@ namespace WpfFront.Presenters
                 if (View.Model.RecordSalida.RowID != 0)
                 {
                     //Status Guardada Para Salida
-                    View.Model.RecordSalida.Status = View.Model.StatusLlegadaSalidaConfirmada;
+                    View.Model.RecordSalida.EstadoID = View.Model.StatusLlegadaSalidaConfirmada.RowID;
                     //Datos Actualizacion Salida
-                    View.Model.RecordSalida.ModDate = DateTime.Now;
-                    View.Model.RecordSalida.ModifiedBy = App.curUser.NombreUsuario;
+                    View.Model.RecordSalida.FechaModificacion = DateTime.Now;
+                    View.Model.RecordSalida.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Actualizo la Salida
                     //db.UpdateSalida(View.Model.RecordSalida);
                     db.SaveChanges();
@@ -818,12 +818,12 @@ namespace WpfFront.Presenters
                 return;
             }
             //Si la llegada y salida esta confirmada, confirmo el vuelo
-            if (View.Model.Record.Llegada.Status.Name == View.Model.StatusLlegadaSalidaConfirmada.Name && View.Model.Record.Salida.Status.Name == View.Model.StatusLlegadaSalidaConfirmada.Name)
+            if (View.Model.Record.Llegada.Estado.Nombre == View.Model.StatusLlegadaSalidaConfirmada.Nombre && View.Model.Record.Salida.Estado.Nombre == View.Model.StatusLlegadaSalidaConfirmada.Nombre)
             {
-                View.Model.Record.Status = View.Model.StatusOperacionConfirmada;
+                View.Model.Record.Estado = View.Model.StatusOperacionConfirmada;
                 //Datos de modificacion Operacion
-                View.Model.Record.ModDate = DateTime.Now;
-                View.Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+                View.Model.Record.FechaModificacion = DateTime.Now;
+                View.Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
                 //db.UpdateOperacion(View.Model.Record);
                 db.SaveChanges();
                 //IList<UserByRol> roles = App.curUser.UserRols;
@@ -841,14 +841,14 @@ namespace WpfFront.Presenters
         public void cargarDatosParaGuardarLlegada()
         {
             //Cargo los comboBox
-            View.Model.RecordLlegada.Clasificacion = ((Tipo)View.TipoOperacion.SelectedItem);
-            View.Model.RecordLlegada.TipoVuelo = ((Tipo)View.TipoVuelo.SelectedItem);
-            View.Model.RecordLlegada.TipoDeclaracion = ((Tipo)View.TipoDeclaracion.SelectedItem);
-            View.Model.RecordLlegada.Banda = ((Tipo)View.Banda.SelectedItem);
-            View.Model.RecordLlegada.TipoPosicion = ((Tipo)View.TipoPosicion.SelectedItem);
-            View.Model.RecordLlegada.Posicion = ((Tipo)View.Posicion.SelectedItem);
-            View.Model.RecordLlegada.Origen = View.Origen.Aeropuertos;
-            View.Model.RecordLlegada.CIAFactura = View.CompañiaFactura.Terceros;
+            View.Model.RecordLlegada.ClasificacionID = ((Tipo)View.TipoOperacion.SelectedItem).RowID;
+            View.Model.RecordLlegada.TipoVueloID = ((Tipo)View.TipoVuelo.SelectedItem).RowID;
+            View.Model.RecordLlegada.TipoDeclaracionID = ((Tipo)View.TipoDeclaracion.SelectedItem).RowID;
+            View.Model.RecordLlegada.BandaID = ((Tipo)View.Banda.SelectedItem).RowID;
+            View.Model.RecordLlegada.TipoPosicionID = ((Tipo)View.TipoPosicion.SelectedItem).RowID;
+            View.Model.RecordLlegada.PosicionID = ((Tipo)View.Posicion.SelectedItem).RowID;
+            View.Model.RecordLlegada.OrigenID = View.Origen.Aeropuertos.RowID;
+            View.Model.RecordLlegada.CIAFacturaID = View.CompañiaFactura.Terceros.RowID;
             View.Model.RecordLlegada.HoraProgramadaLlegada = View.HoraProgramada.Text;
             View.Model.RecordLlegada.FechaAterrizaje = View.FechaAterrizaje.SelectedDate;
             View.Model.RecordLlegada.FechaLLegadaPlataforma = View.FechaLlegadaPlataforma.SelectedDate;
@@ -858,10 +858,10 @@ namespace WpfFront.Presenters
 
         public void cargarDatosParaGuardarSalida()
         {
-            View.Model.RecordSalida.TipoVueloSalida = (Tipo)View.TipoVueloSalida.SelectedItem;
-            View.Model.RecordSalida.Destino = View.Destino.Aeropuertos;
-            View.Model.RecordSalida.TipoPosicionSalida = ((Tipo)View.TipoPosicionSalida.SelectedItem);
-            View.Model.RecordSalida.PosicionSalida = ((Tipo)View.PosicionSalida.SelectedItem);
+            View.Model.RecordSalida.TipoVueloSalidaID = ((Tipo)View.TipoVueloSalida.SelectedItem).RowID;
+            View.Model.RecordSalida.DestinoID = View.Destino.Aeropuertos.RowID;
+            View.Model.RecordSalida.TipoPosicionSalidaID = ((Tipo)View.TipoPosicionSalida.SelectedItem).RowID;
+            View.Model.RecordSalida.PosicionSalidaID = ((Tipo)View.PosicionSalida.SelectedItem).RowID;
             View.Model.RecordSalida.NVueloSalida = View.NumVueloSalida.Text;
             View.Model.RecordSalida.HoraProgramadaSalida = View.HoraProgramadaSalida.Text;
             View.Model.RecordSalida.FechaDespegue = View.FechaDespegue.SelectedDate;
@@ -1044,7 +1044,7 @@ namespace WpfFront.Presenters
             {
                 //Para calcular info de pestaña liquidacion
                 TarifaCecoa Tarifa;
-                if (View.Model.RecordSalida.FechaSalida == null || View.Model.RecordSalida.TipoVueloSalida == null)
+                if (View.Model.RecordSalida.FechaSalida == null || View.Model.RecordSalida.Tipo2 == null)
                 {
                     return;
                 }
@@ -1055,40 +1055,40 @@ namespace WpfFront.Presenters
                     //Tarifa = db.GetTarifas(new Tarifas { FechaFiltro = DateTime.Parse(View.Model.RecordSalida.FechaSalida.ToString()), TipoTarifa = new Tipo { Code = "TASAS" } }).First();
                     Tarifa = db.TarifaCecoa.FirstOrDefault(f => f.TipoTarifaID == db.Tipo.FirstOrDefault(t => t.Codigo == "TASAS").RowID && (View.Model.RecordSalida.FechaSalida.Value >= f.FechaInicial.Value && View.Model.RecordSalida.FechaSalida.Value <= f.FechaFinal.Value));
                     //Tarifa = db.TarifaCecoa.FirstOrDefault( f= > );
-                    if (View.Model.RecordSalida.TipoVueloSalida.Codigo == "NACIONAL")
+                    if (View.Model.RecordSalida.Tipo2.Codigo == "NACIONAL")
                     {
-                        View.Model.RecordTasas.TasaCOP = Tarifa.ValorCOP;
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TasaCOP = Tarifa.ValorCOP;
                     }
                     else
                     {
-                        View.Model.RecordTasas.TasaUSD = Tarifa.ValorUSD;
-                        View.Model.RecordTasas.TasaCOP = Tarifa.ValorUSD;
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TasaUSD = Tarifa.ValorUSD;
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TasaCOP = Tarifa.ValorUSD;
                     }
                 }
                 else
                 //Si no tiene una tarifa de Aerodromo le dejo 0 por defecto
                 {
                     Util.ShowError("No cuenta con una tarifa Tasas disponible");
-                    View.Model.RecordTasas.TasaCOP = 0;
-                    View.Model.RecordTasas.TasaUSD = 0;
+                    //*****ARREGLAR*********/View.Model.RecordTasas.TasaCOP = 0;
+                    //*****ARREGLAR*********/View.Model.RecordTasas.TasaUSD = 0;
                 }
                 //Sumo los exentos de todos los registros de tasas diferentes a CREDITO
                 //View.Model.RecordTasas.Exentos = db.GetTasas(new Tasas { Operacion = View.Model.Record })
                 //                                    .Where(f => f.TipoTasa.Codigo != "CREDITO")
                 //                                    .Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
 
-                View.Model.RecordTasas.Exentos = db.Tasas.Where( f=> f.Operacion == (View.Model.Record as Operacion).RowID)
-                                                   .Where(f => f.Tipo.Codigo != "CREDITO")
-                                                   .Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
+                //*****ARREGLAR*********/View.Model.RecordTasas.Exentos = db.Tasas.Where( f=> f.Operacion.RowID == (View.Model.Record as Operacion).RowID)
+                //*****ARREGLAR*********/.Where(f => f.Tipo.Codigo != "CREDITO")
+                //*****ARREGLAR*********/.Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
 
                 //Resto los CREDITO
                 //View.Model.RecordTasas.Exentos = View.Model.RecordTasas.Exentos - db.GetTasas(new Tasas { Operacion = View.Model.Record })
                 //                                    .Where(f => f.TipoTasa.Codigo == "CREDITO")
                 //                                    .Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
 
-                View.Model.RecordTasas.Exentos = View.Model.RecordTasas.Exentos - db.Tasas.Where(f => f.Operacion == (View.Model.Record as Operacion).RowID)
-                                                   .Where(f => f.Tipo.Codigo == "CREDITO")
-                                                   .Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
+                //*****ARREGLAR*********/View.Model.RecordTasas.Exentos = View.Model.RecordTasas.Exentos - db.Tasas.Where(f => f.Operacion.RowID == (View.Model.Record as Operacion).RowID)
+                //*****ARREGLAR*********/.Where(f => f.Tipo.Codigo == "CREDITO")
+                //*****ARREGLAR*********/.Sum(f => f.Transitos + f.Tripulantes + f.Infantes + f.Otros + f.Militares);
 
 
 
@@ -1096,8 +1096,8 @@ namespace WpfFront.Presenters
                 //View.Model.RecordTasas.PaganTasa = db.GetTasas(new Tasas { Operacion = View.Model.Record })
                 //                                    .Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.PaganTasa);
 
-                View.Model.RecordTasas.PaganTasa = db.Tasas.Where(f => f.Operacion == (View.Model.Record as Operacion).RowID)
-                                                   .Where(f => f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa);
+                //*****ARREGLAR*********/View.Model.RecordTasas.PaganTasa = db.Tasas.Where(f => f.Operacion.RowID == (View.Model.Record as Operacion).RowID)
+                //*****ARREGLAR*********/.Where(f => f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa);
 
 
 
@@ -1105,34 +1105,34 @@ namespace WpfFront.Presenters
                 //View.Model.RecordTasas.PaganTasa = View.Model.RecordTasas.PaganTasa - db.GetTasas(new Tasas { Operacion = View.Model.Record })
                 //                                    .Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
 
-                View.Model.RecordTasas.PaganTasa = View.Model.RecordTasas.PaganTasa - db.Tasas.Where(f => f.Operacion == (View.Model.Record as Operacion).RowID)
+                View.Model.RecordTasas.PaganTasa = View.Model.RecordTasas.PaganTasa - db.Tasas.Where(f => f.Operacion.RowID == (View.Model.Record as Operacion).RowID)
                                                    .Where(f => f.Tipo.Codigo == "CREDITO").Sum(f => f.PaganTasa);
 
-                View.Model.RecordTasas.PasajerosEmbarcados =
-                View.Model.RecordTasas.PaganTasa +
-                View.Model.RecordTasas.Exentos;
+                //*****ARREGLAR*********/View.Model.RecordTasas.PasajerosEmbarcados =
+                //*****ARREGLAR*********/View.Model.RecordTasas.PaganTasa +
+                //*****ARREGLAR*********/View.Model.RecordTasas.Exentos;
 
-                if (View.Model.RecordSalida.TipoVueloSalida.Codigo == "NACIONAL")
+                if (View.Model.RecordSalida.Tipo2.Codigo == "NACIONAL")
                 {
-                    View.Model.RecordTasas.TotalCOP =
-                    View.Model.RecordTasas.PaganTasa *
-                    View.Model.RecordTasas.TasaCOP;
+                    //*****ARREGLAR*********/View.Model.RecordTasas.TotalCOP =
+                    //*****ARREGLAR*********/View.Model.RecordTasas.PaganTasa *
+                    //*****ARREGLAR*********/View.Model.RecordTasas.TasaCOP;
                 }
                 else
                 {
                     TRM Trm;
                    // if (db.GetTRM(new TRM { FechaFiltro = View.Model.Record.Salida.FechaSalida }).Count == 1)
-                     if (db.TRM.Where(f=>  View.Model.Record.Salida.FechaSalida.Value >= f.FechaInicial.Value && View.Model.Record.Salida.FechaSalida.Value <= f.FechaFinal.Value).Count == 1)
+                     if (db.TRM.Where(f=>  View.Model.Record.Salida.FechaSalida.Value >= f.FechaInicial.Value && View.Model.Record.Salida.FechaSalida.Value <= f.FechaFinal.Value).Count() == 1)
                     {
                         //Asigno la TRM vigente
                         //Trm = db.GetTRM(new TRM { FechaFiltro = View.Model.Record.Salida.FechaSalida }).First();
-                        Trm = db.TRM.Where(f=> View.Model.Record.Salida.FechaSalida >= f.FechaInicial.Value  && View.Model.Record.Salida.FechaSalida <= f.FechaFinal.Value);
+                        Trm = db.TRM.FirstOrDefault(f=> View.Model.Record.Salida.FechaSalida >= f.FechaInicial.Value  && View.Model.Record.Salida.FechaSalida <= f.FechaFinal.Value);
 
-                        View.Model.RecordTasas.TotalUSD =
-                        View.Model.RecordTasas.PaganTasa * Trm.Valor *
-                        View.Model.RecordTasas.TasaUSD;
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TotalUSD =
+                        //*****ARREGLAR*********/View.Model.RecordTasas.PaganTasa * Trm.Valor *
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TasaUSD;
                         //Para que se vea en pantalla
-                        View.Model.RecordTasas.TotalCOP = View.Model.RecordTasas.TotalUSD;
+                        //*****ARREGLAR*********/View.Model.RecordTasas.TotalCOP = View.Model.RecordTasas.TotalUSD;
 
                     }
                     else
@@ -1156,7 +1156,7 @@ namespace WpfFront.Presenters
             if (View.Model.Record.Aeronave != null)
             {
                 //Suma de pasajeros totales sin infantes
-                int suma = View.Model.RecordTasas.PaganTasa + View.Model.RecordTasas.Tripulantes + View.Model.RecordTasas.Militares + View.Model.RecordTasas.Transitos + View.Model.RecordTasas.Otros;
+                int suma = View.Model.RecordTasas.PaganTasa.Value + View.Model.RecordTasas.Tripulantes.Value + View.Model.RecordTasas.Militares.Value + View.Model.RecordTasas.Transitos.Value + View.Model.RecordTasas.Otros.Value;
                 //Aeronave aeronaveActualizada = db.GetAeronaves(new Aeronaves { RowID = View.Model.Record.Aeronave.RowID }).First();
                 Aeronave aeronaveActualizada = db.Aeronave.FirstOrDefault( f=> f.RowID == View.Model.Record.Aeronave.RowID);
                 if (suma > aeronaveActualizada.CapacidadPasajeros)
@@ -1170,14 +1170,14 @@ namespace WpfFront.Presenters
             {
 
                 //Asigno las variables de modificacion
-                View.Model.RecordTasas.ModifiedBy = App.curUser.NombreUsuario;
-                View.Model.RecordTasas.ModDate = DateTime.Now;
-                View.Model.RecordTasas.Status = View.Model.StatusTasasNueva;
+                View.Model.RecordTasas.UsuarioModificacion = App.curUser.NombreUsuario;
+                View.Model.RecordTasas.FechaModificacion = DateTime.Now;
+                View.Model.RecordTasas.Estado = View.Model.StatusTasasNueva;
                 //Actualizo
                 //db.UpdateTasas(View.Model.RecordTasas);
                 db.SaveChanges();
                 //View.Model.RegistroTasasList = db.GetTasas(new Tasas { Operacion = View.Model.Record });
-                View.Model.RegistroTasasList = db.Tasas.Where(f=> f.OperacionID == ((Operacion)View.Model.Record).RowID);
+                View.Model.RegistroTasasList = db.Tasas.Where(f=> f.OperacionID == ((Operacion)View.Model.Record).RowID).ToList();
                 Util.ShowMessage("Datos Tasas Actualizados");
             }
             //Si es crear
@@ -1185,12 +1185,12 @@ namespace WpfFront.Presenters
             {
                 //Le asigno tipo
                 //View.Model.RecordTasas.TipoTasa = db.GetTipo(new Tipo { Code = "NORMAL" }).First();
-                View.Model.RecordTasas.TipoTasa = db.Tipo.FirstOrDefault(f => f.Codigo == "NORMAL");
+                View.Model.RecordTasas.Tipo = db.Tipo.FirstOrDefault(f => f.Codigo == "NORMAL");
                 View.Model.RecordTasas.Fecha = DateTime.Now;
                 //Asigno variables de Creacion
-                View.Model.RecordTasas.CreatedBy = App.curUser.NombreUsuario;
-                View.Model.RecordTasas.CreationDate = DateTime.Now;
-                View.Model.RecordTasas.Status = View.Model.StatusTasasNueva;
+                View.Model.RecordTasas.UsuarioCreacion = App.curUser.NombreUsuario;
+                View.Model.RecordTasas.FechaCreacion = DateTime.Now;
+                View.Model.RecordTasas.Estado = View.Model.StatusTasasNueva;
                 //Guardar
                 //View.Model.RecordTasas = db.SaveTasas(View.Model.RecordTasas);
                 db.Tasas.Add(View.Model.RecordTasas);
@@ -1225,18 +1225,18 @@ namespace WpfFront.Presenters
             if (View.Model.RecordServiciosAgrupadosList.Count >= 1)
             {
                 View.Model.RecordServiciosAgrupadosList = View.Model.RecordServiciosAgrupadosList
-                                .GroupBy(l => l.Factura.RowID)
+                                .GroupBy(l => l.Facturas.RowID)
                                 .SelectMany(cl => cl.Select(
                                     csLine => new Servicios
                                     {
-                                        RowID = cl.First().Factura.RowID,
-                                        Facturas = cl.First().Factura,
+                                        RowID = cl.First().Facturas.RowID,
+                                        Facturas = cl.First().Facturas,
                                         Operacion = cl.First().Operacion,
                                         Cantidad = cl.Count(),
                                         Fecha = cl.First().Fecha,
                                         Valor = cl.Sum(c => c.Valor),
-                                        UsuarioCreacion = cl.First().Factura.CreatedBy,
-                                        Estado = cl.First().Factura.Status,
+                                        UsuarioCreacion = cl.First().Facturas.UsuarioCreacion,
+                                        Estado = cl.First().Facturas.Estado,
                                     })).Distinct().ToList();
                 //Elimino los repetidos
                 View.Model.RecordServiciosAgrupadosList = View.Model.RecordServiciosAgrupadosList.GroupBy(a => a.RowID).Select(grp => grp.First()).ToList();
@@ -1264,10 +1264,10 @@ namespace WpfFront.Presenters
 
             // Verifico si existe una tarifa AERODROMO para la fecha de operacion del vuelo
             //if (db.GetTarifas(new Tarifas { FechaFiltro = View.Model.Record.FechaOP, TipoTarifa = new Tipo { Code = "AERODROMO" } }).Count == 1)
-            if (db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" && (View.Model.Record.FechaOP.Value >= f.FechaInicial.Value && View.Model.Record.FechaOP.Value <= f.FechaFinal.Value)).Count == 1)
+            if (db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" && (View.Model.Record.FechaOP >= f.FechaInicial.Value && View.Model.Record.FechaOP <= f.FechaFinal.Value)).Count() == 1)
             {
                 // Tarifa = db.GetTarifas(new Tarifas { FechaFiltro = View.Model.Record.FechaOP, TipoTarifa = new Tipo { Code = "AERODROMO" } }).First();
-                Tarifa = db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" && (View.Model.Record.FechaOP.Value >= f.FechaInicial.Value && View.Model.Record.FechaOP.Value <= f.FechaFinal.Value)).First();
+                Tarifa = db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" && (View.Model.Record.FechaOP >= f.FechaInicial.Value && View.Model.Record.FechaOP <= f.FechaFinal.Value)).First();
             }
             else
             {
@@ -1276,12 +1276,12 @@ namespace WpfFront.Presenters
             }
             //Si es Hangar, Hangar. no cobra parqueo
             //Tipo4 TipoPosicionLlegada
-            if (View.Model.RecordLlegada.TipoPosicion.Codigo == "HANGAR" && primerAdicional.Tipo4.Codigo == "HANGAR")
+            if (View.Model.RecordLlegada.Tipo4.Codigo == "HANGAR" && primerAdicional.Tipo4.Codigo == "HANGAR")
             {
                 this.cobraParqueo = false;
             }
             //Si llega en hangar no le cobro parqueo
-            else if (View.Model.RecordLlegada.TipoPosicion.Codigo == "HANGAR")
+            else if (View.Model.RecordLlegada.Tipo4.Codigo == "HANGAR")
             {
                 this.cobraParqueo = false;
             }
@@ -1290,9 +1290,9 @@ namespace WpfFront.Presenters
             Aeronave aeronaveActualizada = db.Aeronave.FirstOrDefault(f => f.RowID == View.Model.Record.Aeronave.RowID);
 
             //Verifico si el vuelo es nacional
-            if (View.Model.RecordLlegada.TipoVuelo != null)
+            if (View.Model.RecordLlegada.Tipo5 != null)
             {
-                if (View.Model.RecordLlegada.TipoVuelo.Codigo == "NACIONAL")
+                if (View.Model.RecordLlegada.Tipo5.Codigo == "NACIONAL")
                 {
                     if (aeronaveActualizada.FechaVencimientoMatricula < View.Model.Record.FechaOP && aeronaveActualizada.PermisoExplotacion == true)
                     {
@@ -1313,9 +1313,9 @@ namespace WpfFront.Presenters
                         View.RecargoNocturno.Text = (Decimal.Round(valorRecargoNoc)).ToString("N0");
                         String posLlegada = "", posSalida = "";
                         //Valido si selecciono puente en la llegada y salida
-                        if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                        if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                         {
-                            posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                            posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                         }
                         if (primerAdicional.Tipo4.Codigo == "PUENTE")
                         {
@@ -1323,7 +1323,7 @@ namespace WpfFront.Presenters
                         }
                         //Envio TRM porque es InterNacional
                         //Calculo el valor de los puentes
-                        Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.TipoPosicion.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
+                        Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.Tipo4.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
                         View.NumPuentes.Text = ValorPuentes[0] + "";
                         View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
 
@@ -1343,9 +1343,9 @@ namespace WpfFront.Presenters
 
                         String posLlegada = "", posSalida = "";
                         //Valido si selecciono puente en la llegada y salida
-                        if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                        if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                         {
-                            posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                            posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                         }
                         if (primerAdicional.Tipo4.Codigo == "PUENTE")
                         {
@@ -1353,7 +1353,7 @@ namespace WpfFront.Presenters
                         }
                         //Envio Null porque es Nacional
                         //Calculo el valor de los puentes
-                        Decimal[] ValorPuentes = this.calcularPuentes(null, View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.TipoPosicion.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
+                        Decimal[] ValorPuentes = this.calcularPuentes(null, View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.Tipo4.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
                         View.NumPuentes.Text = ValorPuentes[0] + "";
                         View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
                         //Envio Null porque es Nacional
@@ -1361,7 +1361,7 @@ namespace WpfFront.Presenters
                     }
                 }
                 //Verifico si el vuelo es internacional
-                else if (View.Model.RecordLlegada.TipoVuelo.Codigo == "INTERNACIONAL")
+                else if (View.Model.RecordLlegada.Tipo5.Codigo == "INTERNACIONAL")
                 {
                     //Si le envio TRM significa que es internacional
                     //this.calcularTarifasAerodromo(new TRM(), aeronaveActualizada.PBMOKG, Tarifa.ValorUSD, Tarifa.RecargoNocturnoUSD);
@@ -1370,22 +1370,22 @@ namespace WpfFront.Presenters
                     decimal ValorAerodromo = calcularTarifasAerodromo(new TRM(), aeronaveActualizada.PBMOKG.Value, Tarifa.ValorUSD.Value);
                     View.TotalAerodromo.Text = (Decimal.Round(ValorAerodromo)).ToString("N0");
                     //Calculo el recargo Nocturno
-                    Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
+                    Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD.Value, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
                     View.RecargoNocturno.Text = (Decimal.Round(valorRecargoNoc)).ToString("N0");
                     /////////////////////
                     String posLlegada = "", posSalida = "";
                     //Valido si selecciono puente en la llegada y salida
-                    if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                    if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                     {
-                        posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                        posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                     }
-                    if (View.Model.Record.Salida.TipoPosicionSalida.Codigo == "PUENTE")
+                    if (View.Model.Record.Salida.Tipo1.Codigo == "PUENTE")
                     {
-                        posSalida = View.Model.Record.Salida.PosicionSalida.Codigo;
+                        posSalida = View.Model.Record.Salida.Tipo.Codigo;
                     }
                     //Envio TRM porque es INTERNacional
                     //Calculo el valor de los puentes
-                    Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.TipoPosicion.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
+                    Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, primerAdicional.FechaInicial, View.Model.Record.Llegada.Tipo4.Codigo, primerAdicional.Tipo4.Codigo, posLlegada, posSalida);
                     View.NumPuentes.Text = ValorPuentes[0] + "";
                     View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
                     ///////////////////////////
@@ -1409,8 +1409,8 @@ namespace WpfFront.Presenters
             {
                 if (View.Model.RecordSalida.FechaSalidaPlataforma == null ||
                     View.Model.RecordLlegada.FechaLLegadaPlataforma == null ||
-                    View.Model.RecordLlegada.HoraPlataforma == "__:__" ||
-                    View.Model.RecordSalida.HoraSalidaPlataforma == "__:__")
+                    View.Model.RecordLlegada.HoraPlataforma.Contains("_") ||
+                    View.Model.RecordSalida.HoraSalidaPlataforma.Contains("_"))
                 {
                     Util.ShowError("No hay datos suficientes para calcular parqueo.");
                     View.ValorParqueo.Text = 0 + "";
@@ -1431,7 +1431,7 @@ namespace WpfFront.Presenters
 
             // Verifico si existe una tarifa AERODROMO para la fecha de operacion del vuelo
             //if (db.GetTarifas(new Tarifas { FechaFiltro = View.Model.Record.FechaOP, TipoTarifa = new Tipo { Code = "AERODROMO" } }).Count == 1)
-            if (db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" &&  (View.Model.Record.FechaOP >= f.FechaInicial.Value && View.Model.Record.FechaOP <= f.FechaFinal.Value)).Count == 1)
+            if (db.TarifaCecoa.Where(f=> f.Tipo1.Codigo == "AERODROMO" &&  (View.Model.Record.FechaOP >= f.FechaInicial.Value && View.Model.Record.FechaOP <= f.FechaFinal.Value)).Count() == 1)
             {
                 //Tarifa = db.GetTarifas(new Tarifas { FechaFiltro = View.Model.Record.FechaOP, TipoTarifa = new Tipo { Code = "AERODROMO" } }).First();
                 Tarifa = db.TarifaCecoa.FirstOrDefault(f => f.Tipo1.Codigo == "AERODROMO" && (View.Model.Record.FechaOP >= f.FechaInicial.Value && View.Model.Record.FechaOP <= f.FechaFinal.Value));
@@ -1442,12 +1442,12 @@ namespace WpfFront.Presenters
                 return;
             }
             //Si es Hangar, Hangar. no cobra parqueo
-            if (View.Model.RecordLlegada.TipoPosicion.Codigo == "HANGAR" && View.Model.RecordSalida.TipoPosicionSalida.Codigo == "HANGAR")
+            if (View.Model.RecordLlegada.Tipo4.Codigo == "HANGAR" && View.Model.RecordSalida.Tipo1.Codigo == "HANGAR")
             {
                 this.cobraParqueo = false;
             }
             //Si llega en hangar no le cobro parqueo
-            else if (View.Model.RecordLlegada.TipoPosicion.Codigo == "HANGAR")
+            else if (View.Model.RecordLlegada.Tipo4.Codigo == "HANGAR")
             {
                 this.cobraParqueo = false;
             }
@@ -1456,7 +1456,7 @@ namespace WpfFront.Presenters
             Aeronave aeronaveActualizada = db.Aeronave.FirstOrDefault(f => f.RowID == View.Model.Record.Aeronave.RowID);
 
             //Verifico si el vuelo es nacional
-            if (View.Model.RecordLlegada.TipoVuelo != null && View.Model.RecordLlegada.TipoVuelo.Codigo == "NACIONAL")
+            if (View.Model.RecordLlegada.Tipo5 != null && View.Model.RecordLlegada.Tipo5.Codigo == "NACIONAL")
             {
                 if (aeronaveActualizada.FechaVencimientoMatricula < View.Model.Record.FechaOP && aeronaveActualizada.PermisoExplotacion == true)
                 {
@@ -1475,22 +1475,22 @@ namespace WpfFront.Presenters
                     decimal ValorAerodromo = calcularTarifasAerodromo(new TRM(), aeronaveActualizada.PBMOKG.Value, Tarifa.ValorUSD.Value);
                     View.TotalAerodromo.Text = (Decimal.Round(ValorAerodromo)).ToString("N0");
                     //Calculo el recargo Nocturno
-                    Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
+                    Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD.Value, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
                     View.RecargoNocturno.Text = (Decimal.Round(valorRecargoNoc)).ToString("N0");
                     /////////////////////
                     String posLlegada = "", posSalida = "";
                     //Valido si selecciono puente en la llegada y salida
-                    if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                    if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                     {
-                        posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                        posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                     }
-                    if (View.Model.Record.Salida.TipoPosicionSalida.Codigo == "PUENTE")
+                    if (View.Model.Record.Salida.Tipo1.Codigo == "PUENTE")
                     {
-                        posSalida = View.Model.Record.Salida.PosicionSalida.Codigo;
+                        posSalida = View.Model.Record.Salida.Tipo.Codigo;
                     }
                     //Envio TRM porque es INTERNacional
                     //Calculo el valor de los puentes
-                    Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.TipoPosicion.Codigo, View.Model.Record.Salida.TipoPosicionSalida.Codigo, posLlegada, posSalida);
+                    Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.Tipo4.Codigo, View.Model.Record.Salida.Tipo1.Codigo, posLlegada, posSalida);
                     View.NumPuentes.Text = ValorPuentes[0] + "";
                     View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
                     ///////////////////////////
@@ -1509,17 +1509,17 @@ namespace WpfFront.Presenters
                     /////////////////////
                     String posLlegada = "", posSalida = "";
                     //Valido si selecciono puente en la llegada y salida
-                    if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                    if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                     {
-                        posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                        posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                     }
-                    if (View.Model.Record.Salida.TipoPosicionSalida.Codigo == "PUENTE")
+                    if (View.Model.Record.Salida.Tipo1.Codigo == "PUENTE")
                     {
-                        posSalida = View.Model.Record.Salida.PosicionSalida.Codigo;
+                        posSalida = View.Model.Record.Salida.Tipo.Codigo;
                     }
                     //Envio Null porque es Nacional
                     //Calculo el valor de los puentes
-                    Decimal[] ValorPuentes = this.calcularPuentes(null, View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.TipoPosicion.Codigo, View.Model.Record.Salida.TipoPosicionSalida.Codigo, posLlegada, posSalida);
+                    Decimal[] ValorPuentes = this.calcularPuentes(null, View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.Tipo4.Codigo, View.Model.Record.Salida.Tipo1.Codigo, posLlegada, posSalida);
                     View.NumPuentes.Text = ValorPuentes[0] + "";
                     View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
                     ///////////////////////////
@@ -1528,7 +1528,7 @@ namespace WpfFront.Presenters
                 }
             }
             //Verifico si el vuelo es internacional
-            else if (View.Model.RecordLlegada.TipoVuelo != null && View.Model.RecordLlegada.TipoVuelo.Codigo == "INTERNACIONAL")
+            else if (View.Model.RecordLlegada.Tipo5 != null && View.Model.RecordLlegada.Tipo5.Codigo == "INTERNACIONAL")
             {
                 //Si le envio TRM significa que es internacional
                 //this.calcularTarifasAerodromo(new TRM(), aeronaveActualizada.PBMOKG, Tarifa.ValorUSD, Tarifa.RecargoNocturnoUSD);
@@ -1536,22 +1536,22 @@ namespace WpfFront.Presenters
                 decimal ValorAerodromo = calcularTarifasAerodromo(new TRM(), aeronaveActualizada.PBMOKG.Value, Tarifa.ValorUSD.Value);
                 View.TotalAerodromo.Text = (Decimal.Round(ValorAerodromo)).ToString("N0");
                 //Calculo el recargo Nocturno
-                Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
+                Decimal valorRecargoNoc = CalcularRecargoNocturno(Tarifa.RecargoNocturnoUSD.Value, ValorAerodromo, View.Model.RecordLlegada.HoraAterrizaje, View.Model.RecordSalida.HoraDespegue);
                 View.RecargoNocturno.Text = (Decimal.Round(valorRecargoNoc)).ToString("N0");
                 /////////////////////
                 String posLlegada = "", posSalida = "";
                 //Valido si selecciono puente en la llegada y salida
-                if (View.Model.Record.Llegada.TipoPosicion.Codigo == "PUENTE")
+                if (View.Model.Record.Llegada.Tipo4.Codigo == "PUENTE")
                 {
-                    posLlegada = View.Model.Record.Llegada.Posicion.Codigo;
+                    posLlegada = View.Model.Record.Llegada.Tipo2.Codigo;
                 }
-                if (View.Model.Record.Salida.TipoPosicionSalida.Codigo == "PUENTE")
+                if (View.Model.Record.Salida.Tipo1.Codigo == "PUENTE")
                 {
-                    posSalida = View.Model.Record.Salida.PosicionSalida.Codigo;
+                    posSalida = View.Model.Record.Salida.Tipo.Codigo;
                 }
                 //Envio TRM porque es INTERNacional
                 //Calculo el valor de los puentes
-                Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.TipoPosicion.Codigo, View.Model.Record.Salida.TipoPosicionSalida.Codigo, posLlegada, posSalida);
+                Decimal[] ValorPuentes = this.calcularPuentes(new TRM(), View.Model.Record.Salida.FechaSalida, View.Model.Record.Llegada.FechaLlegadaPuente, View.Model.Record.Salida.FechaSalidaPuente, View.Model.Record.Llegada.Tipo4.Codigo, View.Model.Record.Salida.Tipo1.Codigo, posLlegada, posSalida);
                 View.NumPuentes.Text = ValorPuentes[0] + "";
                 View.TotalPuente.Text = (ValorPuentes[1]).ToString("N0");
                 ///////////////////////////
@@ -1577,36 +1577,36 @@ namespace WpfFront.Presenters
                 if (!string.IsNullOrEmpty(View.TotalAerodromo.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalAerodromo.Text)).ToString("N0");
-                    View.ValorAerodromoUSD.Text = (Double.Parse(View.TotalAerodromo.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorAerodromoUSD.Text = (Double.Parse(View.TotalAerodromo.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.RecargoNocturno.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalFacturacionContado.Text) + Double.Parse(View.RecargoNocturno.Text)).ToString("N0");
-                    View.ValorRecargoUSD.Text = (Double.Parse(View.RecargoNocturno.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorRecargoUSD.Text = (Double.Parse(View.RecargoNocturno.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.TotalPuente.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalFacturacionContado.Text) + Double.Parse(View.TotalPuente.Text)).ToString("N0");
-                    View.ValorPuentesUSD.Text = (Double.Parse(View.TotalPuente.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorPuentesUSD.Text = (Double.Parse(View.TotalPuente.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.ValorServBomberos.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalFacturacionContado.Text) + Double.Parse(View.ValorServBomberos.Text)).ToString("N0");
-                    View.ValorBomberosUSD.Text = (Double.Parse(View.ValorServBomberos.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorBomberosUSD.Text = (Double.Parse(View.ValorServBomberos.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.ValorTasas.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalFacturacionContado.Text) + Double.Parse(View.ValorTasas.Text)).ToString("N0");
-                    View.ValorTasasUSD.Text = (Double.Parse(View.ValorTasas.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorTasasUSD.Text = (Double.Parse(View.ValorTasas.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.ValorParqueo.Text))
                 {
                     View.TotalFacturacionContado.Text = (Double.Parse(View.TotalFacturacionContado.Text) + Double.Parse(View.ValorParqueo.Text)).ToString("N0");
-                    View.ValorParqueoUSD.Text = (Double.Parse(View.ValorParqueo.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorParqueoUSD.Text = (Double.Parse(View.ValorParqueo.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
                 if (!string.IsNullOrEmpty(View.TotalFacturacionContado.Text))
                 {
-                    View.ValorTotalUSD.Text = (Double.Parse(View.TotalFacturacionContado.Text) / trmConvertir.Valor).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
+                    View.ValorTotalUSD.Text = (Double.Parse(View.TotalFacturacionContado.Text) / trmConvertir.Valor).Value.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " USD";
                 }
             }
             catch (Exception excp) { }
@@ -1623,7 +1623,7 @@ namespace WpfFront.Presenters
                 {
                     //Verifico si hay una TRM vigente para la operacion
                    // if (db.GetTRM(new TRM { FechaFiltro = View.Model.Record.Salida.FechaSalida }).Count == 1)
-                    if (db.TRM.Where(f=> (View.Model.Record.Salida.FechaSalida.Value >= f.FechaInicial.Value && View.Model.Record.Salida.FechaSalida.Value <= f.FechaFinal.Value)).Count == 1)
+                    if (db.TRM.Where(f=> (View.Model.Record.Salida.FechaSalida.Value >= f.FechaInicial.Value && View.Model.Record.Salida.FechaSalida.Value <= f.FechaFinal.Value)).Count() == 1)
                     {
                         //Asigno la TRM vigente
                         //Trm = db.GetTRM(new TRM { FechaFiltro = View.Model.Record.Salida.FechaSalida }).First();
@@ -1754,8 +1754,8 @@ namespace WpfFront.Presenters
         //    {
         //        if (
         //            View.Model.RecordSalida.FechaSalidaPuente == null ||
-        //            View.Model.RecordLlegada.TipoPosicion == null ||
-        //            View.Model.RecordSalida.TipoPosicionSalida == null ||
+        //            View.Model.RecordLlegada.Tipo4 == null ||
+        //            View.Model.RecordSalida.Tipo1 == null ||
         //            View.Model.RecordLlegada.FechaLlegadaPuente == null
         //            )
         //        {
@@ -1782,8 +1782,8 @@ namespace WpfFront.Presenters
         //            bool llegoEnPuente, SalioEnPuente;
 
         //            //Valido si Llego en puente
-        //            llegoEnPuente = View.Model.RecordLlegada.TipoPosicion.Codigo == "PUENTE" ? true : false;
-        //            SalioEnPuente = View.Model.RecordSalida.TipoPosicionSalida.Codigo == "PUENTE" ? true : false;
+        //            llegoEnPuente = View.Model.RecordLlegada.Tipo4.Codigo == "PUENTE" ? true : false;
+        //            SalioEnPuente = View.Model.RecordSalida.Tipo1.Codigo == "PUENTE" ? true : false;
 
         //            // Llego y salio por puente, los tipos son iguales.
         //            if ((llegoEnPuente && SalioEnPuente))
@@ -2022,17 +2022,17 @@ namespace WpfFront.Presenters
             //Buscar tarifa aerodromo que coincida con  la fecha Salida y que sea de tipo TASAS
             int paganTasa = 0;
             //Sumo todos los registros de pagan tasa, que son diferentes a CREDITO
-            paganTasa = db.Tasas.Where(f => f.OperacionID == View.Model.Record.rowid && f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa);
+            paganTasa = db.Tasas.Where(f => f.OperacionID == View.Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa).Value;
             //Resto los CREDITO
-            paganTasa = View.Model.RecordTasas.PaganTasa - db.Tasas
-                                                .Where(f => f.OperacionID == View.Model.Record.RowID && f.Tipo.Codigo == "CREDITO" ).Sum(f => f.PaganTasa);
+            paganTasa = View.Model.RecordTasas.PaganTasa.Value - db.Tasas
+                                                .Where(f => f.OperacionID == View.Model.Record.RowID && f.Tipo.Codigo == "CREDITO" ).Sum(f => f.PaganTasa).Value;
 
             //if (db.GetTarifas(new Tarifas { FechaFiltro = View.Model.RecordSalida.FechaSalida, TipoTarifa = new Tipo { Code = "TASAS" } }).Count() != 0)
             if (TraerTarifa(View.Model.RecordSalida.FechaSalida.Value, "TASAS").Count() != 0)
             {
                 //Tarifa = db.GetTarifas(new Tarifas { FechaFiltro = DateTime.Parse(View.Model.RecordSalida.FechaSalida.ToString()), TipoTarifa = new Tipo { Code = "TASAS" } }).First();
                 Tarifa = TraerTarifa(View.Model.RecordSalida.FechaSalida.Value, "TASAS").First();
-                if (View.Model.RecordSalida.TipoVueloSalida.Codigo == "NACIONAL")
+                if (View.Model.RecordSalida.Tipo2.Codigo == "NACIONAL")
                 {
                     View.ValorTasas.Text = (paganTasa * Tarifa.ValorCOP.Value).ToString("N0");
                     View.CantTasas.Text = paganTasa + "";
@@ -2207,11 +2207,11 @@ namespace WpfFront.Presenters
                                         break;
                                     case "ASISTENCIA":
                                         View.CantServBomberos.Text = (Int32.Parse(View.CantServBomberos.Text) + servicioDet.Cantidad) + "";
-                                        View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).ToString("N0");
+                                        View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).Value.ToString("N0");
                                         break;
                                     case "LIMPIEZA":
                                         View.CantServBomberos.Text = Int32.Parse(View.CantServBomberos.Text) + servicioDet.Cantidad + "";
-                                        View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).ToString("N0");
+                                        View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).Value.ToString("N0");
                                         break;
                                 }
 
@@ -2244,13 +2244,13 @@ namespace WpfFront.Presenters
                                 View.CantServBomberos.Text = String.IsNullOrEmpty(View.CantServBomberos.Text) ? "0" : View.CantServBomberos.Text;
                                 View.ValorServBomberos.Text = String.IsNullOrEmpty(View.ValorServBomberos.Text) ? "0" : View.ValorServBomberos.Text;
                                 View.CantServBomberos.Text = (Int32.Parse(View.CantServBomberos.Text) + servicioDet.Cantidad) + "";
-                                View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).ToString("N0");
+                                View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).Value.ToString("N0");
                                 break;
                             case "LIMPIEZA":
                                 View.CantServBomberos.Text = String.IsNullOrEmpty(View.CantServBomberos.Text) ? "0" : View.CantServBomberos.Text;
                                 View.ValorServBomberos.Text = String.IsNullOrEmpty(View.ValorServBomberos.Text) ? "0" : View.ValorServBomberos.Text;
                                 View.CantServBomberos.Text = Int32.Parse(View.CantServBomberos.Text) + servicioDet.Cantidad + "";
-                                View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).ToString("N0");
+                                View.ValorServBomberos.Text = (Double.Parse(View.ValorServBomberos.Text) + servicioDet.Valor).Value.ToString("N0");
                                 break;
                         }
                     }

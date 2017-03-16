@@ -34,6 +34,11 @@ namespace WpfFront.Modelo
         IList<Tasas> RegistroTasasAdicionalesList { get; set; }
         IList<Tipo> ListaTipoTasas { get; set; }
         IList<Servicios> RecordServiciosAgrupadosList { get; }
+
+        AdicionalesPyP RecordAdicionalesPyP { get; set; }
+        IList<AdicionalesPyP> RegistroAdicionalesPyPList { get; set; }
+
+
         #region Status
         Estado StatusFacturaEnviarERP { get; }
         Estado StatusServiciosParaFacturar { get; }
@@ -407,6 +412,31 @@ namespace WpfFront.Modelo
         }
 
 
+
+        #endregion
+
+        #region AdicionalesPyP
+        private AdicionalesPyP recordAdicionalesPyP;
+        public AdicionalesPyP RecordAdicionalesPyP
+        {
+            get { return recordAdicionalesPyP; }
+            set
+            {
+                recordAdicionalesPyP = value;
+                OnPropertyChanged("recordAdicionalesPyP");
+            }
+        }
+
+        private IList<AdicionalesPyP> registroAdicionalesPyPList;
+        public IList<AdicionalesPyP> RegistroAdicionalesPyPList
+        {
+            get { return registroAdicionalesPyPList; }
+            set
+            {
+                registroAdicionalesPyPList = value;
+                OnPropertyChanged("RegistroAdicionalesPyPList");
+            }
+        }
 
         #endregion
 

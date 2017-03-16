@@ -137,7 +137,7 @@ namespace WpfFront.Controlador
             {
                 //Variables Auxiliares
                 TabItem NewTabItemPedido;
-                //*IOperacionesPresenter ServicioPresenter;
+                IOperacionesPresenter ServicioPresenter;
                 String nombreTab = "Registro de vuelo # ";
                 if (RegistroVuelos.Llegada != null)
                 { //Para que le muestre en el tab el Nro de Matricula
@@ -162,20 +162,20 @@ namespace WpfFront.Controlador
                     };
 
                     //Creo los datos para el UserControl que me controla los TakeOff
-                    //*ServicioPresenter = container.Resolve<OperacionesPresenter>();
+                    ServicioPresenter = container.Resolve<OperacionesPresenter>();
 
                     //Inicializo los datos del documento a cargar
-                    //*ServicioPresenter.CargarDocumento(RegistroVuelos, this);
+                    ServicioPresenter.CargarDocumento(RegistroVuelos, this);
 
                     //Adiciono al Tab el StackPanel del TakeOff
-                    //*NewTabItemPedido.Content = ServicioPresenter.View;
+                    NewTabItemPedido.Content = ServicioPresenter.View;
 
                     //Adiciono el nuevo Tab a la vista
                     View.TabPadre.Items.Add(NewTabItemPedido);
 
                     //Selecciono por defecto el nuevo Tab
                     NewTabItemPedido.Focus();
-                    //*ServicioPresenter.View.TipoFactura.Focus();
+                    ServicioPresenter.View.TipoFactura.Focus();
                 }
                 catch (Exception Ex)
                 {

@@ -717,7 +717,6 @@
     <Resource Include="Images\Icons\Confirm.png" />
     <Resource Include="Images\Icons\Cross.png" />
     <Resource Include="Images\Icons\Exit16.png" />
-    <Resource Include="Images\Icons\logo16x16.png" />
     <Resource Include="Images\integration.png" />
     <Resource Include="Images\invoice.jpg" />
     <Resource Include="Images\label.jpg" />
@@ -953,6 +952,9 @@
     <Resource Include="Images\Icons\48x48\Aerodromo.png" />
     <Resource Include="Images\Icons\48x48\Reloj.png" />
     <Resource Include="Images\Icons\48x48\Tasa.png" />
+    <Resource Include="Images\Icons\logo16x16.ico" />
+    <Resource Include="Images\Icons\16X16\Check.png" />
+    <Resource Include="Images\Icons\16X16\print.png" />
     <Content Include="Model\DAO.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DAO.edmx</DependentUpon>

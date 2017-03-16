@@ -1207,25 +1207,29 @@ namespace WpfFront.Vista
             //Cargo las posiciones, dependiendo del tipo de posicion que seleccione
             if (((Tipo)TipoPosicion.SelectedItem).Codigo == "PUENTE")
             {
-                Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicion = db.Tipo.Where(f=> f.Agrupacion.Codigo == "POSICIONPUENTE").OrderBy(f => f.Orden).ToList();
             }
             else if (((Tipo)TipoPosicion.SelectedItem).Codigo == "REMOTA")
             {
-                Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicion = db.Tipo.Where(f => f.Agrupacion.Codigo == "POSICION").OrderBy(f => f.Orden).ToList();
                 MaskedHoraPuente.IsEnabled = false;
                 DTP_FechaLlegadaPuente.IsEnabled = false;
                 MaskedHoraPuente.Text = texto;
             }
             else if (((Tipo)TipoPosicion.SelectedItem).Codigo == "CARGA")
             {
-                Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.Orden).ToList();
+                Model.ListaPosicion = db.Tipo.Where(f => f.Agrupacion.Codigo == "POSICIONCARGA").OrderBy(f => f.Orden).ToList();
                 MaskedHoraPuente.IsEnabled = false;
                 DTP_FechaLlegadaPuente.IsEnabled = false;
                 MaskedHoraPuente.Text = texto;
             }
             else if (((Tipo)TipoPosicion.SelectedItem).Codigo == "HELIRAMPA")
             {
-                Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicion = service.GetTipo(new Tipo { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.Orden).ToList();
+                Model.ListaPosicion = db.Tipo.Where(f => f.Agrupacion.Codigo == "POSICIONHR").OrderBy(f => f.Orden).ToList();
                 MaskedHoraPuente.IsEnabled = false;
                 DTP_FechaLlegadaPuente.IsEnabled = false;
                 MaskedHoraPuente.Text = texto;
@@ -1250,20 +1254,24 @@ namespace WpfFront.Vista
             HoraLlegadaPteAdicional.Visibility = Visibility.Collapsed;
             if (((Tipo)cbxTipPosLlegadaPyP.SelectedItem).Codigo == "PUENTE")
             {
-                Model.ListaPosicionPyP = service.GetTipo(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionPyP = service.GetTipo(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionPyP = db.Tipo.Where( f=> f.Agrupacion.Codigo == "POSICIONPUENTE").OrderBy(f => f.Orden).ToList();
                 HoraLlegadaPteAdicional.Visibility = Visibility.Visible;
             }
             else if (((Tipo)cbxTipPosLlegadaPyP.SelectedItem).Codigo == "REMOTA")
             {
-                Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionPyP = db.Tipo.Where( f=> f.Agrupacion.Codigo == "POSICION").OrderBy(f => f.Orden).ToList();
             }
             else if (((Tipo)cbxTipPosLlegadaPyP.SelectedItem).Codigo == "CARGA")
             {
-                Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionPyP = db.Tipo.Where( f=> f.Agrupacion.Codigo == "POSICIONCARGA").OrderBy(f => f.Orden).ToList();
             }
             else if (((Tipo)cbxTipPosLlegadaPyP.SelectedItem).Codigo == "HELIRAMPA")
             {
-                Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionPyP = db.Tipo.Where( f=> f.Agrupacion.Codigo == "POSICIONHR").OrderBy(f => f.Orden).ToList();
             }
             else
             {
@@ -1282,20 +1290,24 @@ namespace WpfFront.Vista
             HoraSalidaPteAdicional.Visibility = Visibility.Collapsed;
             if (((Tipo)cbxTipPosSalidaPyP.SelectedItem).Codigo == "PUENTE")
             {
-                Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalidaPyP = db.Tipo.Where(f=> f.Codigo== "POSICIONPUENTE").OrderBy(f => f.Orden).ToList();
                 HoraSalidaPteAdicional.Visibility = Visibility.Visible;
             }
             else if (((Tipo)cbxTipPosSalidaPyP.SelectedItem).Codigo == "REMOTA")
             {
-                Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalidaPyP = db.Tipo.Where(f=> f.Codigo== "POSICION").OrderBy(f => f.Orden).ToList();
             }
             else if (((Tipo)cbxTipPosSalidaPyP.SelectedItem).Codigo == "CARGA")
             {
-                Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalidaPyP = db.Tipo.Where(f=> f.Codigo== "POSICIONCARGA").OrderBy(f => f.Orden).ToList();
             }
             else if (((Tipo)cbxTipPosSalidaPyP.SelectedItem).Codigo == "HELIRAMPA")
             {
-                Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalidaPyP = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalidaPyP = db.Tipo.Where(f=> f.Codigo== "POSICIONHR").OrderBy(f => f.Orden).ToList();
             }
             else
             {
@@ -1317,25 +1329,29 @@ namespace WpfFront.Vista
             //Cargo las posiciones, dependiendo del tipo de posicion que seleccione
             if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "PUENTE")
             {
-                Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONPUENTE" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalida = TraerTipos("POSICIONPUENTE");
             }
             else if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "REMOTA")
             {
-                Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICION" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalida = TraerTipos("POSICION");
                 MaskedHoraSalidaPuente.IsEnabled = false;
                 DTP_FechaSalidaPuente.IsEnabled = false;
                 MaskedHoraSalidaPuente.Text = texto;
             }
             else if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "CARGA")
             {
-                Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONCARGA" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalida = TraerTipos("POSICIONCARGA");
                 MaskedHoraSalidaPuente.IsEnabled = false;
                 DTP_FechaSalidaPuente.IsEnabled = false;
                 MaskedHoraSalidaPuente.Text = texto;
             }
             else if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "HELIRAMPA")
             {
-                Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                //Model.ListaPosicionSalida = service.GetMMaster(new MMaster { MetaType = new MType { Code = "POSICIONHR" } }).OrderBy(f => f.NumOrder).ToList();
+                Model.ListaPosicionSalida = TraerTipos("POSICIONHR");
                 MaskedHoraSalidaPuente.IsEnabled = false;
                 DTP_FechaSalidaPuente.IsEnabled = false;
                 MaskedHoraSalidaPuente.Text = texto;
@@ -1348,6 +1364,20 @@ namespace WpfFront.Vista
                 MaskedHoraSalidaPuente.Text = texto;
                 PosicionSalida.SelectedIndex = -1;
             }
+        }
+
+        public List<Tipo> TraerTipos(String codigoAgrupacion)
+        {
+            List<Tipo> Lista = new List<Tipo>();
+            if (!String.IsNullOrEmpty(codigoAgrupacion))
+            {
+                Lista = db.Tipo.Where(f => f.Agrupacion.Codigo == codigoAgrupacion).OrderBy(f => f.Orden).ToList();
+            }
+            else
+            {
+                Lista = db.Tipo.ToList();
+            }
+            return Lista;
         }
 
         private void btnConfirmarLlegada_Click_1(object sender, RoutedEventArgs e)
@@ -1378,20 +1408,20 @@ namespace WpfFront.Vista
                 return;
             }
             SearchOrigen_OnSelected_1(sender, null);
-
+            int varaux = 0;
             //Cargo los datos que esten seteados al record
-            Model.Record.FechaOP = FechaOperacion.SelectedDate;
-            Model.Record.TipoFacturacion = ((Tipo)TipoFactura.SelectedItem);
+            Model.Record.FechaOP = FechaOperacion.SelectedDate.Value;
+            Model.Record.Tipo = ((Tipo)TipoFactura.SelectedItem);
             //Guardo informacion de los combos si estan seleccionados
             Model.Record.Aeronave = Aeronave.Aeronaves != null ? Aeronave.Aeronaves : null;
-            Model.RecordLlegada.Clasificacion = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem) : null;
-            Model.RecordLlegada.TipoVuelo = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem) : null;
-            Model.RecordLlegada.TipoDeclaracion = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem) : null;
-            Model.RecordLlegada.Banda = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem) : null;
-            Model.RecordLlegada.TipoPosicion = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem) : null;
-            Model.RecordLlegada.Posicion = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem) : null;
-            Model.RecordLlegada.Origen = Origen.Aeropuertos != null ? Origen.Aeropuertos : null;
-            Model.RecordLlegada.CIAFactura = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros : null;
+            Model.RecordLlegada.ClasificacionID = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem).RowID : varaux = 0;
+            Model.RecordLlegada.TipoVueloID = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem).RowID : varaux = 0;
+            Model.RecordLlegada.TipoDeclaracionID = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem).RowID : varaux = 0;
+            Model.RecordLlegada.BandaID = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem).RowID : varaux = 0; ;
+            Model.RecordLlegada.TipoPosicionID = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem).RowID : varaux = 0;
+            Model.RecordLlegada.PosicionID = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem).RowID : varaux = 0;
+            Model.RecordLlegada.OrigenID = Origen.Aeropuertos != null ? Origen.Aeropuertos.RowID : varaux = 0;
+            Model.RecordLlegada.CIAFacturaID = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros.RowID : varaux=0;
             Model.RecordLlegada.NVuelo = !string.IsNullOrEmpty(NumVuelo.Text) ? NumVuelo.Text : null;
 
             ConfirmarRecordLlegada(sender, e);           
@@ -1404,7 +1434,8 @@ namespace WpfFront.Vista
                 //Si no tiene salida, ni operacion le valido 
                 if (Model.RecordSalida.RowID == 0 && Model.Record.RowID == 0)
                 {
-                    List<Operacion> operacionesCon = service.GetOperacion(new Operacion { Aeronave = new Aeronaves { RowID = SearchAeronave.Aeronaves.RowID } }).Where(f => f.Salida == null).ToList();
+                    //List<Operacion> operacionesCon = service.GetOperacion(new Operacion { Aeronave = new Aeronaves { RowID = SearchAeronave.Aeronaves.RowID } }).Where(f => f.Salida == null).ToList();
+                    List<Operacion> operacionesCon = db.Operacion.Where(f=> f.RowID == SearchAeronave.Aeronaves.RowID && f.Salida == null).ToList();
                     //Busco operaciones con la misma aeronave que no tengan salida
                     if (operacionesCon.Count >= 1)
                     {
@@ -1435,18 +1466,18 @@ namespace WpfFront.Vista
                 }
 
                 //Cargo los datos que esten seteados al record
-                Model.Record.FechaOP = FechaOperacion.SelectedDate;
-                Model.Record.TipoFacturacion = ((Tipo)TipoFactura.SelectedItem);
+                Model.Record.FechaOP = FechaOperacion.SelectedDate.Value;
+                Model.Record.TipoFacturacionID = ((Tipo)TipoFactura.SelectedItem).RowID;
                 //Guardo informacion de los combos si estan seleccionados
                 Model.Record.Aeronave = Aeronave.Aeronaves != null ? Aeronave.Aeronaves : null;
-                Model.RecordLlegada.Clasificacion = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem) : null;
-                Model.RecordLlegada.TipoVuelo = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem) : null;
-                Model.RecordLlegada.TipoDeclaracion = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem) : null;
-                Model.RecordLlegada.Banda = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem) : null;
-                Model.RecordLlegada.TipoPosicion = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem) : null;
-                Model.RecordLlegada.Posicion = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem) : null;
-                Model.RecordLlegada.Origen = Origen.Aeropuertos != null ? Origen.Aeropuertos : null;
-                Model.RecordLlegada.CIAFactura = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros : null;
+                Model.RecordLlegada.ClasificacionID = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem).RowID : 0;
+                Model.RecordLlegada.TipoVueloID = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem).RowID : 0;
+                Model.RecordLlegada.TipoDeclaracionID = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem).RowID : 0;
+                Model.RecordLlegada.BandaID = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem).RowID : 0;
+                Model.RecordLlegada.TipoPosicionID = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem).RowID : 0;
+                Model.RecordLlegada.PosicionID = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem).RowID : 0;
+                Model.RecordLlegada.OrigenID = Origen.Aeropuertos != null ? Origen.Aeropuertos.RowID : 0;
+                Model.RecordLlegada.CIAFacturaID = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros.RowID : 0;
                 Model.RecordLlegada.NVuelo = !string.IsNullOrEmpty(NumVuelo.Text) ? NumVuelo.Text : null;
                 Model.RecordLlegada.HoraProgramadaLlegada = !string.IsNullOrEmpty(HoraProgramada.Text) ? HoraProgramada.Text : null;
                 SearchOrigen_OnSelected_1(sender, null);
@@ -1455,16 +1486,20 @@ namespace WpfFront.Vista
                 if (Model.Record.RowID != 0)
                 {
                     //Datos Actualizacion Salida
-                    Model.RecordLlegada.ModDate = DateTime.Now;
-                    Model.RecordLlegada.ModifiedBy = App.curUser.NombreUsuario;
+                    Model.RecordLlegada.FechaModificacion = DateTime.Now;
+                    Model.RecordLlegada.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Actualizar Salida
-                    service.UpdateLlegada(Model.RecordLlegada);
+                    //service.UpdateLlegada(Model.RecordLlegada);
+                    db.SaveChanges();
                     Model.Record.Llegada = Model.RecordLlegada;
-                    Model.Record.Estado =  service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
-                    Model.Record.ModDate = DateTime.Now;
-                    Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+                    //Model.Record.Estado =  service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                    Model.Record.Estado =  db.Estado.FirstOrDefault(f=>f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
+                    Model.Record.FechaModificacion = DateTime.Now;
+                    Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Si actualiza datos de aeronave, tipo factura o fechaOP
-                    service.UpdateOperacion(Model.Record);
+                    //service.UpdateOperacion(Model.Record);
+                    db.SaveChanges();
+
                     Util.ShowMessage("Se actualizaron exitosamente los datos de llegada");
 
                 }
@@ -1474,22 +1509,27 @@ namespace WpfFront.Vista
                     //Status Guardada Para Llegada
                     Model.RecordLlegada.Estado = Model.StatusLlegadaSalidaGuardada;
                     //Datos de Creacion de la Llegada
-                    Model.RecordLlegada.CreationDate = DateTime.Now;
-                    Model.RecordLlegada.CreatedBy = App.curUser.NombreUsuario;
+                    Model.RecordLlegada.FechaCreacion = DateTime.Now;
+                    Model.RecordLlegada.UsuarioCreacion = App.curUser.NombreUsuario;
                     //Guardo Llegada
-                    Model.RecordLlegada = service.SaveLlegada(Model.RecordLlegada);
+                    //Model.RecordLlegada = service.SaveLlegada(Model.RecordLlegada);
+                    Model.RecordLlegada = db.Llegada.Add(Model.RecordLlegada);
+                    db.SaveChanges();
                     Model.Record.Llegada = Model.RecordLlegada;
                     //Status Guardada Para Operacion
-                    Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                    //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                    Model.Record.Estado =  db.Estado.FirstOrDefault(f=>f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
                     //Datos de Creacion de la Operacion
-                    Model.Record.CreationDate = DateTime.Now;
-                    Model.Record.CreatedBy = App.curUser.NombreUsuario;
+                    Model.Record.FechaCreacion = DateTime.Now;
+                    Model.Record.UsuarioCreacion = App.curUser.NombreUsuario;
                     ///a solicitud del aeropuerto se muestra la fecha de modificacion en la lista de vuelos, por eso cuando se crea inmediatamente se le ponen tambien
                     ///los datos de modificacion
-                    Model.Record.ModDate = DateTime.Now;
-                    Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+                    Model.Record.FechaModificacion = DateTime.Now;
+                    Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Guardo Operacion
-                    Model.Record = service.SaveOperacion(Model.Record);
+                    //Model.Record = service.SaveOperacion(Model.Record);
+                    Model.Record = db.Operacion.Add(Model.Record);
+                    db.SaveChanges();
                     BtnConfirmarLlegada.IsEnabled = true;
                     Util.ShowMessage("Se registraron exitosamente los datos de llegada");
                 }
@@ -1514,11 +1554,11 @@ namespace WpfFront.Vista
                 return;
             }
             SearchDestino_KeyUp_1(sender, null);
-            Model.RecordSalida.TipoVueloSalida = TipoVueloSalida.SelectedItem != null ? (Tipo)TipoVueloSalida.SelectedItem : null;
-            Model.RecordSalida.Destino = Destino.Aeropuertos != null ? Destino.Aeropuertos : null;
-            Model.RecordSalida.TipoPosicionSalida = TipoPosicionSalida.SelectedItem != null ? ((Tipo)TipoPosicionSalida.SelectedItem) : null;
-            Model.RecordSalida.PosicionSalida = PosicionSalida.SelectedItem != null ? ((Tipo)PosicionSalida.SelectedItem) : null;
-            Model.RecordSalida.NVueloSalida = !string.IsNullOrEmpty(NumVueloSalida.Text) ? NumVueloSalida.Text : null;
+            Model.RecordSalida.TipoVueloSalidaID = TipoVueloSalida.SelectedItem != null ? ((Tipo)TipoVueloSalida.SelectedItem).RowID : 0;
+            Model.RecordSalida.DestinoID = Destino.Aeropuertos != null ? Destino.Aeropuertos.RowID : 0;
+            Model.RecordSalida.TipoPosicionSalidaID = TipoPosicionSalida.SelectedItem != null ? ((Tipo)TipoPosicionSalida.SelectedItem).RowID : 0;
+            Model.RecordSalida.PosicionSalidaID = PosicionSalida.SelectedItem != null ? ((Tipo)PosicionSalida.SelectedItem).RowID : 0;
+            Model.RecordSalida.NVueloSalida = !string.IsNullOrEmpty(NumVueloSalida.Text) ? NumVueloSalida.Text : "";
 
             ConfirmarRecordSalida(sender, e);
         }
@@ -1527,35 +1567,39 @@ namespace WpfFront.Vista
         {
             if (Model.Record.RowID != 0)
             {
+                int var = 0;
                 //Cargo los datos que esten seteados al record
                 Model.Record.Aeronave = Aeronave.Aeronaves;
-                Model.Record.FechaOP = FechaOperacion.SelectedDate;
-                Model.Record.TipoFacturacion = ((Tipo)TipoFactura.SelectedItem);
+                Model.Record.FechaOP = FechaOperacion.SelectedDate.Value;
+                Model.Record.TipoFacturacionID = ((Tipo)TipoFactura.SelectedItem).RowID;
                 //Guardo informacion de los combos si estan seleccionados
-                Model.RecordSalida.TipoVueloSalida = TipoVueloSalida.SelectedItem != null ? (Tipo)TipoVueloSalida.SelectedItem : null;
-                Model.RecordSalida.Destino = Destino.Aeropuertos != null ? Destino.Aeropuertos : null;
-                Model.RecordSalida.TipoPosicionSalida = TipoPosicionSalida.SelectedItem != null ? ((Tipo)TipoPosicionSalida.SelectedItem) : null;
-                Model.RecordSalida.PosicionSalida = PosicionSalida.SelectedItem != null ? ((Tipo)PosicionSalida.SelectedItem) : null;
-                Model.RecordSalida.NVueloSalida = !string.IsNullOrEmpty(NumVueloSalida.Text) ? NumVueloSalida.Text : null;
-                Model.RecordSalida.HoraProgramadaSalida = !string.IsNullOrEmpty(HoraProgramadaSalida.Text) ? HoraProgramadaSalida.Text : null;
+                Model.RecordSalida.TipoVueloSalidaID = TipoVueloSalida.SelectedItem != null ? ((Tipo)TipoVueloSalida.SelectedItem).RowID : var=0;
+                Model.RecordSalida.DestinoID = Destino.Aeropuertos != null ? Destino.Aeropuertos.RowID : var = 0;
+                Model.RecordSalida.TipoPosicionSalidaID = TipoPosicionSalida.SelectedItem != null ? ((Tipo)TipoPosicionSalida.SelectedItem).RowID : var = 0;
+                Model.RecordSalida.PosicionSalidaID = PosicionSalida.SelectedItem != null ? ((Tipo)PosicionSalida.SelectedItem).RowID : var = 0;
+                Model.RecordSalida.NVueloSalida = !string.IsNullOrEmpty(NumVueloSalida.Text) ? NumVueloSalida.Text : "";
+                Model.RecordSalida.HoraProgramadaSalida = !string.IsNullOrEmpty(HoraProgramadaSalida.Text) ? HoraProgramadaSalida.Text :"";
                 SearchDestino_KeyUp_1(sender, null);
 
                 //Actualizar
                 if (Model.RecordSalida.RowID != 0)
                 {
                     //Datos Actualizacion Salida
-                    Model.RecordSalida.ModDate = DateTime.Now;
-                    Model.RecordSalida.ModifiedBy = App.curUser.NombreUsuario;
+                    Model.RecordSalida.FechaModificacion = DateTime.Now;
+                    Model.RecordSalida.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Actualizar Salida
-                    service.UpdateSalida(Model.RecordSalida);
+                    //service.UpdateSalida(Model.RecordSalida);
+                    db.SaveChanges();
                     Model.Record.Salida = Model.RecordSalida;
-                    Model.Record.ModDate = DateTime.Now;
-                    Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+                    Model.Record.FechaModificacion = DateTime.Now;
+                    Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
                     if(Model.Record.Facturado == false){//Si la operacion no se ha facturado
-                        Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                        //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                        Model.Record.Estado = db.Estado.First(f=> f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
                     }
                     //Si actualiza datos de aeronave, tipo factura o fechaOP
-                    service.UpdateOperacion(Model.Record);
+                    //service.UpdateOperacion(Model.Record);
+                    db.SaveChanges();
                     Util.ShowMessage("Se actualizaron exitosamente los datos de salida");
                 }
                 //Crear Nuevo
@@ -1565,19 +1609,23 @@ namespace WpfFront.Vista
                     //Status Guardada Para Llegada
                     Model.RecordSalida.Estado = Model.StatusLlegadaSalidaGuardada;
                     //Datos Creacion Salida
-                    Model.RecordSalida.CreationDate = DateTime.Now;
-                    Model.RecordSalida.CreatedBy = App.curUser.NombreUsuario;
+                    Model.RecordSalida.FechaCreacion = DateTime.Now;
+                    Model.RecordSalida.UsuarioCreacion = App.curUser.NombreUsuario;
                     //Guardo Salida
-                    Model.RecordSalida = service.SaveSalida(Model.RecordSalida);
+                    //Model.RecordSalida = service.SaveSalida(Model.RecordSalida);
+                    Model.RecordSalida = db.Salida.Add(Model.RecordSalida);
+                    db.SaveChanges();
                     if (Model.Record.Facturado == false)
                     {//Si la operacion no se ha facturado
-                        Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                        //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                        Model.Record.Estado = db.Estado.FirstOrDefault(f=> f.Nombre == "Guardada" && f.Tipo.Codigo == "OperacionCecoa");
                     }
                     Model.Record.Salida = Model.RecordSalida;                    
-                    Model.Record.ModDate = DateTime.Now;
-                    Model.Record.ModifiedBy = App.curUser.NombreUsuario;
+                    Model.Record.FechaModificacion = DateTime.Now;
+                    Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
                     //Actualizo el vuelo
-                    service.UpdateOperacion(Model.Record);
+                    //service.UpdateOperacion(Model.Record);
+                    db.SaveChanges();
                     BtnConfirmarSalida.IsEnabled = true;
                     Util.ShowMessage("Se registraron exitosamente los datos de salida");
                 }
@@ -1631,7 +1679,7 @@ namespace WpfFront.Vista
             {
                 mensaje = "Debe Seleccionar la Posicion de Salida.";
             }
-            else if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "PUENTE" && HoraPuenteSalida.Text == "__:__")
+            else if (((Tipo)TipoPosicionSalida.SelectedItem).Codigo == "PUENTE" && HoraPuenteSalida.Text.Contains("_"))
             {
                 mensaje = "Debe ingresar una hora de Salida a Puente";
             }
@@ -1701,12 +1749,13 @@ namespace WpfFront.Vista
                 Util.ShowError("Debe Crear Llegada y Salida.");
                 return;
             }
-            else if (service.GetTRM(new TRM { FechaFiltro = FechaSalida.SelectedDate }).Count == 0)
+            //else if (service.GetTRM(new TRM { FechaFiltro = FechaSalida.SelectedDate }).Count == 0)
+            else if (TraerTRM(FechaSalida.SelectedDate.Value).Count == 0)
             {
                 Util.ShowError("No existe TRM para la fecha seleccionada");
                 return;
             }
-            else if (Model.Record.Llegada.Status.StatusID != Model.StatusLlegadaSalidaConfirmada.StatusID || Model.Record.Salida.Status.StatusID != Model.StatusLlegadaSalidaConfirmada.StatusID)
+            else if (Model.Record.Llegada.Estado.RowID != Model.StatusLlegadaSalidaConfirmada.RowID || Model.Record.Salida.Estado.RowID != Model.StatusLlegadaSalidaConfirmada.RowID)
             {
                 Util.ShowError("Debe confirmar Llegada y Salida.");
                 return;
@@ -1719,16 +1768,18 @@ namespace WpfFront.Vista
                 }
             }
 
+
             //Valido que haya Liquidado
-            Status statusOPliquidada = Model.StatusOperacionLiquidada;
-            if (Model.Record.Status.StatusID != statusOPliquidada.StatusID)
+            Estado statusOPliquidada = Model.StatusOperacionLiquidada;
+            if (Model.Record.Estado.RowID != statusOPliquidada.RowID)
             {
                 Util.ShowError("Debe Liquidar la Operacion.");
                 return;
             }
 
             //Si La operacion tiene adicionales de Puentes y parqueo
-            if (service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record, Status = Model.StatusAdicionalesConfirmado }).Count() >= 1)
+            //if (service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record, Status = Model.StatusAdicionalesConfirmado }).Count() >= 1)
+            if (db.AdicionalesPyP.Where(f=> f.OperacionID == Model.Record.RowID && f.EstadoID == Model.StatusAdicionalesConfirmado.RowID).Count() >= 1)
             {
                 //Para calcular el primer adicional
                 CalcularFacturacionContadoConAdicionales(sender, e);
@@ -1741,8 +1792,9 @@ namespace WpfFront.Vista
             {
                 CalcularFacturacionContado(sender, e);
             }
-            Status aux = Model.StatusServiciosParaFacturar;
-            Status auxBomberos = service.GetStatus(new Status { Name = "ParaFacturar", StatusType = new StatusType { Name = "ServicioBomberos" } }).First();
+            Estado aux = Model.StatusServiciosParaFacturar;
+            //Estado auxBomberos = service.GetStatus(new Status { Name = "ParaFacturar", StatusType = new StatusType { Name = "ServicioBomberos" } }).First();
+            Estado auxBomberos = db.Estado.FirstOrDefault(f=> f.Nombre == "ParaFacturar" && f.Tipo.Nombre == "ServicioBomberos");
             //Le envio el status y false para que no genere factura
             this.facturarServicios(aux, auxBomberos, false);
             Btn_CerrarOperacion.IsEnabled = false;
@@ -1762,27 +1814,28 @@ namespace WpfFront.Vista
         {
             if (Model.Record.Facturado == true)
             {
-                if (Model.Record.TipoFacturacion != null)
+                if (Model.Record.Tipo != null)
                 {
-                    if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                    if (Model.Record.Tipo.Codigo != "CONTADO")
                     {
                         //Validar que el usuario con el que esta ingresando sea MasterCecoa, JefeCecoa, o Admin
-                        foreach (UserByRol rol in App.curUser.UserRols)
-                        {
-                            if (rol.Rol.Name == "Administrador" || rol.Rol.Name == "MasterCecoa" || rol.Rol.Name == "JefeCecoa")//VAlido Rol
+                        //foreach (UserByRol rol in App.curUser.UserRols)
+                        //{
+                            if (App.curUser.Rol.Nombre == "Administrador" || App.curUser.Rol.Nombre == "MasterCecoa" || App.curUser.Rol.Nombre == "JefeCecoa")//VAlido Rol
                             {
                                 if (UtilWindow.ConfirmOK("Está seguro de que quiere Abrir la Operación?") == false)
                                 {
                                     return;
                                 }
 
-                                //IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record }).ToList();
-                                IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record }).Where(f => f.Estado.Nombre != "Anulada").ToList();
+                            //IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record }).ToList();
+                            //IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record }).Where(f => f.Estado.Nombre != "Anulada").ToList();
+                            IList<Servicios> ListaServicios = db.Servicios.Where(f => f.Operacion == Model.Record && f.Estado.Nombre != "Anulada").ToList();
 
                                 //Verificar si tiene servicios creados con estado diferente a ParaFacturar
                                 foreach (Servicios servicio1 in ListaServicios)
                                 {
-                                    if (servicio1.Status.StatusID == Model.StatusServiciosParaFacturar.StatusID || servicio1.Status.StatusID == Model.StatusServiciosAnulada.StatusID)
+                                    if (servicio1.Estado.RowID == Model.StatusServiciosParaFacturar.RowID || servicio1.Estado.RowID == Model.StatusServiciosAnulada.RowID)
                                     { 
                                     
                                     }
@@ -1798,10 +1851,11 @@ namespace WpfFront.Vista
                                 foreach (Servicios servicio in ListaServicios)
                                 {
 
-                                    if (servicio.Status.StatusID == Model.StatusServiciosParaFacturar.StatusID)
+                                    if (servicio.Estado.RowID == Model.StatusServiciosParaFacturar.RowID)
                                     {
                                         servicio.Estado = Model.StatusServiciosAnulada;
-                                        service.UpdateServicios(servicio);
+                                        //service.UpdateServicios(servicio);
+                                        db.SaveChanges();
                                     }
                                 }
 
@@ -1809,26 +1863,29 @@ namespace WpfFront.Vista
                                 this.cambiarStatusTasas(Model.StatusTasasNueva);
 
                                 //Cambio el status de los bomberos a Nuevo
-                                if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                                if (Model.Record.Tipo.Codigo != "CONTADO")
                                 {
-                                    this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusTasasParaFacturar.Name);
+                                    this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusTasasParaFacturar.Nombre);
                                 }
                                 else
                                 {
-                                    this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusBomberosParaEnviarERP.Name);
+                                    this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusBomberosParaEnviarERP.Nombre);
 
                                 }
 
                                 //Actualizo El vuelo A Facturado = False
                                 Model.Record.Facturado = false;
-                                Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
-                                service.UpdateOperacion(Model.Record);
+                            //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                                Model.Record.Estado = db.Estado.FirstOrDefault(f => f.Nombre == "Guardada"  && f.Tipo.Nombre == "OperacionCecoa");
+                                //service.UpdateOperacion(Model.Record);
+                                db.SaveChanges();
                                 //Para abrir la operacion y que puedan modificar
                                 Model.RecordLlegada.Estado = Model.StatusLlegadaSalidaGuardada;
-                                service.UpdateLlegada(Model.RecordLlegada);
+                                //service.UpdateLlegada(Model.RecordLlegada);
+                                db.SaveChanges();
                                 Model.RecordSalida.Estado = Model.StatusLlegadaSalidaGuardada;
-                                service.UpdateSalida(Model.RecordSalida);
-
+                                //service.UpdateSalida(Model.RecordSalida);
+                                db.SaveChanges();
                                 //Habilito los campos para que los pueda editar
                                 BotonFacturar.IsEnabled = true;
                                 PanelDatosOperacionLlegada.IsEnabled = true;
@@ -1852,7 +1909,7 @@ namespace WpfFront.Vista
                                 Util.ShowError("No puede Abrir esta Operación.");
                                 return;
                             }
-                        }
+                        //}
                     }
                     else
                     {
@@ -1871,15 +1928,17 @@ namespace WpfFront.Vista
             {         return;       }
 
             //Para la llegada
-            if (Model.Record.Llegada.Estado.Nombre == Model.StatusLlegadaSalidaConfirmada.Name)
+            if (Model.Record.Llegada.Estado.Nombre == Model.StatusLlegadaSalidaConfirmada.Nombre)
             {
                 //Para abrir la operacion y que puedan modificar
                 Model.RecordLlegada.Estado = Model.StatusLlegadaSalidaGuardada;
-                service.UpdateLlegada(Model.RecordLlegada);
+                //service.UpdateLlegada(Model.RecordLlegada);
+                                db.SaveChanges();
                 //Para Saber quien fue la ultima persona que modifico la operacion
-                Model.Record.ModDate = DateTime.Now;
-                Model.Record.ModifiedBy = App.curUser.NombreUsuario;
-                service.UpdateOperacion(Model.Record);
+                Model.Record.FechaModificacion = DateTime.Now;
+                Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
+                //service.UpdateOperacion(Model.Record);
+                                db.SaveChanges();
                 ActualizarDatosOperacion(sender, new DataEventArgs<Operacion>(Model.Record));
             }
             if (Model.Record.Salida != null)
@@ -1887,30 +1946,35 @@ namespace WpfFront.Vista
                 if (Model.Record.Salida.Estado == null)
                 { return; }
                 //Para la salida
-                if (Model.Record.Salida.Estado.Nombre == Model.StatusLlegadaSalidaConfirmada.Name)
+                if (Model.Record.Salida.Estado.Nombre == Model.StatusLlegadaSalidaConfirmada.Nombre)
                 {
                     //Para abrir la operacion y que puedan modificar
                     Model.RecordSalida.Estado = Model.StatusLlegadaSalidaGuardada;
-                    service.UpdateSalida(Model.RecordSalida);
+                    //service.UpdateSalida(Model.RecordSalida);
+                                db.SaveChanges();
                     //Para Saber quien fue la ultima persona que modifico la operacion
-                    Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
-                    Model.Record.ModDate = DateTime.Now;
-                    Model.Record.ModifiedBy = App.curUser.NombreUsuario;
-                    service.UpdateOperacion(Model.Record);
+                    //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                    Model.Record.Estado = db.Estado.FirstOrDefault(f => f.Nombre == "Guardada"  && f.Tipo.Nombre == "OperacionCecoa");
+                    Model.Record.FechaModificacion = DateTime.Now;
+                    Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
+                    //service.UpdateOperacion(Model.Record);
+                    db.SaveChanges();
                     ActualizarDatosOperacion(sender, new DataEventArgs<Operacion>(Model.Record));
                 }
             }
             if (Model.RegistroAdicionalesPyPList.Count != 0)
             {
                 foreach(AdicionalesPyP adicional in Model.RegistroAdicionalesPyPList){
-                    if (adicional.Estado.Nombre == Model.StatusAdicionalesConfirmado.Name)
+                    if (adicional.Estado.Nombre == Model.StatusAdicionalesConfirmado.Nombre)
                     {
                         //Para abrir los adicionales y que puedan modificar
                         adicional.Estado = Model.StatusAdicionalesGuardado;
                         //Para Saber quien fue la ultima persona que modifico la operacion
-                        adicional.ModDate = DateTime.Now;
-                        adicional.ModifiedBy = App.curUser.NombreUsuario;
-                        service.UpdateAdicionalesPyP(adicional);
+                        adicional.FechaModificacion = DateTime.Now;
+                        adicional.UsuarioModificacion = App.curUser.NombreUsuario;
+                        //service.UpdateAdicionalesPyP(adicional);
+                        db.SaveChanges();
+
                     }
                 }
             }
@@ -1993,11 +2057,13 @@ namespace WpfFront.Vista
                 DTP_FechaServicioAdicional.Focus();
                 return;
             }
-            Tarifas TarifaBomberos;
+            TarifaCecoa TarifaBomberos;
             // Verifico si existe una tarifa BOMBERO para la fecha seleccionada
-            if (service.GetTarifas(new Tarifas { FechaFiltro = DTP_FechaServicioAdicional.SelectedDate, TipoTarifa = new MMaster { Code = "BOMBEROS" }, TipoServicio = (Tipo)tipoBomberoAdicional.SelectedItem }).Count == 1)
+            //if (service.GetTarifas(new Tarifas { FechaFiltro = DTP_FechaServicioAdicional.SelectedDate, TipoTarifa = new MMaster { Code = "BOMBEROS" }, TipoServicio = (Tipo)tipoBomberoAdicional.SelectedItem }).Count == 1)
+            if (TraerTarifa(DTP_FechaServicioAdicional.SelectedDate.Value, "BOMBEROS").Where(f => f.TipoServicioID == ((Tipo)tipoBomberoAdicional.SelectedItem).RowID).Count() == 1)
             {
-                TarifaBomberos = service.GetTarifas(new Tarifas { FechaFiltro = DTP_FechaServicioAdicional.SelectedDate, TipoTarifa = new MMaster { Code = "BOMBEROS" }, TipoServicio = (Tipo)tipoBomberoAdicional.SelectedItem }).First();
+                //TarifaBomberos = service.GetTarifas(new Tarifas { FechaFiltro = DTP_FechaServicioAdicional.SelectedDate, TipoTarifa = new MMaster { Code = "BOMBEROS" }, TipoServicio = (Tipo)tipoBomberoAdicional.SelectedItem }).First();
+                TarifaBomberos = TraerTarifa(DTP_FechaServicioAdicional.SelectedDate.Value, "BOMBEROS").Where(f => f.TipoServicioID == ((Tipo)tipoBomberoAdicional.SelectedItem).RowID).First();
                 //Asigno el Valor del servicio
                 Model.RecordBomberosAdicional.ValorServicio = TarifaBomberos.ValorCOP;
             }
@@ -2010,20 +2076,24 @@ namespace WpfFront.Vista
             //Le asigno el vuelo actual
             Model.RecordBomberosAdicional.Operacion = Model.Record;
             Model.RecordBomberosAdicional.Fecha = DTP_FechaServicioAdicional.SelectedDate;
-            Model.RecordBomberosAdicional.TipoServicioBomb = (Tipo)tipoBomberoAdicional.SelectedItem;
-            Model.RecordBomberosAdicional.Estado = service.GetStatus(new Status { Name = "Nuevo", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
+            Model.RecordBomberosAdicional.TipoServicioBombID = ((Tipo)tipoBomberoAdicional.SelectedItem).RowID;
+            //Model.RecordBomberosAdicional.Estado = service.GetStatus(new Status { Name = "Nuevo", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
+            Model.RecordBomberosAdicional.Estado = db.Estado.FirstOrDefault(f=> f.Nombre == "Nuevo" && f.Tipo.Nombre == "ServicioBomberosAdicional");
             Model.RecordBomberosAdicional.Activo = true;
             //Asigno variables de Creacion
-            Model.RecordBomberosAdicional.CreatedBy = App.curUser.NombreUsuario;
-            Model.RecordBomberosAdicional.CreationDate = DateTime.Now;
+            Model.RecordBomberosAdicional.UsuarioCreacion = App.curUser.NombreUsuario;
+            Model.RecordBomberosAdicional.FechaCreacion = DateTime.Now;
             //Guardo el registro
-            service.SaveBomberos(Model.RecordBomberosAdicional);
+            //service.SaveBomberos(Model.RecordBomberosAdicional);
+            db.Bombero.Add(Model.RecordBomberosAdicional);
+            db.SaveChanges();
             Util.ShowMessage("Se registro exitosamente el Servicio Bomberos");
             //Actualizar Lista bomberos
-            Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record }).Where(f => f.Status.StatusType.Name == "ServicioBomberosAdicional").ToList();
+            //Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record }).Where(f => f.Status.StatusType.Nombre == "ServicioBomberosAdicional").ToList();
+            Model.RegistroBomberosAdicionalesList = db.Bombero.Where(f=> f.OperacionID == Model.Record.RowID && f.Tipo.Nombre == "ServicioBomberosAdicional").ToList();
             DTP_FechaServicioAdicional.SelectedDate = Model.Record.FechaOP;
             tipoBomberoAdicional.SelectedIndex = -1;
-            Model.RecordBomberosAdicional = new Bomberos();
+            Model.RecordBomberosAdicional = new Bombero();
         }
 
         private void btnEliminarBomberoAdicional_Click_1(object sender, RoutedEventArgs e)
@@ -2033,18 +2103,21 @@ namespace WpfFront.Vista
             {
                 return;
             }
-            foreach (Bomberos ServicioBombero in lvRegistroServicioBomberosAdicionales.SelectedItems)
+            foreach (Bombero ServicioBombero in lvRegistroServicioBomberosAdicionales.SelectedItems)
             {
                 if (ServicioBombero.Estado.Nombre == "Nuevo")
                 {
-                    service.DeleteBomberos(ServicioBombero);
+                    //service.DeleteBomberos(ServicioBombero);
+                    db.Bombero.Remove(ServicioBombero);
+                    db.SaveChanges();
                 }
                 else
                 {
                     Util.ShowError("No puede eliminar este registro");
                 }
             }
-            Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record }).Where(f => f.Status.StatusType.Name == "ServicioBomberosAdicional").ToList();
+            //Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record }).Where(f => f.Status.StatusType.Nombre == "ServicioBomberosAdicional").ToList();
+            Model.RegistroBomberosAdicionalesList = db.Bombero.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Nombre == "ServicioBomberosAdicional").ToList();
         }
 
         
@@ -2066,21 +2139,21 @@ namespace WpfFront.Vista
                 return;
             }
             //Si es credito o abonos no le asocio Factura
-            if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+            if (Model.Record.Tipo.Codigo != "CONTADO")
             {
                 GenerarFacturacionServiciosAdicionales(Model.StatusServiciosParaFacturar);
             }
         }
 
-        public void GenerarFacturacionServiciosAdicionales(Status NuevoStatus)
+        public void GenerarFacturacionServiciosAdicionales(Estado NuevoStatus)
         {
             Facturas NroFactura = null; //Factura que se le va a asociar a los servicios
             int cantAsistencia = 0, cantLimpieza = 0, cantTasas = 0, cantPyP = 0;
             //Recorro los registros para ver si hay algo para facturar
-            cantAsistencia = Model.RegistroBomberosAdicionalesList.Where(f => f.TipoServicioBomb.Codigo == "ASISTENCIA" && f.Estado.Nombre == "Nuevo").Count();
-            cantLimpieza = Model.RegistroBomberosAdicionalesList.Where(f => f.TipoServicioBomb.Codigo == "LIMPIEZA" && f.Estado.Nombre == "Nuevo").Count();
-            cantTasas = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Name).Count();
-            //cantPyP = Model.RegistroAdicionalesPyPList.Where(f => f.Estado.Nombre == Model.StatusAdicionalesConfirmado.Name).Count();
+            cantAsistencia = Model.RegistroBomberosAdicionalesList.Where(f => f.Tipo.Codigo == "ASISTENCIA" && f.Estado.Nombre == "Nuevo").Count();
+            cantLimpieza = Model.RegistroBomberosAdicionalesList.Where(f => f.Tipo.Codigo == "LIMPIEZA" && f.Estado.Nombre == "Nuevo").Count();
+            cantTasas = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre).Count();
+            //cantPyP = Model.RegistroAdicionalesPyPList.Where(f => f.Estado.Nombre == Model.StatusAdicionalesConfirmado.Nombre).Count();
             //Si no hay bomberos, ni tasas registrados 
             if (cantAsistencia == 0 && cantLimpieza == 0 && cantTasas == 0)
             {
@@ -2092,94 +2165,109 @@ namespace WpfFront.Vista
             {
                 //Agrupo Tasas por tipo Debito o credito
                 int cantCredito = 0, cantDebito = 0;
-                cantCredito = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Name && f.TipoTasa.Codigo == "CREDITO").Count();
-                cantDebito = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Name && f.TipoTasa.Codigo == "DEBITO").Count();
+                cantCredito = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre && f.Tipo.Codigo == "CREDITO").Count();
+                cantDebito = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre && f.Tipo.Codigo == "DEBITO").Count();
                 if (cantCredito != 0)
                 {
                     Servicios tasas = new Servicios();
-                    int paganTasa = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Name && f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                    //int paganTasa = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre && f.Tipo.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                    int paganTasa = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre && f.Tipo.Codigo == "CREDITO").Sum(f => f.PaganTasa).Value;
                     tasas.Fecha = DateTime.Now;
                     //Los que pagan tasa de tipo Credito
                     tasas.Cantidad = paganTasa;
                     //Si es Nacional le asigno la tarifa Nacional
-                    if (Model.RecordSalida.TipoVueloSalida.Codigo == "NACIONAL")
+                    if (Model.RecordSalida.Tipo2.Codigo == "NACIONAL")
                     {
-                        tasas.Valor = paganTasa * Model.RecordTasas.TasaCOP;
+                        //*****ARREGLAR*********/ tasas.Valor = paganTasa * Model.RecordTasas.TasaCOP;
                     }
                     //Si es InterNacional le asigno la tarifa Inter
                     else
                     {
-                        TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
-                        tasas.Valor = paganTasa * Model.RecordTasas.TasaUSD * trm.Valor;
+                        //TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
+                        TRM trm = TraerTRM(Model.Record.Salida.FechaSalida.Value).FirstOrDefault();
+                        //*****ARREGLAR*********/tasas.Valor = paganTasa * Model.RecordTasas.TasaUSD * trm.Valor.Value;
                     }
                     //Si es Credito le asigno tipo TASAS
-                    tasas.TipoServicio = service.GetMMaster(new MMaster { Code = "TASASCREDITO" }).First();
+                    //tasas.TipoServicioID = service.GetMMaster(new MMaster { Code = "TASASCREDITO" }).First();
+                    tasas.TipoServicioID = db.Tipo.FirstOrDefault(f => f.Codigo == "TASASCREDITO").RowID;
                     tasas.Operacion = Model.Record;
-                    tasas.Factura = NroFactura;
+                    tasas.FacturaID = NroFactura.RowID;
                     tasas.Estado = NuevoStatus;
-                    tasas.CreatedBy = App.curUser.NombreUsuario;
-                    tasas.CreationDate = DateTime.Now;
-                    service.SaveServicios(tasas);
+                    tasas.UsuarioCreacion = App.curUser.NombreUsuario;
+                    tasas.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(tasas);
+                    db.Servicios.Add(tasas);
+                    db.SaveChanges();
 
                 }
                 if (cantDebito != 0)
                 {
                     Servicios tasas = new Servicios();
-                    int paganTasa = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Name && f.TipoTasa.Codigo == "DEBITO").Sum(f => f.PaganTasa);
+                    int paganTasa = Model.RegistroTasasAdicionalesList.Where(f => f.Estado.Nombre == Model.StatusTasasNueva.Nombre && f.Tipo.Codigo == "DEBITO").Sum(f => f.PaganTasa).Value;
                     tasas.Fecha = DateTime.Now;
                     tasas.Cantidad = paganTasa;
                     //Si es Nacional le asigno la tarifa Nacional
-                    if (Model.RecordSalida.TipoVueloSalida.Codigo == "NACIONAL")
+                    if (Model.RecordSalida.Tipo2.Codigo == "NACIONAL")
                     {
-                        tasas.Valor = paganTasa * Model.RecordTasas.TasaCOP;
+                       //*****ARREGLAR*********/ tasas.Valor = paganTasa * Model.RecordTasas.TasaCOP;
                     }
                     //Si es InterNacional le asigno la tarifa Inter
                     else
                     {
-                        TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
-                        tasas.Valor = paganTasa * Model.RecordTasas.TasaUSD * trm.Valor;
+                        //TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
+                        TRM trm = TraerTRM(Model.Record.Salida.FechaSalida.Value).First();
+                        //*****ARREGLAR*********/ tasas.Valor = paganTasa * Model.RecordTasas.TasaUSD * trm.Valor;
                     }
                     //Si es Debito le asigno tipo TASASDEBITO
-                    tasas.TipoServicio = service.GetMMaster(new MMaster { Code = "TASASDEBITO" }).First();
+                    //tasas.TipoServicioID = service.GetMMaster(new MMaster { Code = "TASASDEBITO" }).First();
+                    tasas.TipoServicioID = db.Tipo.FirstOrDefault(f => f.Codigo == "TASASDEBITO").RowID;
                     tasas.Operacion = Model.Record;
-                    tasas.Factura = NroFactura;
+                    tasas.FacturaID = NroFactura.RowID;
                     tasas.Estado = NuevoStatus;
-                    tasas.CreatedBy = App.curUser.NombreUsuario;
-                    tasas.CreationDate = DateTime.Now;
-                    service.SaveServicios(tasas);
+                    tasas.UsuarioCreacion = App.curUser.NombreUsuario;
+                    tasas.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(tasas);
+                    db.Servicios.Add(tasas);
+                    db.SaveChanges();
                 }
             }
             //Creo servicio para bomberos asistencia
             if (cantAsistencia != 0)
             {
-                double acumAsistencia = Model.RegistroBomberosAdicionalesList.Where(f => f.TipoServicioBomb.Codigo == "ASISTENCIA" && f.Estado.Nombre == "Nuevo").Sum(f => f.ValorServicio);
+                double acumAsistencia = Model.RegistroBomberosAdicionalesList.Where(f => f.Tipo.Codigo == "ASISTENCIA" && f.Estado.Nombre == "Nuevo").Sum(f => f.ValorServicio).Value;
                 Servicios asistenciaBomberos = new Servicios();
                 asistenciaBomberos.Fecha = DateTime.Now;
                 asistenciaBomberos.Cantidad = cantAsistencia;
                 asistenciaBomberos.Valor = acumAsistencia;
-                asistenciaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "ASISTENCIA" }).First();
+                //asistenciaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "ASISTENCIA" }).First();
+                asistenciaBomberos.TipoServicioID = db.Tipo.FirstOrDefault(f => f.Codigo == "ASISTENCIA").RowID;
                 asistenciaBomberos.Operacion = Model.Record;
-                asistenciaBomberos.Factura = NroFactura;
+                asistenciaBomberos.Facturas = NroFactura;
                 asistenciaBomberos.Estado = NuevoStatus;
-                asistenciaBomberos.CreatedBy = App.curUser.NombreUsuario;
-                asistenciaBomberos.CreationDate = DateTime.Now;
-                service.SaveServicios(asistenciaBomberos);
+                asistenciaBomberos.UsuarioCreacion = App.curUser.NombreUsuario;
+                asistenciaBomberos.FechaCreacion = DateTime.Now;
+                //service.SaveServicios(asistenciaBomberos);
+                db.Servicios.Add(asistenciaBomberos);
+                db.SaveChanges();
             }
             //Creo servicio para bomberos limpieza
             if (cantLimpieza != 0)
             {
-                double acumLimpieza = Model.RegistroBomberosAdicionalesList.Where(f => f.TipoServicioBomb.Codigo == "LIMPIEZA" && f.Estado.Nombre == "Nuevo").Sum(f => f.ValorServicio);
+                double acumLimpieza = Model.RegistroBomberosAdicionalesList.Where(f => f.Tipo.Codigo == "LIMPIEZA" && f.Estado.Nombre == "Nuevo").Sum(f => f.ValorServicio).Value;
                 Servicios limpiezaBomberos = new Servicios();
                 limpiezaBomberos.Fecha = DateTime.Now;
                 limpiezaBomberos.Cantidad = cantLimpieza;
                 limpiezaBomberos.Valor = acumLimpieza;
-                limpiezaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "LIMPIEZA" }).First();
+                //limpiezaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "LIMPIEZA" }).First();
+                limpiezaBomberos.TipoServicioID = db.Tipo.FirstOrDefault(f => f.Codigo == "LIMPIEZA").RowID;
                 limpiezaBomberos.Operacion = Model.Record;
-                limpiezaBomberos.Factura = NroFactura;
+                limpiezaBomberos.Facturas = NroFactura;
                 limpiezaBomberos.Estado = NuevoStatus;
-                limpiezaBomberos.CreatedBy = App.curUser.NombreUsuario;
-                limpiezaBomberos.CreationDate = DateTime.Now;
-                service.SaveServicios(limpiezaBomberos);
+                limpiezaBomberos.UsuarioCreacion = App.curUser.NombreUsuario;
+                limpiezaBomberos.FechaCreacion = DateTime.Now;
+                //service.SaveServicios(limpiezaBomberos);
+                db.Servicios.Add(limpiezaBomberos);
+                db.SaveChanges();
             }
 
             //Cambio el status a las Tasas 
@@ -2188,25 +2276,31 @@ namespace WpfFront.Vista
                 foreach (Tasas tasas in lvRegistroServicioTasaAdicional.Items)
                 {
                     //Si el estado es nueva
-                    if (tasas.Estado.Nombre == Model.StatusTasasNueva.Name)
+                    if (tasas.Estado.Nombre == Model.StatusTasasNueva.Nombre)
                     {
                         tasas.Estado = Model.StatusTasasParaFacturar; // Le asigno para Facturar
-                        service.UpdateTasas(tasas);
+                        //service.UpdateTasas(tasas);
+                        db.SaveChanges();
                     }
                 }
-                Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
+                //Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
+                Model.RegistroTasasAdicionalesList = db.Tasas.Where(f=> f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "NORMAL").ToList();
             }
 
             //Cambio el Status de Bomberos Adicionales
-            Status auxBomberos = service.GetStatus(new Status { Name = "ParaEnviarERP", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
-            foreach (Bomberos ServicioBombero in lvRegistroServicioBomberosAdicionales.Items)
+            //Estado auxBomberos = service.GetStatus(new Status { Name = "ParaEnviarERP", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
+            Estado auxBomberos = db.Estado.FirstOrDefault(f=> f.Nombre == "ParaEnviarERP" && f.Tipo.Nombre == "ServicioBomberosAdicional");
+            foreach (Bombero ServicioBombero in lvRegistroServicioBomberosAdicionales.Items)
             {
                 if (ServicioBombero.Estado.Nombre == "Nuevo")
                 {
-                    ServicioBombero.Estado = service.GetStatus(new Status { Name = "ParaFacturar", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
-                    service.UpdateBomberos(ServicioBombero);
+                    //ServicioBombero.Estado = service.GetStatus(new Status { Name = "ParaFacturar", StatusType = new StatusType { Name = "ServicioBomberosAdicional" } }).First();
+                    ServicioBombero.Estado = db.Estado.FirstOrDefault(f=> f.Nombre == "ParaEnviarERP" && f.Tipo.Nombre == "ServicioBomberosAdicional");
+                    //service.UpdateBomberos(ServicioBombero);
+                    db.SaveChanges();
                 }
-                Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record, Activo = true }).Where(f => f.Status.StatusType.Name == "ServicioBomberosAdicional").ToList();
+                //Model.RegistroBomberosAdicionalesList = service.GetBomberos(new Bomberos { Operacion = Model.Record, Activo = true }).Where(f => f.Status.StatusType.Nombre == "ServicioBomberosAdicional").ToList();
+                Model.RegistroBomberosAdicionalesList = db.Bombero.Where(f =>f.OperacionID == Model.Record.RowID && f.Activo == true &&  f.Estado.Tipo.Nombre == "ServicioBomberosAdicional").ToList();
             }
             Util.ShowMessage("Adicionales Procesados Correctamente");
         }
@@ -2221,19 +2315,22 @@ namespace WpfFront.Vista
             if (Model.Record.Facturado == true)
             {
                 //Valido si existe un servicio de tasas que este paraFacturar 
-                Servicios ServicioTasas = service.GetServicios(new Servicios { Operacion = new Operacion { RowID = Model.Record.RowID }, Status = new Status { StatusID = Model.StatusServiciosParaFacturar.StatusID }, TipoServicio = new MMaster { Code = "TASAS"} }).FirstOrDefault();
-                if (ServicioTasas.Factura == null)
+                //Servicios ServicioTasas = service.GetServicios(new Servicios { Operacion = new Operacion { RowID = Model.Record.RowID }, Status = new Status { StatusID = Model.StatusServiciosParaFacturar.RowID }, TipoServicio = new MMaster { Code = "TASAS"} }).FirstOrDefault();
+                Servicios ServicioTasas = db.Servicios.FirstOrDefault(f=> f.OperacionID == Model.Record.RowID && f.Estado.RowID == Model.StatusServiciosParaFacturar.RowID && f.Tipo.Codigo == "TASAS");
+                if (ServicioTasas.Facturas == null)
                 {
                     Util.ShowError("Solo puede registrar NOTAS cuando el vuelo ya se facturo");
                     return;
                 }
-                if (service.GetTarifas(new Tarifas { FechaFiltro = Model.Record.Salida.FechaSalida , TipoTarifa = new MMaster { Code = "TASAS"} }).Count() ==0)
+                //if (service.GetTarifas(new TarifaCecoa { FechaFiltro = Model.Record.Salida.FechaSalida , TipoTarifa = new MMaster { Code = "TASAS"} }).Count() ==0)
+                if (TraerTarifa( Model.Record.Salida.FechaSalida.Value, "TASAS").Count() ==0)
                 {
                     Util.ShowError("No hay una tarifa TASAS Activa para la fecha seleccionada.");
                     return;
                 }
-                if(Model.Record.Salida.TipoVueloSalida.Codigo == "INTERNACIONAL"){
-                    if (service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).Count() == 0)
+                if(Model.Record.Salida.Tipo2.Codigo == "INTERNACIONAL"){
+                    //if (service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).Count() == 0)
+                    if (TraerTRM(Model.Record.Salida.FechaSalida.Value).Count() == 0)
                     {
                         Util.ShowError("No hay un TRM Activo para la fecha de seleccionada.");
                         return;
@@ -2252,25 +2349,30 @@ namespace WpfFront.Vista
                     return;
                 }
                 //Busco Tasas Adicionales que esten en status Nueva
-                if (service.GetTasas(new Tasas { Operacion = Model.Record}).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList().Count >= 1)
+                //if (service.GetTasas(new Tasas { Operacion = Model.Record}).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList().Count >= 1)
+                if (db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "NORMAL").ToList().Count >= 1)
                 {
                     Util.ShowError("Solo puede Ingresar una nota por operacion");
                     return;
                 }
                 //Le asigno el vuelo actual
                 Model.RecordTasasAdicionales.Operacion = Model.Record;
-                Model.RecordTasasAdicionales.TipoTasa = (Tipo)TipoTasaAdicional.SelectedItem;
+                Model.RecordTasasAdicionales.TipoTasaID = ((Tipo)TipoTasaAdicional.SelectedItem).RowID;
                 Model.RecordTasasAdicionales.Fecha = DateTime.Now;
                 Model.RecordTasasAdicionales.Estado = Model.StatusTasasNueva;
                 //Asigno variables de Creacion
-                Model.RecordTasasAdicionales.CreatedBy = App.curUser.NombreUsuario;
-                Model.RecordTasasAdicionales.CreationDate = DateTime.Now;
+                Model.RecordTasasAdicionales.UsuarioCreacion = App.curUser.NombreUsuario;
+                Model.RecordTasasAdicionales.FechaCreacion = DateTime.Now;
                 //Guardo el registro
-                service.SaveTasas(Model.RecordTasasAdicionales);
+                //service.SaveTasas(Model.RecordTasasAdicionales);
+                db.Tasas.Add(Model.RecordTasasAdicionales);
+                db.SaveChanges();
                 Util.ShowMessage("Se registro Exitosamente");
                 //Actualizar Lista bomberos
-                Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
-                Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+                //Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
+                Model.RegistroTasasAdicionalesList = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "NORMAL").ToList();
+                //Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+                Model.RegistroTasasList = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID).ToList();
                 TipoTasaAdicional.SelectedIndex = -1;
                 Model.RecordTasasAdicionales = new Tasas();
                 CalcularDatosLiquidacion(sender, e);
@@ -2290,16 +2392,20 @@ namespace WpfFront.Vista
             foreach (Tasas TasaAdicional in lvRegistroServicioTasaAdicional.SelectedItems)
             {
                 //Si el estado es nuevo lo elimino
-                if (TasaAdicional.Estado.Nombre == Model.StatusTasasNueva.Name)
+                if (TasaAdicional.Estado.Nombre == Model.StatusTasasNueva.Nombre)
                 {
-                    service.DeleteTasas(TasaAdicional);
+                    //service.DeleteTasas(TasaAdicional);
+                    db.Tasas.Remove(TasaAdicional);
+                    db.SaveChanges();
                 }
                 else {
                     Util.ShowError("No puede eliminar este registro.");
                 }
             }
-            Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
-            Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+            //Model.RegistroTasasAdicionalesList = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "NORMAL").ToList();
+            Model.RegistroTasasAdicionalesList = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "NORMAL").ToList();
+            //Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+            Model.RegistroTasasList = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID).ToList();
             CalcularDatosLiquidacion(sender, e);
         }
 
@@ -2311,33 +2417,39 @@ namespace WpfFront.Vista
             {
                 int suma = 0;
                 //Valido que la cantidad de pagan tasas sea menos o igual a la existente
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.PaganTasa) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.PaganTasa) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.PaganTasa).Value;
                 if ((Model.RecordTasasAdicionales.PaganTasa > suma) && Model.RecordTasasAdicionales.PaganTasa != 0)
                 {
                     mensaje = "Cantidad de Pagan Tasa no valida";
                 }
                 //Valido que la cantidad de exentos a guardar sea menor o igual a la existente
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Infantes) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Infantes);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Infantes) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Infantes);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.Infantes).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.Infantes).Value;
                 if (Model.RecordTasasAdicionales.Infantes > suma && Model.RecordTasasAdicionales.Infantes != 0)
                 {
                     mensaje = "Cantidad de Infantes no valida";
                 }
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Tripulantes) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Tripulantes);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Tripulantes) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Tripulantes);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.Tripulantes).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.Tripulantes).Value;
                 if (Model.RecordTasasAdicionales.Tripulantes > suma && Model.RecordTasasAdicionales.Tripulantes != 0)
                 {
                     mensaje = "Cantidad de Tripadi no valida";
                 }
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Militares) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Militares);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Militares) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Militares);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.Militares).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.Militares).Value;
                 if (Model.RecordTasasAdicionales.Militares > suma && Model.RecordTasasAdicionales.Militares != 0)
                 {
                     mensaje = "Cantidad de Militares no valida";
                 }
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Transitos) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Transitos);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Transitos) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Transitos);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.Transitos).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.Transitos).Value;
                 if (Model.RecordTasasAdicionales.Transitos > suma && Model.RecordTasasAdicionales.Transitos != 0)
                 {
                     mensaje = "Cantidad de Transitos no valida";
                 }
-                suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Otros) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Otros);
+                //suma = service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.Otros) - service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.Otros);
+                suma = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.Otros).Value - db.Tasas.Where(f => f.OperacionID == Model.Record.RowID  && f.Tipo.Codigo == "CREDITO").Sum(f => f.Otros).Value;
                 if (Model.RecordTasasAdicionales.Otros > suma && Model.RecordTasasAdicionales.Otros != 0)
                 {
                     mensaje = "Cantidad de Otros no valida";
@@ -2347,14 +2459,17 @@ namespace WpfFront.Vista
             else
             {
                 //Suma de pasajeros totales
-                int suma = Model.RecordTasasAdicionales.PaganTasa + Model.RecordTasasAdicionales.Tripulantes + Model.RecordTasasAdicionales.Militares + Model.RecordTasasAdicionales.Transitos + Model.RecordTasasAdicionales.Otros;
+                int suma = Model.RecordTasasAdicionales.PaganTasa.Value + Model.RecordTasasAdicionales.Tripulantes.Value + Model.RecordTasasAdicionales.Militares.Value + Model.RecordTasasAdicionales.Transitos.Value + Model.RecordTasasAdicionales.Otros.Value;
                 //Le adiciono a la suma los debitos menos los CREDITO
-                suma = suma + service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.PaganTasa) -
-                              service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                //suma = suma + service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo != "CREDITO").Sum(f => f.PaganTasa) -
+                //              service.GetTasas(new Tasas { Operacion = Model.Record }).Where(f => f.TipoTasa.Codigo == "CREDITO").Sum(f => f.PaganTasa);
+                suma = suma + db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo != "CREDITO").Sum(f => f.PaganTasa.Value) -
+                             db.Tasas.Where(f => f.OperacionID == Model.Record.RowID && f.Tipo.Codigo == "CREDITO").Sum(f => f.PaganTasa.Value);
                 if (Model.Record.Aeronave != null)
                 {
                     //Traigo el peso de la aeronave, por si se actualiza el peso de la aeronave despues de que se cargo el vuelo
-                    Aeronaves aeronaveActualizada = service.GetAeronaves(new Aeronaves { RowID = Model.Record.Aeronave.RowID }).First();
+                    //Aeronave aeronaveActualizada = service.GetAeronaves(new Aeronaves { RowID = Model.Record.Aeronave.RowID }).First();
+                    Aeronave aeronaveActualizada = db.Aeronave.First(f => f.RowID == Model.Record.Aeronave.RowID);
                     if (suma > aeronaveActualizada.CapacidadPasajeros)
                     {
                         mensaje = "La cantidad de pasajeros supera la capacidad de la aeronave";
@@ -2420,13 +2535,14 @@ namespace WpfFront.Vista
                 Util.ShowError("Debe confirmar Llegada y Salida.");
                 return;
             }
-            else if (service.GetTRM(new TRM { FechaFiltro = FechaSalida.SelectedDate}).Count == 0)
+            //else if (service.GetTRM(new TRM { FechaFiltro = FechaSalida.SelectedDate}).Count == 0)
+            else if (TraerTRM(FechaSalida.SelectedDate.Value).Count == 0)
             {
                 Util.ShowError("No existe TRM para la fecha seleccionada");
                 return;
             }
             else if(Model.Record.Facturado == true){
-                if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                if (Model.Record.Tipo.Codigo != "CONTADO")
                 {
                     Util.ShowError("Operacion ya Liquidada");
                     return;
@@ -2437,12 +2553,13 @@ namespace WpfFront.Vista
                     return;
                 }
             }
-            Status statusConfirmada = Model.StatusLlegadaSalidaConfirmada;
-            Status statusOPliquidada = Model.StatusOperacionLiquidada;
-            if (Model.Record.Llegada.Status.StatusID == statusConfirmada.StatusID && Model.Record.Salida.Status.StatusID == statusConfirmada.StatusID)
+            Estado statusConfirmada = Model.StatusLlegadaSalidaConfirmada;
+            Estado statusOPliquidada = Model.StatusOperacionLiquidada;
+            if (Model.Record.Llegada.Estado.RowID == statusConfirmada.RowID && Model.Record.Salida.Estado.RowID == statusConfirmada.RowID)
             {
                 //Busco si tiene adicionales que esten confirmados y con despegado = true
-                if (service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record, Status = Model.StatusAdicionalesConfirmado, Despego = true }).Count() >= 1)
+                //if (service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record, Status = Model.StatusAdicionalesConfirmado, Despego = true }).Count() >= 1)
+                if (db.AdicionalesPyP.Where(f=>f.OperacionID == Model.Record.RowID && f.EstadoID == Model.StatusAdicionalesConfirmado.RowID && f.Despego == true).Count() >= 1)
                 {
                     //Para calcular el primer adicional
                     CalcularFacturacionContadoConAdicionales(sender, e);
@@ -2466,9 +2583,10 @@ namespace WpfFront.Vista
                     BotonFacturar.IsEnabled = true;
                 }
 
-                Model.Record.ModDate = DateTime.Now;
-                Model.Record.ModifiedBy = App.curUser.NombreUsuario;
-                service.UpdateOperacion(Model.Record);
+                Model.Record.FechaModificacion = DateTime.Now;
+                Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
+                //service.UpdateOperacion(Model.Record);
+                db.SaveChanges();
             }
             else
             {
@@ -2484,24 +2602,26 @@ namespace WpfFront.Vista
                 return;
             }
 
-            Status statusConfirmada = Model.StatusLlegadaSalidaConfirmada;
-            if (Model.Record.Llegada.Status.StatusID == statusConfirmada.StatusID && Model.Record.Salida.Status.StatusID == statusConfirmada.StatusID)
+            Estado statusConfirmada = Model.StatusLlegadaSalidaConfirmada;
+            if (Model.Record.Llegada.Estado.RowID == statusConfirmada.RowID && Model.Record.Salida.Estado.RowID == statusConfirmada.RowID)
             {
                 //Valido que haya Liquidado
-                Status statusOPliquidada = Model.StatusOperacionLiquidada;
-                if (Model.Record.Status.StatusID == statusOPliquidada.StatusID)
+                Estado statusOPliquidada = Model.StatusOperacionLiquidada;
+                if (Model.Record.Estado.RowID == statusOPliquidada.RowID)
                 {
-                    Status aux = Model.StatusServiciosEnviarERP;
-                    Status auxBomberos = service.GetStatus(new Status { Name = "ParaEnviarERP", StatusType = new StatusType { Name = "ServicioBomberos" } }).First();
+                    Estado aux = Model.StatusServiciosEnviarERP;
+                    //Estado auxBomberos = service.GetStatus(new Status { Name = "ParaEnviarERP", StatusType = new StatusType { Name = "ServicioBomberos" } }).First();
+                    Estado auxBomberos = db.Estado.FirstOrDefault(f => f.Nombre == "ParaEnviarERP" && f.Tipo.Nombre == "ServicioBomberos");
                     this.facturarServicios(aux, auxBomberos, true);
                     ObteberListaFacturas(sender, e);
                     //Para imprimir la factura de Contado
-                    IList<Servicios> listaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Status = aux }).ToList();
+                    //IList<Servicios> listaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Status = aux }).ToList();
+                    IList<Servicios> listaServicios = db.Servicios.Where(f => f.OperacionID == Model.Record.RowID && f.EstadoID == aux.RowID).ToList();
                     PrinterControl.imprimirFactura(listaServicios);
                     stkDatosOperacionSalida3Contado.IsEnabled = true;
-                    if (Model.Record.Salida.TipoPosicionSalida != null)
+                    if (Model.Record.Salida.TipoPosicionSalidaID != null)
                     {
-                        if (Model.Record.Salida.TipoPosicionSalida.Codigo != "PUENTE")
+                        if (Model.Record.Salida.Tipo1.Codigo != "PUENTE")
                         {
                             PanelDatosOperacionSalidaPuenteContado.IsEnabled = false;
                         }
@@ -2522,10 +2642,11 @@ namespace WpfFront.Vista
 
         public String NuevoPrefijoFactura()
         {
-            MMaster pre = service.GetMMaster(new MMaster { Code = "PREFIJOCONTADO" }).FirstOrDefault();
+            //Tipo pre = service.GetMMaster(new MMaster { Code = "PREFIJOCONTADO" }).FirstOrDefault();
+            Tipo pre = db.Tipo.FirstOrDefault(f => f.Codigo == "PREFIJOCONTADO");
             String prefijoActual = pre.Codigo2;
-            String Limite = pre.DefValue;
-            String ConsecutivoActual = pre.Name;
+            String Limite = pre.Valor;
+            String ConsecutivoActual = pre.Nombre;
             int ConsecutivoI = Convert.ToInt32(ConsecutivoActual);
             int limiteI = Convert.ToInt32(Limite);
             ConsecutivoI = ConsecutivoI + 1;
@@ -2537,13 +2658,14 @@ namespace WpfFront.Vista
             else
             {
                 String NuevoPrefijo = prefijoActual + " " + ConsecutivoI;
-                pre.Name = ConsecutivoI.ToString();
-                service.UpdateMMaster(pre);
+                pre.Nombre = ConsecutivoI.ToString();
+                //service.UpdateMMaster(pre);
+                db.SaveChanges();
                 return NuevoPrefijo;
             }
         }
 
-        public void facturarServicios(Status NuevoStatus, Status NuevoStatusBomberos, bool AsociarFactura)
+        public void facturarServicios(Estado NuevoStatus, Estado NuevoStatusBomberos, bool AsociarFactura)
         {
             if (Model.Record.RowID != 0)
             {
@@ -2556,10 +2678,13 @@ namespace WpfFront.Vista
                     facturaServicios.FechaInicio = DateTime.Now;
                     facturaServicios.FechaFinal = DateTime.Now;
                     facturaServicios.Estado = Model.StatusFacturaEnviarERP;
-                    facturaServicios.CreatedBy = App.curUser.NombreUsuario;
-                    facturaServicios.CreationDate = DateTime.Now;
+                    facturaServicios.UsuarioCreacion = App.curUser.NombreUsuario;
+                    facturaServicios.FechaCreacion = DateTime.Now;
                     facturaServicios.NumeroFactura = NuevoPrefijoFactura();
-                    NroFactura = service.SaveFacturas(facturaServicios);
+                    //NroFactura = service.SaveFacturas(facturaServicios);
+                    NroFactura = db.Facturas.Add(facturaServicios);
+                    db.SaveChanges();
+
                 }
                 //Creo Servicio Aerodromo
                 if (!string.IsNullOrEmpty(txtTotalAerodromo.Text) && txtTotalAerodromo.Text != "0")
@@ -2568,13 +2693,16 @@ namespace WpfFront.Vista
                     aerodromo.Fecha = DateTime.Now;
                     aerodromo.Cantidad = 1;
                     aerodromo.Valor = Double.Parse(txtTotalAerodromo.Text);
-                    aerodromo.TipoServicio = service.GetMMaster(new MMaster { Code = "AERODROMO" }).First();
-                    aerodromo.Factura = NroFactura;
+                   // aerodromo.TipoServicio = service.GetMMaster(new MMaster { Code = "AERODROMO" }).First();
+                    aerodromo.TipoServicioID = db.Tipo.First(f => f.Codigo == "AERODROMO").RowID;
+                    aerodromo.Facturas = NroFactura;
                     aerodromo.Estado = NuevoStatus;
-                    aerodromo.CreatedBy = App.curUser.NombreUsuario;
+                    aerodromo.UsuarioCreacion = App.curUser.NombreUsuario;
                     aerodromo.Operacion = Model.Record;
-                    aerodromo.CreationDate = DateTime.Now;
-                    service.SaveServicios(aerodromo);
+                    aerodromo.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(aerodromo);
+                    db.Servicios.Add(aerodromo);
+                    db.SaveChanges();
                 }
                 //Creo Servicio Recargo Nocturno
                 if (!string.IsNullOrEmpty(txtRecargoNocturno.Text) && txtRecargoNocturno.Text != "0")
@@ -2583,13 +2711,16 @@ namespace WpfFront.Vista
                     recargo.Fecha = DateTime.Now;
                     recargo.Cantidad = 1;
                     recargo.Valor = Double.Parse(txtRecargoNocturno.Text);
-                    recargo.TipoServicio = service.GetMMaster(new MMaster { Code = "RECARGONOC" }).First();
+                    //recargo.TipoServicio = service.GetMMaster(new MMaster { Code = "RECARGONOC" }).First();
+                    recargo.TipoServicioID = db.Tipo.First(f => f.Codigo == "RECARGONOC").RowID;
                     recargo.Operacion = Model.Record;
-                    recargo.Factura = NroFactura;
+                    recargo.Facturas = NroFactura;
                     recargo.Estado = NuevoStatus;
-                    recargo.CreatedBy = App.curUser.NombreUsuario;
-                    recargo.CreationDate = DateTime.Now;
-                    service.SaveServicios(recargo);
+                    recargo.UsuarioCreacion = App.curUser.NombreUsuario;
+                    recargo.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(recargo);
+                    db.Servicios.Add(recargo);
+                    db.SaveChanges();
                 }
                 //Creo Servicio Puentes
                 if (!string.IsNullOrEmpty(txtTotalPuente.Text) && txtTotalPuente.Text != "0")
@@ -2598,13 +2729,16 @@ namespace WpfFront.Vista
                     puentes.Fecha = DateTime.Now;
                     puentes.Cantidad = Int32.Parse(txtNumPuentes.Text);
                     puentes.Valor = Double.Parse(txtTotalPuente.Text);
-                    puentes.TipoServicio = service.GetMMaster(new MMaster { Code = "PUENTES" }).First();
+                    //puentes.TipoServicio = service.GetMMaster(new MMaster { Code = "PUENTES" }).First();
+                    puentes.TipoServicioID = db.Tipo.First(f => f.Codigo == "PUENTES").RowID;
                     puentes.Operacion = Model.Record;
-                    puentes.Factura = NroFactura;
+                    puentes.Facturas = NroFactura;
                     puentes.Estado = NuevoStatus;
-                    puentes.CreatedBy = App.curUser.NombreUsuario;
-                    puentes.CreationDate = DateTime.Now;
-                    service.SaveServicios(puentes);
+                    puentes.UsuarioCreacion = App.curUser.NombreUsuario;
+                    puentes.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(puentes);
+                    db.Servicios.Add(puentes);
+                    db.SaveChanges();
                 }
                 //Creo Servicio Parqueo
                 if (!string.IsNullOrEmpty(txtTotalParqueo.Text) && txtTotalParqueo.Text != "0")
@@ -2613,13 +2747,16 @@ namespace WpfFront.Vista
                     parqueo.Fecha = DateTime.Now;
                     parqueo.Cantidad = Int32.Parse(txtCantHoras.Text);
                     parqueo.Valor = Double.Parse(txtTotalParqueo.Text);
-                    parqueo.TipoServicio = service.GetMMaster(new MMaster { Code = "PARQUEO" }).First();
+                    //parqueo.TipoServicioID = service.GetMMaster(new MMaster { Code = "PARQUEO" }).First();
+                    parqueo.TipoServicioID = db.Tipo.First(f=> f.Codigo == "PARQUEO").RowID;
                     parqueo.Operacion = Model.Record;
-                    parqueo.Factura = NroFactura;
+                    parqueo.Facturas = NroFactura;
                     parqueo.Estado = NuevoStatus;
-                    parqueo.CreatedBy = App.curUser.NombreUsuario;
-                    parqueo.CreationDate = DateTime.Now;
-                    service.SaveServicios(parqueo);
+                    parqueo.UsuarioCreacion = App.curUser.NombreUsuario;
+                    parqueo.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(parqueo);
+                    db.Servicios.Add(parqueo);
+                    db.SaveChanges();
                 }
                 //Creo Servicio Tasas
                 if (!string.IsNullOrEmpty(txtValorTasas.Text) && txtValorTasas.Text != "0")
@@ -2628,32 +2765,35 @@ namespace WpfFront.Vista
                     tasas.Fecha = DateTime.Now;
                     tasas.Cantidad = Int32.Parse(txtcantPasajeros.Text);
                     tasas.Valor = Double.Parse(txtValorTasas.Text);
-                    tasas.TipoServicio = service.GetMMaster(new MMaster { Code = "TASAS" }).First();
+                    //tasas.TipoServicio = service.GetMMaster(new MMaster { Code = "TASAS" }).First();
+                    tasas.TipoServicioID = db.Tipo.First(f => f.Codigo == "TASAS").RowID;
                     tasas.Operacion = Model.Record;
-                    tasas.Factura = NroFactura;
+                    tasas.Facturas = NroFactura;
                     tasas.Estado = NuevoStatus;
-                    tasas.CreatedBy = App.curUser.NombreUsuario;
-                    tasas.CreationDate = DateTime.Now;
-                    service.SaveServicios(tasas);
+                    tasas.UsuarioCreacion = App.curUser.NombreUsuario;
+                    tasas.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(tasas);
+                    db.Servicios.Add(tasas);
+                    db.SaveChanges();
                 }
                 //Creo 2 Servicios, uno agrupando asistencia y otro agrugando limpieza
                 int cantAsistencia = 0, cantLimpieza = 0;
                 double acumAsistencia = 0, acumLimpieza = 0;
                 if (!string.IsNullOrEmpty(txtCantidadSerBomb.Text) && txtCantidadSerBomb.Text != "0")
                 {
-                    foreach (Bomberos ServicioBombero in ListaBomberos.Items)
+                    foreach (Bombero ServicioBombero in ListaBomberos.Items)
                     {
                         if (ServicioBombero.Estado.Nombre == "Nuevo")
                         {
-                            if (ServicioBombero.TipoServicioBomb.Codigo == "ASISTENCIA")
+                            if (ServicioBombero.Tipo.Codigo == "ASISTENCIA")
                             {
                                 cantAsistencia++;
-                                acumAsistencia += ServicioBombero.ValorServicio;
+                                acumAsistencia += ServicioBombero.ValorServicio.Value;
                             }
-                            else if (ServicioBombero.TipoServicioBomb.Codigo == "LIMPIEZA")
+                            else if (ServicioBombero.Tipo.Codigo == "LIMPIEZA")
                             {
                                 cantLimpieza++;
-                                acumLimpieza += ServicioBombero.ValorServicio;
+                                acumLimpieza += ServicioBombero.ValorServicio.Value;
                             }
                         }
                     }
@@ -2669,13 +2809,16 @@ namespace WpfFront.Vista
                     asistenciaBomberos.Fecha = DateTime.Now;
                     asistenciaBomberos.Cantidad = cantAsistencia;
                     asistenciaBomberos.Valor = acumAsistencia;
-                    asistenciaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "ASISTENCIA" }).First();
+                    //asistenciaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "ASISTENCIA" }).First();
+                    asistenciaBomberos.TipoServicioID = db.Tipo.First(f => f.Codigo == "ASISTENCIA").RowID;
                     asistenciaBomberos.Operacion = Model.Record;
-                    asistenciaBomberos.Factura = NroFactura;
+                    asistenciaBomberos.Facturas = NroFactura;
                     asistenciaBomberos.Estado = NuevoStatus;
-                    asistenciaBomberos.CreatedBy = App.curUser.NombreUsuario;
-                    asistenciaBomberos.CreationDate = DateTime.Now;
-                    service.SaveServicios(asistenciaBomberos);
+                    asistenciaBomberos.UsuarioCreacion = App.curUser.NombreUsuario;
+                    asistenciaBomberos.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(asistenciaBomberos);
+                    db.Servicios.Add(asistenciaBomberos);
+                    db.SaveChanges();
                 }
 
                 if (cantLimpieza != 0)
@@ -2684,18 +2827,21 @@ namespace WpfFront.Vista
                     limpiezaBomberos.Fecha = DateTime.Now;
                     limpiezaBomberos.Cantidad = cantLimpieza;
                     limpiezaBomberos.Valor = acumLimpieza;
-                    limpiezaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "LIMPIEZA" }).First();
+                    //limpiezaBomberos.TipoServicio = service.GetMMaster(new MMaster { Code = "LIMPIEZA" }).First();
+                    limpiezaBomberos.TipoServicioID = db.Tipo.First(f => f.Codigo == "LIMPIEZA").RowID;
                     limpiezaBomberos.Operacion = Model.Record;
-                    limpiezaBomberos.Factura = NroFactura;
+                    limpiezaBomberos.FacturaID = NroFactura.RowID;
                     limpiezaBomberos.Estado = NuevoStatus;
-                    limpiezaBomberos.CreatedBy = App.curUser.NombreUsuario;
-                    limpiezaBomberos.CreationDate = DateTime.Now;
-                    service.SaveServicios(limpiezaBomberos);
+                    limpiezaBomberos.UsuarioCreacion = App.curUser.NombreUsuario;
+                    limpiezaBomberos.FechaCreacion = DateTime.Now;
+                    //service.SaveServicios(limpiezaBomberos);
+                    db.Servicios.Add(limpiezaBomberos);
+                    db.SaveChanges();
                 }
                 //Le asigno status de Facturada a la operacionbtnFacturar_Click
-                if (Model.Record.TipoFacturacion != null)
+                if (Model.Record.Tipo != null)
                 {
-                    if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                    if (Model.Record.Tipo.Codigo != "CONTADO")
                     {
                         Model.Record.Estado = Model.StatusOperacionLiquidada;
                     }
@@ -2706,9 +2852,10 @@ namespace WpfFront.Vista
                 }                
                 Model.Record.Facturado = true;
                 //Datos de modificacion Operacion
-                Model.Record.ModDate = DateTime.Now;
-                Model.Record.ModifiedBy = App.curUser.NombreUsuario;
-                service.UpdateOperacion(Model.Record);
+                Model.Record.FechaModificacion = DateTime.Now;
+                Model.Record.UsuarioModificacion = App.curUser.NombreUsuario;
+                //service.UpdateOperacion(Model.Record);
+                db.SaveChanges();
                 //Para que No facture otra vez
                 btnFacturar.IsEnabled = false;
                 //Para que pueda imprimir
@@ -2725,9 +2872,9 @@ namespace WpfFront.Vista
                 //Asigno la factura y el status a los servicios bomberos
                 this.cambiarStatusYFacturaBomberos(NuevoStatusBomberos, "Nuevo");
                 //Le cambio el estado a las tasas 
-                if (Model.Record.TipoFacturacion != null)
+                if (Model.Record.Tipo != null)
                 {
-                    if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                    if (Model.Record.Tipo.Codigo != "CONTADO")
                     {
                         this.cambiarStatusTasas(Model.StatusTasasParaFacturar);
                     }
@@ -2737,7 +2884,7 @@ namespace WpfFront.Vista
                     }
                 } 
 
-                if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                if (Model.Record.Tipo.Codigo != "CONTADO")
                 {
                     Util.ShowMessage("Operacion Terminada correctamente");
                 }
@@ -2757,7 +2904,8 @@ namespace WpfFront.Vista
                     Util.ShowError("Factura Anulada, no se puede imprimir");
                     return;
                 }
-                IList<Servicios> listaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Factura = new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID } });
+                //IList<Servicios> listaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Facturas = new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID } });
+                IList<Servicios> listaServicios = db.Servicios.Where(f => f.OperacionID == Model.Record.RowID && f.FacturaID == ((Servicios)ListaFacturas.SelectedItem).RowID).ToList();
                 PrinterControl.imprimirFactura(listaServicios);
             }
             else
@@ -2768,20 +2916,22 @@ namespace WpfFront.Vista
         }
 
         //Pone el nuevoStatus a la condicion que digan
-        public void cambiarStatusYFacturaBomberos(Status NuevoStatus, String Condicion)
+        public void cambiarStatusYFacturaBomberos(Estado NuevoStatus, String Condicion)
         {
-            foreach (Bomberos ServicioBombero in ListaBomberos.Items)
+            foreach (Bombero ServicioBombero in ListaBomberos.Items)
             {
                 if (ServicioBombero.Estado.Nombre == Condicion)
                 {
                     ServicioBombero.Estado = NuevoStatus;
-                    service.UpdateBomberos(ServicioBombero);
+                    //service.UpdateBomberos(ServicioBombero);
+                    db.SaveChanges();
                 }
             }
-            Model.RegistroBomberosList = service.GetBomberos(new Bomberos { Operacion = Model.Record, Activo = true }).Where(f => f.Status.StatusType.Name == "ServicioBomberos").ToList();
+            //Model.RegistroBomberosList = service.GetBomberos(new Bomberos { Operacion = Model.Record, Activo = true }).Where(f => f.Status.StatusType.Nombre == "ServicioBomberos").ToList();
+            Model.RegistroBomberosList = db.Bombero.Where(f => f.OperacionID == Model.Record.RowID && f.Activo == true && f.Estado.Tipo.Nombre == "ServicioBomberos").ToList();
         }
 
-        public void cambiarStatusTasas(Status NuevoStatus)
+        public void cambiarStatusTasas(Estado NuevoStatus)
         {
             //Le cambio el estado a las tasas 
             if (Model.RecordTasas.RowID != 0)
@@ -2789,12 +2939,14 @@ namespace WpfFront.Vista
                 try
                 {
                     //Asigno las variables de modificacion
-                    Model.RecordTasas.ModifiedBy = App.curUser.NombreUsuario;
-                    Model.RecordTasas.ModDate = DateTime.Now;
+                    Model.RecordTasas.UsuarioModificacion = App.curUser.NombreUsuario;
+                    Model.RecordTasas.FechaModificacion = DateTime.Now;
                     Model.RecordTasas.Estado = NuevoStatus;
                     //Actualizo
-                    service.UpdateTasas(Model.RecordTasas);
-                    Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+                    //service.UpdateTasas(Model.RecordTasas);
+                    db.SaveChanges();
+                    //Model.RegistroTasasList = service.GetTasas(new Tasas { Operacion = Model.Record });
+                    Model.RegistroTasasList = db.Tasas.Where(f => f.OperacionID == Model.Record.RowID).ToList();
                 }
                 catch (Exception)
                 {
@@ -2819,19 +2971,22 @@ namespace WpfFront.Vista
                     return;
                 }
                 //Cambio Status de los Servicios a Anulado
-                IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Factura = new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID } , Status = Model.StatusServiciosEnviarERP }).ToList();
+                //IList<Servicios> ListaServicios = service.GetServicios(new Servicios { Operacion = Model.Record, Facturas = new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID } , Status = Model.StatusServiciosEnviarERP }).ToList();
+                IList<Servicios> ListaServicios = db.Servicios.Where(f=> f.OperacionID == Model.Record.RowID && f.FacturaID == ((Servicios)ListaFacturas.SelectedItem).RowID && f.Estado.RowID == Model.StatusServiciosEnviarERP.RowID).ToList() ;
                 foreach (Servicios servicio in ListaServicios)
                 {
                     servicio.Estado = Model.StatusServiciosAnulada;
-                    service.UpdateServicios(servicio);
+                    //service.UpdateServicios(servicio);
+                    db.SaveChanges();
                 }
                 //Cambio Status de la Factura a Anulada
-                Facturas Factura = service.GetFacturas(new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID }).First();
+                //Facturas Factura = service.GetFacturas(new Facturas { RowID = ((Servicios)ListaFacturas.SelectedItem).RowID }).First();
+                Facturas Factura = db.Facturas.First(f => f.RowID == ((Servicios)ListaFacturas.SelectedItem).RowID);
                 Factura.Estado = Model.StatusFacturaAnulada;
-                service.UpdateFacturas(Factura);
-                
+                //service.UpdateFacturas(Factura);
+                db.SaveChanges();
                 //Cambio el status de los bomberos a Nuevo
-                this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusBomberosParaEnviarERP.Name);
+                this.cambiarStatusYFacturaBomberos(Model.StatusBomberosNuevo, Model.StatusBomberosParaEnviarERP.Nombre);
                 //Cambio el estado para las tasas a nuevo
                 this.cambiarStatusTasas(Model.StatusTasasNueva);
                 //Actualizar Lista
@@ -2839,13 +2994,17 @@ namespace WpfFront.Vista
 
                 //Actualizo El vuelo A Facturado = False
                 Model.Record.Facturado = false;
-                Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
-                service.UpdateOperacion(Model.Record);
+                //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
+                Model.Record.Estado =  db.Estado.FirstOrDefault(f=>f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
+                //service.UpdateOperacion(Model.Record);
+                db.SaveChanges();
                 //Para abrir la operacion y que puedan modificar
                 Model.RecordLlegada.Estado = Model.StatusLlegadaSalidaGuardada;
-                service.UpdateLlegada(Model.RecordLlegada);
+                //service.UpdateLlegada(Model.RecordLlegada);
+                db.SaveChanges();
                 Model.RecordSalida.Estado = Model.StatusLlegadaSalidaGuardada;
-                service.UpdateSalida(Model.RecordSalida);
+                //service.UpdateSalida(Model.RecordSalida);
+                db.SaveChanges();
 
                 //Habilito los campos para que los pueda editar
                 BotonFacturar.IsEnabled = true;
@@ -2891,32 +3050,37 @@ namespace WpfFront.Vista
                             return;
                         }
                     }
+                    int var = 0;
                     Model.RecordAdicionalesPyP.Operacion = Model.Record;
                     Model.RecordAdicionalesPyP.FechaInicial = DTP_FechaInicialPyP.SelectedDate != null ? DTP_FechaInicialPyP.SelectedDate : null;
                     Model.RecordAdicionalesPyP.FechaFinal = DTP_FechaFinalPyP.SelectedDate != null ? DTP_FechaFinalPyP.SelectedDate : null;
-                    Model.RecordAdicionalesPyP.TipoPosicionLlegada = cbxTipPosLlegadaPyP.SelectedItem != null ? (Tipo)(cbxTipPosLlegadaPyP.SelectedItem) : null;
-                    Model.RecordAdicionalesPyP.TipoPosicionSalida = cbxTipPosSalidaPyP.SelectedItem != null ? (Tipo)(cbxTipPosSalidaPyP.SelectedItem) : null;
-                    Model.RecordAdicionalesPyP.TipoLlegada = cbxTipoLlegada.SelectedItem != null ? (Tipo)(cbxTipoLlegada.SelectedItem) : null;
-                    Model.RecordAdicionalesPyP.PosicionLlegada = cbxPosLlegadaPyP.SelectedItem != null ? (Tipo)(cbxPosLlegadaPyP.SelectedItem) : null;
-                    Model.RecordAdicionalesPyP.PosicionSalida = cbxPosSalidaPyP.SelectedItem != null ? (Tipo)(cbxPosSalidaPyP.SelectedItem) : null;
+                    Model.RecordAdicionalesPyP.TipoPosicionLlegadaID = cbxTipPosLlegadaPyP.SelectedItem != null ? ((Tipo)(cbxTipPosLlegadaPyP.SelectedItem)).RowID : var = 0;
+                    Model.RecordAdicionalesPyP.TipoPosicionSalidaID = cbxTipPosSalidaPyP.SelectedItem != null ? ((Tipo)(cbxTipPosSalidaPyP.SelectedItem)).RowID : var = 0;
+                    Model.RecordAdicionalesPyP.TipoLlegadaID = cbxTipoLlegada.SelectedItem != null ? ((Tipo)(cbxTipoLlegada.SelectedItem)).RowID : var = 0;
+                    Model.RecordAdicionalesPyP.PosicionLlegadaID = cbxPosLlegadaPyP.SelectedItem != null ? ((Tipo)(cbxPosLlegadaPyP.SelectedItem)).RowID : var = 0;
+                    Model.RecordAdicionalesPyP.PosicionSalidaID = cbxPosSalidaPyP.SelectedItem != null ? ((Tipo)(cbxPosSalidaPyP.SelectedItem)).RowID : var = 0;
                     Model.RecordAdicionalesPyP.Estado = Model.StatusAdicionalesGuardado;
                   
                     if (Model.RecordAdicionalesPyP.RowID == 0)
                     {
-                       Model.RecordAdicionalesPyP.CreatedBy = App.curUser.NombreUsuario;
-                       Model.RecordAdicionalesPyP.CreationDate = DateTime.Now;
-                       Model.RecordAdicionalesPyP = service.SaveAdicionalesPyP(Model.RecordAdicionalesPyP);
+                       Model.RecordAdicionalesPyP.UsuarioCreacion = App.curUser.NombreUsuario;
+                       Model.RecordAdicionalesPyP.FechaCreacion = DateTime.Now;
+                        // Model.RecordAdicionalesPyP = service.SaveAdicionalesPyP(Model.RecordAdicionalesPyP);
+                        db.AdicionalesPyP.Add(Model.RecordAdicionalesPyP);
+                        db.SaveChanges();
                     }
                     else
                     {
-                        Model.RecordAdicionalesPyP.ModifiedBy = App.curUser.NombreUsuario;
-                        Model.RecordAdicionalesPyP.ModDate = DateTime.Now;
-                        service.UpdateAdicionalesPyP(Model.RecordAdicionalesPyP);
+                        Model.RecordAdicionalesPyP.UsuarioModificacion = App.curUser.NombreUsuario;
+                        Model.RecordAdicionalesPyP.FechaModificacion = DateTime.Now;
+                        //service.UpdateAdicionalesPyP(Model.RecordAdicionalesPyP);
+                        db.SaveChanges();
                     }
                     limpiarAdcionales();
                     panelHoraDespegue.Visibility = Visibility.Collapsed;
                     //panelIngresoAdicionales.Visibility = Visibility.Collapsed;
-                    Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+                    //Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+                    Model.RegistroAdicionalesPyPList = db.AdicionalesPyP.Where(f => f.OperacionID == Model.Record.RowID).ToList();
                     Util.ShowMessage("Guardado Correctamente");
                 }
                 else
@@ -2945,15 +3109,16 @@ namespace WpfFront.Vista
                 Model.RecordAdicionalesPyP.Operacion = Model.Record;
                 Model.RecordAdicionalesPyP.FechaInicial = DTP_FechaInicialPyP.SelectedDate;
                 Model.RecordAdicionalesPyP.FechaFinal = DTP_FechaFinalPyP.SelectedDate;
-                Model.RecordAdicionalesPyP.TipoPosicionLlegada = (Tipo)(cbxTipPosLlegadaPyP.SelectedItem);
-                Model.RecordAdicionalesPyP.TipoPosicionSalida = (Tipo)(cbxTipPosSalidaPyP.SelectedItem);
-                Model.RecordAdicionalesPyP.TipoLlegada = (Tipo)(cbxTipoLlegada.SelectedItem);
-                Model.RecordAdicionalesPyP.PosicionLlegada = (Tipo)(cbxPosLlegadaPyP.SelectedItem);
-                Model.RecordAdicionalesPyP.PosicionSalida = (Tipo)(cbxPosSalidaPyP.SelectedItem);
+                Model.RecordAdicionalesPyP.TipoPosicionLlegadaID = ((Tipo)(cbxTipPosLlegadaPyP.SelectedItem)).RowID;
+                Model.RecordAdicionalesPyP.TipoPosicionSalidaID = ((Tipo)(cbxTipPosSalidaPyP.SelectedItem)).RowID;
+                Model.RecordAdicionalesPyP.TipoLlegadaID = ((Tipo)(cbxTipoLlegada.SelectedItem)).RowID;
+                Model.RecordAdicionalesPyP.PosicionLlegadaID = ((Tipo)(cbxPosLlegadaPyP.SelectedItem)).RowID;
+                Model.RecordAdicionalesPyP.PosicionSalidaID = ((Tipo)(cbxPosSalidaPyP.SelectedItem)).RowID;
                 Model.RecordAdicionalesPyP.Estado = Model.StatusAdicionalesConfirmado;
-                Model.RecordAdicionalesPyP.ModifiedBy = App.curUser.NombreUsuario;
-                Model.RecordAdicionalesPyP.ModDate = DateTime.Now;
-                service.UpdateAdicionalesPyP(Model.RecordAdicionalesPyP);
+                Model.RecordAdicionalesPyP.UsuarioModificacion = App.curUser.NombreUsuario;
+                Model.RecordAdicionalesPyP.FechaModificacion = DateTime.Now;
+                //service.UpdateAdicionalesPyP(Model.RecordAdicionalesPyP);
+                db.SaveChanges();
                 if (Model.RecordAdicionalesPyP.Despego == true)
                 {
                     //Cargo los datos del adicional en los datos de salida del vuelo
@@ -2961,7 +3126,8 @@ namespace WpfFront.Vista
                     panelIngresoAdicionales.IsEnabled = false;
                     btnAgregarPyp.IsEnabled = false;
                 }
-                Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+                //Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+                Model.RegistroAdicionalesPyPList = db.AdicionalesPyP.Where(f => f.OperacionID == Model.Record.RowID).ToList();
                 //Cargo los datos del adicional en los datos de salida del vuelo
                 this.limpiarAdcionales();
                 panelHoraDespegue.Visibility = Visibility.Collapsed;
@@ -2984,24 +3150,24 @@ namespace WpfFront.Vista
             //panelIngresoAdicionales.Visibility = Visibility.Visible;
             Model.RecordAdicionalesPyP = (AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem;
             //Si ya esta confirmado no lo puede editar
-            if (((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).Estado.Nombre != Model.StatusAdicionalesGuardado.Name)
+            if (((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).Estado.Nombre != Model.StatusAdicionalesGuardado.Nombre)
             {
                 panelIngresoAdicionales.IsEnabled = false;
             }
             else
             {         panelIngresoAdicionales.IsEnabled = true; }
             //Si esta seleccionado despego, muestro la hora de despegue
-            if (((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).Despego)
+            if (((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).Despego.Value)
             {
                 panelHoraDespegue.Visibility = Visibility.Visible;
             }
            //Tipos de posiciones
-            cbxTipPosLlegadaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionLlegada != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionLlegada.MetaMasterID : 0;
-            cbxTipPosSalidaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionSalida != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionSalida.MetaMasterID : 0;
+            cbxTipPosLlegadaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionLlegadaID != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionLlegadaID : 0;
+            cbxTipPosSalidaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionSalidaID != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoPosicionSalidaID : 0;
             //Posiciones
-            cbxPosLlegadaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionLlegada != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionLlegada.MetaMasterID : 0;
-            cbxPosSalidaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionSalida != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionSalida.MetaMasterID : 0;
-            cbxTipoLlegada.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoLlegada != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoLlegada.MetaMasterID : 0;
+            cbxPosLlegadaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionLlegadaID != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionLlegadaID : 0;
+            cbxPosSalidaPyP.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionSalidaID != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).PosicionSalidaID : 0;
+            cbxTipoLlegada.SelectedValue = ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoLlegadaID != null ? ((AdicionalesPyP)lvRegistroSAdicionalesPyp.SelectedItem).TipoLlegadaID : 0;
         }
 
         public void limpiarAdcionales() {
@@ -3013,9 +3179,9 @@ namespace WpfFront.Vista
             cbxPosLlegadaPyP.SelectedIndex = -1;
             cbxPosSalidaPyP.SelectedIndex = -1;
             //Si esta seleccionado el tipo de vuelo en la llegada se lo asigno por defecto al control
-            if (Model.Record.Llegada.TipoVuelo != null)
+            if (Model.Record.Llegada.TipoVueloID != null)
             {
-                cbxTipoLlegada.SelectedItem = Model.Record.Llegada.TipoVuelo;
+                ((Tipo)cbxTipoLlegada.SelectedItem).RowID = Model.Record.Llegada.TipoVueloID.Value;
             }
             else
             {
@@ -3053,10 +3219,13 @@ namespace WpfFront.Vista
                         this.limpiarAdcionales();
                     }
                     panelIngresoAdicionales.IsEnabled = true;
-                    service.DeleteAdicionalesPyP(adicional);
+                    //service.DeleteAdicionalesPyP(adicional);
+                    db.AdicionalesPyP.Remove(adicional);
+                    db.SaveChanges();
                 }
             }
-            Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+            //Model.RegistroAdicionalesPyPList = service.GetAdicionalesPyP(new AdicionalesPyP { Operacion = Model.Record });
+            Model.RegistroAdicionalesPyPList = db.AdicionalesPyP.Where(f=> f.OperacionID == Model.Record.RowID).ToList();
         }
 
         private void btnCalcularAdicionalesPyp_Click(object sender, RoutedEventArgs e)
@@ -3099,7 +3268,7 @@ namespace WpfFront.Vista
                 return null;
             }
 
-            if (Model.RegistroAdicionalesPyPList.Count(f=> f.Estado.Nombre == Model.StatusAdicionalesConfirmado.Name) == 0 )
+            if (Model.RegistroAdicionalesPyPList.Count(f=> f.Estado.Nombre == Model.StatusAdicionalesConfirmado.Nombre) == 0 )
             {
                 Util.ShowError("No hay Adicionales confirmados para facturar");
                 return null;
@@ -3113,10 +3282,12 @@ namespace WpfFront.Vista
                 cantPuentes = CalcularCantPuentes(adicional);
 
                 //Verifico si cuenta con una tarifa de puentes disponible
-                Tarifas TarifaPuente = null;
-                if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PUENTES" } }).Count == 1)
+                TarifaCecoa TarifaPuente = null;
+                //if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PUENTES" } }).Count == 1)
+                if (TraerTarifa(adicional.FechaFinal.Value, "PUENTES").Count == 1)
                 {
-                    TarifaPuente = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PUENTES" } }).First();
+                    //TarifaPuente = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PUENTES" } }).First();
+                    TarifaPuente = TraerTarifa(adicional.FechaFinal.Value, "PUENTES").FirstOrDefault();
                 }
                 else
                 {
@@ -3125,12 +3296,14 @@ namespace WpfFront.Vista
                 }
 
                 cantHoras = CalcularCantHoras(adicional);
-                
+
                 //Verifico si cuenta con una tarifa de parqueo disponible
-                Tarifas TarifaParqueo = null;
-                if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PARQUEO" } }).Count == 1)
+                TarifaCecoa TarifaParqueo = null;
+                //if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PARQUEO" } }).Count == 1)
+                if (TraerTarifa(adicional.FechaFinal.Value, "PARQUEO").Count == 1)
                 {
-                    TarifaParqueo = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PARQUEO" } }).First();
+                    //TarifaParqueo = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "PARQUEO" } }).First();
+                    TarifaParqueo = TraerTarifa(adicional.FechaFinal.Value, "PARQUEO").FirstOrDefault();
                 }
                 else
                 {
@@ -3139,11 +3312,13 @@ namespace WpfFront.Vista
                     ValorParqueo = 0;
                 }
 
-                Tarifas TarifaAerodromo = null;
+                TarifaCecoa TarifaAerodromo = null;
                 // Verifico si existe una tarifa AERODROMO para la fecha de operacion del vuelo
-                if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaInicial, TipoTarifa = new MMaster { Code = "AERODROMO" } }).Count == 1)
+                //if (service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaInicial, TipoTarifa = new MMaster { Code = "AERODROMO" } }).Count == 1)
+                if (TraerTarifa(adicional.FechaFinal.Value, "AERODROMO").Count == 1)
                 {
-                    TarifaAerodromo = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "AERODROMO" } }).First();
+                    //TarifaAerodromo = service.GetTarifas(new Tarifas { FechaFiltro = adicional.FechaFinal, TipoTarifa = new MMaster { Code = "AERODROMO" } }).First();
+                    TarifaAerodromo = TraerTarifa(adicional.FechaFinal.Value, "AERODROMO").FirstOrDefault();
                 }
                 else
                 {
@@ -3153,7 +3328,7 @@ namespace WpfFront.Vista
                 }
 
                 //Calcular el valor total puentes dependiendo del tipo de llegada
-                if (adicional.TipoLlegada.Codigo == "NACIONAL")
+                if (adicional.Tipo2.Codigo == "NACIONAL")
                 {
                     if (TarifaPuente != null)
                     {
@@ -3177,11 +3352,12 @@ namespace WpfFront.Vista
                 {
                     TRM Trm;
                     //Verifico si hay una TRM vigente para la operacion
-                    if (service.GetTRM(new TRM { FechaFiltro = adicional.FechaFinal }).Count == 1)
+                    //if (service.GetTRM(new TRM { FechaFiltro = adicional.FechaFinal }).Count == 1)
+                        if (TraerTRM(adicional.FechaFinal.Value).Count == 1)
                     {
                         //Asigno la TRM vigente
-                        Trm = service.GetTRM(new TRM { FechaFiltro = adicional.FechaFinal }).First();
-
+                        //Trm = service.GetTRM(new TRM { FechaFiltro = adicional.FechaFinal }).First();
+                        Trm = TraerTRM(adicional.FechaFinal.Value).FirstOrDefault();
                         if (TarifaPuente != null)
                         {
                             //Calculo Puentes = Cantidad de puentes * tarifa Puentes INTERNACIONAL * TRM
@@ -3233,12 +3409,12 @@ namespace WpfFront.Vista
             bool llegoEnPuente, SalioEnPuente;
             
             //Valido si Llego en puente
-            llegoEnPuente = adicional.TipoPosicionLlegada.Codigo == "PUENTE" ? true : false;
-            SalioEnPuente = adicional.TipoPosicionSalida.Codigo == "PUENTE" ? true : false;
+            llegoEnPuente = adicional.Tipo4.Codigo == "PUENTE" ? true : false;
+            SalioEnPuente = adicional.Tipo3.Codigo == "PUENTE" ? true : false;
             // Llego y salio por puente, los tipos son iguales.
             if ((llegoEnPuente && SalioEnPuente))
             {
-                if ((adicional.PosicionLlegada.Codigo == adicional.PosicionSalida.Codigo))
+                if ((adicional.Tipo == adicional.Tipo1)) // Si la posicion de llegada y salida son las misamas
                 {
                     //Fechas iguales
                     if (adicional.FechaInicial == adicional.FechaFinal)
@@ -3266,7 +3442,7 @@ namespace WpfFront.Vista
             int cantHoras = 0;
 
             //Si llego en Hangar no cobra parqueo 
-            if (adicional.TipoPosicionLlegada.Codigo == "HANGAR")
+            if (adicional.Tipo4.Codigo == "HANGAR")
             {
                 return 0;
             }
@@ -3421,18 +3597,18 @@ namespace WpfFront.Vista
             MaskedHoraSalidaPlataforma.Text = Model.RecordAdicionalesPyP.HoraSalida;
             MaskedHoraSalidaPuente.Text = String.IsNullOrEmpty(Model.RecordAdicionalesPyP.HoraSalidaPuente) ? "" : Model.RecordAdicionalesPyP.HoraSalidaPuente ;
             Model.RecordSalida.FechaSalida = Model.RecordAdicionalesPyP.FechaFinal;
-            TipoPosicionSalida.SelectedValue = Model.RecordAdicionalesPyP.TipoPosicionSalida.MetaMasterID;
-            PosicionSalida.SelectedValue = Model.RecordAdicionalesPyP.PosicionSalida != null ? Model.RecordAdicionalesPyP.PosicionSalida.MetaMasterID : 0;
-            //TipoVueloSalida.SelectedValue = Model.RecordAdicionalesPyP.TipoLlegada.MetaMasterID;
+            TipoPosicionSalida.SelectedValue = Model.RecordAdicionalesPyP.TipoPosicionSalidaID;
+            PosicionSalida.SelectedValue = Model.RecordAdicionalesPyP.PosicionSalidaID != null ? Model.RecordAdicionalesPyP.PosicionSalidaID : 0;
+            //TipoVueloSalida.SelectedValue = Model.RecordAdicionalesPyP.TipoLlegada.RowID;
             HoraDespegue.Text = Model.RecordAdicionalesPyP.HoraDespegue;
 
 
             Model.RecordSalida.HoraSalidaPlataforma = Model.RecordAdicionalesPyP.HoraSalida;
-            Model.RecordSalida.TipoPosicionSalida = Model.RecordAdicionalesPyP.TipoPosicionSalida;
-            Model.RecordSalida.PosicionSalida = Model.RecordAdicionalesPyP.PosicionSalida != null ? Model.RecordAdicionalesPyP.PosicionSalida : null;
+            Model.RecordSalida.PosicionSalidaID = Model.RecordAdicionalesPyP.PosicionSalidaID;
+            Model.RecordSalida.PosicionSalidaID = Model.RecordAdicionalesPyP.PosicionSalidaID != null ? Model.RecordAdicionalesPyP.PosicionSalidaID : null;
             Model.RecordSalida.HoraDespegue = Model.RecordAdicionalesPyP.HoraDespegue;
 
-            if (((Tipo)Model.RecordAdicionalesPyP.TipoPosicionSalida).Codigo == "PUENTE")
+            if (((Tipo)Model.RecordAdicionalesPyP.Tipo3).Codigo == "PUENTE")
             {
                 String asd = (Convert.ToDateTime(Model.RecordAdicionalesPyP.HoraSalida).AddMinutes(-1)).ToShortTimeString();
                 Model.RecordSalida.HoraSalidaPuente = asd.Length == 4 ? "0" + asd : asd;
@@ -3447,10 +3623,11 @@ namespace WpfFront.Vista
             
 
             //Guardo la salida
-            Model.RecordSalida.ModDate = DateTime.Now;
-            Model.RecordSalida.ModifiedBy = App.curUser.NombreUsuario;
+            Model.RecordSalida.FechaModificacion = DateTime.Now;
+            Model.RecordSalida.UsuarioModificacion = App.curUser.NombreUsuario;
             //Actualizo la Salida
-            service.UpdateSalida(Model.RecordSalida);
+            //service.UpdateSalida(Model.RecordSalida);
+            db.SaveChanges();
         }
 
         #endregion
@@ -3462,7 +3639,7 @@ namespace WpfFront.Vista
                 
                 if (Model.Record.Facturado == false)
                 {
-                    if (Model.Record.TipoFacturacion.Codigo != "CONTADO")
+                    if (Model.Record.Tipo.Codigo != "CONTADO")
                     {
                         Util.ShowError("Esta operación no se ha terminado.");
                     }
@@ -3473,27 +3650,62 @@ namespace WpfFront.Vista
                     return;
                 }
                 //listo los servicios que no estan anulados para mostrarlos en el informe
-                List<Servicios> ListaServicios =  service.GetServicios(new Servicios { Operacion = Model.Record}).Where(f => f.Estado.Nombre != Model.StatusServiciosAnulada.Name).ToList();
+                //List<Servicios> ListaServicios =  service.GetServicios(new Servicios { Operacion = Model.Record}).Where(f => f.Estado.Nombre != Model.StatusServiciosAnulada.Nombre).ToList();
+                List<Servicios> ListaServicios =  db.Servicios.Where(f => f.OperacionID == Model.Record.RowID && f.Estado.Nombre != Model.StatusServiciosAnulada.Nombre).ToList();
                 //Busco el trm con la fecha de salida para mostrarlo en el informe
                 double valorTRM=0;
                 try
                 {
-                    TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
-                    valorTRM = trm.Valor;
+                    //TRM trm = service.GetTRM(new TRM { FechaFiltro = Model.Record.Salida.FechaSalida }).First();
+                    TRM trm = TraerTRM(Model.Record.Salida.FechaSalida.Value).FirstOrDefault();
+                    valorTRM = trm.Valor.Value;
                 }
                 catch (Exception exp) { }
                 string tiempo = ObtenerTiempoHoras();
 
-                PrinterControl.imprimirDetalleOperacion(Model.Record, 
-                        service.GetTasas(new Tasas { Operacion = Model.Record }).ToList(), 
+                PrinterControl.imprimirDetalleOperacion(Model.Record,
+                        db.Tasas.Where(f => f.OperacionID == Model.Record.RowID).ToList(), 
                         ListaServicios,
                         valorTRM, tiempo);
             }
-            else
+                       else
             {
                 Util.ShowError("Debe Crear una operacion");
 
             }
+        }
+
+        public List<TRM> TraerTRM(DateTime FechaFiltro)
+        {
+            List<TRM> Lista = new List<TRM>();
+            if (FechaFiltro != DateTime.MinValue)
+            {
+                Lista = db.TRM.Where(f => (FechaFiltro >= f.FechaInicial.Value && FechaFiltro <= f.FechaFinal.Value)).ToList();
+            }
+            else
+            {
+                return null;
+            }
+            return Lista;
+        }
+
+        public List<TarifaCecoa> TraerTarifa(DateTime FechaFiltro, String Codigo)
+        {
+            List<TarifaCecoa> Lista = new List<TarifaCecoa>();
+            if (FechaFiltro != DateTime.MinValue)
+            {
+                Lista = db.TarifaCecoa.Where(f => (FechaFiltro >= f.FechaInicial.Value && FechaFiltro <= f.FechaFinal.Value)).ToList();
+            }
+            else
+            {
+                Lista = db.TarifaCecoa.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(Codigo))
+            {
+                Lista = Lista.Where(f => f.Tipo1.Codigo == Codigo).ToList();
+            }
+            return Lista;
         }
 
         public string ObtenerTiempoHoras()
@@ -3595,7 +3807,7 @@ namespace WpfFront.Vista
         private void cmb_TipoVuelo_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (cmb_TipoVuelo.SelectedItem == null || cmb_TipoVuelo.SelectedIndex == -1) { return; }
-            cbxTipoLlegada.SelectedValue = ((Tipo)cmb_TipoVuelo.SelectedItem).MetaMasterID;
+            cbxTipoLlegada.SelectedValue = ((Tipo)cmb_TipoVuelo.SelectedItem).RowID;
             
         }
 

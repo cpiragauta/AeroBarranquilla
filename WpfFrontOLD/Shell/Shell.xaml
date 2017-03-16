@@ -9,9 +9,8 @@
     WindowStyle="SingleBorderWindow"        
     WindowStartupLocation="CenterScreen"   
     xmlns:lg="clr-namespace:WpfFront.Common"
-    Icon="/WpfFront;component/Images/logo16x16.png"            
+    Icon="/WpfFront;component/Images/Icons/logo16x16.ico"            
     WindowState="Maximized">
-
     <Grid x:Uid="Grid_1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40*" />
