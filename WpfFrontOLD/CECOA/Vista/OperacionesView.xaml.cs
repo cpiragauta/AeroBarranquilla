@@ -815,6 +815,11 @@ namespace WpfFront.Vista
         //Selecciono por defecto las fechas de la operacion (Llegada)
         private void DTP_FechaOperacion_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            if (DTP_FechaOperacion.SelectedDate == DateTime.MinValue)
+            {
+                DTP_FechaOperacion.SelectedDate = null;
+                DTP_FechaOperacion.DisplayDate = DateTime.Now;
+            }
             DTP_FechaAterrizaje.SelectedDate = DTP_FechaOperacion.SelectedDate;
             DTP_FechaLlegadaPuente.SelectedDate = DTP_FechaOperacion.SelectedDate;
             DTP_FechaLlegadaPlataforma.SelectedDate = DTP_FechaOperacion.SelectedDate;
@@ -1431,7 +1436,7 @@ namespace WpfFront.Vista
         {
             try
             {
-                //Si no tiene salida, ni operacion le valido 
+                //Si no tiene salida, ni operacion le valido que la ultima operacion tenga salida 
                 if (Model.RecordSalida.RowID == 0 && Model.Record.RowID == 0)
                 {
                     //List<Operacion> operacionesCon = service.GetOperacion(new Operacion { Aeronave = new Aeronaves { RowID = SearchAeronave.Aeronaves.RowID } }).Where(f => f.Salida == null).ToList();
@@ -1470,14 +1475,14 @@ namespace WpfFront.Vista
                 Model.Record.TipoFacturacionID = ((Tipo)TipoFactura.SelectedItem).RowID;
                 //Guardo informacion de los combos si estan seleccionados
                 Model.Record.Aeronave = Aeronave.Aeronaves != null ? Aeronave.Aeronaves : null;
-                Model.RecordLlegada.ClasificacionID = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem).RowID : 0;
-                Model.RecordLlegada.TipoVueloID = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem).RowID : 0;
-                Model.RecordLlegada.TipoDeclaracionID = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem).RowID : 0;
-                Model.RecordLlegada.BandaID = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem).RowID : 0;
-                Model.RecordLlegada.TipoPosicionID = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem).RowID : 0;
-                Model.RecordLlegada.PosicionID = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem).RowID : 0;
-                Model.RecordLlegada.OrigenID = Origen.Aeropuertos != null ? Origen.Aeropuertos.RowID : 0;
-                Model.RecordLlegada.CIAFacturaID = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros.RowID : 0;
+                Model.RecordLlegada.ClasificacionID = TipoOperacion.SelectedItem != null ? ((Tipo)TipoOperacion.SelectedItem).RowID : Model.RecordLlegada.ClasificacionID;
+                Model.RecordLlegada.TipoVueloID = TipoVuelo.SelectedItem != null ? ((Tipo)TipoVuelo.SelectedItem).RowID : Model.RecordLlegada.TipoVueloID;
+                Model.RecordLlegada.TipoDeclaracionID = TipoDeclaracion.SelectedItem != null ? ((Tipo)TipoDeclaracion.SelectedItem).RowID : Model.RecordLlegada.TipoDeclaracionID;
+                Model.RecordLlegada.BandaID = Banda.SelectedItem != null ? ((Tipo)Banda.SelectedItem).RowID : Model.RecordLlegada.BandaID;
+                Model.RecordLlegada.TipoPosicionID = TipoPosicion.SelectedItem != null ? ((Tipo)TipoPosicion.SelectedItem).RowID : Model.RecordLlegada.TipoPosicionID;
+                Model.RecordLlegada.PosicionID = Posicion.SelectedItem != null ? ((Tipo)Posicion.SelectedItem).RowID : Model.RecordLlegada.PosicionID;
+                Model.RecordLlegada.OrigenID = Origen.Aeropuertos != null ? Origen.Aeropuertos.RowID : Model.RecordLlegada.OrigenID;
+                Model.RecordLlegada.CIAFacturaID = CompañiaFactura.Terceros != null ? CompañiaFactura.Terceros.RowID : Model.RecordLlegada.CIAFacturaID;
                 Model.RecordLlegada.NVuelo = !string.IsNullOrEmpty(NumVuelo.Text) ? NumVuelo.Text : null;
                 Model.RecordLlegada.HoraProgramadaLlegada = !string.IsNullOrEmpty(HoraProgramada.Text) ? HoraProgramada.Text : null;
                 SearchOrigen_OnSelected_1(sender, null);
@@ -1507,18 +1512,22 @@ namespace WpfFront.Vista
                 else
                 {
                     //Status Guardada Para Llegada
-                    Model.RecordLlegada.Estado = Model.StatusLlegadaSalidaGuardada;
+                    int estadoId;
+                    estadoId = Model.StatusLlegadaSalidaGuardada.RowID;
+                    Model.RecordLlegada.EstadoID = estadoId;
                     //Datos de Creacion de la Llegada
                     Model.RecordLlegada.FechaCreacion = DateTime.Now;
                     Model.RecordLlegada.UsuarioCreacion = App.curUser.NombreUsuario;
                     //Guardo Llegada
                     //Model.RecordLlegada = service.SaveLlegada(Model.RecordLlegada);
-                    Model.RecordLlegada = db.Llegada.Add(Model.RecordLlegada);
                     db.SaveChanges();
-                    Model.Record.Llegada = Model.RecordLlegada;
+                    Model.Record.Llegada = new Llegada();
+                    Model.Record.Llegada.RowID = Model.RecordLlegada.RowID;
                     //Status Guardada Para Operacion
                     //Model.Record.Estado = service.GetStatus(new Status { Name = "Guardada", StatusType = new StatusType { Name = "OperacionCecoa" } }).First();
-                    Model.Record.Estado =  db.Estado.FirstOrDefault(f=>f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
+                    //Model.Record.Estado =  db.Estado.FirstOrDefault(f=>f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
+                    estadoId = Model.StatusOperacionGuardada.RowID;
+                    Model.Record.EstadoID = estadoId;
                     //Datos de Creacion de la Operacion
                     Model.Record.FechaCreacion = DateTime.Now;
                     Model.Record.UsuarioCreacion = App.curUser.NombreUsuario;

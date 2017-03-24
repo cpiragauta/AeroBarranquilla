@@ -1,0 +1,84 @@
+﻿<WMCore:UserControlBase x:Uid="ListaCarnets" x:Class="WpfFront.Vista.ListaCarnetsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Controles"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="ListaCarnets">
+
+    <AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" >
+               
+                <TabControl x:Uid="tabMenu" Name="tabMenu" TabStripPlacement="Top" Style="{DynamicResource TabControlStyle}" Width="auto">
+                    <TabItem x:Uid="Tab_ListadoSalidasAlmacen" Header="Listado de Carnets"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto">
+                        <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                        
+                            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                                <StackPanel Orientation="Vertical" Margin="5,0,3,0" Height="400" Width="auto">
+                                    <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0">
+                                            <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold"  Text="Tercero Solicitante:" />
+                                                <uc:SearchTerceros Height="23" x:Name="TerceroSeleccionado"  />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+                                                <TextBlock FontWeight="Bold"  Text="Tercero Solicitante:" />
+                                                <uc:SearchTerceros Height="23" x:Name="TerceroFactura"  />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock x:Uid="TextBlock_4" FontWeight="Bold"  Text="NoDocumento / Placa:" />
+                                                <TextBox Height="23" Name="txt_NoDocumento_Placa" Width="120"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                                <TextBlock x:Uid="TextBlock_4" FontWeight="Bold"  Text="Nombres / Marca:" />
+                                                <TextBox Height="23" Name="txt_Nombres_Marca" Width="120"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                                <awc:ImageButton x:Name="btnBuscarCarnets" Height="32" Width="30" VerticalAlignment="Bottom" ToolTip="Buscar Carnets" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarCarnets_Click_1"/>
+                                                <awc:ImageButton x:Name="btnNuevoRegistro" Height="32" Width="30" VerticalAlignment="Bottom" ToolTip="Nuevo Registro de Carnets" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                                <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Bottom" ToolTip="Actualizar lista de Carnets" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <StackPanel Width="auto">
+                                        <ListView Width="auto" SelectionMode="Single" ItemsSource="{Binding Path=EntityList}"  Margin="0,4,0,0" MaxHeight="400" Height="340" Name="ListadoCarnets" AllowDrop="True" MouseDoubleClick="ListadoCarnets_MouseDoubleClick_1">
+                                            <ListView.View>
+                                                <GridView >
+                                                    <GridViewColumn Header="ID"  DisplayMemberBinding="{Binding Path=Encabezado.RowID}"/>
+                                                    <GridViewColumn Header="Tercero Solicitante" Width="200" DisplayMemberBinding="{Binding Path=Encabezado.TerceroSolicita.Nombre}"/>
+                                                    <GridViewColumn Header="Tipo Solicitud" Width="140"  DisplayMemberBinding="{Binding Path=TipoSolicitud.Name}"/>
+                                                    <GridViewColumn Header="Rango" Width="120"  DisplayMemberBinding="{Binding Path=RangoCarnet.Name}"/>
+                                                    <GridViewColumn Header="Identidicacion / Placa" Width="130"  DisplayMemberBinding="{Binding Path=NoDocumento_Placa}"/>
+                                                    <GridViewColumn Header="Nombre / Marca" Width="130"  DisplayMemberBinding="{Binding Path=NombreCompleto_MarcaCompleta}"/>
+                                                    <GridViewColumn Header="Estado" Width="100"  DisplayMemberBinding="{Binding Path=Estado.Name}"/>
+                                                    <GridViewColumn Header="Usuario Creacion" Width="100" DisplayMemberBinding="{Binding Path=CreatedBy}"/>
+                                                    <GridViewColumn Header="Fecha Creacion" Width="100" DisplayMemberBinding="{Binding Path=CreationDate}"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Border>
+                        </StackPanel>
+
+                    </TabItem>
+                </TabControl>
+
+
+
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>

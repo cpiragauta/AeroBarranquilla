@@ -1,0 +1,116 @@
+﻿<WMCore:UserControlBase x:Uid="Tasas" x:Class="WpfFront.Vista.TasasView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Tasas" >
+
+    <AdornerDecorator x:Uid="AdornerDecorator_1" >
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="DockPanel_Loaded_1">
+            <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal" Width="auto" Height="auto">
+                    <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                        <StackPanel Orientation="Horizontal" Height="auto" Width="auto">
+                            <StackPanel Orientation="Vertical" Height="auto" Width="auto">
+                                <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+                                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Width="auto" Margin="0,0,0,10">
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Fecha Inicio:" />
+                                            <toolkit:DatePicker SelectedDate="{Binding Path=RecordTarifaBusqueda.FechaInicio}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Fecha Final:" />
+                                            <toolkit:DatePicker SelectedDate="{Binding Path=RecordTarifaBusqueda.FechaFinal}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Valor:" />
+                                            <TextBox  Height="25" Width="120" Text="{Binding Path=RecordTarifaBusqueda.Valor}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Valor Reexpedicion:" />
+                                            <TextBox  Height="25" Width="120" Text="{Binding Path=RecordTarifaBusqueda.ValorReexpedicion}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Tipo:" />
+                                            <ComboBox x:Name="FiltroTipo" Height="25" Width="120"  DisplayMemberPath="Name" SelectionChanged="FiltroTipo_SelectionChanged_1"  SelectedValuePath="MetaMasterID" ItemsSource="{Binding ListaTipoTasa}" SelectedValue="{Binding Path=RecordTarifaBusqueda.TipoTasa.MetaMasterID}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                            <TextBlock FontWeight="Bold"  Text="Rango:" />
+                                            <ComboBox x:Name="FiltroRango" Height="25" Width="120" ItemsSource="{Binding ListaTiempoValidezFiltro}" DisplayMemberPath="Name"  SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordTarifaBusqueda.TiempoValidez.MetaMasterID}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="8,0,8,0">
+                                            <awc:ImageButton x:Name="btnBuscarAeropuertos" Height="26" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Buscar Tasa" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarTasas_Click_1" />
+                                            <awc:ImageButton x:Name="btnNuevoRegistro" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Nuevo Registro de Tasa" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                            <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" ToolTip="Actualizar lista de Tasas" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                <StackPanel>
+                                    <ListView SelectionMode="Single" MouseDoubleClick="ListTasas_MouseDoubleClick_1" ItemsSource="{Binding Path=ListaTarifas}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListaTarifas" AllowDrop="True" >
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Fecha Inicio" Width="170" DisplayMemberBinding="{Binding Path=FechaInicio, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                <GridViewColumn Header="Fecha Final" Width="170" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                <GridViewColumn Header="Valor" Width="170" DisplayMemberBinding="{Binding Path=Valor}" />
+                                                <GridViewColumn Header="Valor Reexpedicion" Width="170" DisplayMemberBinding="{Binding Path=ValorReexpedicion}" />
+                                                <GridViewColumn Header="Tipo Tasa" Width="170" DisplayMemberBinding="{Binding Path=Tipo.Name}" />
+                                                <GridViewColumn Header="Rango" Width="170" DisplayMemberBinding="{Binding Path=Rango.Name}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
+                            </StackPanel>
+                            <GroupBox Margin="8,0,0,0" Name="PanelNuevoRegistro" Visibility="Collapsed">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold"  Text="Fecha Inicio:"  Width="70" HorizontalAlignment="Left" />
+                                        <toolkit:DatePicker Name="FechaInicio" SelectedDate="{Binding Path=RecordTarifa.FechaInicio}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold"  Text="Fecha Final:"  Width="70" HorizontalAlignment="Left" />
+                                        <toolkit:DatePicker Name="FechaFinal" SelectedDate="{Binding Path=RecordTarifa.FechaFinal}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold"  Text="Valor:"  HorizontalAlignment="Left"/>
+                                        <TextBox Height="25" Name="Valor" Width="120" HorizontalAlignment="Left" Text="{Binding RecordTarifa.Valor}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold"  Text="Valor Reexpedicion:"  HorizontalAlignment="Left"/>
+                                        <TextBox Height="25" Name="ValorReexpedicion" Width="120" HorizontalAlignment="Left" Text="{Binding RecordTarifa.ValorReexpedicion}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock  FontWeight="Bold"  Text="Tipo:" HorizontalAlignment="Left"/>
+                                        <ComboBox Name="Tipo" HorizontalAlignment="Left" Height="25" Width="120" ItemsSource="{Binding ListaTipoTasa}" DisplayMemberPath="Name"  SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoTasa_SelectionChanged_1" SelectedValue="{Binding RecordTarifa.Tipo.MetaMasterID}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock  FontWeight="Bold"  Text="Tiempo Validez Tasa:" HorizontalAlignment="Left"/>
+                                        <ComboBox Name="Rango" HorizontalAlignment="Left" Height="25" Width="120" ItemsSource="{Binding ListaTiempoValidez}" DisplayMemberPath="Name"  SelectedValuePath="MetaMasterID" SelectedValue="{Binding RecordTarifa.Rango.MetaMasterID}"/>
+                                        <!---->
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <awc:ImageButton Margin="0,4,0,0" x:Name="btnGuardarRegistro" Height="26" Width="110" VerticalAlignment="Bottom" HorizontalAlignment="Left" ToolTip="Agregar" IsToolStyle="False" Click="btnGuardarRegistro_Click_1"  Content="Guardar" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>
+
+
+</WMCore:UserControlBase>
+
+    
+    

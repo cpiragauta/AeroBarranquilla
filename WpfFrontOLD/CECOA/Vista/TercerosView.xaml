@@ -1,0 +1,117 @@
+﻿<WMCore:UserControlBase x:Uid="Bodegas" x:Class="WpfFront.Vista.TercerosView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Common.UserControls"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="TERCEROS">
+    <AdornerDecorator>
+        <DockPanel Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="DockPanel_Loaded_1">
+            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0">
+                <StackPanel Margin="5" Width="auto" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0"  >
+                            <StackPanel x:Uid="Stack_Panel2" Width="auto" Orientation="Vertical" Margin="0,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    
+                                    <StackPanel Orientation="Vertical"  Margin="4,0,0,0" >
+                                        <TextBlock Text="Tipo Tercero" FontWeight="Bold" HorizontalAlignment="Left" />
+                                        <ComboBox x:Name="cb_Tipo_Cliente" Width="100" Height="21" ItemsSource="{Binding Path=ListTipoTercero}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical"  Margin="4,0,0,0">
+                                        <TextBlock Text="Identificacion:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                        <TextBox x:Name="tb_Documento" Text="{Binding RecordBusqueda.Identificacion}" Width="130" MaxLength="15" VerticalAlignment="Bottom"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical"  Margin="4,0,0,0">
+                                        <TextBlock Text="Razon Social / Nombre:" FontWeight="Bold" HorizontalAlignment="Left" />
+                                        <TextBox x:Name="Filtro_Nombre" Text="{Binding RecordBusqueda.Nombre}" Width="130" MaxLength="12" VerticalAlignment="Bottom" Height="21" />
+                                    </StackPanel>
+
+                                    <!--<StackPanel Orientation="Vertical"  Margin="10,10,0,0">
+                                            <TextBlock Text="Estado" HorizontalAlignment="Left" />
+                                            <ComboBox x:Name="cb_Estado" Width="100" Height="21">
+                                                <ComboBoxItem Content="Activo"/>
+                                                <ComboBoxItem Content="Desactivo"/>
+                                            </ComboBox>
+                                        </StackPanel>-->
+
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<awc:ImageButton x:Name="BuscarTercero" Width="auto"  Height="25" HorizontalAlignment="Center"  ToolTip="Filtrar Tercero" Content="Filtrar "  Click="BuscarTercero_Click"/>-->
+                                        <awc:ImageButton x:Name="BuscarTercero" Height="32" Margin="8,8,0,0" ToolTip="Buscar Aeropuerto" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="BuscarTercero_Click"  />
+                                        <awc:ImageButton x:Name="NuevaTercero"  Height="32" Margin="4,8,0,0" ToolTip="Crear Tercero"  ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True"  Click="NuevaTercero_Click"/>
+                                        <awc:ImageButton x:Name="btnActualizarLista" Height="32"  Margin="4,8,0,0"  ToolTip="Actualizar lista de Terceros" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click" />
+                                        <!--<awc:ImageButton x:Name="Limpiar" Height="25" Margin="4,20,0,0" ToolTip="Limpiar Filtros" Content="Limpiar" ImageSource="/WpfFront;component/Images/New.png"   Click="Limpiar_Click"/>-->
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Margin="0,4,0,0">
+                            <ListView x:Name="ListaTerceros" ItemsSource="{Binding ListaTercero}" Height="400"  MouseDoubleClick="ListaTerceros_MouseDoubleClick_1" SelectionMode="Single">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Nombre" Width="200" DisplayMemberBinding="{Binding Nombre}"/>
+                                        <GridViewColumn Header="Identificacion" Width="150" DisplayMemberBinding="{Binding Identificacion}"/>
+                                        <GridViewColumn Header="TipoTercero" Width="100" DisplayMemberBinding="{Binding Tipo.Nombre}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel x:Name="panelDatosTercero" Margin="10,0,0,0" Visibility="Collapsed" VerticalAlignment="Top" >
+                        <Border x:Name="Border_Ediciones" Style="{DynamicResource UserControlFormInnerBorder}" Margin="0,0,0,0" Width="auto">
+                            <StackPanel Orientation="Vertical" >
+                                <StackPanel>
+                                    <TextBlock Text="Tipo Tercero:" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton GroupName="tpersona" x:Name="rbtNatural" Content="Natural" VerticalAlignment="Center" Checked="rbtNatural_Checked" />
+                                        <RadioButton GroupName="tpersona" x:Name="rbtJuridico" Content="Jurídica"  VerticalAlignment="Center" Checked="rbtJuridico_Checked" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Documento"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox x:Name="txt_Identificacion" MaxLength="15" Text="{Binding RecordTercero.Identificacion}" Width="145" Height="20"/>
+                                        <StackPanel Orientation="Horizontal" x:Name="panel_Digito" Visibility="Collapsed">
+                                            <TextBlock Text="-" FontWeight="Bold"/>
+                                            <TextBox  x:Name="txt_Digito" Text="{Binding RecordTercero.Digito}"  Width="30" Height="20"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="panel_RazonSocial" Visibility="Collapsed">
+                                    <TextBlock Text="Razon Social:" />
+                                    <TextBox x:Name="txt_RazonSocial" Height="20" Text="{Binding RecordTercero.Nombre}" />
+                                </StackPanel>
+                                <StackPanel x:Name="panel_Nombres">
+                                    <TextBlock  Text="Nombres:" />
+                                    <TextBox x:Name="txt_Nombres" MaxLength="50" Height="20" Text="{Binding RecordTercero.Nombre}"/>
+                                </StackPanel>
+                                <StackPanel x:Name="panel_Apellidos">
+                                    <TextBlock Text="Apellidos:" />
+                                    <TextBox x:Name="txt_Apellidos" Height="20" Text="{Binding RecordTercero.Apellidos}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Direccion:" />
+                                    <TextBox x:Name="txt_Direccion" Text="{Binding RecordTercero.Direccion}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Telefono:" />
+                                    <TextBox x:Name="txt_Telefono" MaxLength="15" Text="{Binding RecordTercero.Telefono}" />
+                                </StackPanel>
+                                <awc:ImageButton x:Name="Btn_guardarCliente" Width="80" HorizontalAlignment="Left" Margin="0,4,0,0" ToolTip="Guardar Tercero" Content="Guardar" ImageSource="/WpfFront;component/Images/Save.png" Click="Btn_guardarCliente_Click_1" Height="28"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </AdornerDecorator>
+</WMCore:UserControlBase>

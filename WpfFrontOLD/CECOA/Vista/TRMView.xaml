@@ -1,0 +1,79 @@
+﻿<WMCore:UserControlBase x:Uid="TRM" x:Class="WpfFront.Vista.TRMView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="TRM">
+    <AdornerDecorator >
+        <DockPanel>
+            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0">
+                <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Vertical">
+                        <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold"  Text="Fecha Inicial:" />
+                                    <toolkit:DatePicker Name="DTP_FechaInicialBusqueda"/>
+                                </StackPanel>
+                                <StackPanel Margin="4,0,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Fecha Final:" />
+                                    <toolkit:DatePicker  Name="DTP_FechaFinalBusqueda"/>
+                                </StackPanel>
+                                <StackPanel Margin="4,0,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Valor:" />
+                                    <TextBox Height="27" Name="txt_Valor" Width="120"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="8,0,8,0" VerticalAlignment="Bottom">
+                                    <awc:ImageButton x:Name="btnBuscarTRM" Height="26" Width="30"  ToolTip="Buscar TRM" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarTRM_Click" />
+                                    <awc:ImageButton x:Name="btnNuevoRegistro" Height="32" Width="30" ToolTip="Nuevo Registro de TRM" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click" />
+                                    <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30"  ToolTip="Actualizar lista de TRM" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Margin="0,8,0,0" >
+                            <ListView SelectionMode="Single" MouseDoubleClick="ListTRMs_MouseDoubleClick_1" ItemsSource="{Binding Path=ListTRM}" Margin="0,4,0,0" MaxHeight="500" Height="300" Name="ListTRMs" AllowDrop="True" SelectionChanged="ListTRMs_SelectionChanged">
+                                <ListView.View>
+                                    <GridView x:Name="GridViewDetailsTRM" >
+                                        <GridViewColumn Header="Fecha Inicial" Width="150" DisplayMemberBinding="{Binding Path=FechaInicial, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                        <GridViewColumn Header="Fecha Final" Width="150" DisplayMemberBinding="{Binding Path=FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                        <GridViewColumn Header="Valor" Width="100" DisplayMemberBinding="{Binding Path=Valor}" />
+                                        <GridViewColumn Header="Creado Por" DisplayMemberBinding="{Binding Path=UsuarioCreacion}" />
+                                        <GridViewColumn Header="Fecha Creacion" DisplayMemberBinding="{Binding Path=FechaCreacion}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                <TextBlock Margin="0,0,4,0" FontWeight="Bold" Text="Cantidad: "/>
+                                <TextBlock Margin="0,0,4,0" FontWeight="Bold" Name="TxtCantidadAgrupada" Text="{Binding ListTRM.Count}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <GroupBox Name="gb_NuevoRegistro" Visibility="Collapsed">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Margin="4,0,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Fecha Inicial:"  Width="70" HorizontalAlignment="Left" />
+                                    <toolkit:DatePicker Name="DTP_FechaInicial1" SelectedDate="{Binding TRM.FechaInicial}" />
+                                </StackPanel>
+                                <StackPanel Margin="4,0,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Fecha Final:"  Width="70" HorizontalAlignment="Left" />
+                                    <toolkit:DatePicker  Name="DTP_FechaFinal1" SelectedDate="{Binding TRM.FechaFinal}"  />
+                                </StackPanel>
+                                <StackPanel Margin="4,0,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Valor:" Width="70" HorizontalAlignment="Left"/>
+                                    <TextBox Height="26" Name="txt_ValorR" Width="120" HorizontalAlignment="Left" Text="{Binding TRM.Valor}" KeyDown="soloNumerosKeyDownEvent"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                                    <awc:ImageButton x:Name="btnAgregarTRM" Height="26" Width="75" VerticalAlignment="Bottom"  ToolTip="Agregar" ImageSource="/WpfFront;component/Images/save.png" IsToolStyle="False"  Margin="4,10,0,0" Content="Agregar" Click="btnAgregarTRM_Click" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </AdornerDecorator>
+</WMCore:UserControlBase>

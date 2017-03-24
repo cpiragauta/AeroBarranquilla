@@ -48,6 +48,8 @@ namespace WpfFront.Modelo
         Estado StatusLlegadaSalidaGuardada { get; }
         Estado StatusLlegadaSalidaConfirmada { get; }
         Estado StatusOperacionLiquidada { get; }
+        Estado StatusOperacionGuardada{ get; }
+        
         Estado StatusOperacionConfirmada { get; }
         Estado StatusOperacionFacturada { get; }
 
@@ -140,7 +142,11 @@ namespace WpfFront.Modelo
         {
             get { return _StatusOperacionConfirmada; }
         }
-
+        public static readonly Estado _StatusOperacionGuardada = service.Estado.FirstOrDefault(f => f.Nombre == "Guardada" && f.Tipo.Nombre == "OperacionCecoa");
+        public Estado StatusOperacionGuardada
+        {
+            get { return _StatusOperacionGuardada; }
+        }
         public static readonly Estado _StatusOperacionFacturada = service.Estado.FirstOrDefault(f => f.Nombre == "Facturada" && f.Tipo.Nombre == "OperacionCecoa");
         public Estado StatusOperacionFacturada
         {

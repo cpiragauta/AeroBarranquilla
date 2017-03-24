@@ -1,0 +1,217 @@
+﻿<WMCore:UserControlBase x:Uid="FacturasAgrupadas" x:Class="WpfFront.Vista.FacturasAgrupadasView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"
+    xmlns:lg="clr-namespace:WpfFront.Common"
+    xmlns:uc="clr-namespace:WpfFront.Common.UserControls"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="FacturasAgrupadas">
+    <AdornerDecorator>
+
+        <DockPanel Background="{DynamicResource WBg}" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+
+            <DockPanel.Resources>
+                <WMCore:ForceReReadConverter x:Uid="WMCore:ForceReReadConverter_1" x:Key="forceReReadConverter" />
+                <WMCore:FormattingConverter x:Uid="WMCore:FormattingConverter_1" x:Key="formattingConverter" />
+                <WMCore:FormNotificationErrorMessageConverter x:Uid="WMCore:FormNotificationErrorMessageConverter_1" x:Key="formNotificationErrorMessageConverter" />
+                <WMCore:NullableIntegerFormatConverter x:Key="nullableIntegerFormatConverter" />
+            </DockPanel.Resources>
+
+            <TextBlock  DockPanel.Dock="Top" Margin="4,0,0,0" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Text="Procesamiento de Facturas Credito" />
+
+            <StackPanel  Margin="0,0,0,0" x:Name="stkSearchForm" Orientation="Horizontal" >
+
+                <StackPanel Orientation="Vertical" >
+
+                    <StackPanel >
+                        <StackPanel  Orientation="Horizontal">
+
+                            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto" >
+                                <StackPanel Orientation="Horizontal"  >
+                                    <StackPanel Margin="4,0,0,0"  >
+                                        <TextBlock FontWeight="Bold" Text="Aerolinea:" />
+                                        <uc:SearchTerceros Height="40" x:Name="SearchCompañiaFactura" VerticalAlignment="Top"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold"  Text="Fecha Inicio:" />
+                                        <toolkit:DatePicker Name="Txt_FechaInicio" SelectedDate="{Binding Path=Factura.FechaInicio}"  Width="160" Height="28"  FirstDayOfWeek="Sunday" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="4,0,0,0" >
+                                        <TextBlock FontWeight="Bold" Text="Fecha Final:" />
+                                        <toolkit:DatePicker Name="Txt_FechaFinal" SelectedDate="{Binding Path=Factura.FechaFinal}"  Width="160" Height="28"  FirstDayOfWeek="Sunday" />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="4,0,0,4">
+                                        <TextBlock FontWeight="Bold" Text="Tipo Operacion:"/>
+                                        <ComboBox x:Name="cmb_TipoVuelo"  Height="25" Width="100" ItemsSource="{Binding ListaTipoOperacion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                                        <awc:ImageButton x:Name="btn_Buscar" Height="26" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Buscar Servicios" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btn_Buscar_Click" />
+                                        <awc:ImageButton x:Name="btnActualizarLista" Height="32" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Actualizar lista de Servicios" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="4,0,0,0" Height="auto" Width="auto" >
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock  FontWeight="Bold"  Text="Fecha Tarifa:" />
+                                        <toolkit:DatePicker Name="DTP_FechaConsultaTarifas" Width="160" Height="28" SelectedDateChanged="Txt_FechaConsultaTarifas_SelectedDateChanged"  />
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock Name="lblTRM" Text="TRM: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblAerodromo" Text="AERODROMO: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblPuentes" Text="PUENTES: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblParqueo" Text="PARQUEO: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                    </StackPanel>
+                                    <StackPanel Margin="4,0,0,0">
+                                        <TextBlock Name="lblLimpieza" Text="LIMPIEZA: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblAsistencia" Text="ASISTENCIA: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblRecargo" Text="RECARGO NOC: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                        <TextBlock Name="lblTasas" Text="TASAS: " FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,4,0,0" />
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TabControl Name="TabPadre2" Margin="2">
+                                <TabItem  Header="Proceso Facturacion"  >
+
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel  Name="stk_ListView" Orientation="Vertical" >
+
+                                            <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                                                <TextBlock FontWeight="Bold" Margin="0,0,0,0" Name="TxtRecords" />
+                                                <Button Name="btn_Actualizar" Content="Actualizar Avance" Height="26" Width="110" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0"   />
+                                            </StackPanel>
+
+
+                                            <ListView SelectionMode="Single"  Name="lvRegistrosVuelo" ItemsSource="{Binding Path=RecordListAerodromoAgrupada}" Margin="0,4,0,0" MaxHeight="400" Height="auto" AllowDrop="True" MouseDoubleClick="lvRegistrosVuelo_MouseDoubleClick" ToolTip="Doble Clic para ver Detalle" >
+                                                <ListView.View>
+                                                    <GridView >
+                                                        <GridViewColumn Header="NIT" Width="100" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Identificacion}" />
+                                                        <GridViewColumn Header="AEROLINEA" Width="300" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Nombre}" />
+                                                        <GridViewColumn Header="CANT OPERACIONES" Width="120" DisplayMemberBinding="{Binding Path=Cantidad}"  />
+                                                        <GridViewColumn Header="VALOR" Width="110" DisplayMemberBinding="{Binding Path=Valor,  StringFormat=\{0:C0\} }" TextBlock.TextAlignment="Right"/>
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="Cantidad: "/>
+                                                    <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtCantidadAgrupada" Text="{Binding RecordListAerodromo.Count}"/>
+                                                    <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="- Total: $"/>
+                                                    <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtTotalAgrupado" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal"  Margin="0,8,0,12" >
+                                                <StackPanel Margin="4,0,0,0">
+                                                    <TextBlock  FontWeight="Bold"  Text="Fecha Emision:" />
+                                                    <toolkit:DatePicker Name="DTP_FechaEmision" />
+                                                </StackPanel>
+                                                <StackPanel Margin="4,0,0,0">
+                                                    <TextBlock  FontWeight="Bold"  Text="Fecha Inicial:" />
+                                                    <toolkit:DatePicker Name="DTP_FechaInicial"/>
+                                                </StackPanel>
+                                                <StackPanel Margin="4,0,0,0">
+                                                    <TextBlock  FontWeight="Bold"  Text="Fecha Final:" />
+                                                    <toolkit:DatePicker Name="DTP_FechaFinal" />
+                                                </StackPanel>
+                                                <StackPanel Margin="8,16,4,0" >
+                                                    <Button Name="btn_Procesar" IsEnabled="False" Content="Facturar" Height="26" Width="60" Click="btn_Procesar_Click" ToolTip="Seleccione Aerolinea para Facturar"/>
+                                                </StackPanel>
+                                            </StackPanel>
+
+
+                                            <TextBlock Text="Envio a ERP:" FontSize="12" Foreground="Brown" FontWeight="bold" Margin="0,12,0,0" />
+                                            <Separator Margin="0,4,0,8"/>
+                                            <TabControl Name="TabPadreFacturas">
+                                                <TabItem Header="Facturas a enviar a ERP">
+                                                    <StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <ListView SelectionMode="Extended" Name="ListaFacturas" ItemsSource="{Binding Path=RecordServiciosAgrupadosList}" Margin="0,4,0,0" MaxHeight="400" Height="auto"  AllowDrop="True" MouseDoubleClick="ListaFacturas_MouseDoubleClick_1" ToolTip="Doble Clic para ver Detalle" >
+                                                                <ListView.View>
+                                                                    <GridView>
+                                                                        <GridViewColumn Header="Nro" Width="70" DisplayMemberBinding="{Binding Path=RowID}" />
+                                                                        <GridViewColumn Header="Cant Items" Width="70" DisplayMemberBinding="{Binding Path=Cantidad}" />
+                                                                        <GridViewColumn Header="Fecha Emision" Width="100" DisplayMemberBinding="{Binding Path=Factura.FechaEmision, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                                        <GridViewColumn Header="Fecha Inicio" Width="100" DisplayMemberBinding="{Binding Path=Factura.FechaInicio, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                                        <GridViewColumn Header="Fecha Final" Width="100" DisplayMemberBinding="{Binding Path=Factura.FechaFinal, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                                        <GridViewColumn Header="Aerolinea" Width="300" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Nombre}"/>
+                                                                        <GridViewColumn Header="Tipo" Width="120" DisplayMemberBinding="{Binding Path=TipoServicio.Code2}"/>
+                                                                        <GridViewColumn Header="Valor Total" Width="100" DisplayMemberBinding="{Binding Path=Valor,  StringFormat=\{0:C0\} }" />
+                                                                        <GridViewColumn Header="Creada Por" Width="100" DisplayMemberBinding="{Binding Path=CreatedBy}" />
+                                                                        <GridViewColumn Header="Estado" Width="100" DisplayMemberBinding="{Binding Path=Status.Name}" />
+                                                                    </GridView>
+                                                                </ListView.View>
+                                                            </ListView>
+
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <StackPanel Margin="4,8,4,4" >
+                                                                <Button Name="btn_EnviarERP" Content="Enviar a ERP" Height="26" Width="60" Click="btn_EnviarERP_Click" />
+                                                            </StackPanel>
+                                                            <StackPanel Margin="4,8,4,4" >
+                                                                <Button Name="btn_AuxConfirmar" Content="AuxConfirmar" Height="26" Width="80" Click="btn_AuxConfirmar_Click" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </TabItem>
+                                            </TabControl>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem Header="Detalle Registro" Name="tbDetalleRegistroAerodromo" Visibility="Collapsed" Height="23" VerticalAlignment="Top" >
+                                    <StackPanel Orientation="Vertical">
+
+                                        <ListView SelectionMode="Single" ItemsSource="{Binding Path=RecordListAerodromo}" Margin="0,4,0,0" MaxHeight="400" Height="auto" Name="dgLista_Registros" AllowDrop="True"  >
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Header="FECHA" Width="90" DisplayMemberBinding="{Binding Path= Operacion.Salida.FechaSalida, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                                    <GridViewColumn Header="OPERACION" Width="80" DisplayMemberBinding="{Binding Path= Operacion.RowID}" />
+                                                    <GridViewColumn Header="NIT" Width="100" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Identificacion}" />
+                                                    <GridViewColumn Header="AEROLINEA" Width="260" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Nombre}" />
+                                                    <GridViewColumn Header="TIPO" Width="110" DisplayMemberBinding="{Binding Path=Operacion.Llegada.TipoVuelo.Code}" />
+                                                    <GridViewColumn Header="SERVICIO" Width="100" DisplayMemberBinding="{Binding Path=TipoServicio.Code}" />
+                                                    <GridViewColumn Header="CANTIDAD" Width="80" DisplayMemberBinding="{Binding Path=Cantidad}" />
+                                                    <GridViewColumn Header="VALOR" Width="100" DisplayMemberBinding="{Binding Path=Valor,  StringFormat=\{0:C0\} }" />
+                                                    <GridViewColumn Header="Estado" Width="80" DisplayMemberBinding="{Binding Path=Status.Name}" />
+                                                    <GridViewColumn Header="CREADO POR" Width="100" DisplayMemberBinding="{Binding Path=CreatedBy}" />
+                                                </GridView>
+                                            </ListView.View>
+
+                                        </ListView>
+
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="Cantidad: "/>
+                                                <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtCantidadDetallada" Text="{Binding RecordListAerodromo.Count}"/>
+                                                <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="- Total: $"/>
+                                                <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtTotalDetallado" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <Button Name="btn_Procesar2" Content="Procesar" Height="26" Width="60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="btn_Procesar_Click" Visibility="Collapsed"/>
+                                    </StackPanel>
+
+                                </TabItem>
+                            </TabControl>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </DockPanel>
+    </AdornerDecorator>
+</WMCore:UserControlBase>

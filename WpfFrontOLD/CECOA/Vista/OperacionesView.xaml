@@ -25,7 +25,7 @@
                                 <StackPanel Name="stkDatosCabecera" Orientation="Horizontal">
                                     <StackPanel Orientation="Vertical" Margin="8,0,0,0">
                                         <TextBlock Text="Tipo Factura:"  />
-                                        <ComboBox x:Name="cmb_TipoFactura" HorizontalAlignment="Left" Margin="0,0,0,4" Width="160" ItemsSource="{Binding ListaTipoFacturacion}" DisplayMemberPath="Name" SelectedValue="{Binding Record.TipoFacturacion.MetaMasterID}" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoFactura_SelectionChanged_1" TabIndex="0"  />
+                                        <ComboBox x:Name="cmb_TipoFactura" HorizontalAlignment="Left" Margin="0,0,0,4" Width="160" ItemsSource="{Binding ListaTipoFacturacion}" DisplayMemberPath="Nombre" SelectedValue="{Binding Record.TipoFacturacion.RowID}" SelectedValuePath="RowID" SelectionChanged="cmb_TipoFactura_SelectionChanged_1" TabIndex="0"  />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical" Margin="8,0,0,0">
                                         <TextBlock Text="Aeronave:" FontSize="12" Width="58" HorizontalAlignment="Left"/>
@@ -112,11 +112,11 @@
 
                                                                 <StackPanel Margin="0,0,0,4">
                                                                     <TextBlock Text="Tipo de Posición Llegada:"/>
-                                                                    <ComboBox x:Name="cmb_TipoPosicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoPosicion_SelectionChanged_1" />
+                                                                    <ComboBox x:Name="cmb_TipoPosicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cmb_TipoPosicion_SelectionChanged_1" />
                                                                 </StackPanel>
                                                                 <StackPanel x:Name="stkPosicionLleg" Margin="0,0,0,4">
                                                                     <TextBlock Text="Posición de llegada:"/>
-                                                                    <ComboBox x:Name="cmb_Posicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                                    <ComboBox x:Name="cmb_Posicion" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaPosicion}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
                                                                 </StackPanel>
                                                                 <StackPanel Orientation="Vertical">
                                                                     <TextBlock Text="Hora/Fecha Llegada Puente:"/>
@@ -127,7 +127,7 @@
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4">
                                                                     <TextBlock Text="Declaración Vuelo:"/>
-                                                                    <ComboBox x:Name="cmb_TipoDeclaracion" HorizontalAlignment="Left" Width="120"  Height="22" ItemsSource="{Binding ListaTipoDeclaracion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" KeyDown="cmb_TipoDeclaracion_KeyDown"/>
+                                                                    <ComboBox x:Name="cmb_TipoDeclaracion" HorizontalAlignment="Left" Width="120"  Height="22" ItemsSource="{Binding ListaTipoDeclaracion}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" KeyDown="cmb_TipoDeclaracion_KeyDown"/>
                                                                 </StackPanel>
 
 
@@ -149,11 +149,11 @@
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4">
                                                                     <TextBlock Text="Banda:"/>
-                                                                    <ComboBox x:Name="cmb_Banda" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaBanda}" DisplayMemberPath="Name" SelectedValue="{Binding RecordLlegada.Banda.MetaMasterID}" SelectedValuePath="MetaMasterID"/>
+                                                                    <ComboBox x:Name="cmb_Banda" HorizontalAlignment="Left" Width="120" Height="22" ItemsSource="{Binding ListaBanda}" DisplayMemberPath="Nombre" SelectedValue="{Binding RecordLlegada.Banda.RowID}" SelectedValuePath="RowID"/>
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4" HorizontalAlignment="Left">
                                                                     <TextBlock Text="Clasificación de la Operación:"/>
-                                                                    <ComboBox x:Name="cmb_TipoOperacion" HorizontalAlignment="Left" Width="120" ItemsSource="{Binding ListaTipoOperacion}" DisplayMemberPath="Name" SelectedValue="{Binding RecordLlegada.Clasificacion.MetaMasterID}" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoOperacion_SelectionChanged_1" />
+                                                                    <ComboBox x:Name="cmb_TipoOperacion" HorizontalAlignment="Left" Width="120" ItemsSource="{Binding ListaTipoOperacion}" DisplayMemberPath="Nombre" SelectedValue="{Binding RecordLlegada.Clasificacion.RowID}" SelectedValuePath="RowID" SelectionChanged="cmb_TipoOperacion_SelectionChanged_1" />
                                                                 </StackPanel>
                                                                 <StackPanel Orientation="Vertical" Margin="0,0,0,4">
                                                                     <TextBlock Text="Pax Llegados:" />
@@ -196,7 +196,7 @@
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4">
                                                                     <TextBlock Text="Tipo Vuelo Llegada:"/>
-                                                                    <ComboBox x:Name="cmb_TipoVuelo" HorizontalAlignment="Left" Height="22" Width="160" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cmb_TipoVuelo_SelectionChanged_1" />
+                                                                    <ComboBox x:Name="cmb_TipoVuelo" HorizontalAlignment="Left" Height="22" Width="160" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cmb_TipoVuelo_SelectionChanged_1" />
                                                                 </StackPanel>
                                                                 <StackPanel Margin="0,0,0,4" >
                                                                     <TextBlock Text="Observaciones:" />
@@ -257,11 +257,11 @@
                                                                     
                                                                     <StackPanel Margin="0,0,0,4">
                                                                         <TextBlock Text="Tipo Posición Salida:"/>
-                                                                        <ComboBox  x:Name="cbxTipoPoscinSalid" Height="22"  ItemsSource="{Binding ListaTipoPosicionSalida}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipoPoscinSalid_SelectionChanged_1"/>
+                                                                        <ComboBox  x:Name="cbxTipoPoscinSalid" Height="22"  ItemsSource="{Binding ListaTipoPosicionSalida}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cbxTipoPoscinSalid_SelectionChanged_1"/>
                                                                     </StackPanel>
                                                                     <StackPanel Name="stkPosicionSalida" Margin="0,0,0,2">
                                                                         <TextBlock Text="Posición Salida:"/>
-                                                                        <ComboBox x:Name="cbxPoscinSalid" Height="22" ItemsSource="{Binding ListaPosicionSalida}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" />
+                                                                        <ComboBox x:Name="cbxPoscinSalid" Height="22" ItemsSource="{Binding ListaPosicionSalida}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" />
                                                                     </StackPanel>
 
 
@@ -310,7 +310,7 @@
                                                                         </StackPanel>
                                                                         <StackPanel Margin="0,0,0,4">
                                                                             <TextBlock Text="Tipo Vuelo Salida:"/>
-                                                                            <ComboBox  x:Name="cbxTipoVuelSalid" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectionChanged="cbxTipoVuelSalid_SelectionChanged_1" SelectedValuePath="MetaMasterID" />
+                                                                            <ComboBox  x:Name="cbxTipoVuelSalid" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Nombre" SelectionChanged="cbxTipoVuelSalid_SelectionChanged_1" SelectedValuePath="RowID" />
                                                                         </StackPanel>
 
                                                                       
@@ -395,7 +395,7 @@
                                                             </StackPanel>
                                                             <StackPanel Orientation="Vertical" Margin="4,0,0,0">
                                                                 <TextBlock FontWeight="Bold"  Text="Servicio:" />
-                                                                <ComboBox Margin="0,3,0,0" x:Name="cbxServicio" Height="24" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Name" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.MetaMasterID}" SelectedValuePath="MetaMasterID" />
+                                                                <ComboBox Margin="0,3,0,0" x:Name="cbxServicio" Height="24" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Nombre" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.RowID}" SelectedValuePath="RowID" />
                                                             </StackPanel>
                                                             <StackPanel Orientation="Vertical" Margin="4,0,0,0">
                                                                 <TextBlock FontWeight="Bold" Text="Fecha del Servicio:" />
@@ -589,7 +589,7 @@
 
                                                     <StackPanel Orientation="Vertical" Margin="4,0,0,0">
                                                         <TextBlock FontWeight="Bold"  Text="Servicio:" />
-                                                        <ComboBox x:Name="tipoBomberoAdicional" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Name" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.MetaMasterID}" SelectedValuePath="MetaMasterID" />
+                                                        <ComboBox x:Name="tipoBomberoAdicional" Width="120" ItemsSource="{Binding ListaTipoServicio}" DisplayMemberPath="Nombre" SelectedValue="{Binding RecordServicioBomberos.TipoServicio.RowID}" SelectedValuePath="RowID" />
                                                     </StackPanel>
 
                                                     <StackPanel Orientation="Vertical" Margin="4,0,0,0">
@@ -635,7 +635,7 @@
                                                 <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                                                     <StackPanel Margin="0,0,4,0">
                                                         <TextBlock FontWeight="Bold" Text="Tipo Tasa:"/>
-                                                        <ComboBox Name="TipoTasaAdicional" Width="90" ItemsSource="{Binding ListaTipoTasas}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                        <ComboBox Name="TipoTasaAdicional" Width="90" ItemsSource="{Binding ListaTipoTasas}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
                                                     </StackPanel>
                                                     <StackPanel Orientation="Vertical" Margin="0,0,4,0">
                                                         <TextBlock FontWeight="Bold" Text="# Pagan Tasa:" />
@@ -712,11 +712,11 @@
 
                                                         <StackPanel Margin="4,0,0,4">
                                                             <TextBlock FontWeight="Bold" Text="Tipo Pos. de Llegada:"/>
-                                                            <ComboBox Name="cbxTipPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipPosLlegadaPyP_SelectionChanged_1"/>
+                                                            <ComboBox Name="cbxTipPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cbxTipPosLlegadaPyP_SelectionChanged_1"/>
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4">
                                                             <TextBlock FontWeight="Bold" Text="Posición de llegada:"/>
-                                                            <ComboBox Name="cbxPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionPyP}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                            <ComboBox Name="cbxPosLlegadaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionPyP}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4" Name="HoraLlegadaPteAdicional" Visibility="Collapsed">
                                                             <TextBlock FontWeight="Bold" Text="Hora Lleg Pte:"/>
@@ -728,7 +728,7 @@
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4">
                                                             <TextBlock  FontWeight="Bold"  Text="Tipo Llegada:"/>
-                                                            <ComboBox  x:Name="cbxTipoLlegada" Width="110" Height="22" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                            <ComboBox  x:Name="cbxTipoLlegada" Width="110" Height="22" ItemsSource="{Binding ListaTipoVuelo}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
                                                         </StackPanel>
                                                     </StackPanel>
 
@@ -739,11 +739,11 @@
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4">
                                                             <TextBlock FontWeight="Bold" Text="Tipo Pos. de Salida:"/>
-                                                            <ComboBox HorizontalAlignment="Left" Name="cbxTipPosSalidaPyP" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="cbxTipPosSalidaPyP_SelectionChanged_1"/>
+                                                            <ComboBox HorizontalAlignment="Left" Name="cbxTipPosSalidaPyP" Width="120" Height="25" ItemsSource="{Binding ListaTipoPosicion}" DisplayMemberPath="Nombre" SelectedValuePath="RowID" SelectionChanged="cbxTipPosSalidaPyP_SelectionChanged_1"/>
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4">
                                                             <TextBlock FontWeight="Bold" Text="Posición de Salida:"/>
-                                                            <ComboBox  Name="cbxPosSalidaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionSalidaPyP}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"/>
+                                                            <ComboBox  Name="cbxPosSalidaPyP" HorizontalAlignment="Left" Width="120" Height="25" ItemsSource="{Binding ListaPosicionSalidaPyP}" DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
                                                         </StackPanel>
                                                         <StackPanel Margin="4,0,0,4" Name="HoraSalidaPteAdicional" Visibility="Collapsed">
                                                             <TextBlock FontWeight="Bold" Text="Hora Sald Pte:"/>

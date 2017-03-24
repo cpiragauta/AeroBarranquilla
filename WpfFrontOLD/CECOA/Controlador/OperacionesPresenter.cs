@@ -97,17 +97,17 @@ namespace WpfFront.Controlador
             //Obtengo la conexion
             //Cargo los comboBox
             //view.Model.ListaTipoFacturacion = db.GetTipo(new Tipo { MetaType = new MType { Code = "TIPOFACTURACION" }, Active = true });
-            view.Model.ListaTipoFacturacion = db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOFACTURACION" && f.Activo == true).ToList();
-            view.Model.ListaTipoPosicion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true).ToList();
-            view.Model.ListaTipoPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOPOSICION"&& f.Activo == true).ToList();
-            view.Model.ListaTipoOperacion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOOPERACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaTipoVuelo =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOVUELO" && f.Activo == true).ToList();
-            view.Model.ListaTipoDeclaracion =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPODECLARACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaBanda =db.Tipo.Where(f => f.Agrupacion.Nombre == "BANDA" && f.Activo == true).ToList();
-            view.Model.ListaPosicion =db.Tipo.Where(f => f.Agrupacion.Nombre == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Nombre == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
-            view.Model.ListaTipoServicio =db.Tipo.Where(f => f.Agrupacion.Nombre == "ServicioBomberos" && f.Activo == true).ToList();
-            view.Model.ListaTipoTasas =db.Tipo.Where(f => f.Agrupacion.Nombre == "TIPOTASA" && f.Activo == true && f.Codigo == "NORMAL").ToList();
+            view.Model.ListaTipoFacturacion = db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOFACTURACION" && f.Activo == true).ToList();
+            view.Model.ListaTipoPosicion =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOPOSICION"&& f.Activo == true).ToList();
+            view.Model.ListaTipoPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOPOSICION"&& f.Activo == true).ToList();
+            view.Model.ListaTipoOperacion =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOOPERACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
+            view.Model.ListaTipoVuelo =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOVUELO" && f.Activo == true).ToList();
+            view.Model.ListaTipoDeclaracion =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPODECLARACION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
+            view.Model.ListaBanda =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "BANDA" && f.Activo == true).ToList();
+            view.Model.ListaPosicion =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
+            view.Model.ListaPosicionSalida =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "POSICION" && f.Activo == true).OrderBy(f => f.Orden).ToList();
+            view.Model.ListaTipoServicio =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "ServicioBomberos" && f.Activo == true).ToList();
+            view.Model.ListaTipoTasas =db.Tipo.Where(f => f.Agrupacion.Codigo.ToUpper() == "TIPOTASA" && f.Activo == true && f.Codigo == "NORMAL").ToList();
             view.Model.Record = new Operacion();
             //Cargo los datos de la pestaña Liquidacion
             view.Model.RecordTasas = new Tasas();

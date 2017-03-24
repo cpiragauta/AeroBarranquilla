@@ -1,0 +1,408 @@
+﻿<WMCore:UserControlBase x:Uid="DatosCarnets" x:Class="WpfFront.Vista.DatosCarnetsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"
+    xmlns:uc="clr-namespace:WpfFront.Controles" 
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    xmlns:odc="http://schemas.odyssey.com/wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:af="clr-namespace:AForge.Controls;assembly=AForge.Controls"
+    x:Name="DatosCarnets" Loaded="DatosCarnets_Loaded">
+
+    <!--//Nicolas-->
+    <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto">
+        <StackPanel Orientation="Vertical">
+            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto" >
+                <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock FontWeight="Bold" Text="Tercero Solicitante" />
+                        <uc:SearchTerceros x:Name="TerceroSolicita" HorizontalAlignment="Left" OnSelected="SearchTerceroSolicitante_OnSelected_1" />
+                    </StackPanel>
+
+                    <!--<StackPanel Orientation="Vertical" Margin="4,0,0,0" x:Name="PanelDeterioro" Visibility="Collapsed">
+                        <TextBlock FontWeight="Bold" Text="Deterioro:" />
+                        <CheckBox x:Name="CheckDeterioro" Height="20" HorizontalAlignment="Center" Margin="0,4,0,0" Checked="CheckDeterioro_Checked_1" Unchecked="CheckDeterioro_Unchecked_1" />
+                    </StackPanel>-->
+                    <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                        <TextBlock FontWeight="Bold" Text="Estado:  " />
+                        <TextBlock x:Name="txt_EstadoRadicacion" FontWeight="Bold"  Height="23" Foreground="DarkRed" Text="{Binding Path=RecordEncabezado.Estado.Name}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="4,0,0,0">
+                        <awc:ImageButton x:Name="btnCerrarTab" ToolTip="Cerrar Tab" Content="Cerrar Ventana" ImageSource="/WpfFront;component/Images/Delete.png" Click="btnCerrarTab_Click_1" />
+                    </StackPanel>
+
+
+                </StackPanel>
+            </Border>
+            <StackPanel>
+                <TabControl SelectionChanged="TabControl_SelectionChanged_1">
+                    <TabItem Header="Solicitudes" x:Name="Tab_Solicitudes" Margin="-2,1,-2,-1">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" >
+                                <StackPanel   Orientation="Vertical" Width="auto">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Buscar solicitud:"/>
+                                        <TextBox Width="150" Height="25" x:Name="BuscarSolicitud" KeyDown="BuscarSolicitud_KeyDown_1"  HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                        <TextBlock FontWeight="Bold" Text="Tipo Solicitud:" />
+                                        <ComboBox x:Name="TipoSolicitud"  Height="25" Width="150" SelectionChanged="TipoSolicitud_SelectionChanged_1" ItemsSource="{Binding ListTipoSolicitud}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding RecordSolicitud.TipoSolicitud.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" x:Name="PanelDatosCarnet">
+
+
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                            <TextBlock FontWeight="Bold" Text="Tipo Carnet:" />
+                                            <ComboBox x:Name="TipoCarnet"  Height="25" Width="150" SelectionChanged="cmb_TipoCarnet_SelectionChanged_1" ItemsSource="{Binding ListTipoCarnet}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding RecordSolicitud.TipoCarnet.MetaMasterID}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                            <TextBlock FontWeight="Bold" Text="Rango Carnet:" />
+                                            <ComboBox x:Name="RangoCarnet" Height="25" Width="150" ItemsSource="{Binding Path=ListRangoCarnet}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.RangoCarnet.MetaMasterID}" SelectionChanged="RangoCarnet_SelectionChanged_1"/>
+                                        </StackPanel>
+                                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
+                                            <TextBlock  FontWeight="Bold" Text="Tipo :" />
+                                            <ComboBox x:Name="TipoEmpleado" Height="25" Width="150" ItemsSource="{Binding Path=ListTipoEmpleado}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.TipoEmpleado.MetaMasterID}" />
+                                        </StackPanel>
+                                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
+                                            <TextBlock  FontWeight="Bold" Text="Adicional:" />
+                                            <ComboBox x:Name="Adicional" Height="25" Width="150" ItemsSource="{Binding Path=ListAdicional}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Adicional.MetaMasterID}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontWeight="Bold" Text="Fecha Inicio:" />
+                                            <toolkit:DatePicker x:Name="FechaInicio" SelectedDateChanged="dp_FechaInicio_SelectedDateChanged_1" SelectedDate="{Binding Path=RecordSolicitud.FechaInicio}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontWeight="Bold" Text="Fecha Final:" />
+                                            <toolkit:DatePicker x:Name="FechaFinal" SelectedDate="{Binding Path=RecordSolicitud.FechaFinal}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontWeight="Bold" Text="Comentario:" />
+                                            <TextBox Height="25" x:Name="ComentarioSolicitud" Text="{Binding RecordSolicitud.Comentario}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="PanelDatosPersona" Width="150" Margin="8,0,0,0" Visibility="Collapsed">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Nro Documento:" />
+                                        <TextBox x:Name="NoDocumento" Height="25" Text="{Binding RecordSolicitud.NoDocumento_Placa}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Nombres:" />
+                                        <TextBox x:Name="Nombres" Height="25" Text="{Binding RecordSolicitud.Nombres_Marca}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Apellidos:" />
+                                        <TextBox x:Name="Apellidos" Height="25" Text="{Binding RecordSolicitud.Apellidos_Modelo}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Cargo:" />
+                                        <TextBox x:Name="Cargo" Height="25" Text="{Binding RecordSolicitud.Cargo_NoMotor}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" x:Name="PanelAreasPersona">
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="Area 1:"/>
+                                            <ComboBox x:Name="Area1Persona" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area1.MetaMasterID}" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="Area 2:" />
+                                            <ComboBox x:Name="Area2Persona" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area2.MetaMasterID}" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="Area 3:" />
+                                            <ComboBox x:Name="Area3Persona" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area3Puerta1.MetaMasterID}"/>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="Area 4:" />
+                                            <ComboBox x:Name="Area4Persona" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area4Puerta2.MetaMasterID}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="PanelDatosVehiculo" Margin="8,0,0,0" Width="150" Visibility="Collapsed">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Placa:" />
+                                        <TextBox x:Name="Placa" Height="25" Text="{Binding RecordSolicitud.NoDocumento_Placa}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Marca:" />
+                                        <TextBox x:Name="Marca" Height="25" Text="{Binding RecordSolicitud.Nombres_Marca}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Modelo:" />
+                                        <TextBox x:Name="Modelo" Height="25" Text="{Binding RecordSolicitud.Apellidos_Modelo}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="No. Motor:" />
+                                        <TextBox x:Name="NoMotor" Height="29" Text="{Binding RecordSolicitud.Cargo_NoMotor}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Area 1:" />
+                                        <ComboBox x:Name="Area1Vehiculo" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area1.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="0,2,0,0">
+                                        <TextBlock FontWeight="Bold" Text="Area 2:" />
+                                        <ComboBox x:Name="Area2Vehiculo" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasPersonal}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area2.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Puerta 1:" />
+                                        <ComboBox x:Name="Puerta1" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasVehiculos}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area3_Puerta1.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Puerta 2:" />
+                                        <ComboBox x:Name="Puerta2" Height="25" Width="150" ItemsSource="{Binding Path=ListAreasVehiculos}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectedValue="{Binding Path=RecordSolicitud.Area4_Puerta2.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Soat:"/>
+                                        <toolkit:DatePicker x:Name="Soat" SelectedDate="{Binding Path=RecordSolicitud.Soat}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="panelFoto" Orientation="Vertical" Margin="8,0,0,0"  Width="150" Visibility="Visible">
+                                    <StackPanel  Orientation="Vertical" >
+                                        <TextBlock FontWeight="Bold" Text="URL Foto:" />
+                                        <TextBox Height="25" x:Name="Foto" Text="{Binding RecordSolicitud.Foto}" IsEnabled="False" TextChanged="Foto_TextChanged"  />
+                                        <Image x:Name="imagen_Foto" Source="{Binding RecordSolicitud.Foto}" Width="140" Height="140" Margin="4,4,4,4" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                        <awc:ImageButton x:Name="btn_Capturar" Height="30"  ToolTip="Capturar Foto"  ImageSource="/WpfFront;component/Images/Camara.png" Click="btn_Capturar_Click_1"/>
+                                        <awc:ImageButton x:Name="btn_Cargar" Margin="4,0,0,0" Height="30"  ToolTip="Cargar Foto"  ImageSource="/WpfFront;component/Images/CargarImagen.png" Click="btn_Cargar_Click_1"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="stk_TomarFoto" Visibility="Collapsed">
+                                        <!--<uc:Camara-->
+                                        <!--<uc:Webcam x:Name="ControlWebCam" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+                                        <Button x:Name="CapturarImagen" Content="Capturar Imagen" Width="130" Click="CapturarImagen_Click" />
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                    
+                                    <TextBlock FontWeight="Bold" Text="Listado de solicitudes Personas:" />
+                                    <ListView x:Name="SolicitudesPersona" ItemsSource="{Binding SolicitudesPersona}" MaxHeight="200" SelectionMode="Single" MouseDoubleClick="lvSolicitudesPersona_MouseDoubleClick_1">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding RowID}" />
+                                                <GridViewColumn Header="Tipo Empleado" Width="110" DisplayMemberBinding="{Binding TipoEmpleado.Code}" />
+                                                <GridViewColumn Header="Tipo" Width="110" DisplayMemberBinding="{Binding TipoSolicitud.Name}" />
+                                                <GridViewColumn Header="Rango" Width="80" DisplayMemberBinding="{Binding RangoCarnet.Name}" />
+                                                <GridViewColumn Header="Documento" Width="100" DisplayMemberBinding="{Binding NoDocumento_Placa}"   />
+                                                <GridViewColumn Header="Nombres" Width="150" DisplayMemberBinding="{Binding NombreCompleto_MarcaCompleta}"/>
+                                                <GridViewColumn Header="Fecha Venc." Width="100" DisplayMemberBinding="{Binding FechaFinal}" />
+                                                <GridViewColumn Header="Estado" Width="80" DisplayMemberBinding="{Binding Estado.Name}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+
+                                    <TextBlock FontWeight="Bold" Text="Listado de solicitudes Vehiculo:" />
+                                    <ListView x:Name="SolicitudesVehiculo" ItemsSource="{Binding SolicitudesVehiculo}" MaxHeight="200" SelectionMode="Single" MouseDoubleClick="SolicitudesVehiculo_MouseDoubleClick_1">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding RowID}" />
+                                                <GridViewColumn Header="Tipo Empleado" Width="110" DisplayMemberBinding="{Binding TipoEmpleado.Code}" />
+                                                <GridViewColumn Header="Tipo" Width="110" DisplayMemberBinding="{Binding TipoSolicitud.Name}" />
+                                                <GridViewColumn Header="Rango" Width="80" DisplayMemberBinding="{Binding RangoCarnet.Name}" />
+                                                <GridViewColumn Header="Placa" Width="100" DisplayMemberBinding="{Binding NoDocumento_Placa}"   />
+                                                <GridViewColumn Header="Marca" Width="150" DisplayMemberBinding="{Binding NombreCompleto_MarcaCompleta}"/>
+                                                <GridViewColumn Header="Fecha Venc." Width="100" DisplayMemberBinding="{Binding FechaFinal}" />
+                                                <GridViewColumn Header="Estado" Width="80" DisplayMemberBinding="{Binding Estado.Name}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Margin="0,8,0,0" >
+                                    <awc:ImageButton x:Name="btn_NuevaSolicitud" Height="25"  ToolTip="Nueva Solicitud" Content="Nueva Solicitud" ImageSource="/WpfFront;component/Images/add.png" Click="btn_NuevaSolicitud_Click_1"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="panelBotonesSolicitud">
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_GuardarSolicitud" Height="25"  ToolTip="Adicionar Solicitud" Content="Guardar" ImageSource="/WpfFront;component/Images/save.png" Click="btn_GuardarSolicitud_Click_1"/>
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_ConfirmarSolicitud" Height="25"  ToolTip="Confirmar Solicitud" Content="Confirmar" ImageSource="/WpfFront;component/Images/16X16/Check.png" Click="btn_ConfirmarSolicitud_Click_1"/>
+                                    
+                                </StackPanel>
+                                <StackPanel Margin="4,8,0,0" >
+                                    <awc:ImageButton x:Name="btn_AnularSolicitud" Visibility="Collapsed" Height="25" HorizontalAlignment="Left"  ToolTip="Anular Solicitud" Content="Anular Solicitud" ImageSource="/WpfFront;component/Images/Delete.png" Click="btn_AnularSolicitud_Click_1"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Pagos" x:Name="TabPagos" IsEnabled="False" Height="26" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                <StackPanel Orientation="Vertical" Name="stk_DatosNuevoPago">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Tercero Factura" />
+                                        <uc:SearchTerceros x:Name="TerceroFactura"  HorizontalAlignment="Left" OnSelected="SearchTerceroFactura_OnSelected_1" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" >
+                                        <TextBlock FontWeight="Bold" Text="Tipo de Pago:" />
+                                        <ComboBox x:Name="TipoPago" Height="25" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding Path=ListTipoPago}" 
+                                                          DisplayMemberPath="Name" SelectedValuePath="MetaMasterID"  SelectionChanged="TipoPago_SelectionChanged_1" SelectedValue="{Binding Path=RecordPago.TipoPago.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Name="panelSeleccionarSolicitud" Orientation="Vertical" Visibility="Collapsed">
+                                        <TextBlock FontWeight="Bold" Text="Solicitud" />
+                                        <ComboBox x:Name="SolicitudAPagar" Height="25" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding Path=SolicitudesParaPago}" SelectedValuePath="RowID" SelectionChanged="SolicitudAPagar_SelectionChanged_1" SelectedValue="{Binding Path=RecordPago.Solicitud.RowID}" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock DataContext="{Binding}">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0} - {1} - {2}">
+                                                                <Binding Path="RowID" />
+                                                                <Binding Path="NoDocumento_Placa" />
+                                                                <Binding Path="NombreCompleto_MarcaCompleta" />
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Valor A Pagar" />
+                                        <TextBox Height="25" x:Name="ValorPago" HorizontalAlignment="Left"  Width="150" Text="{Binding Path=RecordPago.Valor}" IsEnabled="False" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock  FontWeight="Bold" Text="Forma Pago" />
+                                        <ComboBox x:Name="FormaPago" Height="25" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding Path=ListFormaPago}" DisplayMemberPath="Name" SelectedValuePath="MetaMasterID" SelectionChanged="FormaPago_SelectionChanged_1"  SelectedValue="{Binding Path=RecordPago.FormaPago.MetaMasterID}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Valor Recibido" />
+                                        <TextBox Height="25" x:Name="ValorRecibido" Width="150" HorizontalAlignment="Left" Text="{Binding RecordPago.ValorPagado}" KeyDown="ValorRecibido_KeyDown_1"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Visibility="Visible">
+                                        <TextBlock  FontWeight="Bold" Text="Cambio" />
+                                        <TextBlock Height="25" x:Name="ValorCambio" Width="150" HorizontalAlignment="Left" Text="{Binding Path=RecordPago.Cambio, StringFormat='{}{0:C0}'}" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="panelNoCheque" Orientation="Vertical" Visibility="Collapsed">
+                                        <TextBlock  FontWeight="Bold" Text="Numero" />
+                                        <TextBox Height="25" x:Name="NoCheque"  Width="150" HorizontalAlignment="Left" Text="{Binding Path=RecordPago.NoCheque}" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="panelBanco" Orientation="Vertical" Visibility="Collapsed">
+                                        <TextBlock  FontWeight="Bold" Text="Banco" />
+                                        <TextBox Height="25" Name="BancoCheque" Width="150" HorizontalAlignment="Left" Text="{Binding Path=RecordPago.BancoCheque}" />
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Vertical">
+                                        <TextBlock  FontWeight="Bold" Text="Comentario" />
+                                        <TextBox Height="25" Name="ComentarioPago" Width="150" HorizontalAlignment="Left" Text="{Binding Path=RecordPago.Comentario}" />
+                                    </StackPanel>
+                                    <!--<awc:ImageButton x:Name="btn_AdicionarPago" Height="25" Width="50"  VerticalAlignment="Bottom" Margin="10,4,4,0" ToolTip="Adicionar Pago" ImageSource="/WpfFront;component/Images/save.png" />-->
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Listado de pagos:" />
+                                        <ListView x:Name="Pagos" ItemsSource="{Binding Pagos}" MaxHeight="200" SelectionMode="Single" MouseDoubleClick="Pagos_MouseDoubleClick_1">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding RowID}" />
+                                                    <GridViewColumn Header="Solicitante" Width="200" DisplayMemberBinding="{Binding Encabezado.TerceroSolicita.NombreCompleto}" />
+                                                    <GridViewColumn Header="Tercero Factura" Width="200" DisplayMemberBinding="{Binding TerceroFactura.NombreCompleto}" />
+                                                    <GridViewColumn Header="Valor" Width="90" DisplayMemberBinding="{Binding Path=Valor}" />
+                                                    <GridViewColumn Header="Valor Recibido" Width="80" DisplayMemberBinding="{Binding Path=ValorPagado}" />
+                                                    <GridViewColumn Header="Tipo Pago" Width="100" DisplayMemberBinding="{Binding Path=TipoPago.Name}" />
+                                                    <GridViewColumn Header="Forma Pago" Width="100" DisplayMemberBinding="{Binding Path=FormaPago.Name}" />
+                                                    <GridViewColumn Header="Estado" Width="80" DisplayMemberBinding="{Binding Estado.Name}" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,8,0,0" x:Name="panel_BotonesImpresion" Orientation="Horizontal" Visibility="Collapsed">
+                                        <awc:ImageButton Margin="4,0,0,0" x:Name="btn_ImprimirFactura" Height="25" Width="120" HorizontalAlignment="Left"  ToolTip="Imprimir Factura" Content="Imprimir Factura" ImageSource="/WpfFront;component/Images/16X16/print.png" Click="btn_ImprimirFactura_Click_1"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Name="BotonesPago">
+                                <StackPanel Margin="4,8,0,0">
+                                    <awc:ImageButton x:Name="btn_NuevoPago" Height="25"  ToolTip="Nuevo Pago" Content="Nuevo Pago" ImageSource="/WpfFront;component/Images/add.png" Click="btn_NuevoPago_Click_1"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="panelBotonesPago">
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_GuardarPago" Height="25"  ToolTip="Guardar Pago" Content="Guardar" ImageSource="/WpfFront;component/Images/save.png" Click="btn_GuardarPago_Click_1"/>
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_ConfirmarPago" Height="25"  ToolTip="Confirmar Pago" Content="Confirmar" ImageSource="/WpfFront;component/Images/16X16/Check.png" Click="btn_ConfirmarPago_Click_1"/>
+                                </StackPanel>
+                                <StackPanel Margin="4,8,0,0" >
+                                    <awc:ImageButton x:Name="btn_AnularPagos" Height="25" ToolTip="Anular Pago" Content="Anular Pago" ImageSource="/WpfFront;component/Images/Delete.png" Click="btn_AnularPagos_Click" />
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Entregas" x:Name="TabEntregas" IsEnabled="False" Height="23" Width="60">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                <StackPanel Orientation="Vertical" >
+                                    <StackPanel Orientation="Vertical" >
+                                        <TextBlock FontWeight="Bold" Text="Tipo de Entrega:" />
+                                        <ComboBox Name="TipoEntrega" Height="25" Width="200" HorizontalAlignment="Left" ItemsSource="{Binding Path=ListTipoPago}" 
+                                                          DisplayMemberPath="Name" SelectedValue="{Binding Path=RecordEntrega.Tipo  .MetaMasterID}" SelectedValuePath="MetaMasterID" SelectionChanged="TipoEntrega_SelectionChanged_1"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="panelSeleccionarPago" Orientation="Vertical" Visibility="Collapsed">
+                                        <TextBlock FontWeight="Bold" Text="Pago:" />
+                                        <ComboBox Name="PagoAEntregar" Height="25" Width="200"  ItemsSource="{Binding Path=PagosParaEntrega}" SelectedValue="{Binding Path=RecordEntrega.Pago.RowID}" SelectedValuePath="RowID" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock DataContext="{Binding}">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0} - {1} - {2}">
+                                                                <Binding Path="RowID" />
+                                                                <Binding Path="Solicitud.NombreCompleto_MarcaCompleta" />
+                                                                <Binding Path="Valor" />
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Vertical">
+                                        <TextBlock FontWeight="Bold" Text="Comentario" />
+                                        <TextBox Height="25" x:Name="Comentario" Width="200" Text="{Binding Path=RecordEntrega.Comentario}" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+
+                                    <TextBlock FontWeight="Bold" Text="Listado de Entregas:" />
+                                    <ListView x:Name="Entregas" ItemsSource="{Binding Entregas}" MaxHeight="200" SelectionMode="Single" MouseDoubleClick="Entregas_MouseDoubleClick_1">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding RowID}" />
+                                                <GridViewColumn Header="NoDocumento / Placa" Width="150" DisplayMemberBinding="{Binding Path=Pago.Solicitud.NoDocumento_Placa}" />
+                                                <GridViewColumn Header="Nombres / Marca" Width="150" DisplayMemberBinding="{Binding Path=Pago.Solicitud.NombreCompleto_MarcaCompleta}" />
+                                                <GridViewColumn Header="Tipo Entrega" Width="100" DisplayMemberBinding="{Binding Path=TipoEntrega.Name}" />
+                                                <GridViewColumn Header="Cantidad Impreso" Width="100" DisplayMemberBinding="{Binding Path=CantidadImpreso}" />
+                                                <GridViewColumn Header="Estado" Width="80" DisplayMemberBinding="{Binding Estado.Name}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <StackPanel Margin="4,8,0,0" Visibility="Visible">
+                                    <awc:ImageButton x:Name="btn_NuevoEntrega" Height="25"  ToolTip="Nueva Entrega" Content="Nueva Entrega" ImageSource="/WpfFront;component/Images/add.png" Click="btn_NuevoEntrega_Click_1"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="panelBotonesEntrega" >
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_GuardarEntrega" Height="25"  ToolTip="Guardar Entrega" Content="Guardar" ImageSource="/WpfFront;component/Images/save.png" Click="btn_GuardarEntrega_Click_1"/>
+                                    <awc:ImageButton Margin="4,8,0,0" x:Name="btn_ConfirmarEntrega" Height="25"  ToolTip="Confirmar Entrega" Content="Confirmar" ImageSource="/WpfFront;component/Images/16X16/Check.png" Click="btn_ConfirmarEntrega_Click_1"/>
+                                </StackPanel>
+                                <StackPanel Name="panelImprimirCarnet" Margin="4,8,0,0">
+                                    <awc:ImageButton x:Name="btn_ImprimirCarnet" Height="25"  ToolTip="Imprimir Carnet" Content="Imprimir Carnet" ImageSource="/WpfFront;component/Images/16X16/print.png" Click="btn_ImprimirCarnet_Click_1"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </TabItem>
+
+                </TabControl>
+            </StackPanel>
+
+
+        </StackPanel>
+    </Border>
+</WMCore:UserControlBase>

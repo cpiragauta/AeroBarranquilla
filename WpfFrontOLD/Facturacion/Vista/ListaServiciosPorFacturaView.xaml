@@ -1,0 +1,93 @@
+﻿<WMCore:UserControlBase x:Uid="ListaServiciosPorFactura" x:Class="WpfFront.Vista.ListaServiciosPorFacturaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch"
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"
+    xmlns:lg="clr-namespace:WpfFront.Common"
+    xmlns:uc="clr-namespace:WpfFront.Common.UserControls"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="ListaServiciosPorFactura">
+    <AdornerDecorator>
+
+        <DockPanel Background="{DynamicResource WBg}" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+
+            <DockPanel.Resources>
+                <WMCore:ForceReReadConverter x:Uid="WMCore:ForceReReadConverter_1" x:Key="forceReReadConverter" />
+                <WMCore:FormattingConverter x:Uid="WMCore:FormattingConverter_1" x:Key="formattingConverter" />
+                <WMCore:FormNotificationErrorMessageConverter x:Uid="WMCore:FormNotificationErrorMessageConverter_1" x:Key="formNotificationErrorMessageConverter" />
+                <WMCore:NullableIntegerFormatConverter x:Key="nullableIntegerFormatConverter" />
+            </DockPanel.Resources>
+
+            <StackPanel  Margin="0,0,0,0" x:Name="stkSearchForm" Orientation="Vertical" >
+                <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" Height="auto" Width="auto" >
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+                            <TextBlock Text="Fecha Emision:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtFechaEmision" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Fecha Inicial:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtFechaInicial" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Fecha Final:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtFechaFinal" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Aerolinea:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtAerolinea" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Tipo:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtTipo" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Valor Total:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtValorTotal" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <TextBlock Text="Creada Por:"  VerticalAlignment="Center" FontWeight="bold"/>
+                            <TextBlock Name="txtCreadaPor" Foreground="Brown" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                            <awc:ImageButton x:Name="btnCerrarTab" Margin="8,4,0,0"  HorizontalAlignment="Right" ToolTip="Cerrar Tab" Content="Cerrar Tab" ImageSource="/WpfFront;component/Images/Delete.png" Click="btnCerrarTab_Click_1" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Vertical" >
+                         <StackPanel>
+                            <StackPanel Orientation="Vertical">
+                            <ListView SelectionMode="Single" ItemsSource="{Binding Path=RecordServiciosDetalladoList}" Margin="0,4,0,0" MaxHeight="400" Height="auto" Name="dgLista_Registros" AllowDrop="True" MouseDoubleClick="dgLista_Registros_MouseDoubleClick" ToolTip="Doble Clic para ver Detalle">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="FACTURA" Width="70" DisplayMemberBinding="{Binding Path= Factura.RowID}" />
+                                            <GridViewColumn Header="OPERACION" Width="80" DisplayMemberBinding="{Binding Path= Operacion.RowID}" />
+                                            <GridViewColumn Header="NIT" Width="100" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Identificacion}" />
+                                            <GridViewColumn Header="AEROLINEA" Width="260" DisplayMemberBinding="{Binding Path=Operacion.Aeronave.CompañiaFactura.Nombre}" />
+                                            <GridViewColumn Header="TIPO" Width="90" DisplayMemberBinding="{Binding Path=Operacion.Llegada.TipoVuelo.Code}" />
+                                            <GridViewColumn Header="SERVICIO" Width="100" DisplayMemberBinding="{Binding Path=TipoServicio.Code}" />
+                                            <GridViewColumn Header="CANTIDAD" Width="70" DisplayMemberBinding="{Binding Path=Cantidad}" />
+                                            <GridViewColumn Header="VALOR" Width="90" DisplayMemberBinding="{Binding Path=Valor,  StringFormat=\{0:C0\} }" />
+                                            <GridViewColumn Header="ESTADO" Width="80" DisplayMemberBinding="{Binding Path=Status.Name}" />
+                                            <GridViewColumn Header="CREADO POR" Width="90" DisplayMemberBinding="{Binding Path=CreatedBy}" />
+                                    </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="Cantidad: "/>
+                                    <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtCantidadDetallada" Text="{Binding RecordServiciosDetalladoList.Count}"/>
+                                    <TextBlock  Margin="4,4,0,4" FontWeight="Bold" Text="- Total: $"/>
+                                    <TextBlock  Margin="0,4,0,4" FontWeight="Bold" Name="TxtTotalDetallado" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </AdornerDecorator>
+</WMCore:UserControlBase>

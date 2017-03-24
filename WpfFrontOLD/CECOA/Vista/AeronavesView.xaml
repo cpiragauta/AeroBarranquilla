@@ -1,0 +1,116 @@
+﻿<WMCore:UserControlBase x:Uid="Aeronaves" x:Class="WpfFront.Vista.AeronavesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" HorizontalAlignment="Stretch" 
+    xmlns:WMCore="clr-namespace:Core.WPF;assembly=Core"   
+    xmlns:dg="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:uc="clr-namespace:WpfFront.Controles"
+    xmlns:awc="clr-namespace:Assergs.Windows.Controls;assembly=Assergs.Windows"
+    x:Name="Aeronaves">
+    <AdornerDecorator>
+        <DockPanel Background="AliceBlue">
+            <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" >
+                        <Border Style="{DynamicResource UserControlFormInnerBorder}" Margin="0" >
+                            <StackPanel Orientation="Horizontal" Margin="8,2,0,10">
+                                <StackPanel >
+                                    <TextBlock  FontWeight="Bold"  Text="Matricula:" />
+                                    <TextBox Height="22" Name="TxtFiltroMatricula"  TextWrapping="Wrap" Width="70" ToolTip="Ingrese Matricula Aeronave"></TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0" >
+                                    <TextBlock FontWeight="Bold" Text="Capacidad:" />
+                                    <TextBox Height="22" Name="TxtFiltroCapacidad"  TextWrapping="Wrap" ToolTip="Ingrese Capacidad de Pasajeros" KeyDown="soloNumerosKeyDownEvent"></TextBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0">
+                                    <TextBlock  FontWeight="Bold"  Text="Propietaria:" />
+                                    <uc:SearchTerceros Height="40" x:Name="SearchPropietariaFiltro" VerticalAlignment="Top"/>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Vertical" Margin="8,0,0,0" >
+                                    <TextBlock  FontWeight="Bold"  Text="Tipo Operación:" />
+                                    <ComboBox  Width="150"    Name="CboFiltroTipoOper"   ToolTip="Seleccione Tipo Operacion"  ItemsSource="{Binding Path=TipoOperacion}" SelectedValue="{Binding Path.RowID}"   DisplayMemberPath="Nombre" SelectedValuePath="RowID" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
+                                    <awc:ImageButton x:Name="btnBuscarAeronaves" ToolTip="Buscar Aeronaves" ImageSource="/WpfFront;component/Images/Buscar.png" IsToolStyle="True" Click="btnBuscarAeronaves_Click_1" />
+                                    <awc:ImageButton x:Name="btnNuevoRegistro" ToolTip="Nuevo Registro de Aeronave" ImageSource="/WpfFront;component/Images/add.png" IsToolStyle="True" Click="btnNuevoRegistro_Click_1" />
+                                    <awc:ImageButton x:Name="btnActualizarLista"  ToolTip="Actualizar lista de Aeronaves" ImageSource="/WpfFront;component/Images/actualizar.png" IsToolStyle="True" Click="btnActualizarLista_Click_1" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <ListView SelectionMode="Single" ItemsSource="{Binding Path=ListadoAeronaves}" Margin="0,4,0,0" MaxHeight="500" Height="400" Width="auto" MaxWidth="1100" Name="ListadoAeronaves" AllowDrop="True" MouseDoubleClick="ListadoAeronaves_MouseDoubleClick_1" >
+                            <ListView.View>
+                                <GridView x:Name="GridViewDetailsCSO">
+                                    <GridViewColumn Header="Matricula" Width="80" DisplayMemberBinding="{Binding Path=Matricula}" />
+                                    <GridViewColumn Header="Peso" Width="70" DisplayMemberBinding="{Binding Path=PBMOKG}" />
+                                    <GridViewColumn Header="Propietaria" Width="200" DisplayMemberBinding="{Binding Path=Propietario.Nombre}" />
+                                    <GridViewColumn Header="Factura" Width="200" DisplayMemberBinding="{Binding Path=CompañiaFactura.Nombre}" />
+                                    <GridViewColumn Header="Clasificacion Operacion" Width="190" DisplayMemberBinding="{Binding Path=Clasificacion.Name}" />
+                                    <GridViewColumn Header="Tipo Aeronave" Width="100" DisplayMemberBinding="{Binding Path=TipoAeronave}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="4,0,0,0"  >
+                        <GroupBox Name="gb_NuevoRegistro" Visibility="Visible" Header="Datos de Aeronave">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                        <TextBlock  FontWeight="Bold" Text="Matricula:" />
+                                        <TextBox Name="txtMatricula" ToolTip="Ingrese Matricula Aeronave" Height="23" Width="100" Text="{Binding Path=RecordAeronaves.Matricula}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                        <TextBlock FontWeight="Bold"  Text="Extranjera:" />
+                                        <CheckBox Name="chkExtranjera" HorizontalAlignment="Center" Margin="4" IsChecked="{Binding Path=RecordAeronaves.Extranjera}" Click="chkExtranjera_Click_1"/>
+                                    </StackPanel>
+                                    <StackPanel Name="stkPermisoExplotacion" Orientation="Vertical" Margin="8,4,0,0" Visibility="Collapsed">
+                                        <TextBlock FontWeight="Bold"  Text="Per. Explotación:" />
+                                        <CheckBox Name="chkPermisoExplotacion" ToolTip="Permiso de Explotación" HorizontalAlignment="Center" Margin="4" IsChecked="{Binding Path=RecordAeronaves.PermisoExplotacion}" Click="chkPermisoExplotacion_Click_1"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock  FontWeight="Bold"  Text="PBMO Kg:" />
+                                    <TextBox Name="txtPeso" ToolTip="Ingrese PBMO" Height="23" Width="140" HorizontalAlignment="Left" Text="{Binding Path=RecordAeronaves.PBMOKG}" KeyDown="soloNumerosKeyDownEvent" TextChanged="txtPeso_TextChanged"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock  FontWeight="Bold"  Text="Capacidad Pasajeros:" />
+                                    <TextBox Name="txtCapPasajeros" ToolTip="Ingrese un cargo u oficio"  Width="140" HorizontalAlignment="Left" Height="23" Text="{Binding Path=RecordAeronaves.CapacidadPasajeros}" KeyDown="soloNumerosKeyDownEvent"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock  FontWeight="Bold"  Text="Tipo Aeronave:" />
+                                    <TextBox Name="txtTipoAeronave" Width="140" HorizontalAlignment="Left" ToolTip="Ingrese Tipo Aeronave" Height="23" Text="{Binding Path=RecordAeronaves.TipoAeronave}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock  FontWeight="Bold"  Text="Compañía propietaria:" />
+                                    <uc:SearchTerceros Height="40" x:Name="SearchCompañiaPropietaria" VerticalAlignment="Top"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock FontWeight="Bold"  Text="Compañía Factura:" />
+                                    <uc:SearchTerceros Height="40" x:Name="SearchCompañiaFactura" VerticalAlignment="Top"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <TextBlock FontWeight="Bold" Text="Clasificacion de la Operación:" />
+                                    <ComboBox Name="CboListaOper"  Width="200" HorizontalAlignment="Left" ToolTip="Seleccione Tipo de Operacion" ItemsSource="{Binding Path=TipoOperacion}" SelectedValue="{Binding Path=RowID}"   DisplayMemberPath="Nombre" SelectedValuePath="RowID"/>
+                                </StackPanel>
+                                <StackPanel Name="PanelMatricula" Orientation="Vertical" Margin="0,4,0,0" Visibility="Collapsed">
+                                    <TextBlock FontWeight="Bold"  Text="F. Venc Matrícula:" />
+                                    <toolkit:DatePicker Name="Txt_FechaM"  Width="200" HorizontalAlignment="Left" SelectedDate="{Binding RecordAeronaves.FechaVencimientoMatricula}"  />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                                    <awc:ImageButton x:Name="btnGuardarRegistro" Width="200" VerticalAlignment="Bottom"  ToolTip="Agregar Nuevo Registro" ImageSource="/WpfFront;component/Images/Save.png" IsToolStyle="False" Click="btnGuardarRegistro_Click_1"  Content="Guardar" />
+                                    <awc:ImageButton x:Name="btn_Delete" Width="200" ToolTip="Eliminar Registro" IsToolStyle="False" Click="btn_Delete_Click_1" ImageSource="/WpfFront;component/Images/Delete.png" Content="Eliminar" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </DockPanel>
+    </AdornerDecorator>
+</WMCore:UserControlBase>

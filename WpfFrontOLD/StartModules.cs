@@ -65,6 +65,22 @@ namespace WpfFront
             container.RegisterType<IPlaneacionPresenter, PlaneacionPresenter>();
             container.RegisterType<IPlaneacionModel, PlaneacionModel>();
 
+            container.RegisterType<IAeronavesView, AeronavesView>();
+            container.RegisterType<IAeronavesPresenter, AeronavesPresenter>();
+            container.RegisterType<IAeronavesModel, AeronavesModel>();
+
+            container.RegisterType<ITercerosView, TercerosView>();
+            container.RegisterType<ITercerosPresenter, TercerosPresenter>();
+            container.RegisterType<ITercerosModel, TercerosModel>();
+
+            container.RegisterType<ITarifasView, TarifasView>();
+            container.RegisterType<ITarifasPresenter, TarifasPresenter>();
+            container.RegisterType<ITarifasModel, TarifasModel>();
+
+            container.RegisterType<ITRMView, TRMView>();
+            container.RegisterType<ITRMPresenter, TRMPresenter>();
+            container.RegisterType<ITRMModel, TRMModel>();
+
             IList<ModuleRegion> menuOptions = Util.GetMenuOptionsV2(this);
 
             foreach (ModuleRegion modreg in menuOptions)
@@ -91,6 +107,23 @@ namespace WpfFront
                     PlaneacionPresenter PlaneacionPresenter = container.Resolve<PlaneacionPresenter>();
                     PlaneacionPresenter.Window = window;
                     return PlaneacionPresenter.View;
+                case "AeronavesPresenter":
+                    AeronavesPresenter AeronavesPresenter = container.Resolve<AeronavesPresenter>();
+                    AeronavesPresenter.Window = window;
+                    return AeronavesPresenter.View;
+                case "TercerosPresenter":
+                    TercerosPresenter TercerosPresenter = container.Resolve<TercerosPresenter>();
+                    TercerosPresenter.Window = window;
+                    return TercerosPresenter.View;
+                case "TarifasPresenter":
+                    TarifasPresenter TarifasPresenter = container.Resolve<TarifasPresenter>();
+                    TarifasPresenter.Window = window;
+                    return TarifasPresenter.View;
+                case "TRMPresenter":
+                    TRMPresenter TRMPresenter = container.Resolve<TRMPresenter>();
+                    TRMPresenter.Window = window;
+                    return TRMPresenter.View;
+
             }
 
             return null;

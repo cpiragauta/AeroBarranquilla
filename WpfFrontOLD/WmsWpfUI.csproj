@@ -262,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CECOA\Vista\AeronavesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CECOA\Vista\AeropuertoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -279,6 +283,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CECOA\Vista\TarifasView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CECOA\Vista\TercerosView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CECOA\Vista\TRMView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -404,6 +416,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Facturacion\Vista\FacturasAgrupadasView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Facturacion\Vista\FacturasTasasView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Facturacion\Vista\ListaServiciosPorAerolinea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Facturacion\Vista\ListaServiciosPorFacturaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\LogOnScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -422,16 +450,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="CECOA\Controlador\AeronavesPresenter.cs" />
     <Compile Include="CECOA\Controlador\AeropuertoPresenter.cs" />
     <Compile Include="CECOA\Controlador\OperacionesPresenter.cs" />
     <Compile Include="CECOA\Controlador\PlaneacionPresenter.cs" />
     <Compile Include="CECOA\Controlador\TarifasPresenter.cs" />
+    <Compile Include="CECOA\Controlador\TercerosPresenter.cs" />
+    <Compile Include="CECOA\Controlador\TRMPresenter.cs" />
+    <Compile Include="CECOA\Modelo\AeronavesModel.cs" />
     <Compile Include="CECOA\Modelo\ListaOperacionesModel.cs" />
     <Compile Include="CECOA\Modelo\AeropuertoModel.cs" />
     <Compile Include="CECOA\Controlador\ListaOperacionesPresenter.cs" />
     <Compile Include="CECOA\Modelo\OperacionesModel.cs" />
     <Compile Include="CECOA\Modelo\PlaneacionModel.cs" />
     <Compile Include="CECOA\Modelo\TarifasModel.cs" />
+    <Compile Include="CECOA\Modelo\TercerosModel.cs" />
+    <Compile Include="CECOA\Modelo\TRMModel.cs" />
+    <Compile Include="CECOA\Vista\AeronavesView.xaml.cs">
+      <DependentUpon>AeronavesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CECOA\Vista\AeropuertoView.xaml.cs">
       <DependentUpon>AeropuertoView.xaml</DependentUpon>
     </Compile>
@@ -446,6 +483,12 @@
     </Compile>
     <Compile Include="CECOA\Vista\TarifasView.xaml.cs">
       <DependentUpon>TarifasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\TercerosView.xaml.cs">
+      <DependentUpon>TercerosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CECOA\Vista\TRMView.xaml.cs">
+      <DependentUpon>TRMView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\RawPrinterHelper.cs" />
     <Compile Include="Common\Windows\ViewDocument.xaml.cs">
@@ -532,6 +575,26 @@
     </Compile>
     <Compile Include="Controles\SearchTerceros.xaml.cs">
       <DependentUpon>SearchTerceros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Controlador\FacturasAgrupadasPresenter.cs" />
+    <Compile Include="Facturacion\Controlador\FacturasTasasPresenter.cs" />
+    <Compile Include="Facturacion\Controlador\ListaServiciosPorAerolineaPresenter.cs" />
+    <Compile Include="Facturacion\Controlador\ListaServiciosPorFacturaPresenter.cs" />
+    <Compile Include="Facturacion\Modelo\FacturasAgrupadasModel.cs" />
+    <Compile Include="Facturacion\Modelo\FacturasTasasModel.cs" />
+    <Compile Include="Facturacion\Modelo\ListaServiciosPorAerolineaModel.cs" />
+    <Compile Include="Facturacion\Modelo\ListaServiciosPorFacturaModel.cs" />
+    <Compile Include="Facturacion\Vista\FacturasAgrupadasView.xaml.cs">
+      <DependentUpon>FacturasAgrupadasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Vista\FacturasTasasView.xaml.cs">
+      <DependentUpon>FacturasTasasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Vista\ListaServiciosPorAerolinea.xaml.cs">
+      <DependentUpon>ListaServiciosPorAerolinea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Vista\ListaServiciosPorFacturaView.xaml.cs">
+      <DependentUpon>ListaServiciosPorFacturaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\AdicionalesPyP.cs">
       <DependentUpon>DAO.tt</DependentUpon>
